@@ -93,7 +93,28 @@
 
 - **Fase 2: Analisi della Sicurezza a Livello di Codice**  
   Dal 24 febbraio al 17 marzo (3 settimane)  
-  - Approfondimento delle pratiche di Secure Coding e SecDevOps.  
+  - Approfondimento delle pratiche di Secure Coding e SecDevOps.
+  - attacco e difesa reverse engineering
+  - traffico http e non HTTPS(link gimme5)
+  - cve flutter
+    - Hardcoded API Keys:
+OneSignal and Mixpanel tokens are exposed in Constants
+Recommendation: Move to environment variables or secure storage
+Insecure Firebase Configuration:
+No validation of Firebase initialization
+Recommendation: Add initialization checks and fallback behavior
+Insufficient Error Handling:
+Critical error handlers are commented out
+Recommendation: Implement proper error boundaries and logging
+Debug Information Exposure:
+Debug logging enabled in production
+Recommendation: Remove debug logging from production builds
+Insecure Data Storage:
+SharedPreferences used without encryption
+Recommendation: Use encrypted storage for sensitive data
+Lack of Analytics Opt-out:
+No way for users to disable analytics tracking
+Recommendation: Add privacy controls and opt-out mechanism
   - Analisi di strumenti per l'analisi statica e dinamica del codice.  
   - **Materiale da inviare:** Capitolo su Secure Coding e SecDevOps.  
 
