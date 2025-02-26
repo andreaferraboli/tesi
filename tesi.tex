@@ -1,123 +1,198 @@
-\documentclass[a4paper,12pt]{book}
-\usepackage[utf8]{inputenc}
-\usepackage[italian]{babel}
+
+%
+\documentclass[a4paper,12pt]{report}
+%    \renewcommand{\baselinestretch}{1.6}      % interline spacing
+%
+% \includeonly{}
+%
+%			PREAMBOLO
+%
+\usepackage[a4paper]{geometry}
+\usepackage{amssymb,amsmath,amsthm}
 \usepackage{graphicx}
-\usepackage{amsmath, amssymb}
+\usepackage{url}
 \usepackage{hyperref}
-\usepackage{geometry}
-\geometry{a4paper, margin=1in}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhead{}
-\fancyfoot{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
+\usepackage{epsfig}
+\usepackage[italian]{babel}
+\usepackage{setspace}
+\usepackage{tesi}
 
-% Metadata
-\title{Implementazione della Cybersecurity in una Startup Fintech: Il Caso Finanz}
-\author{Andrea Ferraboli}
-\date{Anno Accademico 2024-2025}
-
+% per le accentate
+\usepackage[utf8]{inputenc}
+%
+\newtheorem{myteor}{Teorema}[section]
+%
+\newenvironment{teor}{\begin{myteor}\slshape}{\end{myteor}}
+%
+%
+%			TITOLO
+%
 \begin{document}
 
-% Frontespizio
-\begin{titlepage}
-    \begin{center}
-        \includegraphics[width=0.2\textwidth]{images/Unimi-logo.png} \\[1cm]
-        \textsc{\LARGE Università degli Studi di Milano}
-        \textsc{\Large Facoltà di Scienze e Tecnologie}
-        \vspace{0.5cm}
-        \textsc{\Large Dipartimento di Informatica} \\
-        \textbf{\huge Implementazione della Cybersecurity in una Startup Fintech: Il Caso Finanz} \\
-        \vspace{1.5cm}
-        \emph{Relatore:} Prof. Giovanni Degli Antoni \\
-        \emph{Correlatori:} Prof. Brian W. Kernighan, Prof. Dennis M. Ritchie \\
-        \vspace{2cm}
-        \textbf{Elaborato Finale di:} \\
-        Andrea Ferraboli \\
-        Matr. Nr. 09985a \\
-        \vfill
-        Anno Accademico 2024-2025
-    \end{center}
-\end{titlepage}
+% Aggiunta immagine sopra al titolo
+\begin{center}
+        \includegraphics[width=0.2\textwidth]{images/Unimi-logo.png}
+        \vspace{1cm}
+\end{center}
 
-% Dedica
-\cleardoublepage
-\thispagestyle{empty}
-\begin{flushright}
-    \emph{Questo lavoro è dedicato ai miei genitori}\\[1cm]
-    \textit{\guillemotleft What I cannot create, I do not understand \guillemotright} -- Richard Feynman\\
-    \textit{\guillemotleft It’s not only powerful, but it’s also inadequate \guillemotright} -- Miller Puckette
-\end{flushright}
+\title{Sicurezza dell'Infrastruttura AWS in una Startup Fintech: Sfide, Best Practices e Implementazione di un Modello di Sicurezza Resiliente Low Cost}
+\author{Andrea Ferraboli}
+\dept{Corso di Laurea in Sicurezza dei Sistemi e delle Reti Informatiche } 
+\anno{2024-2025}
+\matricola{09985A}
+\relatore{Prof. Claudio Agostino Ardagna}
+\correlatore{Lorenzo Perotta, Andrea Pasini, Simone Cortese}
+%
+%        \submitdate{month year in which submitted to GPO}
+%		- date LaTeX'd if omitted
+%	\copyrightyear{year degree conferred (next year if submitted in Dec.)}
+%		- year LaTeX'd (or next year, in December) if omitted
+%	\copyrighttrue or \copyrightfalse
+%		- produce or don't produce a copyright page (false by default)
+%	\figurespagetrue or \figurespagefalse
+%		- produce or don't produce a List of Figures page
+%		  (false by default)
+%	\tablespagetrue or \tablespagefalse
+%		- produce or don't produce a List of Tables page
+%		  (false by default)
+% 
+%			DEDICA
+%
+\beforepreface
+\prefacesection{}
+        {\hfill \Large {\sl dedicato a \dots}}
+% 
+%			PREFAZIONE
+%
+\prefacesection{Prefazione}
+%			ORGANIZZAZIONE
 
-% Ringraziamenti
-\chapter*{Ringraziamenti}
-Questa sezione, facoltativa, contiene i ringraziamenti.
-\addcontentsline{toc}{chapter}{Ringraziamenti}
-
-% Indice
 \tableofcontents
 
+\chapter*{Introduzione}
+\addcontentsline{toc}{chapter}{Introduzione}
+\section{Contesto: Crescita delle startup fintech e importanza della sicurezza}
+\section{Obiettivi della tesi e domande di ricerca}
+\subsection{Quali sono le principali sfide di cybersecurity per una startup fintech che utilizza AWS?}
+\subsection{Quali sono le best practice di sicurezza di AWS più rilevanti per una startup fintech?}
+\subsection{Come si può implementare un'infrastruttura AWS sicura e resiliente per una startup fintech?}
+\section{Struttura della tesi}
+
+\chapter{Principi}
+\section{Il concetto di "Security by Design"}
+\section{Best practice e principi di sicurezza}
+
+\chapter{Fondamenti di Sicurezza su AWS}
+\section{Modello di responsabilità condivisa di AWS}
+\section{Best practice di sicurezza specifiche per startup fintech}
+\section{Panoramica dei principali servizi di sicurezza di AWS}
+\subsection{AWS Identity and Access Management (IAM)}
+\subsection{AWS Key Management Service (KMS)}
+\subsection{AWS CloudTrail e Amazon CloudWatch (servizi concorrenti)}
+\subsection{AWS GuardDuty, Amazon Inspector e Amazon Macie (alternativa valida)}
+\subsection{Altri servizi rilevanti (es. AWS WAF, VPC)}
+
+\chapter{Gestione delle Identità e degli Accessi (IAM)}
+\section{Implementazione del principio del minimo privilegio}
+\section{Creazione e gestione di utenti, gruppi e ruoli IAM}
+\section{Utilizzo di policy IAM per concedere permessi granulari}
+\section{Configurazione dell'autenticazione a più fattori (MFA)}
+\section{Gestione delle credenziali (es. utilizzo di IAM Roles per EC2)}
+\section{Audit e monitoraggio degli accessi IAM}
+
+\chapter{Monitoraggio e Logging della Sicurezza}
+\section{Configurazione di AWS CloudTrail per tracciare le attività degli utenti}
+\section{Implementazione di Amazon CloudWatch per monitorare le metriche di sistema}
+\section{Creazione di allarmi per eventi specifici e attività sospette}
+\section{Utilizzo di AWS GuardDuty per il rilevamento automatico di minacce}
+\section{Integrazione con sistemi SIEM (Security Information and Event Management)}
+\section{Gestione e analisi dei log}
+
+\chapter{Protezione dei Dati Sensibili e Conformità Normativa}
+\section{Crittografia dei dati a riposo e in transito}
+\section{Gestione delle chiavi di crittografia con AWS KMS o CloudHSM}
+\section{Implementazione di meccanismi per la protezione dei dati in S3}
+\section{Misure per la conformità a PCI DSS (se rilevante)}
+\section{Misure per la conformità al GDPR e protezione dei dati personali}
+\section{Valutazione e gestione del rischio di perdita di dati}
+
+\chapter{Casi Studio e Implementazione Pratica}
+\section{Esempio di architettura di sicurezza AWS per una startup fintech (proposta)}
+\section{Implementazione delle best practice descritte nei capitoli precedenti}
+\section{Test di penetrazione e valutazione della sicurezza dell'ambiente}
+\section{Analisi dei risultati e confronto con le best practice}
+\section{Integrazione di strumenti di sicurezza terzi (es. SentinelOne)}
+\section{Infrastruttura di base AWS, integrazione codice e infrastruttura di un sistema honeypot}
+\section{Deadcode per confondere malware (Capitolo 7)}
+\section{Autenticazione con chiavi pubbliche (Capitolo 8)}
+\section{Progettazione e implementazione di una Virtual Private Cloud (VPC) isolata}
+\subsection{Creazione di subnet pubbliche e private}
+\subsection{Utilizzo di gruppi di sicurezza e ACL per controllare il traffico di rete}
+\subsection{Implementazione di Network Address Translation (NAT) e VPN/Direct Connect}
+\subsection{Configurazione di load balancer per alta disponibilità e scalabilità}
+\subsection{Utilizzo di container (es. ECS o EKS) per una maggiore sicurezza e scalabilità}
+
+\chapter{Discussione e Conclusioni}
+\section{Rielaborazione delle domande di ricerca iniziali e discussione dei risultati}
+\section{Riflessioni sulle sfide e opportunità per la sicurezza di AWS nelle startup fintech}
+\section{Prospettive future per la ricerca e l'innovazione}
+\section{Raccomandazioni per la creazione di un modello di cybersecurity resiliente per startup fintech}
+
+\chapter*{Bibliografia}
+\addcontentsline{toc}{chapter}{Bibliografia}
+Elenco di tutti i materiali consultati durante la stesura della tesi.
+
+
+%
+%			RINGRAZIAMENTI
+%
+\prefacesection{Ringraziamenti}
+asdjhgftry.
+\afterpreface
+% 
+% 
+%			CAPITOLO 1: dshjkfg
 \chapter{Introduzione}
-\section{Contesto e motivazioni}
-\section{Obiettivi della tesi}
-\section{Struttura del lavoro}
+\label{cap1}
+%
+%
 
-\chapter{Panoramica sulla Cybersecurity nel Settore Fintech}
-\section{Definizione di Fintech e sue peculiarità}
-\section{Minacce e vulnerabilità nel settore Fintech}
-\section{Regolamentazioni e standard di sicurezza}
-
-\chapter{Sicurezza a Livello di Codice}
-\section{Introduzione alla Secure Coding}
-\section{Principi di Secure Coding}
-\subsection{Validazione degli input}
-\subsection{Gestione sicura delle sessioni}
-\subsection{Prevenzione delle vulnerabilità comuni (es. SQL Injection, XSS)}
-\section{Approccio SecDevOps}
-\subsection{Integrazione della sicurezza nel ciclo di sviluppo}
-\subsection{Strumenti per l'analisi statica e dinamica del codice}
-\subsection{Automazione dei test di sicurezza}
-
-\chapter{Sicurezza a Livello di Infrastruttura}
-\section{Architettura sicura per una startup Fintech}
-\subsection{Design dell'infrastruttura cloud}
-\subsection{Segmentazione della rete e controllo degli accessi}
-\section{Gestione sicura dei dati}
-\subsection{Crittografia dei dati a riposo e in transito}
-\subsection{Gestione delle chiavi crittografiche}
-\subsection{Backup e ripristino dei dati}
-\section{Monitoraggio e risposta agli incidenti}
-\subsection{Sistemi di rilevamento delle intrusioni (IDS)}
-\subsection{Piani di risposta agli incidenti}
-
-\chapter{Ingegneria Sociale e Sensibilizzazione}
-\section{Definizione e tipologie di attacchi di ingegneria sociale}
-\subsection{Phishing}
-\subsection{Pretexting}
-\subsection{Baiting}
-\section{Simulazione di attacchi ai dipendenti}
-\subsection{Metodologie di simulazione}
-\subsection{Analisi dei risultati e miglioramenti}
-\section{Diffusione della cultura della sicurezza}
-\subsection{Formazione e awareness}
-\subsection{Politiche aziendali e best practices}
-
-\chapter{Aspetti Legali e di Compliance}
-\section{Normative di riferimento (es. GDPR, PSD2)}
-\section{Valutazione del rischio e audit di sicurezza}
-\section{Conformità e certificazioni}
-
-\chapter{Conclusioni}
-\section{Risultati raggiunti}
-\section{Prospettive future}
-
-
-% Bibliografia
-\begin{thebibliography}{9}
-\bibitem{feynman} Richard Feynman. \textit{What I cannot create, I do not understand.}
-\bibitem{puckette} Miller Puckette. \textit{It’s not only powerful, but it’s also inadequate.}
+%
+%			BIBLIOGRAFIA
+%
+\begin{thebibliography}{00}
+%
+\bibitem{gotti91}
+M. Gotti, I linguaggi specialistici, Firenze, La Nuova Italia, 1991.
+%
+\bibitem{wellek62}
+R. Wellek, A. Warren, Theory of Literature , 3rd edition, New York, Harcourt, 1962.
+%
+\bibitem{canziani78}
+A. Canziani et al., Come comunica il teatro: dal testo alla scena. Milano, Il Formichiere, 1978.
+%
+\bibitem{MoD67}
+Ministry of Defence, Great Britain, Author and Subject Catalogues of the Naval Library, London, Ministry of Defence, HMSO, 1967.
+%
+\bibitem{heine23}
+H. Heine, Pensieri e ghiribizzi. A cura di A. Meozzi. Lanciano, Carabba, 1923.
+%
+\bibitem{basso62}
+L. Basso, ``Capitalismo monopolistico e strategia operaia'', Problemi del socialismo, vol. 8, n. 5, pp. 585-612, 1962.
+%
+\bibitem{avirovic93}
+L. Avirovic, J. Dodds (a cura di), Atti del Convegno internazionale "Umberto Eco, Claudio Magris. Autori e traduttori a confronto" ( Trieste, 27-28 novembre 1989), Udine, Campanotto, 1993.
+%
+\bibitem{gans67}
+E.L. Gans, "The Discovery of Illusion: Flaubert's Early Works, 1835-1837", unpublished Ph.D. Dissertation, Johns Hopkins University, 1967.
+%
+\bibitem{harrison92}
+R. Harrison, Bibliography of planned languages (excluding Esperanto).  \url{http://www.vor.nu/langlab/bibliog.html}, 1992, agg. 1997.
+%
 \end{thebibliography}
-
+% 
 \end{document}
+
+
+ 
+s
