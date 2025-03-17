@@ -820,3 +820,4 @@
 *.lockfilen
 *.lockfileo
 *.lockfilep
+.qodo
