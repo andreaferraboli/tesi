@@ -1,0 +1,122 @@
+Dopo aver introdotto le sfide di cybersecurity specifiche per le startup fintech, è fondamentale comprendere il contesto tecnologico in cui queste operano. Oggi, la stragrande maggioranza delle nuove imprese, specialmente nel settore tecnologico e finanziario, basa la propria infrastruttura su modelli di \textbf{cloud computing}. Questo capitolo esplora i motivi di questa scelta, confrontando l'approccio cloud con quello tradizionale on-premises, e introduce \textbf{Amazon Web Services (AWS)}, il provider cloud scelto nel nostro caso studio, delineandone la struttura e i principi fondamentali.
+\section{Fondamenti di Cloud Computing}
+Il cloud computing è un modello di fruizione IT \textit{"on-demand"} che abilita l'accesso ubiquo e conveniente via rete a un pool condiviso di risorse computazionali configurabili (reti, server, storage, applicazioni e servizi) che possono essere predisposte o rilasciate rapidamente con il minimo sforzo di gestione o intervento del provider \cite{nist800-145}. Questo modello si basa su cinque caratteristiche essenziali (tra cui autoservizio on-demand, \textit{multitenancy}, scalabilità rapida ed elasticità) ed esplica diversi modelli di servizio e modelli di distribuzione \cite{nist800-145}.
+
+I vantaggi chiave del cloud – in particolare rilevanti per una startup fintech – sono la \textit{scalabilità}, la \textit{flessibilità} e l'\textit{elasticità}. La scalabilità consente di aumentare o diminuire capacità computazionale in base alla domanda \cite{digitalocean-cloud}. L'elasticità estende il concetto di scalabilità rendendola dinamica: le risorse possono aumentare o diminuire automaticamente in tempo reale a fronte di picchi o cali di carico \cite{geeksforgeeks_scalability}. Ciò permette di ottimizzare i costi (pagando solo ciò che serve) e di raggiungere prestazioni adeguate anche in caso di crescita rapida del business, scenario tipico di molte startup fintech.
+
+I principali modelli di servizio cloud sono:
+\begin{itemize}
+    \item \textbf{IaaS (Infrastructure as a Service):} fornisce infrastruttura IT on-demand (server, macchine virtuali, storage, rete) gestita dal provider cloud \cite{ibm_iaas}. L'utente può configurare e usare queste risorse come farebbe on-premises, senza doverle possedere.
+    \item \textbf{PaaS (Platform as a Service):} fornisce una piattaforma completa (sistema operativo, middleware, strumenti di sviluppo) pronta all'uso per sviluppare, eseguire e gestire applicazioni \cite{ibm-cloud}. Il provider mantiene lo strato sottostante (infrastruttura e runtime), mentre l'utente si concentra sullo sviluppo del software.
+    \item \textbf{SaaS (Software as a Service):} eroga applicazioni software pronte all’uso attraverso il cloud \cite{ibm-cloud}. L’utente finale accede al servizio (es. web app, CRM, gestione documenti) senza gestire infrastruttura o piattaforma sottostante.
+\end{itemize}
+
+Analogamente, i modelli di distribuzione definiscono dove e a chi è dedicato l’ambiente cloud. I più comuni sono:
+\begin{itemize}
+    \item \textbf{Public Cloud:} l’infrastruttura è posseduta da un provider terzo e messa a disposizione del pubblico via Internet \cite{geeksforgeeks_scalability}. Ad esempio, AWS, Azure e Google Cloud offrono servizi condivisi tra molti clienti. I vantaggi includono costi operativi ridotti e alta scalabilità, mentre gli svantaggi possono riguardare il controllo ridotto e la condivisione delle risorse con altri tenant \cite{geeksforgeeks_scalability}.
+    \item \textbf{Private Cloud:} l’infrastruttura è dedicata a un’unica organizzazione (sovente gestita internamente o in data center riservati) \cite{geeksforgeeks_scalability}. Offre maggiore controllo e sicurezza (elevata protezione dei dati sensibili), ma richiede investimenti in hardware dedicato e può avere minore scalabilità rispetto al public cloud \cite{geeksforgeeks_scalability}.
+    \item \textbf{Hybrid Cloud:} combina ambienti pubblici e privati, permettendo di spostare workload tra essi a seconda delle necessità \cite{geeksforgeeks_scalability}. Una startup fintech potrebbe usare il public cloud per carichi generici e il private cloud per dati regolamentati, ottenendo sia flessibilità che compliance normativa \cite{geeksforgeeks_scalability}. L’hybrid cloud massimizza scalabilità e controllo mantenendo la coerenza con requisiti di sicurezza o normativi.
+\end{itemize}
+Queste architetture consentono alle startup fintech di avviare servizi IT senza investimenti iniziali in hardware, scalare in base alla domanda del mercato e sperimentare nuovi servizi in maniera agile, mantenendo al tempo stesso contesti isolati (in ambienti privati) per dati sensibili.
+\section{Cloud Computing vs Infrastrutture On-Premises}
+\label{sec:cloud-vs-onprem}
+
+Tradizionalmente, le aziende gestivano la propria infrastruttura IT internamente, in data center di proprietà o in affitto. Questo modello è noto come \textbf{on-premises}. Richiede l'acquisto di hardware (server, storage, apparati di rete), software (sistemi operativi, licenze), e l'impiego di personale specializzato per la gestione, la manutenzione, gli aggiornamenti e la sicurezza fisica ed operativa.
+
+Il \textbf{cloud computing}, invece, si basa sull'erogazione di risorse informatiche (come potenza di calcolo, storage, database, reti, software, analytics, intelligenza artificiale) tramite Internet, secondo un modello \textit{pay-as-you-go} (paga solo per ciò che consumi). I fornitori di servizi cloud (Cloud Service Provider - CSP), come AWS, Microsoft Azure o Google Cloud Platform, gestiscono l'infrastruttura fisica sottostante, permettendo ai clienti di accedere alle risorse di cui hanno bisogno in modo flessibile e scalabile.
+
+Le differenze principali risiedono in:
+\begin{itemize}
+    \item \textbf{Costi:} On-premises richiede un ingente investimento iniziale (Capex - Capital Expenditure) per l'acquisto dell'hardware, mentre il cloud trasforma questo costo in una spesa operativa variabile (Opex - Operational Expenditure) basata sul consumo effettivo.
+    \item \textbf{Scalabilità:} Il cloud offre scalabilità \textit{elastica}, permettendo di aumentare o diminuire le risorse quasi istantaneamente in base alla domanda. L'infrastruttura on-premises ha una scalabilità limitata e richiede pianificazione e acquisti anticipati per gestire picchi di carico.
+    \item \textbf{Manutenzione:} Nel cloud, la manutenzione dell'hardware e dell'infrastruttura di base è responsabilità del provider, liberando il team IT del cliente da queste incombenze.
+    \item \textbf{Agilità e Velocità:} Il cloud permette di provisionare nuove risorse in pochi minuti, accelerando notevolmente i cicli di sviluppo e il time-to-market di nuovi prodotti o servizi.
+    \item \textbf{Affidabilità e Portata Globale:} I principali CSP dispongono di data center ridondati in diverse regioni geografiche, offrendo alta disponibilità e la possibilità di distribuire applicazioni a livello globale con bassa latenza.
+\end{itemize}
+
+\section{Perché le Startup Scelgono il Cloud}
+\label{sec:startup-cloud-choice}
+
+Per le startup, specialmente quelle fintech che necessitano di agilità e gestione efficiente delle risorse, il modello cloud offre vantaggi decisivi rispetto all'on-premises:
+
+\begin{itemize}
+    \item \textbf{Riduzione delle Barriere all'Ingresso:} L'assenza di grandi investimenti iniziali (Capex) rende accessibili tecnologie avanzate anche a realtà con budget limitati. Si paga solo per l'uso effettivo, allineando i costi alla crescita.
+    \item \textbf{Scalabilità Rapida:} Una startup può iniziare con poche risorse e scalare rapidamente man mano che la base utenti o il volume delle transazioni cresce, senza dover sovradimensionare l'infrastruttura all'inizio. Questo è cruciale nel fintech, dove i volumi possono essere imprevedibili.
+    \item \textbf{Focalizzazione sul Core Business:} Delegando la gestione dell'infrastruttura al CSP, la startup può concentrare le proprie risorse limitate (tempo e personale) sullo sviluppo del prodotto, sull'acquisizione clienti e sull'innovazione, anziché sulla gestione dei server.
+    \item \textbf{Velocità di Innovazione (Time-to-Market)}:** La possibilità di provisionare velocemente ambienti di sviluppo, test e produzione accelera il rilascio di nuove funzionalità, un fattore competitivo essenziale.
+    \item \textbf{Accesso a Tecnologie Avanzate:} I CSP offrono servizi gestiti per database, machine learning, big data analytics, sicurezza, ecc., che sarebbero complessi e costosi da implementare e gestire autonomamente on-premises.
+    \item \textbf{Affidabilità e Sicurezza di Base:} I CSP investono massicciamente in sicurezza fisica e operativa dei loro data center, offrendo un livello di base di affidabilità e sicurezza spesso superiore a quello che una startup potrebbe permettersi on-premises (sebbene la sicurezza *nel* cloud rimanga responsabilità del cliente).
+\end{itemize}
+\section{Introduzione ad Amazon Web Services (AWS)}
+\label{sec:aws-intro}
+
+Tra i principali fornitori di servizi cloud, \textbf{Amazon Web Services (AWS)} è il leader di mercato e rappresenta la scelta infrastrutturale per moltissime startup a livello globale, incluse quelle operanti nel settore fintech, come nel caso studio di questa tesi. Lanciato nel 2006, AWS offre un portafoglio estremamente ampio e maturo di servizi cloud.
+
+La struttura di AWS si basa su alcuni concetti chiave:
+
+\begin{itemize}
+    \item \textbf{Infrastruttura Globale:} AWS opera attraverso una rete mondiale di \textbf{Regioni}. Ogni Regione è un'area geografica fisica separata (es. Irlanda, Francoforte, Nord Virginia). All'interno di ciascuna Regione, esistono multiple \textbf{Zone di Disponibilità (Availability Zones - AZ)}. Una AZ è costituita da uno o più data center discreti, con alimentazione, raffreddamento e rete ridondati. Le AZ all'interno di una Regione sono interconnesse con reti a bassa latenza ma sono fisicamente separate per garantire l'isolamento in caso di guasti (incendi, allagamenti, etc.). Questa architettura permette di costruire applicazioni altamente disponibili e tolleranti ai guasti distribuendole su più AZ.
+    \item \textbf{Servizi Fondamentali:} AWS offre centinaia di servizi, ma alcuni sono considerati fondamentali:
+        \begin{itemize}
+            \item \textbf{Compute:} Servizi per eseguire codice, come \textit{Amazon EC2 (Elastic Compute Cloud)} per macchine virtuali scalabili, \textit{AWS Lambda} per l'esecuzione di codice serverless (senza gestire server), e servizi container come \textit{ECS} ed \textit{EKS}.
+            \item \textbf{Storage:} Servizi per l'archiviazione dei dati, come \textit{Amazon S3 (Simple Storage Service)} per lo storage a oggetti altamente duraturo e scalabile, \textit{Amazon EBS (Elastic Block Store)} per volumi a blocchi per le istanze EC2, e \textit{Amazon EFS} per file system condivisi.
+            \item \textbf{Database:} Una vasta gamma di database gestiti, inclusi database relazionali (\textit{Amazon RDS}), NoSQL (\textit{Amazon DynamoDB}), data warehouse (\textit{Amazon Redshift}), ecc.
+            \item \textbf{Networking:} Servizi per definire e controllare la rete virtuale, come \textit{Amazon VPC (Virtual Private Cloud)} per creare reti isolate, \textit{Elastic Load Balancing (ELB)} per distribuire il traffico, e \textit{AWS Direct Connect} per connessioni dedicate.
+            \item \textbf{Security, Identity, \& Compliance:} Servizi per gestire accessi, sicurezza e conformità, come \textit{AWS IAM (Identity and Access Management)}, \textit{AWS KMS (Key Management Service)}, \textit{AWS WAF (Web Application Firewall)}, \textit{Amazon GuardDuty} (rilevamento minacce).
+        \end{itemize}
+    \item \textbf{Modello Pay-as-you-go:} Come accennato, si paga solo per le risorse effettivamente consumate, senza contratti a lungo termine o costi iniziali (per la maggior parte dei servizi).
+    \item \textbf{Modello di Responsabilità Condivisa (Shared Responsibility Model)}:** È cruciale capire che la sicurezza su AWS è una responsabilità condivisa. AWS è responsabile della sicurezza *del* cloud (l'infrastruttura fisica, la rete, l'hypervisor), mentre il cliente è responsabile della sicurezza *nel* cloud (la configurazione dei servizi, la gestione degli accessi, la protezione dei dati, la sicurezza del sistema operativo e delle applicazioni).
+\end{itemize}
+
+\section{Il Caso Specifico: AWS per la Startup Fintech}
+\label{sec:aws-for-fintech}
+
+La scelta di AWS come infrastruttura cloud per la startup fintech oggetto di questa tesi non è casuale. Oltre ai vantaggi generali del cloud, AWS offre caratteristiche particolarmente rilevanti per il settore finanziario:
+\begin{itemize}
+    \item \textbf{Maturità e Affidabilità:} Essendo il provider più longevo e diffuso, AWS ha una comprovata esperienza nella gestione di carichi di lavoro critici.
+    \item \textbf{Ampiezza dei Servizi:} Il vasto portafoglio permette di costruire architetture complesse e moderne, integrando facilmente servizi per l'analisi dei dati, il machine learning (utile per antifrode o scoring), e la gestione sicura delle transazioni.
+    \item \textbf{Supporto alla Compliance:} AWS offre documentazione e servizi che aiutano a soddisfare rigorosi standard di conformità richiesti nel settore finanziario, come PCI DSS, GDPR, ISO 27001, ecc. AWS stessa mantiene numerose certificazioni per la propria infrastruttura.
+    \item \textbf{Scalabilità e Performance:} Fondamentali per gestire picchi di transazioni tipici dei servizi finanziari.
+    \item \textbf{Ecosistema di Partner:} Esiste un vasto ecosistema di partner tecnologici e di consulenza specializzati su AWS, inclusi quelli con expertise nel settore fintech.
+    \item \textbf{Servizi di Sicurezza Avanzati:} AWS offre un set robusto di strumenti nativi per implementare controlli di sicurezza a vari livelli (rete, identità, dati, rilevamento minacce), come vedremo nei capitoli successivi.
+\end{itemize}
+Nei capitoli seguenti, analizzeremo come l'infrastruttura di questa startup fintech è stata costruita e protetta utilizzando specifici servizi e best practice di AWS.
+\section{Infrastruttura Globale AWS}
+Amazon Web Services (AWS) dispone di una infrastruttura globale altamente distribuita: ad oggi il cloud AWS è esteso su 36 Regioni geografiche (ciascuna costituita da più Availability Zone) per un totale di 114 Availability Zones lanciate \cite{aws-global-infra}. Ogni Regione AWS rappresenta un’area geografica distinta, isolata dalle altre (per \textit{fault tolerance} e requisiti regolamentari) \cite{aws-global-infra}. All’interno di ogni Regione sono presenti almeno tre \textit{Availability Zone (AZ)}: queste sono sedi fisiche indipendenti, collegate da rete privata ad alta velocità ma isolate a livello di infrastruttura di alimentazione e raffreddamento \cite{aws-global-infra}.
+
+Questo design \textit{multi-AZ} consente la progettazione di applicazioni ad alta disponibilità: infatti ogni AZ è progettata per sopravvivere a guasti localizzati, e le Regioni tra di loro non condividono componenti critici \cite{aws-global-infra}. Secondo AWS, ciò garantisce la “massima disponibilità dell’infrastruttura” e contiene ogni interruzione entro la Regione interessata \cite{aws-global-infra}.
+
+Per supportare applicazioni globali a bassa latenza, AWS integra inoltre \textit{Edge Location} e \textit{Local Zone}. Le Edge Location (oltre 700 nel mondo) sono data center che ospitano servizi come Amazon CloudFront (content delivery network) per consegna rapida di contenuti agli utenti finali. CloudFront instrada le richieste al punto di presenza (edge) più vicino all’utente, minimizzando la latenza \cite{aws-cloudfront}. Le Local Zone sono infrastrutture AWS supplementari posizionate vicino a grandi centri urbani per offrire latenze ancora inferiori in scenari specifici (ad esempio streaming multimediale, gaming o applicazioni IoT ad alte prestazioni).
+
+Il backbone di rete globale AWS è basato su una dorsale in fibra ottica ridondata a 400 Gb/s fra Regioni \cite{aws-network}. Tutti i dati che transitano sulla rete AWS globale fra datacenter e Regioni vengono crittografati a livello fisico \cite{aws-network}, e il cliente mantiene il pieno controllo sui dati (inclusa la facoltà di cifrarli ulteriormente con servizi dedicati). Questa architettura di rete ad alte prestazioni garantisce bassa latenza e alta capacità di trasferimento; AWS sottolinea come sia possibile dispiegare centinaia di server in pochi minuti in qualsiasi zona \cite{aws-network}.
+
+Dal punto di vista della finanza in ambito fintech, una infrastruttura così distribuita offre vantaggi concreti: il collocamento geografico delle risorse permette di posizionare applicazioni vicine ai propri utenti (per rispettare requisiti di low latency o normativi, ad esempio GDPR), mentre l’ampia rete backbone protegge le comunicazioni inter-regionali. Le edge location, infine, possono accelerare servizi Web o API rivolti ai clienti connettendo gli utenti finali direttamente alla CDN di AWS \cite{aws-cloudfront}.
+
+\section{Architettura Virtualizzata e Meccanismi di Scalabilità}
+Le risorse AWS sono erogate tramite tecnologie di \textit{virtualizzazione}: su ogni host fisico (server hardware) viene eseguito un \textit{hypervisor} (monitor di macchine virtuali) che crea molteplici istanze virtuali isolate fra loro. In AWS, la virtualizzazione consente di far girare su un singolo server fisico decine di VM indipendenti, ciascuna con il proprio sistema operativo e applicazioni \cite{ibm_iaas}. L’hypervisor (ad esempio il VMware ESXi o il più recente AWS Nitro Hypervisor \cite{aws-nitro-hypervisor}) assegna a ogni VM una porzione di CPU, memoria e storage, garantendo che ogni istanza sia isolata dalle altre \cite{ibm_iaas}.
+
+Grazie alla virtualizzazione, più tenant (clienti) possono condividere lo stesso hardware fisico in modalità sicura: questo è il concetto di \textit{multitenancy}, ossia architettura in cui più clienti di un cloud utilizzano le stesse risorse sottostanti senza interferire fra loro \cite{nist800-145}. In pratica, anche in un modello multitenant come AWS, ogni cliente vede solo il proprio ambiente virtuale e i propri dati, mentre la separazione fra clienti è garantita da politiche di isolamento di rete e dal software di virtualizzazione \cite{nist800-145}.
+
+La virtualizzazione è il fulcro dell’architettura IaaS di AWS: come illustrato nell’architettura generale, AWS gestisce l’infrastruttura fisica sottostante (patching hardware, networking, data center), mentre il cliente mantiene il controllo sull’operating system, gli aggiornamenti software e le configurazioni di sicurezza del proprio ambiente virtuale \cite{aws-well-architected}. Ad esempio, se si lancia un’istanza EC2 (IaaS), AWS fornisce la macchina virtuale, ma il cliente deve gestirne il SO e le patch. Questo rende possibile far convivere e scalare migliaia di istanze virtuali senza intervento manuale massivo.
+
+\textit{Scalabilità verticale} e \textit{orizzontale} sono i principali meccanismi per gestire la crescita del carico di lavoro.
+\begin{itemize}
+    \item La \textbf{scalabilità verticale} consiste nell’aumentare le risorse di una singola macchina (es. passare a CPU/RAM/dischi più potenti) per gestire carichi maggiori \cite{digitalocean-cloud}. Questo è utile finché l’istanza ha risorse disponibili, ma presenta limiti fisici e rischia di diventare \textit{single point of failure}.
+    \item Invece, la \textbf{scalabilità orizzontale} significa replicare l’applicazione su più macchine o nodi \cite{digitalocean-cloud}. Ad esempio, si possono avviare più istanze EC2 identiche alle spalle di un bilanciatore di carico. In questo modo il traffico utente viene distribuito fra le VM (middleware come Elastic Load Balancer gestiscono questo compito) ed è possibile tollerare guasti individuali: in caso di crash di un server, le altre istanze restanti continuano a servire richieste. AWS supporta direttamente questi schemi, ad esempio tramite gruppi di auto-scaling che creano o cancellano VM in base a metriche di utilizzo \cite{aws-scaling}.
+\end{itemize}
+
+Per massimizzare la disponibilità delle applicazioni, in AWS si usano repliche \textit{multi-AZ}. Ad esempio, Amazon RDS consente di creare DB Multi-AZ: quando abilitata, AWS provisiona automaticamente una replica sincrona standby in una AZ diversa \cite{aws-rds-multiaz}. Tutte le modifiche al database primario vengono replicate in tempo reale alla standby. In caso di guasto del nodo primario, RDS effettua un \textit{failover} trasparente alla replica, minimizzando i tempi di down. Similmente, servizi come Elastic Load Balancer possono essere distribuiti su più AZ, in modo che un’interruzione locale sia compensata dagli altri nodi. Le scelte architetturali per l’alta disponibilità includono quindi l’uso sistematico di multi-AZ, il bilanciamento del carico e la replica dei dati (eventualmente su più Regioni per il \textit{disaster recovery}).
+
+Nei casi estremi di disastro (es. perdita di un’intera Regione), AWS distingue diverse strategie di \textit{Disaster Recovery} \cite{aws-well-architected}. Ad esempio:
+\begin{itemize}
+    \item il \textit{backup/restore} usa semplicemente snapshot periodici (sfruttando ad es. S3/Glacier) e prevede di ricreare le infrastrutture su una Regione secondaria.
+    \item Strategie più avanzate includono il \textit{pilot light} (mantenere una copia minima dell’infrastruttura e dati critici in replica) o il \textit{warm standby} (versione ridotta attiva in attesa del failover).
+    \item Infine, il modello \textit{multi-site active/active} prevede applicazioni già dispiegate simultaneamente in due Regioni, con bilanciamento geografico del traffico.
+\end{itemize}
+AWS fornisce strumenti e best practice per testare regolarmente queste strategie (per esempio tramite AWS Resilience Hub \cite{aws-resilience}) e garantire che i tempi di recovery (RTO/RPO) rientrino nei requisiti di business.
+
+\section{Modello di Responsabilità Condivisa}
+La sicurezza nel cloud AWS segue il \textit{modello di responsabilità condivisa} \cite{aws-shared-responsibility}. In sintesi, AWS garantisce la \textit{sicurezza dell’infrastruttura (“security of the cloud”)}: hardware fisico, reti, sistemi operativi dei servizi gestiti, data center e controlli fisici/ambientali sono a carico di AWS \cite{aws-shared-responsibility}. L’azienda investe in sorveglianza 24/7, verifica di controllo degli accessi alle strutture e patching dell’infrastruttura sottostante \cite{aws-shared-responsibility}.
+
+Dal canto suo, il cliente è responsabile della \textit{sicurezza nel cloud (“security in the cloud”)}: ossia della configurazione e gestione di ciò che risiede sopra l’infrastruttura AWS \cite{aws-shared-responsibility}. Ad esempio, per un’istanza EC2 (IaaS) il cliente deve gestire il sistema operativo guest, le patch di sicurezza, il software applicativo e la configurazione del firewall virtuale (Security Group) \cite{aws-shared-responsibility}. Per servizi più astratti come S3 o DynamoDB, AWS cura l’infrastruttura e il software di base, ma spetta al cliente proteggere i dati che carica: ciò include impostare permessi di accesso (tramite IAM), cifrare dati sensibili e applicare criteri di rete appropriati \cite{aws-shared-responsibility}. In pratica, AWS fornisce i mezzi di sicurezza (crittografia a riposo, networking isolato, log auditing, ecc.), ma l’operatività della sicurezza applicativa e dei dati è a carico del cliente.
+
