@@ -1,0 +1,778 @@
+[
+  {
+    "Region": "eu-south-1",
+    "Instances": {
+      "Reservations": [
+        {
+          "ReservationId": "r-09bd368988893e7d6",
+          "OwnerId": "538927841179",
+          "RequesterId": "280157566463",
+          "Groups": [],
+          "Instances": [
+            {
+              "Architecture": "x86_64",
+              "BlockDeviceMappings": [
+                {
+                  "DeviceName": "/dev/xvda",
+                  "Ebs": {
+                    "AttachTime": "2024-09-27T02:58:09+00:00",
+                    "DeleteOnTermination": true,
+                    "Status": "attached",
+                    "VolumeId": "vol-0dca6e700ff243d8f"
+                  }
+                }
+              ],
+              "ClientToken": "64c648c5-a841-a9e2-42d6-8e1b9c68bd48",
+              "EbsOptimized": false,
+              "EnaSupport": true,
+              "Hypervisor": "xen",
+              "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::538927841179:instance-profile/aws-elasticbeanstalk-ec2-role",
+                "Id": "AIPAX26U2H6N5A3NSV52U"
+              },
+              "NetworkInterfaces": [
+                {
+                  "Association": {
+                    "IpOwnerId": "amazon",
+                    "PublicDnsName": "ec2-15-160-92-211.eu-south-1.compute.amazonaws.com",
+                    "PublicIp": "15.160.92.211"
+                  },
+                  "Attachment": {
+                    "AttachTime": "2024-09-27T02:58:08+00:00",
+                    "AttachmentId": "eni-attach-0ac04a049a2f6a0be",
+                    "DeleteOnTermination": true,
+                    "DeviceIndex": 0,
+                    "Status": "attached",
+                    "NetworkCardIndex": 0
+                  },
+                  "Description": "",
+                  "Groups": [
+                    {
+                      "GroupId": "sg-0076bdecc361a952b",
+                      "GroupName": "awseb-e-gueuqgs9nc-stack-AWSEBSecurityGroup-rpAF62GyQel4"
+                    }
+                  ],
+                  "Ipv6Addresses": [],
+                  "MacAddress": "0a:96:2a:58:81:67",
+                  "NetworkInterfaceId": "eni-06fd12d5bfaf36711",
+                  "OwnerId": "538927841179",
+                  "PrivateDnsName": "ip-10-0-144-16.eu-south-1.compute.internal",
+                  "PrivateIpAddress": "10.0.144.16",
+                  "PrivateIpAddresses": [
+                    {
+                      "Association": {
+                        "IpOwnerId": "amazon",
+                        "PublicDnsName": "ec2-15-160-92-211.eu-south-1.compute.amazonaws.com",
+                        "PublicIp": "15.160.92.211"
+                      },
+                      "Primary": true,
+                      "PrivateDnsName": "ip-10-0-144-16.eu-south-1.compute.internal",
+                      "PrivateIpAddress": "10.0.144.16"
+                    }
+                  ],
+                  "SourceDestCheck": true,
+                  "Status": "in-use",
+                  "SubnetId": "subnet-0d6c079c9e2ba647a",
+                  "VpcId": "vpc-0954528d44c0efa46",
+                  "InterfaceType": "interface",
+                  "Operator": {
+                    "Managed": false
+                  }
+                }
+              ],
+              "RootDeviceName": "/dev/xvda",
+              "RootDeviceType": "ebs",
+              "SecurityGroups": [
+                {
+                  "GroupId": "sg-0076bdecc361a952b",
+                  "GroupName": "awseb-e-gueuqgs9nc-stack-AWSEBSecurityGroup-rpAF62GyQel4"
+                }
+              ],
+              "SourceDestCheck": true,
+              "Tags": [
+                {
+                  "Key": "Name",
+                  "Value": "Finanz-Prod"
+                },
+                {
+                  "Key": "aws:cloudformation:stack-name",
+                  "Value": "awseb-e-gueuqgs9nc-stack"
+                },
+                {
+                  "Key": "aws:autoscaling:groupName",
+                  "Value": "awseb-e-gueuqgs9nc-stack-AWSEBAutoScalingGroup-jGRS44ygt7OW"
+                },
+                {
+                  "Key": "aws:cloudformation:stack-id",
+                  "Value": "arn:aws:cloudformation:eu-south-1:538927841179:stack/awseb-e-gueuqgs9nc-stack/26d89f70-6fd6-11ef-8257-063fa7bb7ee7"
+                },
+                {
+                  "Key": "elasticbeanstalk:environment-name",
+                  "Value": "Finanz-Prod"
+                },
+                {
+                  "Key": "aws:cloudformation:logical-id",
+                  "Value": "AWSEBAutoScalingGroup"
+                },
+                {
+                  "Key": "elasticbeanstalk:environment-id",
+                  "Value": "e-gueuqgs9nc"
+                }
+              ],
+              "VirtualizationType": "hvm",
+              "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 2
+              },
+              "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+              },
+              "HibernationOptions": {
+                "Configured": false
+              },
+              "MetadataOptions": {
+                "State": "applied",
+                "HttpTokens": "required",
+                "HttpPutResponseHopLimit": 2,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+              },
+              "EnclaveOptions": {
+                "Enabled": false
+              },
+              "BootMode": "uefi-preferred",
+              "PlatformDetails": "Linux/UNIX",
+              "UsageOperation": "RunInstances",
+              "UsageOperationUpdateTime": "2024-09-27T02:58:08+00:00",
+              "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+              },
+              "MaintenanceOptions": {
+                "AutoRecovery": "default"
+              },
+              "CurrentInstanceBootMode": "uefi",
+              "NetworkPerformanceOptions": {
+                "BandwidthWeighting": "default"
+              },
+              "Operator": {
+                "Managed": false
+              },
+              "InstanceId": "i-02399b87420b181d6",
+              "ImageId": "ami-09af0bd217562e293",
+              "State": {
+                "Code": 16,
+                "Name": "running"
+              },
+              "PrivateDnsName": "ip-10-0-144-16.eu-south-1.compute.internal",
+              "PublicDnsName": "ec2-15-160-92-211.eu-south-1.compute.amazonaws.com",
+              "StateTransitionReason": "",
+              "KeyName": "Finanz-Prod",
+              "AmiLaunchIndex": 0,
+              "ProductCodes": [],
+              "InstanceType": "t3a.small",
+              "LaunchTime": "2024-09-27T02:58:08+00:00",
+              "Placement": {
+                "GroupName": "",
+                "Tenancy": "default",
+                "AvailabilityZone": "eu-south-1b"
+              },
+              "Monitoring": {
+                "State": "disabled"
+              },
+              "SubnetId": "subnet-0d6c079c9e2ba647a",
+              "VpcId": "vpc-0954528d44c0efa46",
+              "PrivateIpAddress": "10.0.144.16",
+              "PublicIpAddress": "15.160.92.211"
+            }
+          ]
+        },
+        {
+          "ReservationId": "r-000bb8b97f63b2833",
+          "OwnerId": "538927841179",
+          "RequesterId": "280157566463",
+          "Groups": [],
+          "Instances": [
+            {
+              "Architecture": "x86_64",
+              "BlockDeviceMappings": [
+                {
+                  "DeviceName": "/dev/xvda",
+                  "Ebs": {
+                    "AttachTime": "2025-04-12T01:52:31+00:00",
+                    "DeleteOnTermination": true,
+                    "Status": "attached",
+                    "VolumeId": "vol-05aad2021f5fb0b1f"
+                  }
+                }
+              ],
+              "ClientToken": "4c16589e-cb14-d12e-9b5d-5a82c1ecbfea",
+              "EbsOptimized": false,
+              "EnaSupport": true,
+              "Hypervisor": "xen",
+              "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::538927841179:instance-profile/aws-elasticbeanstalk-ec2-role",
+                "Id": "AIPAX26U2H6N5A3NSV52U"
+              },
+              "NetworkInterfaces": [
+                {
+                  "Association": {
+                    "IpOwnerId": "538927841179",
+                    "PublicDnsName": "ec2-18-102-212-204.eu-south-1.compute.amazonaws.com",
+                    "PublicIp": "18.102.212.204"
+                  },
+                  "Attachment": {
+                    "AttachTime": "2025-04-12T01:52:30+00:00",
+                    "AttachmentId": "eni-attach-066675f3cc15ad197",
+                    "DeleteOnTermination": true,
+                    "DeviceIndex": 0,
+                    "Status": "attached",
+                    "NetworkCardIndex": 0
+                  },
+                  "Description": "",
+                  "Groups": [
+                    {
+                      "GroupId": "sg-0d8116196728e8709",
+                      "GroupName": "awseb-e-q9sa4qsmjz-stack-AWSEBSecurityGroup-XV7AjQKxBttz"
+                    }
+                  ],
+                  "Ipv6Addresses": [],
+                  "MacAddress": "06:ab:f8:f3:de:a9",
+                  "NetworkInterfaceId": "eni-04bfce5298a739f75",
+                  "OwnerId": "538927841179",
+                  "PrivateDnsName": "ip-10-0-9-42.eu-south-1.compute.internal",
+                  "PrivateIpAddress": "10.0.9.42",
+                  "PrivateIpAddresses": [
+                    {
+                      "Association": {
+                        "IpOwnerId": "538927841179",
+                        "PublicDnsName": "ec2-18-102-212-204.eu-south-1.compute.amazonaws.com",
+                        "PublicIp": "18.102.212.204"
+                      },
+                      "Primary": true,
+                      "PrivateDnsName": "ip-10-0-9-42.eu-south-1.compute.internal",
+                      "PrivateIpAddress": "10.0.9.42"
+                    }
+                  ],
+                  "SourceDestCheck": true,
+                  "Status": "in-use",
+                  "SubnetId": "subnet-0606064051bcec44c",
+                  "VpcId": "vpc-0954528d44c0efa46",
+                  "InterfaceType": "interface",
+                  "Operator": {
+                    "Managed": false
+                  }
+                }
+              ],
+              "RootDeviceName": "/dev/xvda",
+              "RootDeviceType": "ebs",
+              "SecurityGroups": [
+                {
+                  "GroupId": "sg-0d8116196728e8709",
+                  "GroupName": "awseb-e-q9sa4qsmjz-stack-AWSEBSecurityGroup-XV7AjQKxBttz"
+                }
+              ],
+              "SourceDestCheck": true,
+              "Tags": [
+                {
+                  "Key": "Name",
+                  "Value": "Finanz-Dev"
+                },
+                {
+                  "Key": "aws:cloudformation:stack-id",
+                  "Value": "arn:aws:cloudformation:eu-south-1:538927841179:stack/awseb-e-q9sa4qsmjz-stack/717426c0-8265-11ef-8ed8-0e9ce4a5f1fb"
+                },
+                {
+                  "Key": "aws:autoscaling:groupName",
+                  "Value": "awseb-e-q9sa4qsmjz-stack-AWSEBAutoScalingGroup-rpVzurlNfYp3"
+                },
+                {
+                  "Key": "aws:cloudformation:logical-id",
+                  "Value": "AWSEBAutoScalingGroup"
+                },
+                {
+                  "Key": "elasticbeanstalk:environment-id",
+                  "Value": "e-q9sa4qsmjz"
+                },
+                {
+                  "Key": "elasticbeanstalk:environment-name",
+                  "Value": "Finanz-Dev"
+                },
+                {
+                  "Key": "aws:cloudformation:stack-name",
+                  "Value": "awseb-e-q9sa4qsmjz-stack"
+                }
+              ],
+              "VirtualizationType": "hvm",
+              "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 2
+              },
+              "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+              },
+              "HibernationOptions": {
+                "Configured": false
+              },
+              "MetadataOptions": {
+                "State": "applied",
+                "HttpTokens": "required",
+                "HttpPutResponseHopLimit": 2,
+                "HttpEndpoint": "enabled",
+                "HttpProtocolIpv6": "disabled",
+                "InstanceMetadataTags": "disabled"
+              },
+              "EnclaveOptions": {
+                "Enabled": false
+              },
+              "BootMode": "uefi-preferred",
+              "PlatformDetails": "Linux/UNIX",
+              "UsageOperation": "RunInstances",
+              "UsageOperationUpdateTime": "2025-04-12T01:52:30+00:00",
+              "PrivateDnsNameOptions": {
+                "HostnameType": "ip-name",
+                "EnableResourceNameDnsARecord": false,
+                "EnableResourceNameDnsAAAARecord": false
+              },
+              "MaintenanceOptions": {
+                "AutoRecovery": "default"
+              },
+              "CurrentInstanceBootMode": "uefi",
+              "NetworkPerformanceOptions": {
+                "BandwidthWeighting": "default"
+              },
+              "Operator": {
+                "Managed": false
+              },
+              "InstanceId": "i-07730c53a4300eeef",
+              "ImageId": "ami-03617ff727b02d279",
+              "State": {
+                "Code": 16,
+                "Name": "running"
+              },
+              "PrivateDnsName": "ip-10-0-9-42.eu-south-1.compute.internal",
+              "PublicDnsName": "ec2-18-102-212-204.eu-south-1.compute.amazonaws.com",
+              "StateTransitionReason": "",
+              "KeyName": "Finanz-Dev",
+              "AmiLaunchIndex": 0,
+              "ProductCodes": [],
+              "InstanceType": "t3a.small",
+              "LaunchTime": "2025-04-12T01:52:30+00:00",
+              "Placement": {
+                "GroupName": "",
+                "Tenancy": "default",
+                "AvailabilityZone": "eu-south-1a"
+              },
+              "Monitoring": {
+                "State": "disabled"
+              },
+              "SubnetId": "subnet-0606064051bcec44c",
+              "VpcId": "vpc-0954528d44c0efa46",
+              "PrivateIpAddress": "10.0.9.42",
+              "PublicIpAddress": "18.102.212.204"
+            }
+          ]
+        }
+      ]
+    },
+    "Volumes": {
+      "Volumes": [
+        {
+          "Iops": 100,
+          "VolumeType": "gp2",
+          "MultiAttachEnabled": false,
+          "Operator": {
+            "Managed": false
+          },
+          "VolumeId": "vol-0dca6e700ff243d8f",
+          "Size": 8,
+          "SnapshotId": "snap-02aca08b316dffa1b",
+          "AvailabilityZone": "eu-south-1b",
+          "State": "in-use",
+          "CreateTime": "2024-09-27T02:58:09.572000+00:00",
+          "Attachments": [
+            {
+              "DeleteOnTermination": true,
+              "VolumeId": "vol-0dca6e700ff243d8f",
+              "InstanceId": "i-02399b87420b181d6",
+              "Device": "/dev/xvda",
+              "State": "attached",
+              "AttachTime": "2024-09-27T02:58:09+00:00"
+            }
+          ],
+          "Encrypted": false
+        },
+        {
+          "Iops": 3000,
+          "VolumeType": "gp3",
+          "MultiAttachEnabled": false,
+          "Throughput": 125,
+          "Operator": {
+            "Managed": false
+          },
+          "VolumeId": "vol-05aad2021f5fb0b1f",
+          "Size": 8,
+          "SnapshotId": "snap-07adce12688f5a816",
+          "AvailabilityZone": "eu-south-1a",
+          "State": "in-use",
+          "CreateTime": "2025-04-12T01:52:31.195000+00:00",
+          "Attachments": [
+            {
+              "DeleteOnTermination": true,
+              "VolumeId": "vol-05aad2021f5fb0b1f",
+              "InstanceId": "i-07730c53a4300eeef",
+              "Device": "/dev/xvda",
+              "State": "attached",
+              "AttachTime": "2025-04-12T01:52:31+00:00"
+            }
+          ],
+          "Encrypted": false
+        }
+      ]
+    },
+    "Snapshots": {
+      "Snapshots": []
+    },
+    "SecurityGroups": {
+      "SecurityGroups": [
+        {
+          "GroupId": "sg-0076bdecc361a952b",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "aws:cloudformation:logical-id",
+              "Value": "AWSEBSecurityGroup"
+            },
+            {
+              "Key": "aws:cloudformation:stack-name",
+              "Value": "awseb-e-gueuqgs9nc-stack"
+            },
+            {
+              "Key": "elasticbeanstalk:environment-name",
+              "Value": "Finanz-Prod"
+            },
+            {
+              "Key": "Name",
+              "Value": "Finanz-Prod"
+            },
+            {
+              "Key": "elasticbeanstalk:environment-id",
+              "Value": "e-gueuqgs9nc"
+            },
+            {
+              "Key": "aws:cloudformation:stack-id",
+              "Value": "arn:aws:cloudformation:eu-south-1:538927841179:stack/awseb-e-gueuqgs9nc-stack/26d89f70-6fd6-11ef-8257-063fa7bb7ee7"
+            }
+          ],
+          "VpcId": "vpc-0954528d44c0efa46",
+          "SecurityGroupArn": "arn:aws:ec2:eu-south-1:538927841179:security-group/sg-0076bdecc361a952b",
+          "OwnerId": "538927841179",
+          "GroupName": "awseb-e-gueuqgs9nc-stack-AWSEBSecurityGroup-rpAF62GyQel4",
+          "Description": "VPC Security Group",
+          "IpPermissions": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 80,
+              "ToPort": 80,
+              "UserIdGroupPairs": [
+                {
+                  "UserId": "538927841179",
+                  "GroupId": "sg-0c5a3e138284857a1"
+                }
+              ],
+              "IpRanges": [],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            },
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 22,
+              "ToPort": 22,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        },
+        {
+          "GroupId": "sg-0828030ab011a59a3",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "VpcId": "vpc-0954528d44c0efa46",
+          "SecurityGroupArn": "arn:aws:ec2:eu-south-1:538927841179:security-group/sg-0828030ab011a59a3",
+          "OwnerId": "538927841179",
+          "GroupName": "default",
+          "Description": "default VPC security group",
+          "IpPermissions": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        },
+        {
+          "GroupId": "sg-0d8116196728e8709",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "Finanz-Dev"
+            },
+            {
+              "Key": "aws:cloudformation:logical-id",
+              "Value": "AWSEBSecurityGroup"
+            },
+            {
+              "Key": "elasticbeanstalk:environment-id",
+              "Value": "e-q9sa4qsmjz"
+            },
+            {
+              "Key": "aws:cloudformation:stack-name",
+              "Value": "awseb-e-q9sa4qsmjz-stack"
+            },
+            {
+              "Key": "elasticbeanstalk:environment-name",
+              "Value": "Finanz-Dev"
+            },
+            {
+              "Key": "aws:cloudformation:stack-id",
+              "Value": "arn:aws:cloudformation:eu-south-1:538927841179:stack/awseb-e-q9sa4qsmjz-stack/717426c0-8265-11ef-8ed8-0e9ce4a5f1fb"
+            }
+          ],
+          "VpcId": "vpc-0954528d44c0efa46",
+          "SecurityGroupArn": "arn:aws:ec2:eu-south-1:538927841179:security-group/sg-0d8116196728e8709",
+          "OwnerId": "538927841179",
+          "GroupName": "awseb-e-q9sa4qsmjz-stack-AWSEBSecurityGroup-XV7AjQKxBttz",
+          "Description": "VPC Security Group",
+          "IpPermissions": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 80,
+              "ToPort": 80,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            },
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 22,
+              "ToPort": 22,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        },
+        {
+          "GroupId": "sg-0c5a3e138284857a1",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 80,
+              "ToPort": 80,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "Tags": [
+            {
+              "Key": "elasticbeanstalk:environment-name",
+              "Value": "Finanz-Prod"
+            },
+            {
+              "Key": "elasticbeanstalk:environment-id",
+              "Value": "e-gueuqgs9nc"
+            },
+            {
+              "Key": "aws:cloudformation:stack-name",
+              "Value": "awseb-e-gueuqgs9nc-stack"
+            },
+            {
+              "Key": "Name",
+              "Value": "Finanz-Prod"
+            },
+            {
+              "Key": "aws:cloudformation:logical-id",
+              "Value": "AWSEBLoadBalancerSecurityGroup"
+            },
+            {
+              "Key": "aws:cloudformation:stack-id",
+              "Value": "arn:aws:cloudformation:eu-south-1:538927841179:stack/awseb-e-gueuqgs9nc-stack/26d89f70-6fd6-11ef-8257-063fa7bb7ee7"
+            }
+          ],
+          "VpcId": "vpc-0954528d44c0efa46",
+          "SecurityGroupArn": "arn:aws:ec2:eu-south-1:538927841179:security-group/sg-0c5a3e138284857a1",
+          "OwnerId": "538927841179",
+          "GroupName": "awseb-e-gueuqgs9nc-stack-AWSEBLoadBalancerSecurityGroup-QUnRogpBwUIA",
+          "Description": "Load Balancer Security Group",
+          "IpPermissions": [
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 80,
+              "ToPort": 80,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            },
+            {
+              "IpProtocol": "tcp",
+              "FromPort": 443,
+              "ToPort": 443,
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        }
+      ]
+    },
+    "KeyPairs": {
+      "KeyPairs": [
+        {
+          "KeyPairId": "key-088073b3d351ef593",
+          "KeyType": "rsa",
+          "Tags": [],
+          "CreateTime": "2024-09-11T17:16:56.790000+00:00",
+          "KeyName": "Finanz-Dev",
+          "KeyFingerprint": "17:39:7e:59:0d:fb:34:08:fa:ce:87:d1:61:13:c4:df:d6:49:86:ba"
+        },
+        {
+          "KeyPairId": "key-0c43255dfafee0c4d",
+          "KeyType": "rsa",
+          "Tags": [],
+          "CreateTime": "2024-04-04T21:45:01.370000+00:00",
+          "KeyName": "Finanz-Prod",
+          "KeyFingerprint": "d9:aa:db:59:48:f8:42:3c:1e:91:56:04:6e:39:e9:6c:d7:16:41:7f"
+        }
+      ]
+    }
+  },
+  {
+    "Region": "eu-west-3",
+    "Instances": {
+      "Reservations": []
+    },
+    "Volumes": {
+      "Volumes": []
+    },
+    "Snapshots": {
+      "Snapshots": []
+    },
+    "SecurityGroups": {
+      "SecurityGroups": [
+        {
+          "GroupId": "sg-0877eaf6e3ccdc17b",
+          "IpPermissionsEgress": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ],
+          "VpcId": "vpc-09783827acadf9a3d",
+          "SecurityGroupArn": "arn:aws:ec2:eu-west-3:538927841179:security-group/sg-0877eaf6e3ccdc17b",
+          "OwnerId": "538927841179",
+          "GroupName": "default",
+          "Description": "default VPC security group",
+          "IpPermissions": [
+            {
+              "IpProtocol": "-1",
+              "UserIdGroupPairs": [],
+              "IpRanges": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ],
+              "Ipv6Ranges": [],
+              "PrefixListIds": []
+            }
+          ]
+        }
+      ]
+    },
+    "KeyPairs": {
+      "KeyPairs": []
+    }
+  }
+]

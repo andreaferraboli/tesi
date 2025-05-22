@@ -1,0 +1,2712 @@
+Region: eu-south-1
+Applications:
+{
+    "Applications": [
+        {
+            "ApplicationArn": "arn:aws:elasticbeanstalk:eu-south-1:538927841179:application/Finanz-Backend",
+            "ApplicationName": "Finanz-Backend",
+            "DateCreated": "2023-03-07T22:06:55.781000+00:00",
+            "DateUpdated": "2023-03-07T22:06:55.781000+00:00",
+            "Versions": [
+                "code-pipeline-1705362294535-8a1b7fe0dc31ee3193d84605038700ffebf8d3fd",
+                "code-pipeline-1731508592558-78e46828c0a705c4e9f16461a6db2639dbee3309",
+                "code-pipeline-1703878943598-809c27fc5ec951094becb58c078fc7c9549eadb6",
+                "code-pipeline-1742221144904-a97a975510fac7210fc98aceb81276264ee3abb9",
+                "code-pipeline-1707076543912-1ce258ba5ceec542f072b2f4d4d8095d9be540e2",
+                "code-pipeline-1741847204773-9a1ccf5988103145ffda2ea5edb669484699d21e",
+                "code-pipeline-1707069709424-42d6ee34e087438c475913807e1fa21f15460ad2",
+                "code-pipeline-1728683201680-1c6c6cad65c95d237be435b386320c2218c0a334",
+                "code-pipeline-1721640389907-5a8cae0ee5c512b341a4aa2307a92fe06fc93eae",
+                "code-pipeline-1700001320401-8fc1863cc75667573ad73e3001cc2638a84defd6",
+                "code-pipeline-1708561816776-b2c3cf5c1fe3e42ffedbec43e267e548b5f49fd5",
+                "code-pipeline-1704234516446-35eb1e94975e565d7c6fc0cd650191cee745e3b4",
+                "code-pipeline-1739210946323-7943523c438f368f770052df8e04bf8663d40f40",
+                "code-pipeline-1742015247533-5a9e08d3fb5d1afed7a910997fb66c2dfbf6e2e6",
+                "code-pipeline-1731013205278-39e797709f6ee594c3d0e88791ebca134bcee101",
+                "code-pipeline-1707076816812-28d5b2be3de8bf08c239685c46e289cb5732c8ae",
+                "code-pipeline-1709502703168-76ba81814027d9311ce988efcdd3818a39726a5a",
+                "code-pipeline-1721659174941-c12257e90e46545ff8fa3fe887ab65db9fddfaaf",
+                "code-pipeline-1729200874193-93b552af2bafa0e6e0748f45ed9d7cfa50ecf1ba",
+                "code-pipeline-1727710067197-f5f68aa9eae7b4cac768399670f81056bcdcee99",
+                "code-pipeline-1700006405265-f01b8a50a01fe0140a7823f74663db32baeab1c6",
+                "code-pipeline-1726080573210-48d8f92f59baf3233dacbd347b019f70ac42a6c2",
+                "code-pipeline-1731627214319-d12532474701da7b6833ffaf3dddeea28d6396e0",
+                "code-pipeline-1725827993032-4f8e71c7ec11cae12a4009a5c5a2b1e42aa57ee8",
+                "code-pipeline-1728219018791-b47a20736cccc9ded422f0c9d3d8d5583c3c2ea3",
+                "Sample Application",
+                "code-pipeline-1728438847001-058ba9c5377c9d8324e7e63ac8730af2a36c8981",
+                "code-pipeline-1732232964495-3c5ffdc08f717a81be4abcb0de68034cede01545",
+                "code-pipeline-1741720622211-9a1ccf5988103145ffda2ea5edb669484699d21e",
+                "code-pipeline-1713135557629-97be13794b00f7e59a000ca2549c46c216ff3869",
+                "code-pipeline-1703879338325-c93c62c1dc02b1c86bacde9c35bbb2b7c70b1a0c",
+                "code-pipeline-1678276478800-cd8978a43a8235545ef96105e86129de11d85a26",
+                "code-pipeline-1728221816627-b47a20736cccc9ded422f0c9d3d8d5583c3c2ea3",
+                "code-pipeline-1724598273774-251eb913f695d6d393f0431dda7bafa2f130d970",
+                "code-pipeline-1741849378238-71f6d36ef90f8dac059942a0b896f337c91462c3",
+                "code-pipeline-1725894319189-9f04d15f38e22a70c2eb0fd553d66b0fc4dd5ba4",
+                "code-pipeline-1726076935933-f35a16446eb0fadf7d30e1a3141847d3501aba84",
+                "code-pipeline-1728050036190-c6d267401eb9c2d9c55214befac54fbc49d0dacd",
+                "code-pipeline-1743768225991-cfb35c76a483367dd997459a642f7ca9e72f2cbe",
+                "code-pipeline-1713892861159-aedd4d86e289cc1b7e9b664dd2083220666dd36b",
+                "code-pipeline-1726302258064-313c5541790c0a28df8c80fd0786450ed1ef53de",
+                "code-pipeline-1742014265073-38d9aaaf9946ecd1f1c4c6a365e328e80c7b784a",
+                "code-pipeline-1678276784377-58b8776d2c86697dd9e03a6d9de38cd375d8a43e",
+                "code-pipeline-1723905170554-398b57996dde61a043236d80dd21273793f0d5b7",
+                "code-pipeline-1743886003754-9af2f4721bbab0585c67b6a116eb5722cc519f04",
+                "code-pipeline-1721306077808-fb53f8be2b9b1d344a7c06ae1134e1a21bf1f775",
+                "code-pipeline-1743876000715-9af2f4721bbab0585c67b6a116eb5722cc519f04",
+                "code-pipeline-1743887657972-48be5ffc87649b9e0b900d17aa1756f6b9d2caa0",
+                "code-pipeline-1716731390751-d86dc47bd7f274830062d4dbfbcdc805f0586b91",
+                "code-pipeline-1728222309293-676d10f2ed4c9093f2da40146e88bf148ee3f9fe",
+                "code-pipeline-1719927824535-1619331a68b842e01fec6dc73d547a6fb0f38bb1",
+                "code-pipeline-1726272947844-5abdf9db55fc1ae38ffc269ffff0eb9fef7a632c",
+                "code-pipeline-1725814549905-58a033d6cb38905b16791214f211b6eb39899b22",
+                "code-pipeline-1741849567216-27bd2f8efe1411de446f27d75ed66123ad55f9eb",
+                "code-pipeline-1723244270706-1b357dc64920334e321c0ce21df2d9f1a03315b6",
+                "code-pipeline-1703691656506-baa9b4848d42e846dd8c556852e42b3c805c5fcc",
+                "code-pipeline-1722601991616-6c448dce53d90353d3dfbcd524985f6580de5e56",
+                "code-pipeline-1703880559255-f5f940f925cb3be1cae3c63f9fff9aef3e101a15",
+                "code-pipeline-1741844073791-fdde04c2867acae248017f5e9fd5176b5e9ecb24",
+                "code-pipeline-1726304105644-afbd077a1e1859f56c06fd13d9e745f5cf233caf",
+                "code-pipeline-1741822876342-f14adc49376d8b4eebe8d5fd518ae83a569421b4",
+                "code-pipeline-1726061432078-3fd043d49044353fbf52a0c06853734903392dcd",
+                "code-pipeline-1729948753665-a79ae00e9f9ec6defdf08882dd3743270f59e103",
+                "code-pipeline-1719499589553-1affcbc7e108289850fcf06ae8d30db4806ac11c",
+                "code-pipeline-1721225481006-c1618c77c9af6bd5afbe7f92b36bec2e63bb2ee5",
+                "code-pipeline-1740805549940-8b44e4b652096cdfa249426803116491a456e007",
+                "code-pipeline-1722686858791-9fd130364e0d45386eed80238b7d9cabffa72696",
+                "code-pipeline-1726077671708-48d8f92f59baf3233dacbd347b019f70ac42a6c2",
+                "code-pipeline-1729933226501-9432d3c21ea303e4fa090fc3ae019c9b759e81ab",
+                "code-pipeline-1725894560474-3168786598ff8a53de637e1aafe064bfb225464c",
+                "code-pipeline-1727844101218-a69345dd8b75fb2acc72dca9de97deb310ca5a73",
+                "code-pipeline-1726271726479-40cd84055f06399a5b7466f089f957f88fda9465",
+                "code-pipeline-1722595493544-7c38fd366cf924ad1326aab9f6bf42f039af9093",
+                "code-pipeline-1726319252895-e768e605f5c0fb62d208388dc75208cda365d52f",
+                "code-pipeline-1728219999320-b47a20736cccc9ded422f0c9d3d8d5583c3c2ea3",
+                "code-pipeline-1705185378277-f1df10ce0cfb82c348e0997247682e6bc403da53",
+                "code-pipeline-1731012823076-cef25960aeab695614966bbf36dd68075c517b99",
+                "code-pipeline-1724600924397-8b3901f4310539a83dbe720be7615f41904abf2a",
+                "code-pipeline-1705857211329-3c6e8b0bb7c9ce613a8e075b1881f2fe9b313649",
+                "code-pipeline-1742016517644-b21c9160d53978d83fac8ab7a6ce0afd97fc22f1",
+                "code-pipeline-1724520645346-c7598e8b78ae9c405bfccd66f10dcc833700d847",
+                "code-pipeline-1733277397293-250e271086450847665a5218a2b8d9e2db4879a6",
+                "code-pipeline-1703859501999-220616b7ab7b37d8665b23be45a2f3464528915f",
+                "code-pipeline-1712674278380-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1725836527196-6ea6a6dd504ea7762fd1a56657c6c2620b0ccf71",
+                "code-pipeline-1740807402401-96dd39aea534ac9105e564eb6fe2af81a422b9f7",
+                "code-pipeline-1729857638533-b081129b54603aac41b81d3bc517ee0d3e44baba",
+                "code-pipeline-1716645570192-a7c8e6bdc700abca0f01124e03d66fc2600891ec",
+                "code-pipeline-1728849326284-e81ee3104625938a117190d29ae2ecdc807065f4",
+                "code-pipeline-1727701834544-63e99f4b69b8920130953b72f6d167c07a16857b",
+                "code-pipeline-1732714101862-ccc1580b60f3905c3d40c7426fa84059ad0241af",
+                "code-pipeline-1729958306418-a4a6616bf278bd511fa8fb6f82d9e0604ba93350",
+                "code-pipeline-1714828576430-9bc6733f1b97c464d52526ed3e0cd892bf25b9f6",
+                "code-pipeline-1727774291690-1b63b199b23060d777906a926347e90a63a64873",
+                "code-pipeline-1725882896623-32e15244e3412cecdc9bfe80a2a2c5ba6386d88a",
+                "code-pipeline-1735838937432-d5c592862350f0052c41c8b47a0d734d426c2707",
+                "code-pipeline-1734288161625-2d6aac525b38dc6693f29116bc8dcc919e99ccce",
+                "code-pipeline-1707588217620-e838154e1cfcf4729fa18bdd7958c4b7bc16fb13",
+                "code-pipeline-1720195272269-7c0cb02ef2b240a627ad040d3eca3688615ae329",
+                "code-pipeline-1719931497774-cacc2db1ab1aa327e9a57c0f65581baf8d455877",
+                "code-pipeline-1723245259120-629df857e2c687498842ed420e1a6a6b7765352e",
+                "code-pipeline-1721159894660-3ed6b902415d58c400c4a47abba1129832d8007f",
+                "code-pipeline-1703695308767-c7da75398ec6aef52e35ca44ea90ede49557d25d",
+                "code-pipeline-1712677225354-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1721689287184-e984664f04f5303e038e1a829b45bfb550b4782a",
+                "code-pipeline-1729107737500-8154a178b95e69ab9f64b60ec02edabb93ce5f09",
+                "code-pipeline-1699977541136-0a6d355562159e6d316c3d93eb0d110ad6589a94",
+                "code-pipeline-1744419468468-c7cb4e6fa63953aa5e8b78cd8fc3d28c4a54e0e8",
+                "code-pipeline-1699976488104-c38a446dda992732707610327ca38938cabd56a7",
+                "code-pipeline-1728223623841-213e30fdd88a8a6d1891aaf1c6cc4c54dea9eab1",
+                "code-pipeline-1705011016882-3f1a6110705a5c7ce518883359fad40497f5e9fe",
+                "code-pipeline-1707048943432-7fe8941c71cf006309be043144f76711d109b41d",
+                "code-pipeline-1727878551965-280f0ad1641d080889c9dc3c6be4c453b6cbeaa7",
+                "code-pipeline-1728832282272-938ae8af7ef092cae1d7409a718587039d99e4e4",
+                "code-pipeline-1705269231543-1fecf16ff074621892632ef3ac2a4a4ca848b155",
+                "code-pipeline-1705856088962-998163e394e1bc804e13a4599d9ce9f05c64a8a4",
+                "code-pipeline-1725739997475-3bd86e76ba42eb92798c2bde62b7f2fd219e5f9f",
+                "code-pipeline-1707356801914-3f3120a7d345c5497a5fadd89741e0eac465091c",
+                "code-pipeline-1720195900929-d539decb625999bd29cac18e7a30095a1b332053",
+                "code-pipeline-1678274999573-434b32ad9588e23195f81441686e9f7dfff4a139",
+                "code-pipeline-1700001986005-d5b18afb2d64b999089e74fd3323ec0f698365dd",
+                "code-pipeline-1707244069493-53e17ce4d4f0f9033f001249ec7bece802ccbd8e",
+                "code-pipeline-1725978539565-663d25536d4a4804159b16825a972000f9484460",
+                "code-pipeline-1726722708039-507c5f86aeba68b33d9f87e02817a488344ede00",
+                "code-pipeline-1723903209299-fbec69319ebcd5d8a55e651953a74bfa31874d1d",
+                "code-pipeline-1678275612627-a7bf066171b68423672c20568532c55422da1ca3",
+                "code-pipeline-1720531183480-5bbed6dda1ff47544275de28d733986a8abb65c5",
+                "code-pipeline-1727527634025-0981a42f03462e4459131807818a1f2210818fba",
+                "code-pipeline-1726303124146-f4812a3f0952187e42d741fd7ce7a208f8ec5ab2",
+                "code-pipeline-1727976106039-0f11bf13a53e49b6fbb54ea2eb2a286d69f2d9fb",
+                "code-pipeline-1719932472559-1c28b17f5fd76e37a81e675b4f770216e5a0106f",
+                "code-pipeline-1726763562804-7b676f9dc331afcfbe11aa54e0abb0f73202a350",
+                "code-pipeline-1729695599322-ed31971ec3d46e6b6c1b06aff54681362805a8f4",
+                "code-pipeline-1728309818404-188e9cb0a604617f8adcaec3fbc1a3148ec87f04",
+                "code-pipeline-1731853748615-e9c33fa0fc59a21f5de5bee2636d57e84c0a4026",
+                "code-pipeline-1712676935575-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1678275344105-c6468db7aa99dd22ca0c6a69345bdff9056f69fc",
+                "code-pipeline-1727711899099-d612d36c0060fbe612f08782245c3a1eb7a1a6dc",
+                "code-pipeline-1722087757110-052381a63522e49c4f4c6cbbaf97581b12b337eb",
+                "code-pipeline-1725815517731-46efbbe984918401f98790f21812744c1c667e90",
+                "code-pipeline-1726415027560-93e120a47f9c1ed85be57cec1d97ffbdbdb600a4",
+                "code-pipeline-1739210657618-10f0d583cf77de748a1920ec9c9da053a68ab56d",
+                "code-pipeline-1741846056010-fa3f043b058d08e8a734370c9a9f35da1f268f8e",
+                "code-pipeline-1729459753433-4e430647e31f52e81d90d0c37cf8a57ab47471ca",
+                "code-pipeline-1722693066258-7dde0ac496408b6553cf980749100ee13d408b3d",
+                "code-pipeline-1708180659374-015c5622d7ee02e948ae1da68089fceb7096a3dd",
+                "code-pipeline-1732154643262-f415708eb1acea8ac7f9f4866634e1045a94ba80",
+                "code-pipeline-1740807714187-c34ce55f6526058830163013094f721cb582d1c8",
+                "code-pipeline-1741913480476-dd5a7fea99461d18ae82911e055c1c3180abcea5",
+                "code-pipeline-1720195011767-b88bf3bfef99e73d5394fc184f06ea29dddd578a",
+                "code-pipeline-1728222737834-4e970eea76006ed8090b89995f616e468db4cfbb",
+                "code-pipeline-1711143185413-84d7bae7827677ca789a5ce680ed1eb2b0246267",
+                "code-pipeline-1705858098694-73fc7b4aaebd29ff3d48a433b998e0c503f51366",
+                "code-pipeline-1721659934485-cad32b0fd8dbf5cb57da3d71080d88c72bdf9590",
+                "code-pipeline-1727017865437-47d82157193b605c34bc0f2ccc1c385d2eb3f1bb",
+                "code-pipeline-1729950297181-6f1e4c689754871742b8cf2ef8d9e357d477126b",
+                "code-pipeline-1731852792444-febba2bcd089d37dd156b0a5e03e0492ce136fc9",
+                "code-pipeline-1727018146753-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1707588977894-600333aafdbda6bec12ac1c70e6ecfce294ecda9",
+                "code-pipeline-1724517475229-b5f39f231bc2f640f3facf63975c45cf28d8fbf1",
+                "code-pipeline-1743886680893-cf203e38f8a8a1a24ae888a70468334d65fb0c16",
+                "code-pipeline-1721286860841-9a0c11f45952040d26c77230324bb14679545988",
+                "code-pipeline-1727017237586-47d82157193b605c34bc0f2ccc1c385d2eb3f1bb",
+                "code-pipeline-1714827791508-aa28cffca302c7c32a045435f7de228d438c250d",
+                "code-pipeline-1712677499181-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1722603398960-6c448dce53d90353d3dfbcd524985f6580de5e56",
+                "code-pipeline-1719934355053-c09bed56adfe7e6b55401c2426a68540189089cb",
+                "code-pipeline-1728249710769-a5c17063eb1944ca72d37521429ab350169a5ec3",
+                "code-pipeline-1727773035862-36fcd28b53def5982aeb28aef9e987bccc492b49",
+                "code-pipeline-1725873323199-2dd079c9a2793c266e7931f201f53533b3805a4d",
+                "code-pipeline-1731890862763-96c24a80a41371641ec047d9d59386f32b9cfde4",
+                "code-pipeline-1708563363079-ae13fa432b7bbe79ba970cde9a0ff475fc559c44",
+                "code-pipeline-1703693016637-a99678231066a6abb405576f9201eb9e1609ed39",
+                "code-pipeline-1732155968284-927b7ae29ea54dda582f9e11c4908a7ad8250a08",
+                "code-pipeline-1726676669813-e09d84d37428e60a598fb8347265c33a0c9d34f2",
+                "code-pipeline-1678273989667-4c585c6dae9524feb666f7eec1ecda2b0c75825e",
+                "code-pipeline-1727701824580-63e99f4b69b8920130953b72f6d167c07a16857b",
+                "code-pipeline-1739209935324-97088307775aea5ca83c453753ad2cb5dd1ed249",
+                "code-pipeline-1726763143237-941d4abe0093d7f892646b6bf16347e00ea783a1",
+                "code-pipeline-1726320714515-2a613c28ec426530ef8b3db3ab1b50b4afa68f87",
+                "code-pipeline-1726078659412-48d8f92f59baf3233dacbd347b019f70ac42a6c2",
+                "code-pipeline-1726079381579-48d8f92f59baf3233dacbd347b019f70ac42a6c2",
+                "code-pipeline-1719932461640-f855854b97259d9536af237d239935cea9cb1930",
+                "code-pipeline-1720194124976-0a37e9477b5f15d6a5aa1cff7f538913e7c03969",
+                "code-pipeline-1731887439484-c4343fc69ef4e8c747c1cf9eae18c81f05216eb2",
+                "code-pipeline-1716739019906-d5309d4da7937a960833182942ee357573e8c331",
+                "code-pipeline-1725894075937-0ba3eb9c959e4dcbee5143320fef11f5f91bbe32",
+                "code-pipeline-1724782925947-2a77b9c465b427edda13e740520842de48f7281c",
+                "code-pipeline-1728228695903-8d0803e1f28e305c7f6e6ba18925bc4833080a97",
+                "code-pipeline-1726751759728-0b320f4c8ec308b069010eedb2ede55f75e6fec9",
+                "code-pipeline-1727711920712-d612d36c0060fbe612f08782245c3a1eb7a1a6dc",
+                "code-pipeline-1728849180341-6c6a9f00de79120b091255769f135f7c0574fb43",
+                "code-pipeline-1700000928740-4ae32ac633edeef2f5c02217b316ac777759d9a6",
+                "code-pipeline-1706998215921-06054540486c562a9df11ee218f3997a8537edd1",
+                "code-pipeline-1725884907832-7cb6b2c29c28c991e91f19b5dc3aa50aa0dcb5d7",
+                "code-pipeline-1725814872497-28b593531b07d67fd00ed95308d82f7c5a55ce52",
+                "code-pipeline-1721688817237-830a613549b71bd47d0f705b952895b4d18feefb",
+                "code-pipeline-1714209705873-2f30748ca5867310353a69fd3abdd8f4f9af1a58",
+                "code-pipeline-1727774277474-1b63b199b23060d777906a926347e90a63a64873",
+                "code-pipeline-1732155594900-e9c33fa0fc59a21f5de5bee2636d57e84c0a4026",
+                "code-pipeline-1732233489393-ad95eeb498e740b88af1e0db32119531d9d6f30a",
+                "code-pipeline-1703779484337-220616b7ab7b37d8665b23be45a2f3464528915f",
+                "code-pipeline-1719928140962-836ba487fb9b9ef43c4133fdff5cf9e6018428fe",
+                "code-pipeline-1706464349380-d5ed7d1d9e6991fc8f19d9ab4e9fb15b1a67baab",
+                "code-pipeline-1712669676530-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1707916581907-167562b8437c7fa84160c20e0a7873c2bfe8380d",
+                "code-pipeline-1722172886435-e52ce24043ce0d0e3ae4d157ee52b292e7840fdd",
+                "code-pipeline-1706466038106-fbc391b0d919a2050e263be0c4d16f4a01933d56",
+                "code-pipeline-1721689955857-55ea4a5e4d1b534f36f3bc8cecec12390002e291",
+                "code-pipeline-1729468320127-b48bc4b88faabbaf128db0f15739957ca9c8f294",
+                "code-pipeline-1703427598700-3c6cb510c53db2ffa9ce7d52c09fe0b01711606e",
+                "code-pipeline-1726080796693-ac94c42cf2fbd273ea48fdc41c1a88f292da3c1f",
+                "code-pipeline-1729235635704-62c9e8f09ab0d16193b0080abd6483d43c4921d1",
+                "code-pipeline-1725882660457-32e15244e3412cecdc9bfe80a2a2c5ba6386d88a",
+                "code-pipeline-1722690748535-803bf418fd4ae24c863411649dd3595bd2c7aa13",
+                "code-pipeline-1705855578240-01d342f2b914babf754c1084204a521aff716361",
+                "code-pipeline-1727878574100-280f0ad1641d080889c9dc3c6be4c453b6cbeaa7",
+                "code-pipeline-1726724776664-776af958a300e2cda4966d5bb36f4284b40af900",
+                "code-pipeline-1722181939955-eb8ef08dc4ef2bc9694de8603a20671e4557c221",
+                "code-pipeline-1727844126402-a69345dd8b75fb2acc72dca9de97deb310ca5a73",
+                "code-pipeline-1729107823229-74134cc051a231c0681116327f402a8f7192d3e8",
+                "code-pipeline-1738105883732-e9c7b73efba95a9442f29903de88bbe83fc5c493",
+                "code-pipeline-1727000903560-7ec3717a8ef32e1e1491d29efebcc099beb0f555",
+                "code-pipeline-1705614780394-92d8e0084b6d7522d8319b89ae205fdefa8db2c6",
+                "code-pipeline-1703879544829-a8c0c4e6ea1cd0d94cee119ce85868a09e6789bd",
+                "code-pipeline-1678276365378-9ab30ca8bf5128b010940d29c67895fcea345ef0",
+                "code-pipeline-1699960738599-17f62c9b7398d3b93949d2601b1eb61586ff90a0",
+                "code-pipeline-1726319326231-f4812a3f0952187e42d741fd7ce7a208f8ec5ab2",
+                "code-pipeline-1726311560789-93bda7de73fb9dfad4a1bd0f29dc20f0444f6265",
+                "code-pipeline-1728222293574-676d10f2ed4c9093f2da40146e88bf148ee3f9fe",
+                "code-pipeline-1712669492235-cd0a4a880594546406b87346a5a42284921fec50",
+                "code-pipeline-1717867666375-c36c2fa14bca686e3d46d5c84f1f3a7080de35c7",
+                "code-pipeline-1727017001326-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1707574762943-c8c195ab4790e0f6c0e203b4c08a145a6db05812",
+                "code-pipeline-1721641263719-54b5ec8a9c30cfdc49a7aee853884f6f29344a74",
+                "code-pipeline-1725989249433-f887701b9a0a2f4e751245c3bde1ea04fa98cd44",
+                "code-pipeline-1678274724867-5f5fd71a603d83e5383b4cedd05c58238eabd738",
+                "code-pipeline-1726752707957-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1727019385962-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1744418454963-d220bd3087ab5ad8443a37443c74a8b09bd60de9",
+                "code-pipeline-1724520604687-7bbb1dc037e30864d9961eb607e3f3483eb72af4",
+                "code-pipeline-1720275065925-7b785915c01faf2a9498f9c7112667806aace7a4",
+                "code-pipeline-1701696865770-3c6cb510c53db2ffa9ce7d52c09fe0b01711606e",
+                "code-pipeline-1715335244447-c93fc07fe9ea8d936d47e9e8d22c7cee56208371",
+                "code-pipeline-1719242485967-9d5eb1a0a6d78f5cbdfe623d567e75d2ccfa1c73",
+                "code-pipeline-1711367600988-29ee74b4089cd6c444241450939430329e94c6df",
+                "code-pipeline-1728230683239-5e3716c557135b4bc3a3fbe2eb08c4b1d4842007",
+                "code-pipeline-1734695704347-dd4c42d17edbb943766561db3061d1fa37e19ec2",
+                "code-pipeline-1719932412502-1644818279ba3ba07985e1db045eea8052236f36",
+                "code-pipeline-1712674528809-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1725813902834-f21026d7dfbd973e38f9becbae78a0913a74a1ee",
+                "code-pipeline-1731018001546-209250ec1c2ecc50b5e017665a23c41d8f1143b3",
+                "code-pipeline-1711056514082-449b2129d8a8cf955bd0762489233b0ec6a1d2a7",
+                "code-pipeline-1726725929251-7cef1258f72c82ee3d148a81b19940413ac4dcaa",
+                "code-pipeline-1727016136616-2560e797ba6e3d43193295e73f983b7506f0aca6",
+                "code-pipeline-1731517308901-ca198d975d37a6579b283ea5c327f296d4548e8c",
+                "code-pipeline-1726279937505-d3d9df5cd80b8b20ae6c47b795a5cd7281e66437",
+                "code-pipeline-1724508248799-683bf31c5a1aef2d4af3004faf9823c7e5875d2a",
+                "code-pipeline-1729858634428-b261229ed9745516b8e89a46a2a3aec9c15012b2",
+                "code-pipeline-1712674624816-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1705852373689-58d847850f0be6d6b8f1a49bf04f4df341cae032",
+                "code-pipeline-1726061453846-31afed57174c3af853d25ca44a78e541c60a7fe0",
+                "code-pipeline-1727525853979-0981a42f03462e4459131807818a1f2210818fba",
+                "code-pipeline-1726077799723-48d8f92f59baf3233dacbd347b019f70ac42a6c2",
+                "code-pipeline-1736203825138-47e40ece675a6b52791f356e335fa19225f516aa",
+                "code-pipeline-1699999990216-a7a67c85e1ec0fd12c977ab0396c13cbe57c437e",
+                "code-pipeline-1730469461340-053644b394f8d496d3ee7d4b339797d80ba9ff6c",
+                "code-pipeline-1727773012349-36fcd28b53def5982aeb28aef9e987bccc492b49",
+                "code-pipeline-1731014129927-3eab27de08db3fd137c073507e440f9227b6518a",
+                "code-pipeline-1744280554270-737d1e2c88cc32f18ddc14169f33db3f153c85c8",
+                "code-pipeline-1726320744326-2a613c28ec426530ef8b3db3ab1b50b4afa68f87",
+                "code-pipeline-1715016130404-223da5c4c25ccaa729a54f9f3dd34bf14313443a",
+                "code-pipeline-1716917654747-bdbff51336a8f8bd2c766f361a9bf8cbb959b366",
+                "code-pipeline-1712674857825-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1708560430526-3a23cf3c281e20ae9aeee009c026145178a04bbb",
+                "code-pipeline-1724622465818-3be3aba15d74f6439345a91710af621c91a7389b",
+                "code-pipeline-1729689683482-8bcf77625aeb643c82d70d08948fd1f491cf37fc",
+                "code-pipeline-1724520192343-b5f39f231bc2f640f3facf63975c45cf28d8fbf1",
+                "code-pipeline-1725836738197-fd332863fe885bbba483fe1891c50a25784f481b",
+                "code-pipeline-1709396964282-31ef87295a1013a1a4103c1bbbdbf62f7a7cc008",
+                "code-pipeline-1726318460766-168518fcc350a1abd36622dac3f4c880a0f760df",
+                "code-pipeline-1743877454210-93fedfdeaf7a1f9c9e0403a6487dddade4fb17d3",
+                "code-pipeline-1716898718188-4b300bd645e73c7adeb04e2ce016d00768df8e05",
+                "code-pipeline-1707357389174-1fcc99b62b752885aa3d92613be663118bf10527",
+                "code-pipeline-1721688195975-229cb7c19addce113880ea945724eb26f5ab712d",
+                "code-pipeline-1704500933610-4c85d6eb70bae3c23c7657f95a2d99e37f759ffd",
+                "code-pipeline-1726073653015-fb873d5d8c9fad9a2a93732f2af663a54602b665",
+                "code-pipeline-1725059795355-85a3c0f9627398401adeaeecfd739b72d984be28",
+                "code-pipeline-1726309980261-73b8c51ef4a734bd5aab676c22fd5f8ef7207057",
+                "code-pipeline-1725919594893-c685dd246da1ea964f95dbe53c79d03450be2cac",
+                "code-pipeline-1703717470266-c7da75398ec6aef52e35ca44ea90ede49557d25d",
+                "code-pipeline-1731891678841-ae12cb95c7d5e755a672a0219b3b19b77f0d7ba6",
+                "code-pipeline-1725893834985-45d8a81de6ed777ee6f0c8b2d9acd687977c2b0f",
+                "code-pipeline-1742660252684-4e0b5bb138605e6bf50b0385b7f44c53e39957c1",
+                "code-pipeline-1744422771999-d220bd3087ab5ad8443a37443c74a8b09bd60de9",
+                "code-pipeline-1744279250857-4c8e72e9b7e59b34c7accf9f225bc501d8cc3922",
+                "code-pipeline-1726278641414-f4812a3f0952187e42d741fd7ce7a208f8ec5ab2",
+                "code-pipeline-1741902708409-3c48d387e863558528dbd87e0b1a71182ee1240f",
+                "code-pipeline-1732156555905-ad95eeb498e740b88af1e0db32119531d9d6f30a",
+                "code-pipeline-1707582045718-84a406b83338e7f41e4310b45c5002030dd0ece8",
+                "code-pipeline-1714207753908-c2b7c9588096ba9c754c40cabb1f80179ca07c7b",
+                "code-pipeline-1726723573932-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1717759518970-d7d20bfd94c7a51c9f4da2eb10c123c5c52aacb7",
+                "code-pipeline-1732155776225-bae3e38ede1cc95332df542808b2bb2d74107a8b",
+                "code-pipeline-1725816269889-70b3c1112e835d7ae3750106b793c4193d5f09a6",
+                "code-pipeline-1717073944667-219752b2d3226f07a5e79ff8790d2190d17138be",
+                "code-pipeline-1726321580100-f4812a3f0952187e42d741fd7ce7a208f8ec5ab2",
+                "code-pipeline-1723902445971-cdd95a82bdb3c3b275205c134e509675e616a80d",
+                "code-pipeline-1709394363477-6b75a73f49dfed4d8de51cac741c635535067f77",
+                "code-pipeline-1720196179733-929ac6068037d3d9ac63e6ad5c5cd79f3cc87a23",
+                "code-pipeline-1725919301061-ff4010194b55e8700962efd5d31b4bddf9ec852a",
+                "code-pipeline-1739714525540-087f1c0786e6e686d4d694918d5645fb95500e93",
+                "code-pipeline-1725921283781-c11f54eb237b99bc5054b88403b02b2d1d47bd7f",
+                "code-pipeline-1703694037933-8a7ddaee795d56b3fc1c35fe4e520f9fe0ac675a",
+                "code-pipeline-1742015702548-4fe32d39a80a48ce2d5d123c3c7fa7c084a1afe4",
+                "code-pipeline-1715015434689-c062331d9575b6a7ddb93248176b8dfa2a3ca9a8",
+                "code-pipeline-1741902834519-d19d95a20357a575b85f57fd4112e5269cbb15f8",
+                "code-pipeline-1741917177785-339bf7a3c025f23e16bfcbcba0ecb01fa171f388",
+                "code-pipeline-1715792845877-4767b64e5daf6834f6424a11e2b9563b84a85bac",
+                "code-pipeline-1713285417151-a7a437cd4807272c17e25ec7982a7da309cf2b24",
+                "code-pipeline-1729120043389-105e65bf08af1de1d270039dcc970a6a2a64d736",
+                "code-pipeline-1703878621133-220616b7ab7b37d8665b23be45a2f3464528915f",
+                "code-pipeline-1704297227957-fbfe6c702dfa2c80acf34461da374871762ca5ff",
+                "code-pipeline-1703880038976-82ea431ec0147cb3da801b37abccf29f69d9c36e",
+                "code-pipeline-1722684467887-7c38fd366cf924ad1326aab9f6bf42f039af9093",
+                "code-pipeline-1700002479261-7e78ceb2ef137102e5e08dc8f8cefa7c285c3708",
+                "code-pipeline-1744420557487-c7cb4e6fa63953aa5e8b78cd8fc3d28c4a54e0e8",
+                "code-pipeline-1736601841910-3c652c219889eac52912413e74354bc6207b1430",
+                "code-pipeline-1719914431856-2f370d4f917433d6fafa9d2a8e5d3cdcace4eefe",
+                "code-pipeline-1714687401995-976f5ea5582c650060c3e1bdf33404ee350e9a58",
+                "code-pipeline-1735839738181-8e17ed305116efe3a4044a04a5c33a53d5c7a673",
+                "code-pipeline-1717074369535-d1348a1b5679aee1173af94e2f4b96d757788829",
+                "code-pipeline-1729598209791-26d1aa8ece5b0ad1512d95922f013b7eb2a135a7",
+                "code-pipeline-1722686896318-cfe38f058140b4b511696e2be0684b4037f41b74",
+                "code-pipeline-1726078312647-48d8f92f59baf3233dacbd347b019f70ac42a6c2",
+                "code-pipeline-1720459133288-da236723da3a994e913f47ba7dd96b4a97e93920",
+                "code-pipeline-1708561492128-359c224421f24352912b5121ea3757237cce331a",
+                "code-pipeline-1741789480522-fa3f043b058d08e8a734370c9a9f35da1f268f8e",
+                "code-pipeline-1730775164233-d9288e18b8acf79cd621e5b54c86a1aa007a4023",
+                "code-pipeline-1728050052372-c6d267401eb9c2d9c55214befac54fbc49d0dacd",
+                "code-pipeline-1743895820669-d4670808564cc1a8503182f13b32687f23675d04",
+                "code-pipeline-1726751933986-0b320f4c8ec308b069010eedb2ede55f75e6fec9",
+                "code-pipeline-1728228733028-8d0803e1f28e305c7f6e6ba18925bc4833080a97",
+                "code-pipeline-1703800014927-220616b7ab7b37d8665b23be45a2f3464528915f",
+                "code-pipeline-1721649508492-ad8a4b80eac0e90960c3dc502bd1b89f6cf76fd1",
+                "code-pipeline-1703777488138-2bcfa9713d584501565937f465ec46d314cefc3e",
+                "code-pipeline-1726318494126-168518fcc350a1abd36622dac3f4c880a0f760df",
+                "code-pipeline-1723900409341-8320dd3a91a36fcccef2b3ac1dd3ead2af4692d2",
+                "code-pipeline-1727840313604-23d11ea4e374d71a3cb8ced42cd7727c9f5a7735",
+                "code-pipeline-1720978175084-6c448dce53d90353d3dfbcd524985f6580de5e56",
+                "code-pipeline-1728230664066-5e3716c557135b4bc3a3fbe2eb08c4b1d4842007",
+                "code-pipeline-1725814743767-58a033d6cb38905b16791214f211b6eb39899b22",
+                "code-pipeline-1725873750420-9194c8dfead74672f9d1e200242a7f27368adaed",
+                "code-pipeline-1731887661127-07959d7ce3369abf4ddf65f0b183bbe59b60ae57",
+                "code-pipeline-1724782891923-011077069b5f6a8d733d9512037308123ee03c2b",
+                "code-pipeline-1726722733267-507c5f86aeba68b33d9f87e02817a488344ede00",
+                "code-pipeline-1725978593957-e29c85005f8451fa4989b6853d9244e039bd48da",
+                "code-pipeline-1703879750763-b880666c7ca4b0bb862c263c911f56b711e7cb59",
+                "code-pipeline-1728223175333-d8f65cd2765c7f2b6b387f1ea6b570cab82532b6",
+                "code-pipeline-1704216746623-16e47ede6495387b02231abe0647b269ace9e5e8",
+                "code-pipeline-1739399042890-5f2b9a45ca796e3201c0d826c578bbb2cdecd46d",
+                "code-pipeline-1720195548331-004d027e30638d506dfe7380101dee63a5c4bdeb",
+                "code-pipeline-1732714874774-ad95eeb498e740b88af1e0db32119531d9d6f30a",
+                "code-pipeline-1712675180226-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1726322444454-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1712655121943-cd0a4a880594546406b87346a5a42284921fec50",
+                "code-pipeline-1726304313246-4594f36854fb040adc02c9d9b4e9d89360decf88",
+                "code-pipeline-1727607001381-0981a42f03462e4459131807818a1f2210818fba",
+                "code-pipeline-1727603394233-0981a42f03462e4459131807818a1f2210818fba",
+                "code-pipeline-1726763076144-0a9621fd7ab9962cbde9b162920871b67b75d407",
+                "code-pipeline-1703776750613-2180a137762a246602d879cd9e6f80cd0f76a405",
+                "code-pipeline-1700045661138-548d8fdb8a7d138a2156ef4aacec664750ffdab5",
+                "code-pipeline-1703776075752-ebec7c9459b18e608654395bc6e63f5cb2de5e6c",
+                "code-pipeline-1712676708339-70b3130e158a45bbba1f742333a7b9d34f140ba1",
+                "code-pipeline-1726302368161-b0f09a35089781b3c0247119305bed7db489d676",
+                "code-pipeline-1726724402958-347d4b103f2b645a8f5c214ebe0b73ee778df21d",
+                "code-pipeline-1726304290613-133b58f0ed11f3bbaf8280d3c71a1ca22b3007b6",
+                "code-pipeline-1713439559693-118bd3ddadc485a48102e3d04fa993e296a08be6",
+                "code-pipeline-1717074872909-969af5ef7de14cd404e92cec91accdcf4abdd5d4",
+                "code-pipeline-1707813819002-c43b67ef4e09e0f37e96c703f556a763d380ce2e",
+                "code-pipeline-1726305155703-f4812a3f0952187e42d741fd7ce7a208f8ec5ab2",
+                "code-pipeline-1728223489818-d8f65cd2765c7f2b6b387f1ea6b570cab82532b6",
+                "code-pipeline-1726317546787-a1f4f3344fcd1fd4fe505dfc52265707ebf0ad88",
+                "code-pipeline-1725749298299-d2ad8c6945973ddfb4d4b5658906afec3e6245d0",
+                "code-pipeline-1726278671442-f4812a3f0952187e42d741fd7ce7a208f8ec5ab2",
+                "code-pipeline-1727840294780-23d11ea4e374d71a3cb8ced42cd7727c9f5a7735",
+                "code-pipeline-1731852561121-88b6113f2426308eda34e841baa96ece47ac611e",
+                "code-pipeline-1730020220251-3cff800e979325cda444115065d7f7828863a172",
+                "code-pipeline-1725919891945-da3a1c6f00e1e64715b46dc7185ded6c6fa0dcd5",
+                "code-pipeline-1731014741322-d9288e18b8acf79cd621e5b54c86a1aa007a4023",
+                "code-pipeline-1733268584426-2fcbb2a05524f408815fb183237d07a278511ff7",
+                "code-pipeline-1712678013920-e6408e75b2d5fb478150f8eb3bb8b05fefcbe7d5",
+                "code-pipeline-1736534203350-040cc77d6ae709b51493b8f7a59adb595dbce281",
+                "code-pipeline-1733793347520-d77ba55363ec1760ab8c3e036f45bb140bbc575e",
+                "code-pipeline-1706544605222-4ff3295bd6ac495e1c3e4a05945ba546de1e8e6e",
+                "code-pipeline-1726726188598-cbb3bc63df1f080fb5c2ebbb0ead03c3554fb944",
+                "code-pipeline-1705362181749-6000e3fe208efb2b07800576409aa4dcdeec8629",
+                "code-pipeline-1731886184635-b92c51159be652a0dc16de42ce92db9594f55785",
+                "code-pipeline-1699999905591-a7a67c85e1ec0fd12c977ab0396c13cbe57c437e",
+                "code-pipeline-1728219006004-b47a20736cccc9ded422f0c9d3d8d5583c3c2ea3",
+                "code-pipeline-1725400507768-4ed66fddaecd954b0d614f519953d2bd1658b934",
+                "code-pipeline-1741845112527-e35663e6e634b6b666dc8c071f8c17375179e707",
+                "code-pipeline-1731890992224-b8f7b6e68711f8686dd92d39d153331322783ddb",
+                "code-pipeline-1730469223617-2ce641b138023ed1bd3d3170b714a9d479b34087",
+                "code-pipeline-1721060952456-92323fd7dc572cd89ffa0e0dfbd90c5bc0ff424a",
+                "code-pipeline-1724507167170-c317a369ef136d8ddaad4f4d24348d149f643b5e",
+                "code-pipeline-1741849659043-71f6d36ef90f8dac059942a0b896f337c91462c3",
+                "code-pipeline-1728249687392-a5c17063eb1944ca72d37521429ab350169a5ec3",
+                "code-pipeline-1703777379028-377e45c5f35ab14918bbd23f2948fbaf6727b430",
+                "code-pipeline-1730135635013-0d5b2c15469ed396648da2a1cf927e6d1fd5f21d",
+                "code-pipeline-1727017727964-0981a42f03462e4459131807818a1f2210818fba",
+                "code-pipeline-1703691589757-baa9b4848d42e846dd8c556852e42b3c805c5fcc",
+                "code-pipeline-1707071628350-f108563ac845b40e2f6b114969fc80699bedb208",
+                "code-pipeline-1725828126932-36a08771cef5d3c75e58a109c93430d93c5beab8",
+                "code-pipeline-1712678294170-e6408e75b2d5fb478150f8eb3bb8b05fefcbe7d5",
+                "code-pipeline-1728435111310-97cf15cdb5091e15022bf0e1f8b6663fee40abf8",
+                "code-pipeline-1721685030325-93c800954bc618b5bb4c48058fa39c4387b2ca54",
+                "code-pipeline-1728222404284-676d10f2ed4c9093f2da40146e88bf148ee3f9fe",
+                "code-pipeline-1722171209184-bb73e60670a6b62f9abcc075592e238b55a565f9",
+                "code-pipeline-1703880938164-f5f940f925cb3be1cae3c63f9fff9aef3e101a15",
+                "code-pipeline-1728442309042-1c1d39b63132c66a991f159ee65c27f45bb82f3d",
+                "code-pipeline-1745503031636-55615c014591799068ce85d3171aadf5f43d2089",
+                "code-pipeline-1720194567246-22d5bcc8125f19ba1aa3f5f285fd19da307d9293",
+                "code-pipeline-1710155884477-327bbfb9405f71e854b779217a633b1fd84465c3",
+                "code-pipeline-1704454528406-d1c08420cdacf62115c337d4770c5203b873244c",
+                "code-pipeline-1725059832232-ca20f3e3e5b4e52cbfa826f3a70c89aa9c2cb681",
+                "code-pipeline-1726321649309-c4569753fadd189671a49c495ddfc84b12acf2e7",
+                "code-pipeline-1741532071321-c2ef20108542040ac1e9e660c5d47e7fbf0111a7",
+                "code-pipeline-1729594443056-6075362ec439685987f262ce0e8a403d7ea4eb4f",
+                "code-pipeline-1735840033665-658dce60d3571b7795417e53003b42d9c9e8fc73",
+                "code-pipeline-1727710086735-f5f68aa9eae7b4cac768399670f81056bcdcee99",
+                "code-pipeline-1722075399482-fb393e19b2bfbac8d3d2f594b0d60304ea51bc1c",
+                "code-pipeline-1729971034536-e4c4a9a241c136596ee6df6ae41693a7927ca484",
+                "code-pipeline-1726080809107-ac94c42cf2fbd273ea48fdc41c1a88f292da3c1f",
+                "code-pipeline-1707593817745-5a0197a933b7067c45c6ae13832eb867995a84ab",
+                "code-pipeline-1727976086602-0f11bf13a53e49b6fbb54ea2eb2a286d69f2d9fb",
+                "code-pipeline-1745372158345-2e8d7e27a2a425e06b134e1e110e2bf952bb72de",
+                "code-pipeline-1729689179009-334839e327c83724d28e7e37e88c4c2d16cfe94a",
+                "code-pipeline-1726273017296-5abdf9db55fc1ae38ffc269ffff0eb9fef7a632c",
+                "code-pipeline-1727019012373-0981a42f03462e4459131807818a1f2210818fba",
+                "code-pipeline-1728440926285-ccad50504cb5d104d028b23995affdb65a69ea6c",
+                "code-pipeline-1741917613218-589b99a58eae10aa278040973551c69889769799",
+                "code-pipeline-1735839977961-dd4c42d17edbb943766561db3061d1fa37e19ec2",
+                "code-pipeline-1703692511362-baa9b4848d42e846dd8c556852e42b3c805c5fcc",
+                "code-pipeline-1729468253702-90d906a0308f675b9262a450bc4ef3901299ee37",
+                "code-pipeline-1737193200998-8367311d45d361b8e0b7cc8a5e524793c12ceccf",
+                "code-pipeline-1721639730848-7660cbf5a085fd570496ed064170f7c21abd39b0",
+                "code-pipeline-1721572164263-fba4544ed67fccbe7d64c890d047d3964de2b56b",
+                "code-pipeline-1725891242140-45d8a81de6ed777ee6f0c8b2d9acd687977c2b0f",
+                "code-pipeline-1743767630336-11dba53eb9156a431bc4cbf1fd1c77152a3154c8",
+                "code-pipeline-1729457296032-bbda81ca9f309e3b3c0b291ec4e7e3be3636c241",
+                "code-pipeline-1723905670889-15003e6028b09496a80c400f678a8839ca22b28c",
+                "code-pipeline-1724600367361-f315eb3ae73d6a79d9eb6937078fade22fb41f94",
+                "code-pipeline-1739398787155-3c224915cedfa88b77cfa2cdc3d4cb91881db103"
+            ],
+            "ConfigurationTemplates": [],
+            "ResourceLifecycleConfig": {
+                "VersionLifecycleConfig": {
+                    "MaxCountRule": {
+                        "Enabled": false,
+                        "MaxCount": 200,
+                        "DeleteSourceFromS3": false
+                    },
+                    "MaxAgeRule": {
+                        "Enabled": false,
+                        "MaxAgeInDays": 180,
+                        "DeleteSourceFromS3": false
+                    }
+                }
+            }
+        }
+    ]
+}
+\nApplication: Finanz-Backend
+Environments:
+{
+    "Environments": [
+        {
+            "EnvironmentName": "Finanz-Dev",
+            "EnvironmentId": "e-q9sa4qsmjz",
+            "ApplicationName": "Finanz-Backend",
+            "VersionLabel": "code-pipeline-1745503031636-55615c014591799068ce85d3171aadf5f43d2089",
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.1.4 running Python 3.11",
+            "PlatformArn": "arn:aws:elasticbeanstalk:eu-south-1::platform/Python 3.11 running on 64bit Amazon Linux 2023/4.1.4",
+            "EndpointURL": "18.102.212.204",
+            "CNAME": "finanz-dev.eu-south-1.elasticbeanstalk.com",
+            "DateCreated": "2024-10-04T15:29:24.001000+00:00",
+            "DateUpdated": "2025-05-04T11:32:49.227000+00:00",
+            "Status": "Ready",
+            "AbortableOperationInProgress": false,
+            "Health": "Green",
+            "HealthStatus": "Ok",
+            "Tier": {
+                "Name": "WebServer",
+                "Type": "Standard",
+                "Version": "1.0"
+            },
+            "EnvironmentLinks": [],
+            "EnvironmentArn": "arn:aws:elasticbeanstalk:eu-south-1:538927841179:environment/Finanz-Backend/Finanz-Dev"
+        },
+        {
+            "EnvironmentName": "Finanz-Prod",
+            "EnvironmentId": "e-gueuqgs9nc",
+            "ApplicationName": "Finanz-Backend",
+            "VersionLabel": "code-pipeline-1743767630336-11dba53eb9156a431bc4cbf1fd1c77152a3154c8",
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.0.10 running Python 3.11",
+            "PlatformArn": "arn:aws:elasticbeanstalk:eu-south-1::platform/Python 3.11 running on 64bit Amazon Linux 2023/4.0.10",
+            "EndpointURL": "awseb--AWSEB-s1VtH1LXAz2m-1557084675.eu-south-1.elb.amazonaws.com",
+            "CNAME": "finanz-prod.eu-south-1.elasticbeanstalk.com",
+            "DateCreated": "2024-04-06T12:11:37.693000+00:00",
+            "DateUpdated": "2025-04-04T11:54:23.725000+00:00",
+            "Status": "Ready",
+            "AbortableOperationInProgress": false,
+            "Health": "Green",
+            "HealthStatus": "Ok",
+            "Tier": {
+                "Name": "WebServer",
+                "Type": "Standard",
+                "Version": "1.0"
+            },
+            "EnvironmentLinks": [],
+            "EnvironmentArn": "arn:aws:elasticbeanstalk:eu-south-1:538927841179:environment/Finanz-Backend/Finanz-Prod"
+        }
+    ]
+}
+\nEnvironment: Finanz-Dev
+Resources:
+{
+    "EnvironmentResources": {
+        "EnvironmentName": "Finanz-Dev",
+        "AutoScalingGroups": [
+            {
+                "Name": "awseb-e-q9sa4qsmjz-stack-AWSEBAutoScalingGroup-rpVzurlNfYp3"
+            }
+        ],
+        "Instances": [
+            {
+                "Id": "i-07730c53a4300eeef"
+            }
+        ],
+        "LaunchConfigurations": [
+            {
+                "Name": "awseb-e-q9sa4qsmjz-stack-AWSEBAutoScalingLaunchConfiguration-5cGs4R8KVebQ"
+            }
+        ],
+        "LaunchTemplates": [],
+        "LoadBalancers": [],
+        "Triggers": [],
+        "Queues": []
+    }
+}
+Configuration Settings:
+{
+    "ConfigurationSettings": [
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.1.4 running Python 3.11",
+            "PlatformArn": "arn:aws:elasticbeanstalk:eu-south-1::platform/Python 3.11 running on 64bit Amazon Linux 2023/4.1.4",
+            "ApplicationName": "Finanz-Backend",
+            "EnvironmentName": "Finanz-Dev",
+            "DeploymentStatus": "deployed",
+            "DateCreated": "2024-10-04T15:29:23+00:00",
+            "DateUpdated": "2025-04-24T13:57:13+00:00",
+            "OptionSettings": [
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "Availability Zones",
+                    "Value": "Any"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "Cooldown",
+                    "Value": "360"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "Custom Availability Zones",
+                    "Value": ""
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "EnableCapacityRebalancing",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "MaxSize",
+                    "Value": "1"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "MinSize",
+                    "Value": "1"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "BlockDeviceMappings"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "DisableDefaultEC2SecurityGroup",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "DisableIMDSv1",
+                    "Value": "true"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "EC2KeyName",
+                    "Value": "Finanz-Dev"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "IamInstanceProfile",
+                    "Value": "aws-elasticbeanstalk-ec2-role"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "ImageId",
+                    "Value": "ami-03617ff727b02d279"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "InstanceType",
+                    "Value": "t3a.small"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "LaunchTemplateTagPropagationEnabled"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "MonitoringInterval",
+                    "Value": "5 minute"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeIOPS"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeSize"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeThroughput"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeType"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "SSHSourceRestriction",
+                    "Value": "tcp,22,22,0.0.0.0/0"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "SecurityGroups",
+                    "Value": "sg-0d8116196728e8709"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "MaxBatchSize"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "MinInstancesInService"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "PauseTime"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "RollingUpdateEnabled",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "RollingUpdateType",
+                    "Value": "Time"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "Timeout",
+                    "Value": "PT30M"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "AppSource",
+                    "Value": "https://elasticbeanstalk-platform-assets-eu-south-1.s3.eu-south-1.amazonaws.com/stalks/eb_python311_amazon_linux_2023_1.0.1359.0_20240905235332/sampleapp/EBSampleApp-Python.zip"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "EnvironmentVariables",
+                    "Value": "ONESIGNAL_API_KEY=Y2Q3NzhkOTktZjdlNi00MWI0LTlkZWUtNWU5Yzk0Njg1ZWFm,PYTHONPATH=/var/app/current:$PYTHONPATH,STRIPE_WEBHOOK_SECRET_KEY=whsec_y3sHoZIUNnNU1s6G5EwJGjpQR3th86nn,STRIPE_SECRET_KEY=sk_test_51PwQ7tGbT0IoF7W8Mv0ncVlUNu6K6ggpgDz6G7FGLH8CfEML8TyH9tYOjgnA5NsYfh393wSTD9Ooq98yH2DhHQlA00519pb8Ds,MIXPANEL_PROJECT_TOKEN=05084c17294645a4fc36d81e500cb8f2,MAILERSEND_TOKEN=mlsn.03b6aefb9382e948aeb0218b22697c0ed8b0c480c27dc5ef99f19c6a6eefaec3,ENVIRONMENT=DEVELOPMENT,AWS_SECRET_ACCESS_KEY=eqGSLtvyIJUPVfkl6/WIQDkzvuwFh6+gFJwn/jRH,AWS_DEFAULT_REGION=eu-south-1,AUTH_DOMAIN=https://dev.auth.finanzapp.io/,MAILERLITE_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGE0Nzg3NzFlZTY2NjUzZjIxMDg5NzViY2QzYTM2YWZjYTgxOWY2YTAwYjFlZDE1MTFkMDgwNzJiZDU5MDVjZmY3YjAxY2YxMjZlMzE5YTciLCJpYXQiOjE3MjgyMjMxMTMuMjcxOTgyLCJuYmYiOjE3MjgyMjMxMTMuMjcxOTg0LCJleHAiOjQ4ODM4OTY3MTMuMjY5MzcxLCJzdWIiOiI3NTk5MTQiLCJzY29wZXMiOltdfQ.hC2YSda-Q_9L9dSRAQE9nDYX-WtVF1j2p7aaW8FMQt1OM7_m7TSS-WH7SmXmPU8bJcOiDyQWHKGtPMs4KDc-h2-za61yiz-K9fWx7VyXJy5JXHbxdEX4x1pF22r0eGo5CvKHMikY0LSjGEDsllVgABkDlvT02RnzMEDL9ovAE5pkG6l2U3iTtEK5SPKASAxMPhhqFw4id_98pJYr0vEmhfXsTZ9v_Q3DZwNj98S5fRwDD6esrfiobbdULTNB2dtNPT740naTXK8qpnTyggawj6wq6m6t7ylM3ObNpP8LWCijBsQrCmsV3b546145lq4MTX_GhP-aOJnUgt4d4P1YRGkBZHzO9RDzY_rZumdLGjdsAtUDN_E0CN2iwVttHnaxWHIVwMBgxPYuYE_Ske9IW4YMcRTR7Pzcn5x6-IN885EoJJr8CKvaJv1sxZmhcjQsGyjcn23aQ4tZCjTHoliFSstSlSA4BslyPwdi28NJE0AbR9BMg7m8ZQUzbPZK1AKrQUDNxY2ZSPXCYdNgO7P2svi2ngdqwZBnrRWQ6uIhvc8-kTCGlcZw4x27x5kBi5OsG_W2ia87IUJEkam-x5RpItcLK4im25EuQp6G4aqekSzzTzMk_BCmLolh7lTusbXqJW0J3NH3cp_xtA1ReFcWNvye1tAFK3-pOie86OMxqkY,BUCKET_URL=https://finanz-development.s3.eu-south-1.amazonaws.com,ONESIGNAL_APP_ID=686bd2ad-ad34-4fe0-96ef-275c8a50151e,STRIPE_PUBLIC_KEY=pk_test_51PwQ7tGbT0IoF7W8u96CP548BcV2TAS5yfLVeWOjRBntLx8Rf5sMnzQejAZK0mf7EGMlr03z1VsGqiFvbRIudFoG00m9fkolwO,AWS_ACCESS_KEY_ID=AKIAX26U2H6N6FJLMBIF,ACCESS_SESSION_KEY_SALT=J6dxrBcY0UkLr0IUT&1pn2XQa9CKeNAtCsUo@PzFSN9Ve6!h!jG!A!6dM5HXm50e,STREETBEAT_BASIC_API_KEY=sk_vdatJKJN7ohdE14hVxQVYb8KwNL0r5hV,POSTGRESQL_DATABASE_URL=postgresql://postgres:2OClfjlnZOmVq54PEW4mQ9Lxc5Lxyb@finanz-dev-db.cz57im2ckdij.eu-south-1.rds.amazonaws.com:5432/FinanzDevDB,VERIFIED_ACCESS_SESSION_KEY_SALT=nX@x@C$nlB*6fpaAHuWk@&uAI#PAZ2siY@!95nkO0$ITdQK#!oN5#qIY9V2shL5kjF,BUCKET_NAME=finanz-development"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "HooksPkgUrl",
+                    "Value": "https://elasticbeanstalk-platform-assets-eu-south-1.s3.eu-south-1.amazonaws.com/stalks/eb_python311_amazon_linux_2023_1.0.1359.0_20240905235332/lib/hooks.tar.gz"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "InstancePort",
+                    "Value": "80"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "InstanceTypeFamily",
+                    "Value": "t3a"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "StaticFiles"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "EnableSpot",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "InstanceTypes",
+                    "Value": "t3a.small"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotAllocationStrategy",
+                    "Value": "capacity-optimized"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotFleetOnDemandAboveBasePercentage",
+                    "Value": "0"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotFleetOnDemandBase",
+                    "Value": "0"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotMaxPrice"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SupportedArchitectures",
+                    "Value": "x86_64"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "AssociatePublicIpAddress",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "ELBScheme",
+                    "Value": "public"
+                },
+                {
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "ELBSubnets",
+                    "Value": "subnet-0606064051bcec44c,subnet-04e6b25665a7f6c31"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "Subnets",
+                    "Value": "subnet-0606064051bcec44c,subnet-04e6b25665a7f6c31"
+                },
+                {
+                    "ResourceName": "AWSEBSecurityGroup",
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "VPCId",
+                    "Value": "vpc-0954528d44c0efa46"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application",
+                    "OptionName": "Application Healthcheck URL",
+                    "Value": ""
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ACCESS_SESSION_KEY_SALT",
+                    "Value": "J6dxrBcY0UkLr0IUT&1pn2XQa9CKeNAtCsUo@PzFSN9Ve6!h!jG!A!6dM5HXm50e"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AUTH_DOMAIN",
+                    "Value": "https://dev.auth.finanzapp.io/"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AWS_ACCESS_KEY_ID",
+                    "Value": "AKIAX26U2H6N6FJLMBIF"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AWS_DEFAULT_REGION",
+                    "Value": "eu-south-1"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AWS_SECRET_ACCESS_KEY",
+                    "Value": "eqGSLtvyIJUPVfkl6/WIQDkzvuwFh6+gFJwn/jRH"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "BUCKET_NAME",
+                    "Value": "finanz-development"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "BUCKET_URL",
+                    "Value": "https://finanz-development.s3.eu-south-1.amazonaws.com"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ENVIRONMENT",
+                    "Value": "DEVELOPMENT"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "MAILERLITE_TOKEN",
+                    "Value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMGE0Nzg3NzFlZTY2NjUzZjIxMDg5NzViY2QzYTM2YWZjYTgxOWY2YTAwYjFlZDE1MTFkMDgwNzJiZDU5MDVjZmY3YjAxY2YxMjZlMzE5YTciLCJpYXQiOjE3MjgyMjMxMTMuMjcxOTgyLCJuYmYiOjE3MjgyMjMxMTMuMjcxOTg0LCJleHAiOjQ4ODM4OTY3MTMuMjY5MzcxLCJzdWIiOiI3NTk5MTQiLCJzY29wZXMiOltdfQ.hC2YSda-Q_9L9dSRAQE9nDYX-WtVF1j2p7aaW8FMQt1OM7_m7TSS-WH7SmXmPU8bJcOiDyQWHKGtPMs4KDc-h2-za61yiz-K9fWx7VyXJy5JXHbxdEX4x1pF22r0eGo5CvKHMikY0LSjGEDsllVgABkDlvT02RnzMEDL9ovAE5pkG6l2U3iTtEK5SPKASAxMPhhqFw4id_98pJYr0vEmhfXsTZ9v_Q3DZwNj98S5fRwDD6esrfiobbdULTNB2dtNPT740naTXK8qpnTyggawj6wq6m6t7ylM3ObNpP8LWCijBsQrCmsV3b546145lq4MTX_GhP-aOJnUgt4d4P1YRGkBZHzO9RDzY_rZumdLGjdsAtUDN_E0CN2iwVttHnaxWHIVwMBgxPYuYE_Ske9IW4YMcRTR7Pzcn5x6-IN885EoJJr8CKvaJv1sxZmhcjQsGyjcn23aQ4tZCjTHoliFSstSlSA4BslyPwdi28NJE0AbR9BMg7m8ZQUzbPZK1AKrQUDNxY2ZSPXCYdNgO7P2svi2ngdqwZBnrRWQ6uIhvc8-kTCGlcZw4x27x5kBi5OsG_W2ia87IUJEkam-x5RpItcLK4im25EuQp6G4aqekSzzTzMk_BCmLolh7lTusbXqJW0J3NH3cp_xtA1ReFcWNvye1tAFK3-pOie86OMxqkY"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "MAILERSEND_TOKEN",
+                    "Value": "mlsn.03b6aefb9382e948aeb0218b22697c0ed8b0c480c27dc5ef99f19c6a6eefaec3"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "MIXPANEL_PROJECT_TOKEN",
+                    "Value": "05084c17294645a4fc36d81e500cb8f2"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ONESIGNAL_API_KEY",
+                    "Value": "Y2Q3NzhkOTktZjdlNi00MWI0LTlkZWUtNWU5Yzk0Njg1ZWFm"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ONESIGNAL_APP_ID",
+                    "Value": "686bd2ad-ad34-4fe0-96ef-275c8a50151e"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "POSTGRESQL_DATABASE_URL",
+                    "Value": "postgresql://postgres:2OClfjlnZOmVq54PEW4mQ9Lxc5Lxyb@finanz-dev-db.cz57im2ckdij.eu-south-1.rds.amazonaws.com:5432/FinanzDevDB"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "PYTHONPATH",
+                    "Value": "/var/app/current:$PYTHONPATH"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STREETBEAT_BASIC_API_KEY",
+                    "Value": "sk_vdatJKJN7ohdE14hVxQVYb8KwNL0r5hV"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STRIPE_PUBLIC_KEY",
+                    "Value": "pk_test_51PwQ7tGbT0IoF7W8u96CP548BcV2TAS5yfLVeWOjRBntLx8Rf5sMnzQejAZK0mf7EGMlr03z1VsGqiFvbRIudFoG00m9fkolwO"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STRIPE_SECRET_KEY",
+                    "Value": "sk_test_51PwQ7tGbT0IoF7W8Mv0ncVlUNu6K6ggpgDz6G7FGLH8CfEML8TyH9tYOjgnA5NsYfh393wSTD9Ooq98yH2DhHQlA00519pb8Ds"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STRIPE_WEBHOOK_SECRET_KEY",
+                    "Value": "whsec_y3sHoZIUNnNU1s6G5EwJGjpQR3th86nn"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "VERIFIED_ACCESS_SESSION_KEY_SALT",
+                    "Value": "nX@x@C$nlB*6fpaAHuWk@&uAI#PAZ2siY@!95nkO0$ITdQK#!oN5#qIY9V2shL5kjF"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                    "OptionName": "DeleteOnTerminate",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                    "OptionName": "RetentionInDays",
+                    "Value": "7"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                    "OptionName": "StreamLogs",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                    "OptionName": "DeleteOnTerminate",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                    "OptionName": "HealthStreamingEnabled",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                    "OptionName": "RetentionInDays",
+                    "Value": "7"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "BatchSize",
+                    "Value": "100"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "BatchSizeType",
+                    "Value": "Percentage"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "DeploymentPolicy",
+                    "Value": "AllAtOnce"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "IgnoreHealthCheck",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "Timeout",
+                    "Value": "600"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:container:python",
+                    "OptionName": "NumProcesses",
+                    "Value": "1"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:container:python",
+                    "OptionName": "NumThreads",
+                    "Value": "15"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:container:python",
+                    "OptionName": "WSGIPath",
+                    "Value": "app:app"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "DefaultSSHPort",
+                    "Value": "22"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "LaunchTimeout",
+                    "Value": "0"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "LaunchType",
+                    "Value": "Migration"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "RollbackLaunchOnFailure",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "EnvironmentType",
+                    "Value": "SingleInstance"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "ExternalExtensionsS3Bucket"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "ExternalExtensionsS3Key"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "ServiceRole",
+                    "Value": "arn:aws:iam::538927841179:role/aws-elasticbeanstalk-service-role"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment:proxy",
+                    "OptionName": "ProxyServer",
+                    "Value": "nginx"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "ConfigDocument",
+                    "Value": "{\"Version\":1,\"CloudWatchMetrics\":{\"Instance\":{\"ApplicationRequestsTotal\":60,\"ApplicationRequests5xx\":60,\"ApplicationRequests4xx\":60,\"LoadAverage1min\":60,\"ApplicationRequests2xx\":60,\"InstanceHealth\":60},\"Environment\":{\"ApplicationRequests5xx\":60,\"ApplicationRequestsTotal\":60,\"ApplicationRequests4xx\":60,\"ApplicationRequests2xx\":60}},\"Rules\":{\"Environment\":{\"ELB\":{\"ELBRequests4xx\":{\"Enabled\":true}},\"Application\":{\"ApplicationRequests4xx\":{\"Enabled\":true}}}}}"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "EnhancedHealthAuthEnabled",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "HealthCheckSuccessThreshold",
+                    "Value": "Ok"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "SystemType",
+                    "Value": "enhanced"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:hostmanager",
+                    "OptionName": "LogPublicationControl",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions",
+                    "OptionName": "ManagedActionsEnabled",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions",
+                    "OptionName": "PreferredStartTime",
+                    "Value": "SUN:10:25"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions",
+                    "OptionName": "ServiceRoleForManagedUpdates",
+                    "Value": "arn:aws:iam::538927841179:role/aws-elasticbeanstalk-service-role"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                    "OptionName": "InstanceRefreshEnabled",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                    "OptionName": "UpdateLevel",
+                    "Value": "minor"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:monitoring",
+                    "OptionName": "Automatically Terminate Unhealthy Instances",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Endpoint",
+                    "Value": "mat.giu2002@gmail.com"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Protocol",
+                    "Value": "email"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Topic ARN",
+                    "Value": "arn:aws:sns:eu-south-1:538927841179:ElasticBeanstalkNotifications-Environment-Finanz-Dev"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Topic Name"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:trafficsplitting",
+                    "OptionName": "EvaluationTime"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:trafficsplitting",
+                    "OptionName": "NewVersionPercent"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:xray",
+                    "OptionName": "XRayEnabled",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:rds:dbinstance",
+                    "OptionName": "HasCoupledDatabase",
+                    "Value": "false"
+                }
+            ]
+        }
+    ]
+}
+\nEnvironment: Finanz-Prod
+Resources:
+{
+    "EnvironmentResources": {
+        "EnvironmentName": "Finanz-Prod",
+        "AutoScalingGroups": [
+            {
+                "Name": "awseb-e-gueuqgs9nc-stack-AWSEBAutoScalingGroup-jGRS44ygt7OW"
+            }
+        ],
+        "Instances": [
+            {
+                "Id": "i-02399b87420b181d6"
+            }
+        ],
+        "LaunchConfigurations": [
+            {
+                "Name": "awseb-e-gueuqgs9nc-stack-AWSEBAutoScalingLaunchConfiguration-qT2VUHw60zBV"
+            }
+        ],
+        "LaunchTemplates": [],
+        "LoadBalancers": [
+            {
+                "Name": "arn:aws:elasticloadbalancing:eu-south-1:538927841179:loadbalancer/app/awseb--AWSEB-s1VtH1LXAz2m/56f9192c64b154f7"
+            }
+        ],
+        "Triggers": [],
+        "Queues": []
+    }
+}
+Configuration Settings:
+{
+    "ConfigurationSettings": [
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.0.10 running Python 3.11",
+            "PlatformArn": "arn:aws:elasticbeanstalk:eu-south-1::platform/Python 3.11 running on 64bit Amazon Linux 2023/4.0.10",
+            "ApplicationName": "Finanz-Backend",
+            "EnvironmentName": "Finanz-Prod",
+            "DeploymentStatus": "deployed",
+            "DateCreated": "2024-04-06T12:11:36+00:00",
+            "DateUpdated": "2025-04-04T11:53:52+00:00",
+            "OptionSettings": [
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "Availability Zones",
+                    "Value": "Any"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "Cooldown",
+                    "Value": "360"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "Custom Availability Zones",
+                    "Value": ""
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "EnableCapacityRebalancing",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "MaxSize",
+                    "Value": "4"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:asg",
+                    "OptionName": "MinSize",
+                    "Value": "1"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "BlockDeviceMappings"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "DisableDefaultEC2SecurityGroup",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "DisableIMDSv1",
+                    "Value": "true"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "EC2KeyName",
+                    "Value": "Finanz-Prod"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "IamInstanceProfile",
+                    "Value": "aws-elasticbeanstalk-ec2-role"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "ImageId",
+                    "Value": "ami-09af0bd217562e293"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "InstanceType",
+                    "Value": "t3a.small"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "LaunchTemplateTagPropagationEnabled"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "MonitoringInterval",
+                    "Value": "5 minute"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeIOPS"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeSize"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeThroughput"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "RootVolumeType"
+                },
+                {
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "SSHSourceRestriction",
+                    "Value": "tcp,22,22,0.0.0.0/0"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:autoscaling:launchconfiguration",
+                    "OptionName": "SecurityGroups",
+                    "Value": "sg-0076bdecc361a952b"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "BreachDuration",
+                    "Value": "5"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "EvaluationPeriods",
+                    "Value": "1"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingScaleDownPolicy",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "LowerBreachScaleIncrement",
+                    "Value": "-1"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "LowerThreshold",
+                    "Value": "2000000"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "MeasureName",
+                    "Value": "CPUUtilization"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "Period",
+                    "Value": "5"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "Statistic",
+                    "Value": "Average"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmLow",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "Unit",
+                    "Value": "Percent"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingScaleUpPolicy",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "UpperBreachScaleIncrement",
+                    "Value": "1"
+                },
+                {
+                    "ResourceName": "AWSEBCloudwatchAlarmHigh",
+                    "Namespace": "aws:autoscaling:trigger",
+                    "OptionName": "UpperThreshold",
+                    "Value": "6000000"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "MaxBatchSize"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "MinInstancesInService"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "PauseTime"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "RollingUpdateEnabled",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "RollingUpdateType",
+                    "Value": "Time"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                    "OptionName": "Timeout",
+                    "Value": "PT30M"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "AppSource",
+                    "Value": "https://elasticbeanstalk-platform-assets-eu-south-1.s3.eu-south-1.amazonaws.com/stalks/eb_python311_amazon_linux_2023_1.0.996.0_20240322194952/sampleapp/EBSampleApp-Python.zip"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "EnvironmentVariables",
+                    "Value": "ONESIGNAL_API_KEY=OGU5MjdkMTAtYWRmNS00ODZmLThmYTMtZjU3NjU1NGEwNzMx,PYTHONPATH=/var/app/current:$PYTHONPATH,STRIPE_WEBHOOK_SECRET_KEY=whsec_SMgUreD93XHmJImut6pbXeeeciu07KYN,STRIPE_SECRET_KEY=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,MAILERSEND_TOKEN=mlsn.d9e745f43e2bad55122711f875c0a271c73ecfb216230615cef6610ac99dec6e,MIXPANEL_PROJECT_TOKEN=61dcd1aa7134ecea2186694b5718cc43,AWS_SECRET_ACCESS_KEY=eqGSLtvyIJUPVfkl6/WIQDkzvuwFh6+gFJwn/jRH,ENVIRONMENT=PRODUCTION,AWS_DEFAULT_REGION=eu-south-1,AUTH_DOMAIN=https://auth.finanzapp.io,FINCHAT_ENTERPRISE_KEY=ce527b50f30045239968a38ec9c2c052,MAILERLITE_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiN2NkNzFiMzAzMzJiYzU0YjUxYjBjNjc1ZTM0ZDk0ZDdhMjc1Zjk2NmU3YzIwNjFjMjhmNjQwNjkzNTdhYjM3YTgxYjcxMGM2YTllMGIzMTIiLCJpYXQiOjE3MjU5NzUzODEuNTg0OTExLCJuYmYiOjE3MjU5NzUzODEuNTg0OTEzLCJleHAiOjQ4ODE2NDg5ODEuNTgxOTQ0LCJzdWIiOiI3NTk5MTQiLCJzY29wZXMiOltdfQ.cjDfXPgqkjMGcJ3bdD-YxPCon0HqmYExiFJyk160GuZ-scjJ1E9YcTPInJVWEuK8gXVzpO7Wj9Wpuf1XoaxpNfAtS91OD0l2GR9LrZYSG9ho7unnwJVGu1fy51jAbjO5wH0TTt71y7h3hsWi_uI9UntkfVlfI4fdrMUacPUd2NZqjo6kwT9pEkK8fTsnLa0Ch2y4uqVSGIdcr2G1RqnAWl2B6uE1Goa8X0tO19Nl-bCt2ia0Iflq3vuPdwbxSZ3hpGAjK56qMvZs_W59QOC8gB4hM6tlj2eoEnFKGAukoQBiMKNeVtX-Fzv3ziqVCrGv6V-ityypBxjFnwr4jgSUERS3AyEmYEPgWjYONrO82Wloc_Wu7vpYXc08uJuslrW8MGAdoO_h3w5mnQWeyzOsWFp_UNY9KOQ4L3zgeWBGCe81MX6kJxFLXBym83dUbwsX20xnjNKJQ3dmCuy19jOZRDEjr1ADyeb5nT9Z76kDsHcMl2eCRZxCyyNzBu6WvHG-nFfq1JMYZt2W9rhYMxRno2zhTQsAobLuJm4_hQ2IPDgsvpJS2wyzSfGuO5-VXJrNuJfG4ocLhdDO6UvQ8a0d93GksqClZlkbIZCtAl2mP40WFD54XVG_afSOfmGka6L6D6Ff4ZsbS9eEnpFQWTfVrVUfEZsBgEPTh7n5lAy-knM,BUCKET_URL=https://finanz-prod-media.s3.eu-south-1.amazonaws.com,ONESIGNAL_APP_ID=eba23fd8-247c-42f5-ab3c-8673d8d93638,STRIPE_PUBLIC_KEY=pk_live_51Kxto5KEZNFeSn9xfN0vC4XCsmdTWolkeVgE7NQmoVXB7z1rnio58aCmJIMM0UPt26jZrvGT2m3nd83UMVaoZXAf003bNnRlZv,AWS_ACCESS_KEY_ID=AKIAX26U2H6N6FJLMBIF,ACCESS_SESSION_KEY_SALT=J6dxrBcY0UkLr0IUT&1pn2XQa9CKeNAtCsUo@PzFSN9Ve6!h!j*G!A!6dM*5HXm50e,POSTGRESQL_DATABASE_URL=postgresql://postgres:2OClfjlnZOmVq54PEW4mQ9Lxc5Lxyb@finanz-prod-db.cz57im2ckdij.eu-south-1.rds.amazonaws.com:5432/FinanzProdDB,VERIFIED_ACCESS_SESSION_KEY_SALT=nX@x@C$nlB*6fpaAHuWk@&uAI#PAZ2siY@!95nkO0$ITdQK#!oN5#qIY9V2shL5kjF,BUCKET_NAME=finanz-prod-media"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "HooksPkgUrl",
+                    "Value": "https://elasticbeanstalk-platform-assets-eu-south-1.s3.eu-south-1.amazonaws.com/stalks/eb_python311_amazon_linux_2023_1.0.996.0_20240322194952/lib/hooks.tar.gz"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "InstancePort",
+                    "Value": "80"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "InstanceTypeFamily",
+                    "Value": "t3a"
+                },
+                {
+                    "Namespace": "aws:cloudformation:template:parameter",
+                    "OptionName": "StaticFiles"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "EnableSpot",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "InstanceTypes",
+                    "Value": "t3a.small"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotAllocationStrategy",
+                    "Value": "capacity-optimized"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotFleetOnDemandAboveBasePercentage",
+                    "Value": "0"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotFleetOnDemandBase",
+                    "Value": "0"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SpotMaxPrice"
+                },
+                {
+                    "Namespace": "aws:ec2:instances",
+                    "OptionName": "SupportedArchitectures",
+                    "Value": "x86_64"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingLaunchConfiguration",
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "AssociatePublicIpAddress",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "ELBScheme",
+                    "Value": "public"
+                },
+                {
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "ELBSubnets",
+                    "Value": "subnet-0d6c079c9e2ba647a,subnet-04882a2313d7c4c45"
+                },
+                {
+                    "ResourceName": "AWSEBAutoScalingGroup",
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "Subnets",
+                    "Value": "subnet-04882a2313d7c4c45,subnet-0d6c079c9e2ba647a"
+                },
+                {
+                    "ResourceName": "AWSEBLoadBalancerSecurityGroup",
+                    "Namespace": "aws:ec2:vpc",
+                    "OptionName": "VPCId",
+                    "Value": "vpc-0954528d44c0efa46"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application",
+                    "OptionName": "Application Healthcheck URL",
+                    "Value": ""
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ACCESS_SESSION_KEY_SALT",
+                    "Value": "J6dxrBcY0UkLr0IUT&1pn2XQa9CKeNAtCsUo@PzFSN9Ve6!h!j*G!A!6dM*5HXm50e"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AUTH_DOMAIN",
+                    "Value": "https://auth.finanzapp.io"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AWS_ACCESS_KEY_ID",
+                    "Value": "AKIAX26U2H6N6FJLMBIF"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AWS_DEFAULT_REGION",
+                    "Value": "eu-south-1"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "AWS_SECRET_ACCESS_KEY",
+                    "Value": "eqGSLtvyIJUPVfkl6/WIQDkzvuwFh6+gFJwn/jRH"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "BUCKET_NAME",
+                    "Value": "finanz-prod-media"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "BUCKET_URL",
+                    "Value": "https://finanz-prod-media.s3.eu-south-1.amazonaws.com"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ENVIRONMENT",
+                    "Value": "PRODUCTION"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "FINCHAT_ENTERPRISE_KEY",
+                    "Value": "ce527b50f30045239968a38ec9c2c052"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "MAILERLITE_TOKEN",
+                    "Value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiN2NkNzFiMzAzMzJiYzU0YjUxYjBjNjc1ZTM0ZDk0ZDdhMjc1Zjk2NmU3YzIwNjFjMjhmNjQwNjkzNTdhYjM3YTgxYjcxMGM2YTllMGIzMTIiLCJpYXQiOjE3MjU5NzUzODEuNTg0OTExLCJuYmYiOjE3MjU5NzUzODEuNTg0OTEzLCJleHAiOjQ4ODE2NDg5ODEuNTgxOTQ0LCJzdWIiOiI3NTk5MTQiLCJzY29wZXMiOltdfQ.cjDfXPgqkjMGcJ3bdD-YxPCon0HqmYExiFJyk160GuZ-scjJ1E9YcTPInJVWEuK8gXVzpO7Wj9Wpuf1XoaxpNfAtS91OD0l2GR9LrZYSG9ho7unnwJVGu1fy51jAbjO5wH0TTt71y7h3hsWi_uI9UntkfVlfI4fdrMUacPUd2NZqjo6kwT9pEkK8fTsnLa0Ch2y4uqVSGIdcr2G1RqnAWl2B6uE1Goa8X0tO19Nl-bCt2ia0Iflq3vuPdwbxSZ3hpGAjK56qMvZs_W59QOC8gB4hM6tlj2eoEnFKGAukoQBiMKNeVtX-Fzv3ziqVCrGv6V-ityypBxjFnwr4jgSUERS3AyEmYEPgWjYONrO82Wloc_Wu7vpYXc08uJuslrW8MGAdoO_h3w5mnQWeyzOsWFp_UNY9KOQ4L3zgeWBGCe81MX6kJxFLXBym83dUbwsX20xnjNKJQ3dmCuy19jOZRDEjr1ADyeb5nT9Z76kDsHcMl2eCRZxCyyNzBu6WvHG-nFfq1JMYZt2W9rhYMxRno2zhTQsAobLuJm4_hQ2IPDgsvpJS2wyzSfGuO5-VXJrNuJfG4ocLhdDO6UvQ8a0d93GksqClZlkbIZCtAl2mP40WFD54XVG_afSOfmGka6L6D6Ff4ZsbS9eEnpFQWTfVrVUfEZsBgEPTh7n5lAy-knM"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "MAILERSEND_TOKEN",
+                    "Value": "mlsn.d9e745f43e2bad55122711f875c0a271c73ecfb216230615cef6610ac99dec6e"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "MIXPANEL_PROJECT_TOKEN",
+                    "Value": "61dcd1aa7134ecea2186694b5718cc43"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ONESIGNAL_API_KEY",
+                    "Value": "OGU5MjdkMTAtYWRmNS00ODZmLThmYTMtZjU3NjU1NGEwNzMx"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "ONESIGNAL_APP_ID",
+                    "Value": "eba23fd8-247c-42f5-ab3c-8673d8d93638"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "POSTGRESQL_DATABASE_URL",
+                    "Value": "postgresql://postgres:2OClfjlnZOmVq54PEW4mQ9Lxc5Lxyb@finanz-prod-db.cz57im2ckdij.eu-south-1.rds.amazonaws.com:5432/FinanzProdDB"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "PYTHONPATH",
+                    "Value": "/var/app/current:$PYTHONPATH"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STRIPE_PUBLIC_KEY",
+                    "Value": "pk_live_51Kxto5KEZNFeSn9xfN0vC4XCsmdTWolkeVgE7NQmoVXB7z1rnio58aCmJIMM0UPt26jZrvGT2m3nd83UMVaoZXAf003bNnRlZv"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STRIPE_SECRET_KEY",
+                    "Value": "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"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "STRIPE_WEBHOOK_SECRET_KEY",
+                    "Value": "whsec_SMgUreD93XHmJImut6pbXeeeciu07KYN"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:application:environment",
+                    "OptionName": "VERIFIED_ACCESS_SESSION_KEY_SALT",
+                    "Value": "nX@x@C$nlB*6fpaAHuWk@&uAI#PAZ2siY@!95nkO0$ITdQK#!oN5#qIY9V2shL5kjF"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                    "OptionName": "DeleteOnTerminate",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                    "OptionName": "RetentionInDays",
+                    "Value": "7"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                    "OptionName": "StreamLogs",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                    "OptionName": "DeleteOnTerminate",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                    "OptionName": "HealthStreamingEnabled",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                    "OptionName": "RetentionInDays",
+                    "Value": "7"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "BatchSize",
+                    "Value": "100"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "BatchSizeType",
+                    "Value": "Percentage"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "DeploymentPolicy",
+                    "Value": "AllAtOnce"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "IgnoreHealthCheck",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:command",
+                    "OptionName": "Timeout",
+                    "Value": "600"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:container:python",
+                    "OptionName": "NumProcesses",
+                    "Value": "1"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:container:python",
+                    "OptionName": "NumThreads",
+                    "Value": "15"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:container:python",
+                    "OptionName": "WSGIPath",
+                    "Value": "app:app"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "DefaultSSHPort",
+                    "Value": "22"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "LaunchTimeout",
+                    "Value": "0"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "LaunchType",
+                    "Value": "Migration"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:control",
+                    "OptionName": "RollbackLaunchOnFailure",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "EnvironmentType",
+                    "Value": "LoadBalanced"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "ExternalExtensionsS3Bucket"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "ExternalExtensionsS3Key"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "LoadBalancerIsShared",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "LoadBalancerType",
+                    "Value": "application"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment",
+                    "OptionName": "ServiceRole",
+                    "Value": "arn:aws:iam::538927841179:role/aws-elasticbeanstalk-service-role"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "DeregistrationDelay",
+                    "Value": "20"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "HealthCheckInterval",
+                    "Value": "15"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "HealthCheckPath",
+                    "Value": "/"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "HealthCheckTimeout",
+                    "Value": "5"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "HealthyThresholdCount",
+                    "Value": "3"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "MatcherHTTPCode"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "Port",
+                    "Value": "80"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "Protocol",
+                    "Value": "HTTP"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "StickinessEnabled",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "StickinessLBCookieDuration",
+                    "Value": "86400"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "StickinessType",
+                    "Value": "lb_cookie"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerTargetGroup",
+                    "Namespace": "aws:elasticbeanstalk:environment:process:default",
+                    "OptionName": "UnhealthyThresholdCount",
+                    "Value": "5"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:environment:proxy",
+                    "OptionName": "ProxyServer",
+                    "Value": "nginx"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "ConfigDocument",
+                    "Value": "{\"Version\":1,\"CloudWatchMetrics\":{\"Instance\":{\"LoadAverage5min\":60,\"ApplicationRequests5xx\":60,\"ApplicationRequestsTotal\":60,\"ApplicationRequests4xx\":60,\"ApplicationRequests3xx\":60,\"LoadAverage1min\":60,\"ApplicationRequests2xx\":60,\"InstanceHealth\":60},\"Environment\":{\"InstancesSevere\":60,\"InstancesDegraded\":60,\"ApplicationRequests5xx\":60,\"ApplicationRequests4xx\":60,\"InstancesUnknown\":60,\"InstancesInfo\":60,\"InstancesPending\":60,\"ApplicationRequestsTotal\":60,\"InstancesNoData\":60,\"ApplicationRequests3xx\":60,\"ApplicationRequests2xx\":60,\"InstancesOk\":60,\"InstancesWarning\":60}},\"Rules\":{\"Environment\":{\"ELB\":{\"ELBRequests4xx\":{\"Enabled\":false}},\"Application\":{\"ApplicationRequests4xx\":{\"Enabled\":false}}}}}"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "EnhancedHealthAuthEnabled",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "HealthCheckSuccessThreshold",
+                    "Value": "Ok"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:healthreporting:system",
+                    "OptionName": "SystemType",
+                    "Value": "enhanced"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:hostmanager",
+                    "OptionName": "LogPublicationControl",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions",
+                    "OptionName": "ManagedActionsEnabled",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions",
+                    "OptionName": "PreferredStartTime",
+                    "Value": "MON:18:34"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions",
+                    "OptionName": "ServiceRoleForManagedUpdates",
+                    "Value": "arn:aws:iam::538927841179:role/aws-elasticbeanstalk-service-role"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                    "OptionName": "InstanceRefreshEnabled",
+                    "Value": "false"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                    "OptionName": "UpdateLevel",
+                    "Value": "minor"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:monitoring",
+                    "OptionName": "Automatically Terminate Unhealthy Instances",
+                    "Value": "true"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Endpoint",
+                    "Value": "mat.giu2002@gmail.com"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Protocol",
+                    "Value": "email"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Topic ARN",
+                    "Value": "arn:aws:sns:eu-south-1:538927841179:ElasticBeanstalkNotifications-Environment-Finanz-Prod"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:sns:topics",
+                    "OptionName": "Notification Topic Name"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:trafficsplitting",
+                    "OptionName": "EvaluationTime"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:trafficsplitting",
+                    "OptionName": "NewVersionPercent"
+                },
+                {
+                    "Namespace": "aws:elasticbeanstalk:xray",
+                    "OptionName": "XRayEnabled",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener443",
+                    "Namespace": "aws:elbv2:listener:443",
+                    "OptionName": "DefaultProcess",
+                    "Value": "default"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener443",
+                    "Namespace": "aws:elbv2:listener:443",
+                    "OptionName": "ListenerEnabled",
+                    "Value": "true"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener443",
+                    "Namespace": "aws:elbv2:listener:443",
+                    "OptionName": "Protocol",
+                    "Value": "HTTPS"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener443",
+                    "Namespace": "aws:elbv2:listener:443",
+                    "OptionName": "Rules"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener443",
+                    "Namespace": "aws:elbv2:listener:443",
+                    "OptionName": "SSLCertificateArns",
+                    "Value": "arn:aws:acm:eu-south-1:538927841179:certificate/bafc48cb-8c61-4b48-b54e-c147c4a45c77"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener443",
+                    "Namespace": "aws:elbv2:listener:443",
+                    "OptionName": "SSLPolicy"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener",
+                    "Namespace": "aws:elbv2:listener:default",
+                    "OptionName": "DefaultProcess",
+                    "Value": "default"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener",
+                    "Namespace": "aws:elbv2:listener:default",
+                    "OptionName": "ListenerEnabled",
+                    "Value": "true"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener",
+                    "Namespace": "aws:elbv2:listener:default",
+                    "OptionName": "Protocol",
+                    "Value": "HTTP"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener",
+                    "Namespace": "aws:elbv2:listener:default",
+                    "OptionName": "Rules"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener",
+                    "Namespace": "aws:elbv2:listener:default",
+                    "OptionName": "SSLCertificateArns"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancerListener",
+                    "Namespace": "aws:elbv2:listener:default",
+                    "OptionName": "SSLPolicy"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancer",
+                    "Namespace": "aws:elbv2:loadbalancer",
+                    "OptionName": "AccessLogsS3Bucket"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancer",
+                    "Namespace": "aws:elbv2:loadbalancer",
+                    "OptionName": "AccessLogsS3Enabled",
+                    "Value": "false"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancer",
+                    "Namespace": "aws:elbv2:loadbalancer",
+                    "OptionName": "AccessLogsS3Prefix"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancer",
+                    "Namespace": "aws:elbv2:loadbalancer",
+                    "OptionName": "IdleTimeout"
+                },
+                {
+                    "ResourceName": "AWSEBV2LoadBalancer",
+                    "Namespace": "aws:elbv2:loadbalancer",
+                    "OptionName": "SecurityGroups",
+                    "Value": "sg-0c5a3e138284857a1"
+                },
+                {
+                    "Namespace": "aws:rds:dbinstance",
+                    "OptionName": "HasCoupledDatabase",
+                    "Value": "false"
+                }
+            ]
+        }
+    ]
+}
+\nAvailable Solution Stacks:
+{
+    "SolutionStacks": [
+        "64bit Amazon Linux 2 v3.8.1 running Corretto 8",
+        "64bit Amazon Linux 2 v3.8.1 running Corretto 11",
+        "64bit Amazon Linux 2 v5.10.1 running Node.js 18",
+        "64bit Amazon Linux 2 v3.9.1 running PHP 8.1",
+        "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 11",
+        "64bit Amazon Linux 2 v4.1.1 running Docker",
+        "64bit Amazon Linux 2 v3.4.1 running ECS",
+        "64bit Amazon Linux 2 v2.10.0 running .NET Core",
+        "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 8",
+        "64bit Amazon Linux 2 v3.8.1 running Corretto 17",
+        "64bit Amazon Linux 2 v3.12.1 running Go 1",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 21",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+        "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.4",
+        "64bit Amazon Linux 2023 v4.3.1 running Go 1",
+        "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.3",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 17",
+        "64bit Amazon Linux 2023 v4.5.1 running Docker",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.2",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.13",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.1",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 17",
+        "64bit Amazon Linux 2023 v3.4.1 running .NET 8",
+        "64bit Amazon Linux 2023 v6.5.1 running Node.js 22",
+        "64bit Amazon Linux 2023 v6.5.1 running Node.js 18",
+        "64bit Amazon Linux 2023 v4.1.1 running ECS",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 17",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 11",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 11",
+        "64bit Amazon Linux 2023 v3.4.1 running .NET 9",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.4",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 21",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.9",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 21",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 17",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.12",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 8",
+        "64bit Amazon Linux 2023 v6.5.1 running Node.js 20",
+        "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.2",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.3",
+        "64bit Amazon Linux 2023 v4.1.4 running Python 3.11",
+        "64bit Amazon Linux 2023 v4.0.10 running Python 3.11",
+        "64bit Amazon Linux 2023 v4.0.5 running Python 3.11",
+        "64bit Amazon Linux 2 v3.5.0 running Python 3.8",
+        "64bit Amazon Linux 2 v3.4.4 running Python 3.8",
+        "64bit Windows Server 2025 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2019 v2.19.0 running IIS 10.0",
+        "64bit Windows Server 2022 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2022 v2.19.0 running IIS 10.0",
+        "64bit Windows Server 2016 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2016 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2025 v2.19.0 running IIS 10.0",
+        "64bit Windows Server 2019 v2.19.0 running IIS 10.0",
+        "64bit Amazon Linux 2018.03 v2.6.33 running Packer 1.0.3"
+    ],
+    "SolutionStackDetails": [
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.8.1 running Corretto 8",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.8.1 running Corretto 11",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v5.10.1 running Node.js 18",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.9.1 running PHP 8.1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 11",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v4.1.1 running Docker",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.4.1 running ECS",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v2.10.0 running .NET Core",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 8",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.8.1 running Corretto 17",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.12.1 running Go 1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 21",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.4",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.3.1 running Go 1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.3",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 17",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Docker",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.2",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.13",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 17",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v3.4.1 running .NET 8",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v6.5.1 running Node.js 22",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v6.5.1 running Node.js 18",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.1.1 running ECS",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 17",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 11",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 11",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v3.4.1 running .NET 9",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.4",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 21",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.9",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 21",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 17",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.12",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 8",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v6.5.1 running Node.js 20",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.2",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.3",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.1.4 running Python 3.11",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.0.10 running Python 3.11",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.0.5 running Python 3.11",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.5.0 running Python 3.8",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.4.4 running Python 3.8",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2025 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2019 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2022 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2022 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2016 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2016 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2025 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2019 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2018.03 v2.6.33 running Packer 1.0.3",
+            "PermittedFileTypes": []
+        }
+    ]
+}
+
+
+
+Region: eu-west-3
+Applications:
+{
+    "Applications": []
+}
+\nAvailable Solution Stacks:
+{
+    "SolutionStacks": [
+        "64bit Windows Server 2025 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2019 v2.19.0 running IIS 10.0",
+        "64bit Windows Server 2019 v2.19.0 running IIS 10.0",
+        "64bit Windows Server 2022 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2025 v2.19.0 running IIS 10.0",
+        "64bit Windows Server 2016 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2016 v2.19.0 running IIS 10.0",
+        "64bit Windows Server Core 2022 v2.19.0 running IIS 10.0",
+        "64bit Amazon Linux 2018.03 v2.6.33 running Packer 1.0.3",
+        "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 8",
+        "64bit Amazon Linux 2 v3.8.1 running Corretto 17",
+        "64bit Amazon Linux 2 v3.12.1 running Go 1",
+        "64bit Amazon Linux 2 v3.9.1 running PHP 8.1",
+        "64bit Amazon Linux 2 v5.10.1 running Node.js 18",
+        "64bit Amazon Linux 2 v3.8.1 running Corretto 11",
+        "64bit Amazon Linux 2 v4.1.1 running Docker",
+        "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 11",
+        "64bit Amazon Linux 2 v3.4.1 running ECS",
+        "64bit Amazon Linux 2 v3.8.1 running Corretto 8",
+        "64bit Amazon Linux 2 v2.10.0 running .NET Core",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.2",
+        "64bit Amazon Linux 2023 v3.4.1 running .NET 9",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 21",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.13",
+        "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.3",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 11",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.1",
+        "64bit Amazon Linux 2023 v4.1.1 running ECS",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 17",
+        "64bit Amazon Linux 2023 v3.4.1 running .NET 8",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 17",
+        "64bit Amazon Linux 2023 v6.5.1 running Node.js 20",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 8",
+        "64bit Amazon Linux 2023 v6.5.1 running Node.js 18",
+        "64bit Amazon Linux 2023 v4.3.1 running Go 1",
+        "64bit Amazon Linux 2023 v4.5.1 running Docker",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.12",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.3",
+        "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.2",
+        "64bit Amazon Linux 2023 v4.6.1 running PHP 8.4",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 17",
+        "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.4",
+        "64bit Amazon Linux 2023 v4.5.1 running Python 3.9",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 11",
+        "64bit Amazon Linux 2023 v6.5.1 running Node.js 22",
+        "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 21",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 17",
+        "64bit Amazon Linux 2023 v4.5.1 running Corretto 21"
+    ],
+    "SolutionStackDetails": [
+        {
+            "SolutionStackName": "64bit Windows Server 2025 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2019 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2019 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2022 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2025 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server 2016 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2016 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Windows Server Core 2022 v2.19.0 running IIS 10.0",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2018.03 v2.6.33 running Packer 1.0.3",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 8",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.8.1 running Corretto 17",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.12.1 running Go 1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.9.1 running PHP 8.1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v5.10.1 running Node.js 18",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.8.1 running Corretto 11",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v4.1.1 running Docker",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v4.8.1 running Tomcat 9 Corretto 11",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.4.1 running ECS",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v3.8.1 running Corretto 8",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2 v2.10.0 running .NET Core",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.2",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v3.4.1 running .NET 9",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 21",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.13",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.3",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 11",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.1.1 running ECS",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 17",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v3.4.1 running .NET 8",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 17",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v6.5.1 running Node.js 20",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 8",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v6.5.1 running Node.js 18",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.3.1 running Go 1",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Docker",
+            "PermittedFileTypes": []
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.12",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.3",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.2",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.6.1 running PHP 8.4",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 11 Corretto 17",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Ruby 3.4",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Python 3.9",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 9 Corretto 11",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v6.5.1 running Node.js 22",
+            "PermittedFileTypes": [
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v5.6.1 running Tomcat 10 Corretto 21",
+            "PermittedFileTypes": [
+                "war",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 17",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        },
+        {
+            "SolutionStackName": "64bit Amazon Linux 2023 v4.5.1 running Corretto 21",
+            "PermittedFileTypes": [
+                "jar",
+                "zip"
+            ]
+        }
+    ]
+}
+
+
+

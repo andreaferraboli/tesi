@@ -1,0 +1,5 @@
+stile impersonale, mai in prima persona, nessuna cosa gergale.
+riassunto:spiegazione scenario,problemi e challenge, soluzione proposta, contributo della tesi con elenco puntato e lavori futuri
+prefazione: riassunto del riassunto con un paragrafo finale con evoluzione della tesi, quindi cosa contiene capitolo 1,2,ecc..
+introduzione:descrive lo scenario, la soluzione proposta e come è strutturato il lavoro, si possono fare le sottosezioni
+conclusione e sviluppi futuri, eventuale codice sorgente
