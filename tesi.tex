@@ -201,13 +201,13 @@ tabsize=2
 {\hfill \Large {\sl dedicato a chi mi vuole bene, a chi mi stima e ai miei compagni di viaggio, vi voglio bene}}
 \prefacesection{Ringraziamenti}
         Vorrei ringraziare soprattutto \dots
-\afterpreface
+
 \tableofcontents
 \listoffigures % Comando per generare l'elenco delle figure
-\addcontentsline{toc}{chapter}{Elenco delle Figure} % Aggiunge l'elenco delle figure all'indice
 
 \chapter{Introduzione}
 \pagenumbering{arabic}
+\label{chapter:introduzione}
 \input{capitoli/capitolo1}
 
 \chapter{Principi di cybersecurity olistici per un'infrastruttura tech}
@@ -226,13 +226,12 @@ tabsize=2
 \label{chap:honeypot_aws}
 \input{capitoli/capitolo4}
 
-
-
 \chapter{Compliance a standard internazionali e framework di sicurezza} 
-\label{chapter:introduzione}
+\label{ch:compliance}
 \input{capitoli/capitolo5}
 
 \chapter{Conclusioni}
+\label{ch:conclusioni}
 \input{capitoli/capitolo6}
 % \chapter{Fondamenti di Sicurezza su AWS}
 % \section{Modello di responsabilità condivisa di AWS}
