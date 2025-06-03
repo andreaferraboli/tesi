@@ -20,7 +20,7 @@ Ecco alcune idee interessanti e originali che potresti sviluppare ulteriormente 
 
   * Configurazione avanzata di AWS WAF (regole personalizzate e uso di liste IP reputazionali).
   * Strategie di mitigazione automatica con Shield Advanced e integrazione con CloudWatch alarms.
-  * Simulazioni di scenari d’attacco e analisi delle performance in condizioni estreme.
+  * Simulazioni di scenari d'attacco e analisi delle performance in condizioni estreme.
 
 ---
 

@@ -1,7 +1,8 @@
 \documentclass[a4paper,12pt]{report}
-% per le accentate
 \usepackage[utf8]{inputenc}
+% per le accentate
 \usepackage{lmodern}
+\usepackage{bookmark}
 \usepackage[T1]{fontenc}
 \usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
 \addbibresource{references.bib}
@@ -125,7 +126,7 @@ tabsize=2
     commentstyle=\color{green!50!black}\itshape,     % Commenti in verde scuro corsivo
     stringstyle=\color{orange!80!black},             % Stringhe in arancio scuro
     emphstyle=\color{red!70!black}\bfseries,          % Evidenziazioni extra in rosso scuro (per emph)
-    escapeinside={\%*}{*},                           % Permette di inserire commenti LaTeX all’interno
+    escapeinside={\%*}{*},                           % Permette di inserire commenti LaTeX all'interno
     morekeywords={boto3, iam, lambda_handler, event, context, client, update_user, UserName, PermissionsBoundary},
     % Aggiunta di built-in e funzioni Python comunemente usate
     morekeywords=[2]{def, return, import, as, if, elif, else, for, while, in, try, except, with, class, from, pass, True, False, None},
@@ -185,7 +186,7 @@ tabsize=2
 \correlatore{Lorenzo Perotta, Andrea Pasini, Simone Cortese}
 
 \beforepreface
- \prefacesection{Prefazione}
+\prefacesection{Prefazione}
         Immaginate un veliero agile e innovativo, una startup fintech, che solca le onde tumultuose del mercato finanziario globale. La sua velocità è la sua forza, la sua tecnologia all'avanguardia la sua vela maestra. Ma in queste acque, popolate da insidie digitali sempre più sofisticate, la robustezza dello scafo e l'affidabilità della bussola – ovvero una solida architettura di cybersecurity – diventano cruciali non solo per raggiungere la meta, ma per la sopravvivenza stessa del viaggio. Questo lavoro si addentra proprio in questo scenario, esplorando il delicato equilibrio tra la spinta propulsiva all'innovazione tipica delle startup fintech e l'imprescindibile necessità di una sicurezza informatica ferrea.
 
         La trattazione si snoda attraverso le sfide specifiche che queste giovani realtà digitali affrontano quotidianamente, proponendo strategie concrete e applicabili, con un'attenzione particolare all'ecosistema cloud di Amazon Web Services (AWS). Si analizzano non solo i mattoni fondamentali della protezione, come la gestione degli accessi e la difesa delle reti, ma anche strumenti di difesa proattiva come gli honeypot, veri e propri "specchietti per le allodole" digitali. Il tutto viene contestualizzato nel panorama dei principali framework e standard di sicurezza internazionali, offrendo così una prospettiva che lega la pratica alla teoria, con l'obiettivo finale di fornire spunti e metodologie per costruire infrastrutture resilienti, capaci di navigare sicure verso il futuro.

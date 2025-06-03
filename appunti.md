@@ -37,26 +37,26 @@
         - Evitare di esporre credenziali in documenti o codice.  
 
     2. **Autenticazione a Due Fattori (2FA)**:  
-        - Implementare **2FA** per aggiungere un ulteriore livello di sicurezza all’accesso.  
+        - Implementare **2FA** per aggiungere un ulteriore livello di sicurezza all'accesso.  
 
     3. **Utilizzo di HTTPS**:  
         - Configurare il server per utilizzare **HTTPS** e ottenere un certificato SSL/TLS valido.  
 
     4. **Gestione Sicura delle Variabili di Ambiente**:  
         - Utilizzare strumenti come **AWS Secrets Manager**, **Azure Key Vault** o **HashiCorp Vault**.  
-        - Limitare l’accesso alle variabili di ambiente solo agli utenti autorizzati.  
+        - Limitare l'accesso alle variabili di ambiente solo agli utenti autorizzati.  
 
-    5. **Limitare l’Accesso alla Documentazione**:  
+    5. **Limitare l'Accesso alla Documentazione**:  
         - Rendere la documentazione accessibile solo tramite **autenticazione** o **VPN**.  
         - Utilizzare strumenti di controllo degli accessi come **IAM** (Identity and Access Management).  
 
     6. **Controlli di Accesso Robusti**:  
-        - Implementare **RBAC** (Role-Based Access Control) per limitare l’accesso agli endpoint sensibili.  
+        - Implementare **RBAC** (Role-Based Access Control) per limitare l'accesso agli endpoint sensibili.  
         - Verificare i permessi degli utenti prima di ogni operazione.  
 
     7. **Paginazione Sicura**:  
         - Limitare il numero massimo di elementi restituiti per pagina.  
-        - Implementare controlli per evitare l’accesso a pagine non autorizzate.  
+        - Implementare controlli per evitare l'accesso a pagine non autorizzate.  
 
     8. **Validazione degli Input**:  
         - Utilizzare librerie di validazione per prevenire **SQL Injection** e **XSS**.  

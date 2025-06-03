@@ -1,7 +1,7 @@
 Avendo stabilito i principi del cloud computing e le ragioni della scelta di AWS, questo capitolo si addentra negli aspetti pratici dell'implementazione di un'infrastruttura sicura e scalabile su AWS per una startup fintech. Verranno presentati esempi concreti di configurazioni e utilizzi dei servizi AWS, focalizzandosi sulle best practice di sicurezza applicabili in un contesto con risorse limitate ma requisiti elevati, tipico di una startup nel settore finanziario.
 
 \section{Implementazione attuale dell'infrastruttura AWS} 
-L'infrastruttura AWS attualmente in uso è composta da una serie di servizi fondamentali per il funzionamento della piattaforma fintech. Tra i servizi abilitati figurano AWS Glue per l'integrazione e la trasformazione dei dati, AWS Key Management Service per la gestione delle chiavi di cifratura, e AWS Secrets Manager per la conservazione sicura delle credenziali applicative. L’elaborazione computazionale è affidata a istanze EC2, sia tramite il servizio “EC2 – Other” che “Amazon Elastic Compute Cloud – Compute”, mentre la distribuzione del traffico e l'alta disponibilità sono garantite da Amazon Elastic Load Balancing.
+L'infrastruttura AWS attualmente in uso è composta da una serie di servizi fondamentali per il funzionamento della piattaforma fintech. Tra i servizi abilitati figurano AWS Glue per l'integrazione e la trasformazione dei dati, AWS Key Management Service per la gestione delle chiavi di cifratura, e AWS Secrets Manager per la conservazione sicura delle credenziali applicative. L'elaborazione computazionale è affidata a istanze EC2, sia tramite il servizio “EC2 – Other” che “Amazon Elastic Compute Cloud – Compute”, mentre la distribuzione del traffico e l'alta disponibilità sono garantite da Amazon Elastic Load Balancing.
 
 Per la gestione della localizzazione e dei dati geografici viene utilizzato Amazon Location Service. I dati applicativi sono gestiti tramite Amazon Relational Database Service (RDS), mentre la comunicazione asincrona tra componenti avviene tramite Amazon Simple Notification Service (SNS) e Amazon Simple Queue Service (SQS). Lo storage oggetti è affidato ad Amazon Simple Storage Service (S3), e la rete privata virtuale è gestita tramite Amazon Virtual Private Cloud (VPC). Il monitoraggio e la raccolta delle metriche sono implementati con Amazon CloudWatch. Infine, sono abilitati anche servizi accessori come “Tax” per la gestione della fatturazione e degli aspetti fiscali.
 
@@ -13,7 +13,7 @@ Questa configurazione riflette una tipica architettura cloud moderna, orientata 
 \section{Implementazione del Modello Zero Trust e del Principio del Minimo Privilegio}
 \label{sec:zero-trust-implementation}
 
-Come introdotto nella sezione \ref{sec:principi-cybersecurity}, il modello \textbf{Zero Trust} rappresenta un cambiamento paradigmatico rispetto alla sicurezza tradizionale basata sul perimetro. Anziché assumere fiducia implicita per le entità all'interno della rete aziendale, il principio cardine è "non fidarsi mai, verificare sempre" (\textit{never trust, always verify}). Ogni richiesta di accesso a una risorsa, indipendentemente dalla sua origine, deve essere esplicitamente autenticata, autorizzata e monitorata. Questo approccio mira a minimizzare la superficie d'attacco e a contenere l'impatto di eventuali compromissioni, risultando particolarmente critico per proteggere la \textit{business continuity} aziendale. Ritengo che l'adozione di questo principio sia particolarmente rilevante nel contesto delle startup, caratterizzate da ambienti operativi dinamici e altamente flessibili. Le startup presentano peculiarità che amplificano l'esigenza di un solido framework di sicurezza:
+Come introdotto nella sezione \ref{ch:principi-cybersecurity}, il modello \textbf{Zero Trust} rappresenta un cambiamento paradigmatico rispetto alla sicurezza tradizionale basata sul perimetro. Anziché assumere fiducia implicita per le entità all'interno della rete aziendale, il principio cardine è "non fidarsi mai, verificare sempre" (\textit{never trust, always verify}). Ogni richiesta di accesso a una risorsa, indipendentemente dalla sua origine, deve essere esplicitamente autenticata, autorizzata e monitorata. Questo approccio mira a minimizzare la superficie d'attacco e a contenere l'impatto di eventuali compromissioni, risultando particolarmente critico per proteggere la \textit{business continuity} aziendale. Ritengo che l'adozione di questo principio sia particolarmente rilevante nel contesto delle startup, caratterizzate da ambienti operativi dinamici e altamente flessibili. Le startup presentano peculiarità che amplificano l'esigenza di un solido framework di sicurezza:
 
 \begin{itemize}
     \item \textbf{Instabilità relazionale:} Le relazioni professionali nelle startup possono deteriorarsi rapidamente, sia a livello dirigenziale che operativo. Secondo un'analisi di CB Insights, i conflitti interni tra fondatori rappresentano una delle principali cause di fallimento delle startup, incidendo per circa il 13\% dei casi esaminati \cite{CBInsights2023}. 
@@ -34,7 +34,7 @@ Una delle prime e più critiche aree di intervento riguarda l' \textbf{account r
     \item \textbf{Monitoraggio Continuo:} Ogni azione eseguita tramite l'account root deve essere tracciata e monitorata tramite servizi come AWS CloudTrail, generando allarmi per qualsiasi utilizzo.
 \end{itemize}
 
-Per le attività amministrative e operative ordinarie, il modello Zero Trust impone l'utilizzo di \textbf{utenti e ruoli IAM} configurati secondo il \textbf{Principio del Minimo Privilegio (PoLP)}. Come descritto nella sezione \ref{sec:principi-cybersecurity}, questo principio stabilisce che a un'entità (utente, servizio, applicazione) debbano essere concesse \textit{esclusivamente} le autorizzazioni minime indispensabili per svolgere le proprie funzioni legittime, e non un permesso di più. Ad esempio, un'applicazione che necessita solo di leggere oggetti da un bucket S3 dovrebbe avere un ruolo IAM con solo il permesso `s3:GetObject` su quel bucket specifico, invece di permessi generici su S3 o, peggio, permessi amministrativi.
+Per le attività amministrative e operative ordinarie, il modello Zero Trust impone l'utilizzo di \textbf{utenti e ruoli IAM} configurati secondo il \textbf{Principio del Minimo Privilegio (PoLP)}. Come descritto nel capitolo \ref{ch:principi-cybersecurity}, questo principio stabilisce che a un'entità (utente, servizio, applicazione) debbano essere concesse \textit{esclusivamente} le autorizzazioni minime indispensabili per svolgere le proprie funzioni legittime, e non un permesso di più. Ad esempio, un'applicazione che necessita solo di leggere oggetti da un bucket S3 dovrebbe avere un ruolo IAM con solo il permesso `s3:GetObject` su quel bucket specifico, invece di permessi generici su S3 o, peggio, permessi amministrativi.
 
 \subsubsection{Sinergia tra Principio del Minimo Privilegio (PoLP) e Zero Trust}
 \label{subsubsec:polp-zerotrust-correlation}
@@ -167,7 +167,7 @@ Per prevenire l'escalation involontaria o malevola dei privilegi, verranno imple
 Il modello di \emph{Identity \& Access Management} (IAM) proposto per la startup fintech prevede \emph{tre gruppi baseline}—\texttt{dev}, \texttt{backend‑dev} e \texttt{admin}—ai quali vengono
 assegnati i permessi necessari per le attività ordinarie, e
 \emph{quattro ruoli operativi circoscritti} da assumere \emph{on‑demand} via AWS STS con MFA.
-L’architettura riduce la \emph{blast‑radius} delle credenziali
+L'architettura riduce la \emph{blast‑radius} delle credenziali
 e facilita gli audit di conformità (PCI DSS, SOC‑2) in linea con i
 principi di \emph{least privilege} e \emph{zero‑trust} \cite{NIST_ZTA,NIST_SP80063,PCI_DSS,DatadogLeastPrivilege}.
 
@@ -201,9 +201,9 @@ Sviluppatori back‑end con responsabilità di integrazione dati.
 \end{itemize}
 
 \paragraph{\texttt{admin}}%
-Cloud Engineers con controllo continuo dell’infrastruttura.  
+Cloud Engineers con controllo continuo dell'infrastruttura.  
 \begin{itemize}
-  \item \textbf{EC2 e Auto Scaling}: piena gestione, esclusa l’eliminazione di VPC prod.  
+  \item \textbf{EC2 e Auto Scaling}: piena gestione, esclusa l'eliminazione di VPC prod.  
   \item \textbf{S3}: modifica dei lifecycle rules e delle policy di replica cross-region.
   
   \item \textbf{Elastic Load Balancing}: creazione, aggiornamento listener e target groups in tutti gli ambienti.
@@ -255,8 +255,8 @@ replica cross-region.
         \texttt{CreateDBSnapshot}, \texttt{StartExportTask}, \texttt{FailoverDBCluster} \cite{AWSRDSIAM}.  
 \end{description}
 
-L’approccio \emph{tag‑based ABAC} riduce la necessità di policy
-puntuali e consente un’espansione lineare degli ambienti (dev, staging,
+L'approccio \emph{tag‑based ABAC} riduce la necessità di policy
+puntuali e consente un'espansione lineare degli ambienti (dev, staging,
 prod) \cite{AWSEC2IAM,AWSELBIAM}.
 
 %-----------------------------------------------------------------
