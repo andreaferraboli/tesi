@@ -116,6 +116,7 @@ acceptable looking results, but it may be omitted to get smaller print.
 % so that single spacing is used.
 % (Note \def\figure{\@float{figure}set single spacing} doesn't work
 %  because figure has an optional argument)
+% VERSIONE MODIFICATA PER COMPATIBILITÀ CON XCOLOR
 \def\@xfloat#1[#2]{\ifhmode \@bsphack\@floatpenalty -\@Mii\else
    \@floatpenalty-\@Miii\fi\def\@captype{#1}\ifinner
       \@parmoderr\@floatpenalty\z@
@@ -130,7 +131,9 @@ acceptable looking results, but it may be omitted to get smaller print.
     \global\setbox\@currbox\vbox\bgroup 
     \def\baselinestretch{1}\@normalsize
     \boxmaxdepth\z@
-    \hsize\columnwidth \@parboxrestore}
+    \hsize\columnwidth \@parboxrestore
+    % AGGIUNGO PROTEZIONE PER EVITARE CONFLITTI CON XCOLOR
+    \let\color\@gobble}
 
 % Redefine the macro used for footnotes to use single spacing
 \long\def\@footnotetext#1{\insert\footins{\def\baselinestretch{1}\footnotesize

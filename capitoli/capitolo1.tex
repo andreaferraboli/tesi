@@ -1,7 +1,7 @@
-
 \section{La Cybersecurity nelle Startup Fintech: Sfide, Vulnerabilità e Strategie di Protezione in un Ecosistema in Rapida Evoluzione}
 
 Il settore fintech rappresenta oggi una delle aree più dinamiche e innovative dell'ecosistema startup, con investimenti globali che hanno raggiunto i 115 miliardi di dollari, in crescita esponenziale rispetto ai 53.2 miliardi del 2018 \cite{gartnerFintech}. Questo rapido sviluppo, caratterizzato dall'implementazione di tecnologie emergenti per i servizi finanziari, porta con sé non solo opportunità senza precedenti, ma anche significative sfide in termini di sicurezza informatica. Le startup fintech, che si trovano all'intersezione tra finanza tradizionale e innovazione tecnologica, gestiscono dati estremamente sensibili diventando bersagli privilegiati per i cybercriminali. Questa tesi esplora le vulnerabilità specifiche di queste realtà, analizza le principali minacce che affrontano e propone strategie di sicurezza efficaci anche in contesti di risorse limitate, evidenziando come un approccio proattivo alla cybersecurity non rappresenti un costo ma un investimento strategico fondamentale per il successo a lungo termine di una piccola-media impresa nel campo del fintech.
+
 \subsection{Definizione di Fintech}
 
 Il termine \textbf{fintech} (acronimo di ``financial technology'') identifica nell'ecosistema economico-finanziario contemporaneo l'\textbf{intersezione tra servizi finanziari e tecnologie digitali avanzate}, caratterizzata dall'implementazione di soluzioni tecnologiche innovative per la trasformazione digitale del settore bancario e finanziario \cite{tecnofinanza}. Una \textbf{startup fintech} si configura come un'\textbf{entità imprenditoriale emergente} che opera nell'ambito della tecnologia finanziaria, sviluppando modelli di business disruptive basati su architetture tecnologiche all'avanguardia e paradigmi operativi che sfidano le metodologie consolidate delle aziende o delle organizzazioni nel settore finanziario tradizionale \cite{fintech_numeri}.
@@ -9,6 +9,13 @@ Il termine \textbf{fintech} (acronimo di ``financial technology'') identifica ne
 Queste organizzazioni technology-driven si caratterizzano per l'adozione di approcci data-centric e customer-centric, finalizzati all'ottimizzazione dell'accessibilità, dell'efficienza operativa e della qualità dell'esperienza utente nei servizi finanziari, assumendo un ruolo strategico di primo piano nel processo di \textbf{trasformazione digitale dell'ecosistema finanziario nazionale} e contribuendo significativamente alla modernizzazione delle infrastrutture di pagamento e dei servizi bancari digitali \cite{tecnofinanza}.
 
 Il panorama dei servizi finanziari sta subendo una profonda trasformazione guidata dall'emergere delle startup FinTech (Financial Technology) e Insurtech (Insurance Technology). Queste entità introducono modelli di business e soluzioni tecnologiche che si pongono in dire130ta competizione, e talvolta in collaborazione, con gli operatori tradizionali del settore. L'offerta tipica di tali startup si articola in diverse aree116 chiave, ciascuna caratterizzata da un elevato grado di innovazione e digitalizzazione:
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fintech_services_categories}
+\caption{Categorie di Servizi Fintech}
+\label{fig:fintech_services}
+\end{figure}
 
 \begin{itemize}
     \item \textbf{Pagamenti Digitali}: I pagamenti digitali consistono in sistemi che consentono la transazione di denaro in formato elettronico, frequentemente mediante applicazioni mobili, portafogli digitali e tecnologie contactless. Tali soluzioni mirano a migliorare l'efficienza dell'esperienza utente, ridurre i costi di transazione e velocizzare i tempi di elaborazione. Dal punto di vista della sicurezza informatica, l'infrastruttura deve prevedere meccanismi robusti di autenticazione degli utenti, crittografia end-to-end e sistemi antifrode intelligenti per garantire la protezione dei dati e delle transazioni \cite{zhang2020digital}.
@@ -33,6 +40,7 @@ Il contesto finanziario in cui operano le startup fintech impone pressioni signi
 
 \subsection{Banche Tradizionali vs. Startup Fintech: Divergenze Strategiche in Tecnologia, Regolamentazione e Cybersecurity}
 Il panorama dei servizi finanziari è caratterizzato da una marcata eterogeneità tra gli operatori tradizionali e le nuove realtà fintech. Queste differenze si manifestano in modo sostanziale negli approcci tecnologici adottati, nei quadri normativi di riferimento e, di conseguenza, nelle strategie implementate per la cybersecurity.
+
 Un aspetto cruciale di distinzione risiede proprio nell'approccio alla cybersecurity. Le istituzioni bancarie tradizionali operano in un contesto altamente strutturato e rigorosamente regolamentato, con precisi obblighi legali in materia di sicurezza e protezione dei dati. Consapevoli che anche il minimo incidente può comportare la perdita di migliaia di clienti e sanzioni finanziarie significative, investono ingenti risorse nel testare costantemente le proprie misure di sicurezza.
 Al contrario, le startup fintech hanno storicamente beneficiato di una maggiore flessibilità normativa \cite{bankingVsFintech}. Spesso nate come realtà agili e in rapida espansione, talvolta fungono da "overlay" per le banche, facilitando la fornitura di servizi finanziari innovativi pur operando, almeno inizialmente, con regolamentazioni meno stringenti. Questa disparità normativa sta tuttavia diminuendo, specialmente per quelle fintech che evolvono verso modelli bancari più completi, assoggettandosi così a un crescente scrutinio regolamentare. La sfida per queste startup consiste quindi nel bilanciare l'agilità operativa con l'adozione di standard di sicurezza elevati, anticipando l'evoluzione normativa del settore.
 \newline
@@ -98,6 +106,13 @@ Queste sfide strutturali e operative aumentano la vulnerabilità delle startup F
 
 Il settore FinTech, data la sua natura digitale e la preziosità dei dati trattati, è un obiettivo primario per una vasta gamma di cyberattacchi \cite{cyberThreatsFintech}. Tra le minacce più rilevanti per le startup FinTech si annoverano:
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{cyber_threats_fintech}
+    \caption{Principali vettori di attacco e minacce informatiche nel contesto Fintech}
+    \label{fig:cyber_threats}
+\end{figure}
+
 \begin{itemize}
     \item \textbf{Attacchi di Social Engineering e Phishing}: Tecniche che mirano a manipolare gli utenti o i dipendenti per indurli a rivelare credenziali di accesso, dati sensibili o a eseguire azioni malevole. E-mail, messaggi e siti web fraudolenti, che replicano comunicazioni legittime, sono strumenti comuni per compromettere la sicurezza a livello umano \cite{cyberThreatsFintech}.
     
@@ -117,11 +132,14 @@ La comprensione approfondita di queste sfide e minacce è il primo passo fondame
 
 L'impatto di un attacco informatico su una startup fintech può essere multidimensionale e, in molti casi, esistenziale. A livello finanziario, oltre ai costi diretti per il ripristino dei sistemi e la gestione dell'incidente, vanno considerati i potenziali risarcimenti a clienti danneggiati, le sanzioni normative e l'aumento dei premi assicurativi \cite{fintechChallenges}. Ma è forse l'impatto reputazionale a rappresentare la minaccia più grave: in un settore basato sulla fiducia come quello finanziario, una violazione dei dati può comprometterne irreparabilmente l'immagine, portando alla perdita di clienti attuali e potenziali.
 
+
 L'interruzione operativa conseguente a un attacco può avere effetti a catena, influenzando non solo i clienti diretti ma anche partner commerciali e fornitori \cite{fintechChallenges}. In un ecosistema interconnesso come quello fintech, l'interdipendenza tra diverse piattaforme e servizi amplifica ulteriormente l'impatto di un incidente di sicurezza, con effetti che possono estendersi ben oltre il perimetro aziendale immediato.
 
 \subsection{Importanza di un Approccio Proattivo alla Cybersecurity}
 
 Implementare una strategia di cybersecurity solida sin dalle prime fasi di sviluppo di una startup fintech non configura un semplice onere, bensì un investimento strategico di primaria importanza \cite{fintechChallenges}. L'adozione del paradigma "security by design" permette infatti di integrare la sicurezza in maniera organica nei processi aziendali e nel ciclo di sviluppo del prodotto, contribuendo alla significativa riduzione dei costi a lungo termine e alla minimizzazione dei rischi potenziali. Al contrario, la mancata attenzione alla sicurezza nelle fasi iniziali comporta l'accumulo di "security debt", ovvero un debito tecnico in ambito sicurezza che, analogamente a un mutuo con tassi elevati, diventa progressivamente più oneroso da gestire e da ripagare nel tempo. Infine, la pressione derivante dalla necessità di accelerare lo sviluppo e di raggiungere rapidamente il mercato può portare a trascurare aspetti fondamentali della sicurezza, esacerbando ulteriormente tale debito tecnico.
+
+
 
 Un approccio preventivo alla sicurezza risulta sempre più efficace ed economico rispetto a uno reattivo \cite{fintechChallenges}. I costi per implementare misure di sicurezza di base sono generalmente inferiori rispetto a quelli necessari per rispondere a un incidente, che possono includere non solo il ripristino dei sistemi ma anche sanzioni, risarcimenti e danni reputazionali. La cybersecurity deve quindi essere considerata come parte integrante della strategia aziendale, non come un elemento accessorio o un costo da minimizzare.
 

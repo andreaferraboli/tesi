@@ -1,0 +1,172 @@
+% tesiupdated.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tesiupdated}[2023/10/27 Modello tesi D.S.I. aggiornato v5 - Assuming report class context]
+
+% --- Pacchetti richiesti ---
+\RequirePackage{ifthen}
+\RequirePackage{setspace}
+\RequirePackage{geometry}
+\RequirePackage{chngcntr}
+\RequirePackage{calc}
+
+\makeatletter % Abilita @ nei nomi dei comandi
+
+% --- Impostazioni di pagina (usando geometry) ---
+% Diamo priorità ai margini specificati.
+% textwidth e textheight saranno calcolati da geometry.
+\geometry{
+  paper=a4paper,     % Assicuriamoci che sia a4paper se non specificato dalla classe
+  inner=1.5in,       % Margine interno per rilegatura
+  outer=1in,         % Margine esterno
+  top=1in,           % Margine superiore
+  bottom=1in,        % Margine inferiore
+  headsep=.5in,
+  marginparwidth=40pt,
+  marginparsep=10pt,
+  twoside            % Per report, 'twoside' è necessario per 'inner'/'outer'
+                     % L'utente dovrebbe usare \documentclass[...,twoside]{report}
+}
+
+% --- Interlinea ---
+\setstretch{1.3}
+
+% --- Numerazione continua per figure, tabelle ed equazioni ---
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
+
+% --- Penalità per interruzioni di pagina su trattini ---
+\brokenpenalty=10000
+
+% --- Definizioni per il frontespizio e metadati ---
+\newcommand{\@dept}{Scienze dell'Informazione}
+\newcommand{\@relatore}{}
+\newcommand{\@correlatore}{}
+\newcommand{\@anno}{\number\year-\number\numexpr\year+1\relax}
+\newcommand{\@matricola}{}
+\newcommand{\@submitdate}{%
+  \ifcase\month\or
+  Gennaio\or Febbraio\or Marzo\or Aprile\or Maggio\or Giugno\or
+  Luglio\or Agosto\or Settembre\or Ottobre\or Novembre\or Dicembre\fi
+  \space \number\year
+}
+\newcommand{\@copyrightyear}{\number\year}
+\ifnum\month=12
+    \edef\@copyrightyear{\number\numexpr\year+1\relax}%
+\fi
+
+\newif\ifcopyright \copyrightfalse
+\newif\iffigurespage \figurespagefalse
+\newif\iftablespage \tablespagefalse
+
+\newcommand{\dept}[1]{\renewcommand{\@dept}{#1}}
+\newcommand{\relatore}[1]{\renewcommand{\@relatore}{#1}}
+\newcommand{\correlatore}[1]{\renewcommand{\@correlatore}{#1}}
+\newcommand{\anno}[1]{\renewcommand{\@anno}{#1}}
+\newcommand{\matricola}[1]{\renewcommand{\@matricola}{#1}}
+\newcommand{\submitdate}[1]{\renewcommand{\@submitdate}{#1}}
+\newcommand{\copyrightyear}[1]{\renewcommand{\@copyrightyear}{#1}}
+
+% --- Pagina del Titolo ---
+\newcommand{\maketitlepage}{%
+  \begin{titlepage}%
+    \thispagestyle{empty}%
+    %\null\vskip1in%
+    \begin{center}
+        \includegraphics[width=0.2\textwidth]{Unimi-logo}
+        \vspace{1cm}
+    \end{center}
+    \begin{center}
+        \Large
+        {\sc Universit\`a degli Studi di Milano} \\
+        Facolt\`a di Scienze e Tecnologie \\
+        {\em \@dept}
+    \end{center}
+    \vskip1in
+    \begin{center}
+% 		{\Large\uppercase\expandafter{\@title}}
+    \begin{doublespace}
+        {\Huge\uppercase\expandafter{\@title}}
+    \end{doublespace}
+    \end{center}
+    \vfill
+    \begin{description}
+    \item[Relatore:] \@relatore
+    \item[Correlatore:] \@correlatore
+    \end{description}
+    \vskip0.5in
+    \null\hfill
+    \parbox{3in}{
+      Tesi di: \\
+      \expandafter{\@author}
+      \\ Matricola: \@matricola
+      }
+    \vfill
+    \begin{center}
+     \large   Anno Accademico \@anno
+    \end{center}
+    \newpage
+  \end{titlepage}%
+}
+
+% --- Pagina Copyright ---
+\newcommand{\makecopyrightpage}{%
+  \newpage\thispagestyle{empty}%
+  \null\vfill
+  \begin{center}%
+    \Large\copyright\ Copyright \@copyrightyear\\
+    by\\
+    \@author
+  \end{center}%
+  \vfill\newpage
+}
+
+% --- Comandi per la struttura del documento ---
+% Assumendo classe 'report' o 'book', \@mainmatterfalse/true esistono.
+\newcommand{\beforepreface}{%
+  \if@twoside
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmatterfalse % Definito dalla classe report/book
+  \pagenumbering{roman}%
+  \maketitlepage
+  \ifcopyright\makecopyrightpage\fi
+  \pagestyle{plain}%
+}
+
+\newcommand{\prefacesection}[1]{%
+  \chapter*{#1}% % La classe report definisce \chapter
+  \addcontentsline{toc}{chapter}{#1}%
+  \if@twoside
+    \markboth{\MakeUppercase{#1}}{\MakeUppercase{#1}}%
+  \else
+    \markright{\MakeUppercase{#1}}%
+  \fi
+}
+
+\newcommand{\afterpreface}{%
+  \if@twoside \cleardoublepage \else \clearpage \fi
+  \tableofcontents
+  \if@twoside \cleardoublepage \else \clearpage \fi
+  \iftablespage
+    \listoftables
+    \if@filesw\addcontentsline{toc}{chapter}{\listtablename}\fi
+    \if@twoside \cleardoublepage \else \clearpage \fi
+  \fi
+  \iffigurespage
+    \listoffigures
+    \if@filesw\addcontentsline{toc}{chapter}{\listfigurename}\fi
+    \if@twoside \cleardoublepage \else \clearpage \fi
+  \fi
+  \@mainmattertrue % Definito dalla classe report/book
+  \pagenumbering{arabic}%
+  \pagestyle{headings}%
+}
+
+\pagestyle{headings}
+
+\makeatother
+\endinput
+% Fine di tesiupdated.sty

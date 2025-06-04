@@ -1,30 +1,35 @@
 \documentclass[a4paper,12pt]{report}
-\usepackage[utf8]{inputenc}
-% per le accentate
-\usepackage{lmodern}
-\usepackage{bookmark}
-\usepackage[T1]{fontenc}
-\usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
-\addbibresource{references.bib}
-%
-% \includeonly{}
-%
-%			PREAMBOLO
-%
-\usepackage[a4paper]{geometry}
+% IMPOSTAZIONI DI BASE E LINGUA
+\usepackage[utf8]{inputenc} % Per caratteri accentati e speciali direttamente da tastiera
+\usepackage[T1]{fontenc}    % Per una corretta sillabazione delle parole accentate e font moderni
+\usepackage{lmodern}        % Font Latin Modern
+\usepackage[italian]{babel} % Impostazioni per la lingua italiana
+\usepackage{csquotes}       % Per virgolette corrette con \enquote{} (usa le impostazioni di babel)
+% GEOMETRIA DELLA PAGINA
+\usepackage[a4paper]{geometry} % Imposta i margini per il formato a4paper (default)
+% MATEMATICA
 \usepackage{amssymb,amsmath,amsthm}
+% COLORI (SPOSTATO PRIMA DI TESI.STY)
+\usepackage{xcolor}         % Per definire e usare colori
+% GRAFICA E TABELLE
 \usepackage{graphicx}
-\usepackage{url}
-\usepackage{booktabs}
+\graphicspath{{./images/}} % Specifica la cartella delle immagini
+\usepackage{subcaption}         % Per sottofigure (alternativa più moderna: subcaption)
+\usepackage{booktabs}       % Per tabelle più professionali
+% BIBLIOGRAFIA
+\usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
+\addbibresource{references.bib} % Assicurati che il file references.bib esista
+% UTILITIES VARIE
+\usepackage{url}            % Per inserire URL cliccabili (spesso gestito anche da hyperref)
+\usepackage{setspace}       % Per controllare l'interlinea
+\usepackage{comment}        % Per blocchi di commento multilinea
+% LISTINGS DI CODICE (XCOLOR È GIÀ CARICATO)
+\usepackage{listings}       % Per inserire blocchi di codice
+% HYPERLINKS E BOOKMARKS (generalmente verso la fine)
 \usepackage{hyperref}
-\usepackage[italian]{babel}
-\usepackage{setspace}
-\usepackage{comment} % Per blocchi di codice
-\usepackage{tesi}
-\usepackage{listings} % Per blocchi di codice
-\usepackage{xcolor} % Per colori nel codice
-
-\usepackage{csquotes} % Per virgolette corrette (\enquote{})
+\usepackage{bookmark}       % Migliora la gestione dei segnalibri PDF
+% PACCHETTO PERSONALIZZATO (DOPO TUTTI GLI ALTRI)
+\usepackage{tesiupdated}           % Pacchetto personalizzato per la tesi"
 % per le accentate
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -171,11 +176,7 @@ tabsize=2
 %			TITOLO
 \begin{document}
 
-% Aggiunta immagine sopra al titolo
-\begin{center}
-        \includegraphics[width=0.2\textwidth]{images/Unimi-logo.png}
-        \vspace{1cm}
-\end{center}
+
 
 \title{Sicurezza dell'Infrastruttura AWS in una Startup Fintech}
 \author{Andrea Ferraboli}
@@ -185,7 +186,7 @@ tabsize=2
 \relatore{Prof. Claudio Agostino Ardagna}
 \correlatore{Lorenzo Perotta, Andrea Pasini, Simone Cortese}
 
-\beforepreface
+\maketitlepage
 \prefacesection{Prefazione}
         Immaginate un veliero agile e innovativo, una startup fintech, che solca le onde tumultuose del mercato finanziario globale. La sua velocità è la sua forza, la sua tecnologia all'avanguardia la sua vela maestra. Ma in queste acque, popolate da insidie digitali sempre più sofisticate, la robustezza dello scafo e l'affidabilità della bussola – ovvero una solida architettura di cybersecurity – diventano cruciali non solo per raggiungere la meta, ma per la sopravvivenza stessa del viaggio. Questo lavoro si addentra proprio in questo scenario, esplorando il delicato equilibrio tra la spinta propulsiva all'innovazione tipica delle startup fintech e l'imprescindibile necessità di una sicurezza informatica ferrea.
 
@@ -203,6 +204,7 @@ tabsize=2
 \prefacesection{Ringraziamenti}
         Vorrei ringraziare soprattutto \dots
 
+\setcounter{tocdepth}{2} % Mostra solo chapter, section e subsection
 \tableofcontents
 \listoffigures % Comando per generare l'elenco delle figure
 
