@@ -19,7 +19,7 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
-    \entry{gartnerFintech}{misc}{}{}
+    \entry{gartnerfintech}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=18bfab6309a4addeb7e1dae07d2a4b89}{%
            family={Gartner},
@@ -37,8 +37,8 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Investimenti globali in Fintech: crescita e trend}
-      \field{title}{Rapporto sugli investimenti globali Fintech}
+      \field{note}{Investimenti globali in fintech: crescita e trend}
+      \field{title}{Rapporto sugli investimenti globali fintech}
       \field{year}{2018}
     \endentry
     \entry{tecnofinanza}{misc}{}{}
@@ -59,7 +59,7 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{note}{Accesso: 2023-10-01}
-      \field{title}{Fintech: quali sono le startup e i numeri in Italia}
+      \field{title}{fintech: quali sono le startup e i numeri in Italia}
       \verb{urlraw}
       \verb https://blog.osservatori.net/it_it/fintech-in-italia
       \endverb
@@ -244,11 +244,11 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Rapporto sul rischio e le vulnerabilità in ambito Fintech}
-      \field{title}{Le sfide della cybersecurity nelle startup Fintech}
+      \field{note}{Rapporto sul rischio e le vulnerabilità in ambito fintech}
+      \field{title}{Le sfide della cybersecurity nelle startup fintech}
       \field{year}{2023}
     \endentry
-    \entry{bankingVsFintech}{misc}{}{}
+    \entry{bankingVsfintech}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=e773efb248aef6d7f57ad11ec967183a}{%
            family={Anonimo},
@@ -268,7 +268,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Analisi comparativa degli approcci di sicurezza}
-      \field{title}{Differenze tra Cybersecurity Bancaria e Fintech}
+      \field{title}{Differenze tra Cybersecurity Bancaria e fintech}
       \field{year}{2023}
     \endentry
     \entry{puschmann_fintech_2017}{article}{}{}
@@ -295,7 +295,7 @@
       \field{journaltitle}{Business \& Information Systems Engineering}
       \field{month}{2}
       \field{number}{1}
-      \field{title}{Fintech}
+      \field{title}{fintech}
       \field{volume}{59}
       \field{year}{2017}
       \field{pages}{69\bibrangedash 76}
@@ -347,7 +347,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{In this chapter, cybersecurity principles to protect digital information against cyber threats and cyber threat actors are discussed. Three fundamental principles to protect data include confidentiality, integrity, and availability. These principles are extended by adding two more principles of accountability and authenticity. The main motivations behind launching cyber threats are data breaches, financial instability, service disruption, and politics. These motivations pave the way for securing critical organizational assets by following the CIAAA principle. Surprisingly, the world's biggest data breaches have exposed several businesses including communication, social networking, aviation industry, financial sector, government databases, health care, media, and transportation. These breaches emphasize the need for a data-centric security management system that includes data protection, transfer, control, access, and measurement. The data-centric security management process gathers meticulous information about an organization to understand how an attacker can exploit the vulnerabilities.}
-      \field{booktitle}{Understanding Cybersecurity Management in FinTech: Challenges, Strategies, and Trends}
+      \field{booktitle}{Understanding Cybersecurity Management in fintech: Challenges, Strategies, and Trends}
       \field{isbn}{978-3-030-79915-1}
       \field{title}{Introduction to Cybersecurity}
       \field{year}{2021}
@@ -374,7 +374,7 @@
       \verb https://www.theseus.fi/bitstream/handle/10024/853540/Kauppinen_Teppo.pdf?sequence=2&isAllowed=y
       \endverb
     \endentry
-    \entry{cyberThreatsFintech}{misc}{}{}
+    \entry{cyberThreatsfintech}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=e773efb248aef6d7f57ad11ec967183a}{%
            family={Anonimo},
@@ -393,8 +393,8 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Analisi delle tipologie di attacchi e delle vulnerabilità in ambito Fintech}
-      \field{title}{Minacce informatiche nel settore Fintech}
+      \field{note}{Analisi delle tipologie di attacchi e delle vulnerabilità in ambito fintech}
+      \field{title}{Minacce informatiche nel settore fintech}
       \field{year}{2023}
     \endentry
     \entry{NIST_SP_1800_26}{report}{}{}
@@ -469,7 +469,6 @@
       \strng{authornamehash}{3890a878cf9ff4b382a676b5d7d51181}
       \strng{authorfullhash}{3890a878cf9ff4b382a676b5d7d51181}
       \strng{authorfullhashraw}{3890a878cf9ff4b382a676b5d7d51181}
-      \field{extraname}{1}
       \field{sortinit}{3}
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
@@ -992,16 +991,16 @@
       \field{abstract}{This paper presents a systematic review analyzing the transformative impact of cloud computing on fintech, focusing on IaaS, PaaS, SaaS and their role in agility, cost reduction, and innovation acceleration. It also addresses security and regulatory challenges in fintech cloud adoption.}
       \field{journaltitle}{BCIIT eJournal}
       \field{number}{1}
-      \field{title}{A Systematic Review of the Impact of Cloud Computing on Fintech Industry}
+      \field{title}{A Systematic Review of the Impact of Cloud Computing on fintech Industry}
       \field{volume}{1}
       \field{year}{2024}
       \field{pages}{37\bibrangedash 44}
       \range{pages}{8}
       \verb{urlraw}
-      \verb https://bciit.ac.in/pdf/eJournal/Issue1/6.Mansi_A%20Systematic%20Review%20of%20the%20Impact%20of%20Cloud%20Computing%20on%20Fintech%20Industry_37-44.pdf
+      \verb https://bciit.ac.in/pdf/eJournal/Issue1/6.Mansi_A%20Systematic%20Review%20of%20the%20Impact%20of%20Cloud%20Computing%20on%20fintech%20Industry_37-44.pdf
       \endverb
       \verb{url}
-      \verb https://bciit.ac.in/pdf/eJournal/Issue1/6.Mansi_A%20Systematic%20Review%20of%20the%20Impact%20of%20Cloud%20Computing%20on%20Fintech%20Industry_37-44.pdf
+      \verb https://bciit.ac.in/pdf/eJournal/Issue1/6.Mansi_A%20Systematic%20Review%20of%20the%20Impact%20of%20Cloud%20Computing%20on%20fintech%20Industry_37-44.pdf
       \endverb
     \endentry
     \entry{hrmars2025cloud}{article}{}{}
@@ -1137,7 +1136,7 @@
       \field{labeltitlesource}{title}
       \field{abstract}{Studio sulle sfide di sicurezza nell'adozione del modello hybrid cloud nel fintech e sull'utilizzo della blockchain per mitigare rischi, garantendo compliance e protezione dei dati sensibili.}
       \field{journaltitle}{Journal of Artificial Intelligence, Machine Learning and Data Science}
-      \field{title}{Security Considerations for Hybrid Cloud Deployments in Fintech Using Blockchain}
+      \field{title}{Security Considerations for Hybrid Cloud Deployments in fintech Using Blockchain}
       \field{year}{2024}
       \verb{urlraw}
       \verb https://urfjournals.org/open-access/security-considerations-for-hybrid-cloud-deployments-in-fintech-using-blockchain.pdf
@@ -2645,409 +2644,6 @@
       \endverb
       \verb{url}
       \verb https://salientengineering.com/setups-guides/how-to-deploy-and-setup-honeydrop-honeypot-in-aws
-      \endverb
-    \endentry
-    \entry{netguru2023}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=a36d85899d2b473c5147128a71d611f3}{%
-           family={Netguru},
-           familyi={N\bibinitperiod}}}%
-      }
-      \strng{namehash}{a36d85899d2b473c5147128a71d611f3}
-      \strng{fullhash}{a36d85899d2b473c5147128a71d611f3}
-      \strng{fullhashraw}{a36d85899d2b473c5147128a71d611f3}
-      \strng{bibnamehash}{a36d85899d2b473c5147128a71d611f3}
-      \strng{authorbibnamehash}{a36d85899d2b473c5147128a71d611f3}
-      \strng{authornamehash}{a36d85899d2b473c5147128a71d611f3}
-      \strng{authorfullhash}{a36d85899d2b473c5147128a71d611f3}
-      \strng{authorfullhashraw}{a36d85899d2b473c5147128a71d611f3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{Cybersecurity in Fintech. Why Is It Important? [2023 Update]}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://www.netguru.com/blog/cybersecurity-in-fintech
-      \endverb
-      \verb{url}
-      \verb https://www.netguru.com/blog/cybersecurity-in-fintech
-      \endverb
-    \endentry
-    \entry{awsResponsibility}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4d7e5f784bb5801c23c91ba37ed2649d}{%
-           family={Services},
-           familyi={S\bibinitperiod},
-           given={Amazon\bibnamedelima Web},
-           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{bibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorbibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authornamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \field{extraname}{9}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{AWS Shared Responsibility Model}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://aws.amazon.com/marketplace/pp/prodview-noe2gzebdrqog
-      \endverb
-      \verb{url}
-      \verb https://aws.amazon.com/marketplace/pp/prodview-noe2gzebdrqog
-      \endverb
-    \endentry
-    \entry{awsNist}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4d7e5f784bb5801c23c91ba37ed2649d}{%
-           family={Services},
-           familyi={S\bibinitperiod},
-           given={Amazon\bibnamedelima Web},
-           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{bibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorbibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authornamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \field{extraname}{10}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{NIST - Amazon Web Services (AWS)}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://aws.amazon.com/compliance/nist/
-      \endverb
-      \verb{url}
-      \verb https://aws.amazon.com/compliance/nist/
-      \endverb
-    \endentry
-    \entry{awsWhitepaperCSF2}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4d7e5f784bb5801c23c91ba37ed2649d}{%
-           family={Services},
-           familyi={S\bibinitperiod},
-           given={Amazon\bibnamedelima Web},
-           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{bibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorbibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authornamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \field{extraname}{11}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Consultato il 22 maggio 2025}
-      \field{title}{AWS Whitepaper: CSF2}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://aws.amazon.com/it/whitepapers/aws-cloud-security/
-      \endverb
-      \verb{url}
-      \verb https://aws.amazon.com/it/whitepapers/aws-cloud-security/
-      \endverb
-    \endentry
-    \entry{awsNistCompliance}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4d7e5f784bb5801c23c91ba37ed2649d}{%
-           family={Services},
-           familyi={S\bibinitperiod},
-           given={Amazon\bibnamedelima Web},
-           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{bibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorbibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authornamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \field{extraname}{12}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Consultato il 22 maggio 2025}
-      \field{title}{AWS NIST Compliance}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://aws.amazon.com/it/compliance/nist/
-      \endverb
-      \verb{url}
-      \verb https://aws.amazon.com/it/compliance/nist/
-      \endverb
-    \endentry
-    \entry{awsAuditManager}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4d7e5f784bb5801c23c91ba37ed2649d}{%
-           family={Services},
-           familyi={S\bibinitperiod},
-           given={Amazon\bibnamedelima Web},
-           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{bibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorbibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authornamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \field{extraname}{13}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{AWS Audit Manager: Automate Evidence Collection for Compliance}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://docs.aws.amazon.com/audit-manager/latest/userguide/NIST-Cybersecurity-Framework-v1-1.html
-      \endverb
-      \verb{url}
-      \verb https://docs.aws.amazon.com/audit-manager/latest/userguide/NIST-Cybersecurity-Framework-v1-1.html
-      \endverb
-    \endentry
-    \entry{nistZeroTrust}{online}{}{}
-      \name{author}{2}{}{%
-        {{hash=91348c04260bd8fbee564adff6c9431e}{%
-           family={Standards},
-           familyi={S\bibinitperiod},
-           given={National\bibnamedelima Institute},
-           giveni={N\bibinitperiod\bibinitdelim I\bibinitperiod},
-           prefix={of},
-           prefixi={o\bibinitperiod}}}%
-        {{hash=e7e767d7c0e58b16e57d3ab16150db80}{%
-           family={Technology},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{fullhash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{fullhashraw}{e94f05990128e9f2bf16dd176922276f}
-      \strng{bibnamehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authorbibnamehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authornamehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authorfullhash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authorfullhashraw}{e94f05990128e9f2bf16dd176922276f}
-      \field{extraname}{4}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{Zero Trust Architecture}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://www.nist.gov/publications/zero-trust-architecture
-      \endverb
-      \verb{url}
-      \verb https://www.nist.gov/publications/zero-trust-architecture
-      \endverb
-    \endentry
-    \entry{nistSP80082}{online}{}{}
-      \name{author}{2}{}{%
-        {{hash=91348c04260bd8fbee564adff6c9431e}{%
-           family={Standards},
-           familyi={S\bibinitperiod},
-           given={National\bibnamedelima Institute},
-           giveni={N\bibinitperiod\bibinitdelim I\bibinitperiod},
-           prefix={of},
-           prefixi={o\bibinitperiod}}}%
-        {{hash=e7e767d7c0e58b16e57d3ab16150db80}{%
-           family={Technology},
-           familyi={T\bibinitperiod}}}%
-      }
-      \strng{namehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{fullhash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{fullhashraw}{e94f05990128e9f2bf16dd176922276f}
-      \strng{bibnamehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authorbibnamehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authornamehash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authorfullhash}{e94f05990128e9f2bf16dd176922276f}
-      \strng{authorfullhashraw}{e94f05990128e9f2bf16dd176922276f}
-      \field{extraname}{5}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{SP 800-82 Rev. 3, Guide to Operational Technology (OT) Security}
-      \field{year}{2020}
-      \verb{urlraw}
-      \verb https://csrc.nist.gov/pubs/sp/800/82/r3/ipd
-      \endverb
-      \verb{url}
-      \verb https://csrc.nist.gov/pubs/sp/800/82/r3/ipd
-      \endverb
-    \endentry
-    \entry{NIST_SP_800_63B}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=3890a878cf9ff4b382a676b5d7d51181}{%
-           family={{National Institute of Standards and Technology (NIST)}},
-           familyi={N\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {NIST}%
-      }
-      \strng{namehash}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{fullhash}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{fullhashraw}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{bibnamehash}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{authorbibnamehash}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{authornamehash}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{authorfullhash}{3890a878cf9ff4b382a676b5d7d51181}
-      \strng{authorfullhashraw}{3890a878cf9ff4b382a676b5d7d51181}
-      \field{extraname}{2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{number}{SP 800-63B}
-      \field{title}{Digital Identity Guidelines: Authentication and Lifecycle Management}
-      \field{year}{2017}
-      \verb{urlraw}
-      \verb https://pages.nist.gov/800-63-3/sp800-63b.html
-      \endverb
-      \verb{url}
-      \verb https://pages.nist.gov/800-63-3/sp800-63b.html
-      \endverb
-    \endentry
-    \entry{jumpcloudNistPassword}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=44a1c4b7ba9d5f437a861be9db542c0d}{%
-           family={JumpCloud},
-           familyi={J\bibinitperiod}}}%
-      }
-      \strng{namehash}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{fullhash}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{fullhashraw}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{bibnamehash}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{authorbibnamehash}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{authornamehash}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{authorfullhash}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \strng{authorfullhashraw}{44a1c4b7ba9d5f437a861be9db542c0d}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{NIST Password Guidelines}
-      \field{year}{2021}
-      \verb{urlraw}
-      \verb https://jumpcloud.com/blog/nist-password-guidelines
-      \endverb
-      \verb{url}
-      \verb https://jumpcloud.com/blog/nist-password-guidelines
-      \endverb
-    \endentry
-    \entry{checkpointQuantum}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=defdeee04404557e14414d62fad850d5}{%
-           family={Point},
-           familyi={P\bibinitperiod},
-           given={Check},
-           giveni={C\bibinitperiod}}}%
-      }
-      \strng{namehash}{defdeee04404557e14414d62fad850d5}
-      \strng{fullhash}{defdeee04404557e14414d62fad850d5}
-      \strng{fullhashraw}{defdeee04404557e14414d62fad850d5}
-      \strng{bibnamehash}{defdeee04404557e14414d62fad850d5}
-      \strng{authorbibnamehash}{defdeee04404557e14414d62fad850d5}
-      \strng{authornamehash}{defdeee04404557e14414d62fad850d5}
-      \strng{authorfullhash}{defdeee04404557e14414d62fad850d5}
-      \strng{authorfullhashraw}{defdeee04404557e14414d62fad850d5}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Consultato il 22 maggio 2025}
-      \field{title}{Quantum Security}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://www.checkpoint.com/quantum/
-      \endverb
-      \verb{url}
-      \verb https://www.checkpoint.com/quantum/
-      \endverb
-    \endentry
-    \entry{awsCheckPoint}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4d7e5f784bb5801c23c91ba37ed2649d}{%
-           family={Services},
-           familyi={S\bibinitperiod},
-           given={Amazon\bibnamedelima Web},
-           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-      }
-      \strng{namehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{fullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{bibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorbibnamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authornamehash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhash}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \strng{authorfullhashraw}{4d7e5f784bb5801c23c91ba37ed2649d}
-      \field{extraname}{14}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Accessed: 2025-03-10}
-      \field{title}{AWS Marketplace: Check Point Quantum Network Security}
-      \field{year}{2023}
-      \verb{urlraw}
-      \verb https://aws.amazon.com/marketplace/pp/prodview-eu5dbipshnzkq
-      \endverb
-      \verb{url}
-      \verb https://aws.amazon.com/marketplace/pp/prodview-eu5dbipshnzkq
-      \endverb
-    \endentry
-    \entry{cybersecurity360NIS2}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=d89753f26a58ce6acf7feae6722285c6}{%
-           family={Cybersecurity360},
-           familyi={C\bibinitperiod}}}%
-      }
-      \strng{namehash}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{fullhash}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{fullhashraw}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{bibnamehash}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{authorbibnamehash}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{authornamehash}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{authorfullhash}{d89753f26a58ce6acf7feae6722285c6}
-      \strng{authorfullhashraw}{d89753f26a58ce6acf7feae6722285c6}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Consultato il 22 maggio 2025}
-      \field{title}{NIS2 e recepimento italiano: regole e adempimenti per le aziende}
-      \field{year}{2024}
-      \verb{urlraw}
-      \verb https://www.cybersecurity360.it/legal/nis-2-e-recepimento-italiano-regole-e-adempimenti-per-le-aziende/
-      \endverb
-      \verb{url}
-      \verb https://www.cybersecurity360.it/legal/nis-2-e-recepimento-italiano-regole-e-adempimenti-per-le-aziende/
       \endverb
     \endentry
   \enddatalist

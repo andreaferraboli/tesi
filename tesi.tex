@@ -178,7 +178,7 @@ tabsize=2
 
 
 
-\title{Sicurezza dell'Infrastruttura AWS in una Startup Fintech}
+\title{Sicurezza dell'Infrastruttura AWS in una Startup fintech}
 \author{Andrea Ferraboli}
 \dept{Corso di Laurea in Sicurezza dei Sistemi e delle Reti Informatiche } 
 \anno{2024-2025}
@@ -188,17 +188,62 @@ tabsize=2
 
 \maketitlepage
 \prefacesection{Prefazione}
-        Immaginate un veliero agile e innovativo, una startup fintech, che solca le onde tumultuose del mercato finanziario globale. La sua velocità è la sua forza, la sua tecnologia all'avanguardia la sua vela maestra. Ma in queste acque, popolate da insidie digitali sempre più sofisticate, la robustezza dello scafo e l'affidabilità della bussola – ovvero una solida architettura di cybersecurity – diventano cruciali non solo per raggiungere la meta, ma per la sopravvivenza stessa del viaggio. Questo lavoro si addentra proprio in questo scenario, esplorando il delicato equilibrio tra la spinta propulsiva all'innovazione tipica delle startup fintech e l'imprescindibile necessità di una sicurezza informatica ferrea.
+La crescente adozione delle tecnologie cloud ha rivoluzionato il settore fintech, 
+portando benefici significativi in termini di scalabilità, flessibilità e riduzione 
+dei costi operativi. Dall'altro lato, questa trasformazione digitale introduce 
+nuove sfide di sicurezza derivanti dall'outsourcing dell'infrastruttura IT e dalla 
+gestione di dati finanziari sensibili in ambienti distribuiti. Per le startup fintech, 
+queste problematiche sono amplificate dalla necessità di bilanciare rapidità di 
+sviluppo e conformità normativa con standard di sicurezza elevati.
 
-        La trattazione si snoda attraverso le sfide specifiche che queste giovani realtà digitali affrontano quotidianamente, proponendo strategie concrete e applicabili, con un'attenzione particolare all'ecosistema cloud di Amazon Web Services (AWS). Si analizzano non solo i mattoni fondamentali della protezione, come la gestione degli accessi e la difesa delle reti, ma anche strumenti di difesa proattiva come gli honeypot, veri e propri "specchietti per le allodole" digitali. Il tutto viene contestualizzato nel panorama dei principali framework e standard di sicurezza internazionali, offrendo così una prospettiva che lega la pratica alla teoria, con l'obiettivo finale di fornire spunti e metodologie per costruire infrastrutture resilienti, capaci di navigare sicure verso il futuro.
+Amazon Web Services (AWS) rappresenta oggi una delle piattaforme cloud più 
+adottate dalle startup fintech per la sua robustezza e completezza dell'offerta di 
+servizi. Tuttavia, la configurazione sicura di un'infrastruttura AWS richiede competenze 
+specifiche e l'implementazione di strategie di sicurezza avanzate che vanno oltre 
+le configurazioni standard. L'obiettivo di questa tesi è stato analizzare e implementare 
+un'architettura di sicurezza completa su AWS specificamente progettata per le 
+esigenze di una startup fintech.
 
-        Il percorso di questa tesi si articola come segue:
-        Il \textbf{Capitolo 1}, intitolato "Introduzione", apre le porte sul mondo delle startup fintech, delineandone il contesto dinamico, le vulnerabilità intrinseche e le sfide uniche che devono affrontare nel campo della cybersecurity. Si mette in luce come un approccio proattivo alla sicurezza non rappresenti un mero costo, bensì un investimento strategico fondamentale.
-        Successivamente, il \textbf{Capitolo 2}, "Principi di cybersecurity olistici per un'infrastruttura tech", getta le basi teoriche, esplorando i concetti cardine della sicurezza informatica – dalla triade CIA (Confidenzialità, Integrità, Disponibilità) alla difesa in profondità, fino al principio del minimo privilegio – calandoli nella realtà operativa delle startup.
-        Il \textbf{Capitolo 3}, "Principi dell'Infrastruttura Cloud e Scelta di AWS", guida il lettore attraverso i paradigmi del cloud computing, confrontandoli con le tradizionali infrastrutture on-premises. Viene quindi introdotto Amazon Web Services (AWS) come piattaforma cloud di riferimento per molte realtà innovative, descrivendone l'architettura globale e i meccanismi che ne garantiscono scalabilità e flessibilità.
-        Con il \textbf{Capitolo 4}, "Implementazioni Pratiche su AWS per una Startup Fintech", si entra nel vivo della progettazione, illustrando come tradurre i principi di sicurezza in configurazioni concrete all'interno dell'ambiente AWS. Si toccano temi cruciali come la gestione delle identità e degli accessi (IAM), la creazione di reti virtuali sicure (VPC), la protezione delle istanze di calcolo (EC2) e la salvaguardia dei dati sensibili.
-        Il \textbf{Capitolo 5}, "Implementazione di un Honeypot in un'Infrastruttura AWS per Startup Fintech", è dedicato a uno strumento di difesa proattiva: l'honeypot. Se ne analizza la definizione, l'utilità, le diverse tipologie, i vantaggi e gli svantaggi, per poi passare alla descrizione di un'implementazione pratica su AWS, corredata da un'analisi dei costi e dalla simulazione di un attacco controllato per testarne l'efficacia.
-        Infine, il \textbf{Capitolo 6}, "Compliance a standard internazionali e framework di sicurezza", chiude l'analisi, esaminando come le pratiche e le infrastrutture di sicurezza implementate si allineino ai principali standard e framework riconosciuti a livello globale, come il NIST Cybersecurity Framework, l'ISO/IEC 27001 e i principi della Zero Trust Architecture, offrendo una visione d'insieme sulla governance della sicurezza in un contesto fintech.
+La ricerca si concentra sull'implementazione pratica di controlli di sicurezza 
+avanzati, tra cui la gestione granulare delle identità e degli accessi (IAM), la 
+progettazione di reti sicure mediante Virtual Private Cloud (VPC), e l'implementazione 
+di sistemi di rilevamento proattivo delle minacce attraverso honeypot. Particolare 
+attenzione è stata posta alla creazione di un ambiente che sia al contempo sicuro, 
+scalabile e conforme ai principali framework di sicurezza internazionali.
+
+L'elaborato è organizzato come segue:
+\newline
+\textbf{Capitolo 1 – Introduzione} In questo capitolo si presenta il contesto delle 
+startup fintech, analizzando le specificità del settore e le principali sfide 
+di sicurezza che caratterizzano queste realtà innovative.
+
+\textbf{Capitolo 2 – Principi di cybersecurity olistici per un'infrastruttura fintech} 
+Il secondo capitolo fornisce le basi teoriche della sicurezza informatica, 
+dalla triade CIA ai principi di difesa in profondità, contestualizzandoli 
+nell'ambito fintech.
+
+\textbf{Capitolo 3 – Principi dell'Infrastruttura Cloud e Scelta di AWS} Il terzo 
+capitolo analizza i paradigmi del cloud computing e presenta AWS come 
+piattaforma di riferimento, descrivendone architettura e caratteristiche 
+di sicurezza.
+
+\textbf{Capitolo 4 – Progettazione e Implementazione Avanzata della Sicurezza delle 
+Identità e degli Accessi (IAM) in AWS} Questo capitolo si concentra sull'implementazione 
+pratica di IAM, analizzando strategie avanzate per la gestione delle identità 
+e l'applicazione del principio del minimo privilegio.
+
+\textbf{Capitolo 5 – Architettura di Rete Sicura e Protezione dei Servizi Applicativi 
+su AWS per fintech} Il quinto capitolo descrive la progettazione di un'architettura 
+di rete sicura mediante VPC, gruppi di sicurezza e controlli di accesso avanzati.
+
+\textbf{Capitolo 6 – Implementazione di un Honeypot in un'Infrastruttura AWS per 
+Startup fintech} L'ultimo capitolo tecnico presenta l'implementazione di un 
+sistema honeypot su AWS per il rilevamento proattivo delle minacce, includendo 
+analisi dei costi e test di efficacia.
+
+\textbf{Capitolo 7 – Conclusioni} Il capitolo finale riassume i risultati raggiunti 
+e presenta considerazioni sulle prospettive future per la sicurezza delle 
+infrastrutture cloud in ambito fintech.
 \prefacesection{Dedica}
 {\hfill \Large {\sl dedicato a chi mi vuole bene, a chi mi stima e ai miei compagni di viaggio, vi voglio bene}}
 \prefacesection{Ringraziamenti}
@@ -213,32 +258,32 @@ tabsize=2
 \label{chapter:introduzione}
 \input{capitoli/capitolo1}
 
-\chapter{Principi di cybersecurity olistici per un'infrastruttura tech}
+\chapter{Principi di cybersecurity olistici \allowbreak{} per un'infrastruttura fintech}
 \label{ch:principi-cybersecurity}
-\input{capitoli/capitolo1_principi}
+\input{capitoli/capitolo2}
 
 \chapter{Principi dell'Infrastruttura Cloud e Scelta di AWS}
 \label{ch:cloud-aws}
-\input{capitoli/capitolo2}
+\input{capitoli/capitolo3}
 
 \chapter{Progettazione e Implementazione Avanzata della Sicurezza delle Identità e degli Accessi (IAM) in AWS}
 \label{ch:iam_security}
-\input{capitoli/capitolo3}
+\input{capitoli/capitolo4}
 \chapter{Architettura di Rete Sicura e Protezione dei Servizi Applicativi su AWS per Finanz}
 \label{ch:vpc_infra_security}
-\input{capitoli/capitolo3_vpc}
-
-\chapter{Implementazione di un Honeypot in un'Infrastruttura AWS per Startup Fintech}
-\label{chap:honeypot_aws}
-\input{capitoli/capitolo4}
-
-\chapter{Compliance a standard internazionali e framework di sicurezza} 
-\label{ch:compliance}
 \input{capitoli/capitolo5}
+
+\chapter{Implementazione di un Honeypot in un'Infrastruttura AWS per Startup fintech}
+\label{chap:honeypot_aws}
+\input{capitoli/capitolo6}
+
+% \chapter{Compliance a standard internazionali e framework di sicurezza} 
+% \label{ch:compliance}
+% \input{capitoli/capitolo5}
 
 \chapter{Conclusioni}
 \label{ch:conclusioni}
-\input{capitoli/capitolo6}
+\input{capitoli/capitolo7}
 % \chapter{Fondamenti di Sicurezza su AWS}
 % \section{Modello di responsabilità condivisa di AWS}
 % \section{Best practice di sicurezza specifiche per startup fintech}

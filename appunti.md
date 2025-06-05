@@ -87,7 +87,7 @@
 
 - **Fase 1: Ricerca e Definizione del Framework**  
   Dal 3 febbraio al 23 febbraio (3 settimane)  
-  - Studio della letteratura esistente su cybersecurity nel settore Fintech.  
+  - Studio della letteratura esistente su cybersecurity nel settore fintech.  
   - Definizione delle research questions e struttura della tesi.  
   - **Materiale da inviare:** Bozza dell'indice e introduzione.  
 

