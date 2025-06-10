@@ -19,28 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
-    \entry{gartnerfintech}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=18bfab6309a4addeb7e1dae07d2a4b89}{%
-           family={Gartner},
-           familyi={G\bibinitperiod}}}%
-      }
-      \strng{namehash}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{fullhash}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{fullhashraw}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{bibnamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{authorbibnamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{authornamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{authorfullhash}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \strng{authorfullhashraw}{18bfab6309a4addeb7e1dae07d2a4b89}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Investimenti globali in fintech: crescita e trend}
-      \field{title}{Rapporto sugli investimenti globali fintech}
-      \field{year}{2018}
-    \endentry
     \entry{tecnofinanza}{misc}{}{}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
@@ -239,36 +217,12 @@
       \strng{authornamehash}{e773efb248aef6d7f57ad11ec967183a}
       \strng{authorfullhash}{e773efb248aef6d7f57ad11ec967183a}
       \strng{authorfullhashraw}{e773efb248aef6d7f57ad11ec967183a}
-      \field{extraname}{1}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Rapporto sul rischio e le vulnerabilità in ambito fintech}
       \field{title}{Le sfide della cybersecurity nelle startup fintech}
-      \field{year}{2023}
-    \endentry
-    \entry{bankingVsfintech}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=e773efb248aef6d7f57ad11ec967183a}{%
-           family={Anonimo},
-           familyi={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{fullhash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{fullhashraw}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{bibnamehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authorbibnamehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authornamehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authorfullhash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authorfullhashraw}{e773efb248aef6d7f57ad11ec967183a}
-      \field{extraname}{2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Analisi comparativa degli approcci di sicurezza}
-      \field{title}{Differenze tra Cybersecurity Bancaria e fintech}
       \field{year}{2023}
     \endentry
     \entry{puschmann_fintech_2017}{article}{}{}
@@ -373,29 +327,6 @@
       \verb{url}
       \verb https://www.theseus.fi/bitstream/handle/10024/853540/Kauppinen_Teppo.pdf?sequence=2&isAllowed=y
       \endverb
-    \endentry
-    \entry{cyberThreatsfintech}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=e773efb248aef6d7f57ad11ec967183a}{%
-           family={Anonimo},
-           familyi={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{fullhash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{fullhashraw}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{bibnamehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authorbibnamehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authornamehash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authorfullhash}{e773efb248aef6d7f57ad11ec967183a}
-      \strng{authorfullhashraw}{e773efb248aef6d7f57ad11ec967183a}
-      \field{extraname}{3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Analisi delle tipologie di attacchi e delle vulnerabilità in ambito fintech}
-      \field{title}{Minacce informatiche nel settore fintech}
-      \field{year}{2023}
     \endentry
     \entry{NIST_SP_1800_26}{report}{}{}
       \name{author}{6}{}{%
@@ -2647,6 +2578,9 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{bankingVsFintech}
+  \missing{cyberThreatsFintech}
+  \missing{gartnerFintech}
 \endrefsection
 \endinput
 
