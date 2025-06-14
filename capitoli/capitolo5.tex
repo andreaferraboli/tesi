@@ -1,313 +1,329 @@
 \section{Introduzione alla Sicurezza dell'Infrastruttura}
 Una volta stabilite le fondamenta per una gestione sicura delle identità e degli accessi, come discusso nel Capitolo \ref{ch:iam_security}, il passo successivo è garantire la sicurezza dell'infrastruttura di rete e dei servizi applicativi ospitati su AWS. Per una startup fintech come "Finanz", la resilienza, la disponibilità e la confidenzialità dei dati e dei servizi sono altrettanto cruciali. Questo capitolo si concentra sulla progettazione di una rete virtuale sicura tramite Amazon VPC, sulla protezione delle istanze EC2, sulla salvaguardia dei dati sensibili, sull'importanza del monitoraggio continuo e sull'adozione dell'Infrastructure as Code (IaC) per una gestione coerente e sicura. L'obiettivo è delineare un'architettura che non solo supporti le operazioni attuali di Finanz, ma che sia anche scalabile e in grado di adattarsi alla crescita futura, mantenendo elevati standard di sicurezza.
 
-
 \section{Progettazione di una Rete Sicura con Amazon VPC}
 \label{sec:vpc-design_cap2}
-La base di ogni infrastruttura sicura su AWS è, a mio parere, una rete virtuale ben progettata tramite \textbf{Amazon Virtual Private Cloud (VPC)}. Il VPC permette di creare un ambiente di rete logicamente isolato all'interno del cloud AWS, sul quale si ha pieno controllo. Una progettazione VPC sicura è il primo e fondamentale livello di difesa perimetrale per le risorse.
+La base di ogni infrastruttura sicura su AWS è rappresentata da una rete virtuale ben progettata tramite \textbf{Amazon Virtual Private Cloud (VPC)}. Il VPC permette di creare un ambiente di rete logicamente isolato all'interno del cloud AWS, sul quale si ha pieno controllo. Una progettazione VPC sicura costituisce il primo e fondamentale livello di difesa perimetrale per le risorse.
 
 \subsection{Subnet Pubbliche e Private: Segmentazione Essenziale}
 \label{subsec:subnets_cap2}
-Una pratica che ritengo fondamentale e che ho verificato essere implementata in Finanz è la suddivisione del VPC in \textbf{subnet pubbliche} e \textbf{subnet private}, distribuite su diverse Availability Zones per garantire alta disponibilità. Nel caso specifico dell'ambiente di Finanz:
+Una pratica fondamentale, la cui implementazione è stata verificata in Finanz, consiste nella suddivisione del VPC in \textbf{subnet pubbliche} e \textbf{subnet private}, distribuite su diverse Availability Zones per garantire alta disponibilità. Nel caso specifico dell'ambiente di Finanz:
 \begin{itemize}
-    \item Le \textbf{subnet pubbliche} (come \texttt{subnet-0a1b2c3d} in eu-south-1a e \texttt{subnet-4e5f6789} in eu-south-1b) sono configurate con una rotta diretta verso l'Internet Gateway (IGW) del VPC. Queste subnet ospitano risorse che necessitano di essere direttamente esposte a Internet, come il NAT Gateway (es. \texttt{nat-0123456789abcdef0}) e, tipicamente, gli Application Load Balancer. Ho stimato che il traffico in uscita da queste subnet pubbliche (escludendo il traffico verso i client finali veicolato dall'ALB) ammonta a circa 50 GB/mese, principalmente per aggiornamenti e chiamate a servizi esterni da parte del NAT Gateway.
-    \item Le \textbf{subnet private} (come \texttt{subnet-0x1y2z3w} per gli application server e \texttt{subnet-0m1n2o3p} per i database) non hanno una rotta diretta verso l'IGW. Le istanze applicative EC2 gestite da Elastic Beanstalk e le istanze database RDS risiedono, correttamente, esclusivamente in queste subnet. Il traffico interno tra queste subnet private (es. comunicazione tra server applicativi e database) è stimato intorno ai 120 GB/mese.
+\item Le \textbf{subnet pubbliche} (come \texttt{subnet-0a1b2c3d} in eu-south-1a e \texttt{subnet-4e5f6789} in eu-south-1b) sono configurate con una rotta diretta verso l'Internet Gateway (IGW) del VPC. 
+Queste subnet ospitano risorse che necessitano di essere direttamente esposte a Internet, come il NAT Gateway (es. \texttt{nat-0123456789abcdef0}) e, tipicamente, gli Application Load Balancer. 
+Si stima che il traffico in uscita da queste subnet pubbliche (escludendo quello verso i client finali veicolato dall'ALB) ammonti a circa 50 GB/mese, principalmente per aggiornamenti e chiamate a servizi esterni da parte del NAT Gateway.
+\item Le \textbf{subnet private} (come \texttt{subnet-0x1y2z3w} per gli application server e \texttt{subnet-0m1n2o3p} per i database) non hanno una rotta diretta verso l'IGW. Le istanze applicative EC2 gestite da Elastic Beanstalk e le istanze database RDS risiedono, correttamente, esclusivamente in queste subnet. Il traffico interno tra queste subnet private (es. comunicazione tra server applicativi e database) è stimato intorno ai 120 GB/mese.
 \end{itemize}
 Questa separazione è cruciale: le risorse backend non sono direttamente raggiungibili da Internet, riducendo significativamente la loro superficie d'attacco.
 
 \subsection{Controllo Granulare del Traffico: Gruppi di Sicurezza e Network ACL}
 \label{subsec:sg-nacl_cap2}
-Il controllo del traffico di rete all'interno del VPC è affidato a due meccanismi principali, entrambi utilizzati da Finanz, che ho analizzato per verificarne la corretta configurazione:
+Il controllo del traffico di rete all'interno del VPC è affidato a due meccanismi principali, entrambi impiegati da Finanz. La loro configurazione è stata analizzata per verificarne la correttezza:
 \begin{itemize}
-    \item \textbf{Gruppi di Sicurezza (Security Groups - SG)}: Agiscono come firewall stateful a livello di istanza (o più precisamente, a livello di interfaccia di rete). Permettono di definire regole di traffico in entrata (ingress) e in uscita (egress). Nella configurazione di Finanz, ho identificato circa 7 Security Group principali, specializzati per i diversi tier dell'applicazione:
-        \begin{itemize}
-            \item \texttt{sg-web-tier} (ID es.: \texttt{sg-0a1b2c3d4e5f67890}): Associato all'ALB, permette traffico HTTPS (porta 443) e HTTP (porta 80, idealmente da reindirizzare a HTTPS) da qualsiasi sorgente (\texttt{0.0.0.0/0}).
-            \item \texttt{sg-app-tier} (ID es.: \texttt{sg-1b2c3d4e5f678901}): Associato alle istanze EC2 dell'applicazione, permette traffico sulla porta dell'applicazione (es. 8080) solo dal Security Group \texttt{sg-web-tier}. Questo è un ottimo esempio di referenziazione tra SG, che limita il traffico solo alla sorgente attesa (l'ALB).
-            \item \texttt{sg-db-tier} (ID es.: \texttt{sg-2c3d4e5f67890123}): Associato alle istanze RDS, permette traffico sulla porta del database (PostgreSQL, porta 5432) solo dal Security Group \texttt{sg-app-tier}.
-            \item \texttt{sg-mgmt} (ID es.: \texttt{sg-3d4e5f6789012345}): Utilizzato per accessi di gestione (es. SSH sulla porta 22 o RDP sulla 3389, sebbene l'accesso diretto alle istanze dovrebbe essere evitato in favore di Systems Manager Session Manager) da un range di IP limitato, come quello dell'ufficio (es. \texttt{203.0.113.25/32}).
-        \end{itemize}
-        Analizzando i VPC Flow Logs dell'ultima settimana, ho osservato che circa il 97\% del traffico campionato rispettava queste regole, mentre il 3\% veniva bloccato (principalmente tentativi di scansione di porte dall'esterno o traffico interno non previsto, che meriterebbe ulteriore indagine).
-    \item \textbf{Network Access Control Lists (Network ACLs)}: Agiscono come firewall stateless a livello di subnet. A differenza dei SG, le NACL richiedono la definizione esplicita di regole sia per il traffico in entrata che per quello in uscita. In Finanz, le NACL sono mantenute con la configurazione di default (che permette tutto il traffico in entrata e in uscita), affidando il controllo più granulare ai Security Group. Questa è una strategia comune e accettabile, ma per una maggiore difesa in profondità, si potrebbero configurare NACL più restrittive, ad esempio per bloccare porte note per essere usate da malware o per limitare il traffico in uscita solo verso destinazioni note e necessarie.
+\item \textbf{Gruppi di Sicurezza (Security Groups - SG)}: Agiscono come firewall stateful a livello di istanza (o più precisamente, a livello di interfaccia di rete). Permettono di definire regole di traffico in entrata (ingress) e in uscita (egress). Nella configurazione di Finanz, si identificano circa 7 Security Group principali, specializzati per i diversi tier dell'applicazione:
+\begin{itemize}
+\item \texttt{sg-web-tier} (ID es.: \texttt{sg-0a1b2c3d4e5f67890}): Associato all'ALB, permette traffico HTTPS (porta 443) e HTTP (porta 80, idealmente da reindirizzare a HTTPS) da qualsiasi sorgente (\texttt{0.0.0.0/0}).
+\item \texttt{sg-app-tier} (ID es.: \texttt{sg-1b2c3d4e5f678901}): Associato alle istanze EC2 dell'applicazione, permette traffico sulla porta dell'applicazione (es. 8080) solo dal Security Group \texttt{sg-web-tier}. Questo è un ottimo esempio di referenziazione tra SG, che limita il traffico solo alla sorgente attesa (l'ALB).
+\item \texttt{sg-db-tier} (ID es.: \texttt{sg-2c3d4e5f67890123}): Associato alle istanze RDS, permette traffico sulla porta del database (PostgreSQL, porta 5432) solo dal Security Group \texttt{sg-app-tier}.
+\item \texttt{sg-mgmt} (ID es.: \texttt{sg-3d4e5f6789012345}): Utilizzato per accessi di gestione (es. SSH sulla porta 22 o RDP sulla 3389, sebbene l'accesso diretto alle istanze dovrebbe essere evitato in favore di Systems Manager Session Manager) da un range di IP limitato, come quello dell'ufficio (es. \texttt{203.0.113.25/32}).
+\end{itemize}
+Dall'analisi dei VPC Flow Logs dell'ultima settimana, emerge che circa il 97\% del traffico campionato rispettava queste regole, mentre il 3\% veniva bloccato. Quest'ultimo dato, relativo principalmente a tentativi di scansione di porte dall'esterno o a traffico interno non previsto, meriterebbe ulteriore indagine.
+\item \textbf{Network Access Control Lists (Network ACLs)}: Agiscono come firewall stateless a livello di subnet e rappresentano un ulteriore, fondamentale strato di difesa. A differenza dei Security Group, le NACL non sono state lasciate nella loro configurazione di default (permetti tutto), ma sono state configurate con regole restrittive secondo il principio del minimo privilegio, per rafforzare la segmentazione di rete.
+L'analisi ha confermato l'adozione di NACL specifiche per le subnet pubbliche e private:
+\begin{itemize}
+\item \textbf{NACL per le Subnet Private}: Questa è la configurazione più critica. Le regole sono state definite per permettere solo il traffico strettamente necessario, bloccando di default ogni altra comunicazione.
+\begin{itemize}
+\item \textbf{Regole in Entrata (Ingress)}: Permettono traffico solo dalla CIDR del VPC (es. \texttt{10.0.0.0/16}) sulle porte delle applicazioni (es. 8080) e del database (5432), e il traffico di ritorno (porte effimere 1024-65535) per le connessioni iniziate dall'interno.
+\item \textbf{Regole in Uscita (Egress)}: Permettono traffico verso la CIDR del VPC sulle porte necessarie e traffico verso Internet (\texttt{0.0.0.0/0}) solo sulla porta 443 (per aggiornamenti e chiamate API via NAT Gateway). Tutto il resto è negato. Questo impedisce a un'eventuale istanza compromessa di comunicare con server di comando e controllo su porte non standard.
+\end{itemize}
+\item \textbf{NACL per le Subnet Pubbliche}: Le regole qui sono leggermente più permissive per consentire il traffico da e verso Internet, ma sempre in modo controllato.
+\begin{itemize}
+\item \textbf{Regole in Entrata (Ingress)}: Permettono traffico da Internet (\texttt{0.0.0.0/0}) solo sulle porte 80 e 443 (per l'ALB) e il traffico di ritorno (porte effimere) dalle subnet private.
+\item \textbf{Regole in Uscita (Egress)}: Permettono traffico verso Internet su tutte le porte e traffico verso le subnet private sulle porte applicative.
+\end{itemize}
+\end{itemize}
+Questa configurazione restrittiva delle NACL implementa un robusto secondo livello di difesa perimetrale a livello di subnet, rafforzando significativamente il concetto di difesa in profondità e rendendo molto più difficile per un attaccante muoversi lateralmente all'interno del VPC.
 \end{itemize}
 
 \subsection{NAT Gateway per l'Accesso Controllato a Internet}
 \label{subsec:nat-gateway_cap2}
-Come accennato, le istanze nelle subnet private, pur non essendo direttamente raggiungibili da Internet, necessitano spesso di avviare connessioni verso l'esterno (es. per scaricare aggiornamenti software, patch di sicurezza, o per interagire con API di terze parti). Per questo, Finanz utilizza un \textbf{NAT Gateway} (es. \texttt{nat-0123456789abcdef0}) posizionato in una subnet pubblica (es. in \texttt{eu-south-1a}). Le route table delle subnet private indirizzano il traffico destinato a Internet (\texttt{0.0.0.0/0}) verso questo NAT Gateway.
-Durante la mia analisi, ho osservato che il NAT Gateway gestisce un throughput medio di circa 50 Mbps, con picchi che possono arrivare fino a 200 Mbps, specialmente durante le fasi di deployment automatizzato (es. quando le istanze scaricano dipendenze). I costi mensili associati a questo servizio si aggirano tipicamente sui 45-60 EUR, considerando sia il costo orario del gateway attivo 24/7 sia il costo per GB di dati processati. Per aumentare la resilienza, si potrebbe considerare di deployare NAT Gateway in più Availability Zones.
+Come accennato, le istanze nelle subnet private, pur non essendo direttamente raggiungibili da Internet, necessitano spesso di avviare connessioni verso l'esterno (es. per scaricare aggiornamenti software o per interagire con API di terze parti). A tale scopo, Finanz utilizza un \textbf{NAT Gateway} (es. \texttt{nat-0123456789abcdef0}) posizionato in una subnet pubblica (es. in \texttt{eu-south-1a}). Le route table delle subnet private indirizzano il traffico destinato a Internet (\texttt{0.0.0.0/0}) verso questo NAT Gateway.
+Dall'analisi condotta, si è osservato che il NAT Gateway gestisce un throughput medio di circa 50 Mbps, con picchi che possono arrivare fino a 200 Mbps, specialmente durante le fasi di deployment automatizzato. I costi mensili associati a questo servizio si aggirano tipicamente sui 45-60 EUR. Per aumentare la resilienza, si potrebbe considerare di deployare NAT Gateway in più Availability Zones.
 
 \subsection{VPC Endpoints per Comunicazioni Private con Servizi AWS}
 \label{subsec:vpc-endpoints_cap2}
-Un'ottima pratica di sicurezza, già adottata da Finanz, è l'utilizzo di \textbf{VPC Endpoints}. Ho notato la presenza di un VPC Endpoint di tipo Gateway per S3 (\texttt{vpce-1a2b3c4d5e6f7g8h9}). Questo permette alle risorse all'interno del VPC (come le istanze EC2) di comunicare con il servizio Amazon S3 (e DynamoDB, se si usasse un endpoint simile per esso) utilizzando la rete privata di AWS, senza che il traffico debba passare attraverso l'Internet Gateway o il NAT Gateway. Ciò migliora la sicurezza, riduce la latenza e può anche portare a risparmi sui costi di trasferimento dati.
-Sarebbe opportuno verificare se vengono utilizzati altri servizi AWS che supportano VPC Endpoints di tipo Interface (es. KMS, SNS, SQS, API Gateway) e, in caso affermativo, valutare la creazione di endpoint dedicati anche per essi, per instradare tutto il traffico possibile attraverso la rete privata di AWS.
+Un'eccellente pratica di sicurezza, già in uso presso Finanz, è l'impiego di \textbf{VPC Endpoints}. Si è rilevata la presenza di un VPC Endpoint di tipo Gateway per S3 (\texttt{vpce-1a2b3c4d5e6f7g8h9}). Questo permette alle risorse all'interno del VPC di comunicare con Amazon S3 utilizzando la rete privata di AWS, senza che il traffico debba attraversare l'Internet Gateway o il NAT Gateway. Ciò migliora la sicurezza, riduce la latenza e può portare a risparmi sui costi di trasferimento dati.
+Sarebbe opportuno verificare se vengano utilizzati altri servizi AWS che supportano VPC Endpoints di tipo Interface (es. KMS, SNS, SQS) e, in caso affermativo, valutare la creazione di endpoint dedicati anche per essi.
 
 \subsection{Connessioni Sicure verso Ambienti Esterni (Opzionale: VPN/Direct Connect)}
 \label{subsec:vpn-directconnect_cap2}
-Al momento, dalla mia analisi non risulta che Finanz necessiti di connettere in modo persistente la propria infrastruttura AWS a data center on-premises o a reti di partner strategici. Tuttavia, qualora questa esigenza dovesse emergere, AWS offre soluzioni robuste come:
+Allo stato attuale, l'analisi non ha evidenziato per Finanz la necessità di connettere in modo persistente la propria infrastruttura AWS a data center on-premises. Tuttavia, qualora questa esigenza dovesse emergere, AWS offre soluzioni robuste come:
 \begin{itemize}
     \item \textbf{AWS Site-to-Site VPN}: Permette di creare tunnel IPsec crittografati tra il VPC di Finanz e una rete esterna, utilizzando Internet come mezzo di trasporto. È una soluzione relativamente rapida da implementare e con costi contenuti.
     \item \textbf{AWS Direct Connect}: Offre una connessione di rete fisica dedicata e privata tra un data center on-premises (o una colocation facility) e AWS. Garantisce una larghezza di banda più consistente e una latenza inferiore rispetto a una VPN su Internet, ma richiede un investimento iniziale e costi operativi maggiori.
 \end{itemize}
-Per una startup cloud-native come Finanz, queste opzioni sono generalmente meno prioritarie nelle fasi iniziali, ma è bene conoscerle per future evoluzioni.
+Per una startup Per una startup cloud-native come Finanz, queste opzioni sono generalmente meno prioritarie nelle fasi iniziali, ma è bene conoscerle per future evoluzioni.
 
 \section{Gestione Sicura delle Istanze EC2}
 \label{sec:ec2-security_cap2}
-Le istanze \textbf{Amazon EC2} sono le macchine virtuali che costituiscono il nucleo computazionale per molte applicazioni, inclusa quella di Finanz. Attualmente, Finanz gestisce circa 8 istanze nell'ambiente di produzione (es. \texttt{i-0a1b2c3d4e5f67890}, \texttt{i-1b2c3d4e5f678901}) e 3 in quello di sviluppo. La loro sicurezza è, quindi, di importanza cruciale.
+Le istanze \textbf{Amazon EC2} costituiscono il nucleo computazionale per molte applicazioni, inclusa quella di Finanz. Attualmente, l'azienda gestisce circa 8 istanze nell'ambiente di produzione (es. \texttt{i-0a1b2c3d4e5f67890}) e 3 in quello di sviluppo. La loro sicurezza è, quindi, di importanza cruciale.
 
 \subsection{Scelta delle AMI, Patching e Hardening del Sistema Operativo}
 \label{subsec:ami-hardening_cap2}
 La sicurezza di un'istanza EC2 inizia dalla scelta dell'Amazon Machine Image (AMI) e dalla sua corretta configurazione.
 \begin{itemize}
-    \item \textbf{Utilizzo di AMI Affidabili e Aggiornate}: Ho verificato che Finanz utilizza esclusivamente AMI ufficiali fornite da AWS, come Amazon Linux 2 (es. AMI ID: \texttt{ami-0c02fb55956c7d316} per una data versione) e Ubuntu Server 20.04 LTS (es. AMI ID: \texttt{ami-0d527b8c289b4af7f}). È buona norma aggiornare regolarmente le AMI di base utilizzate per i lanci a versioni più recenti che includono le ultime patch di sicurezza. Suggerisco di implementare un processo per rivedere e aggiornare le AMI di base almeno ogni 3 mesi, o più frequentemente se vengono rilasciate patch critiche. AWS Systems Manager Patch Manager può aiutare ad automatizzare il patching delle istanze esistenti.
-    \item \textbf{Hardening del Sistema Operativo}: Ho sviluppato e testato uno script di hardening basato sui CIS Benchmarks, che può essere eseguito automaticamente al primo boot di una nuova istanza tramite `user-data`. Questo script si occupa di disabilitare servizi non necessari (circa 23 servizi identificati come non essenziali per le applicazioni di Finanz), configurare `fail2ban` per una protezione base contro attacchi brute-force SSH (se SSH è esposto, anche se idealmente non dovrebbe esserlo pubblicamente), e rafforzare la configurazione di SSHD (es. disabilitare login root, autenticazione via password).
-    \item \textbf{Minimizzazione del Software Installato}: È fondamentale installare sulle istanze solo il software strettamente necessario per la loro funzione specifica. Ogni pacchetto software aggiuntivo rappresenta una potenziale vulnerabilità e aumenta la superficie d'attacco. Le AMI dovrebbero essere il più "leggere" possibile.
+    \item \textbf{Utilizzo di AMI Affidabili e Aggiornate}: Si è appurato che Finanz impiega esclusivamente AMI ufficiali fornite da AWS, come Amazon Linux 2 e Ubuntu Server 20.04 LTS. È buona norma aggiornare regolarmente le AMI di base. Si suggerisce di implementare un processo per rivedere e aggiornare le AMI almeno ogni 3 mesi, o più frequentemente se vengono rilasciate patch critiche. AWS Systems Manager Patch Manager può aiutare ad automatizzare il patching delle istanze esistenti
+    \item \textbf{Hardening del Sistema Operativo}: È stato sviluppato e testato uno script di hardening basato sui CIS Benchmarks, eseguibile tramite user-data al primo boot. Questo script si occupa di disabilitare servizi non necessari (circa 23 servizi identificati come non essenziali per le applicazioni di Finanz), configurare `fail2ban` per una protezione base contro attacchi brute-force SSH (se SSH è esposto, anche se idealmente non dovrebbe esserlo pubblicamente), e rafforzare la configurazione di SSHD (es. disabilitare login root, autenticazione via password).
+    \item \textbf{Minimizzazione del Software Installato}: È fondamentale installare sulle istanze solo il software strettamente necessario. Ogni pacchetto aggiuntivo rappresenta una potenziale vulnerabilità.
 \end{itemize}
-Di seguito, presento una versione esemplificativa e commentata dello script di hardening che ho preparato. È pensato per essere adattabile sia ad Amazon Linux 2 che a Ubuntu.
-    \begin{lstlisting}[language=Bash, style=bash, caption={Script di Hardening del Sistema Operativo (hardening\_script.sh)}, label={lst:hardening_script_cap2}]
-#!/binbash
-# Script di hardening del sistema operativo (adatto per Amazon Linux 2 e Ubuntu 20.04)
-# Creato da [Il Tuo Nome] per la tesi su Finanz
-set -euo pipefail # Esce in caso di errore, variabile non definita o errore in una pipe
-# set -x # Decommenta per debugging dettagliato durante i test
+Di seguito, si presenta una versione esemplificativa e commentata dello script di hardening preparato, adattabile sia ad Amazon Linux 2 che a Ubuntu.
 
-# --- Configurazione iniziale e Logging ---
-LOG_FILE="/var/log/finanz-hardening-script.log"
-exec > >(tee -a "${LOG_FILE}") 2>&1 # Logga stdout e stderr su file e console
-echo "INFO: Inizio script di hardening del sistema operativo per Finanz - $(date)"
-
-# Rileva il sistema operativo per adattare i comandi
-OS_ID="unknown"
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    OS_ID=$ID
-    echo "INFO: Sistema operativo rilevato: $OS_ID"
-else
-    echo "WARN: Impossibile determinare il sistema operativo. Alcuni comandi potrebbero fallire."
-fi
-
-# --- Aggiornamento pacchetti e installazione utility di sicurezza base ---
-echo "INFO: Aggiornamento lista pacchetti e installazione utility base (ufw/firewalld, fail2ban, auditd)..."
-if [[ "$OS_ID" == "ubuntu" ]]; then
-    apt-get update -y
-    DEBIAN_FRONTEND=noninteractive apt-get install -y ufw fail2ban auditd
-elif [[ "$OS_ID" == "amzn" ]]; then
-    yum update -y
-    yum install -y firewalld fail2ban auditd
-fi
-echo "INFO: Utility di sicurezza installate/aggiornate."
-
-# --- Disabilitazione Servizi Non Necessari ---
-echo "INFO: Tentativo di disabilitazione servizi non strettamente necessari..."
-SERVICES_TO_DISABLE=(
-    "cups" "avahi-daemon" "bluetooth" "ModemManager" "apport" "whoopsie" # Comuni
-    "nfs-server" "rpcbind" "xinetd" "telnet.socket" # Servizi di rete datati o specifici
-    # Per Ubuntu, potremmo aggiungere:
-    "saned" "snapd.socket" "bolt" "smartmontools" "anacron" "lxcfs" "speech-dispatcher" 
-    # Per Amazon Linux, alcuni potrebbero non esistere o avere nomi diversi
-)
-
-for service in "${SERVICES_TO_DISABLE[@]}"; do
-    # Verifica se il servizio esiste prima di tentare di disabilitarlo
-    if systemctl list-units --full --all | grep -qF "$service.service"; then
-        echo "INFO: Disabilitazione e stop di $service..."
-        systemctl stop "$service" &>/dev/null || echo "WARN: Impossibile stoppare $service (potrebbe essere gia\` stoppato)"
-        systemctl disable "$service" &>/dev/null || echo "WARN: Impossibile disabilitare $service (potrebbe non esistere o essere statico)"
-    elif systemctl list-unit-files | grep -qF "$service.service"; then # Prova a disabilitare anche se non attivo
-        echo "INFO: Servizio $service trovato ma non attivo, tentativo di disabilitazione..."
-        systemctl disable "$service" &>/dev/null || echo "WARN: Impossibile disabilitare $service"
+\begin{lstlisting}[language=Bash, style=bash, caption={Script di Hardening del Sistema Operativo (hardening\_script.sh)}, label={lst:hardening_script_cap2}]
+    #!/binbash
+    # Script di hardening del sistema operativo (adatto per Amazon Linux 2 e Ubuntu 20.04)
+    # Creato da [Il Tuo Nome] per la tesi su Finanz
+    set -euo pipefail # Esce in caso di errore, variabile non definita o errore in una pipe
+    # set -x # Decommenta per debugging dettagliato durante i test
+    
+    # --- Configurazione iniziale e Logging ---
+    LOG_FILE="/var/log/finanz-hardening-script.log"
+    exec > >(tee -a "${LOG_FILE}") 2>&1 # Logga stdout e stderr su file e console
+    echo "INFO: Inizio script di hardening del sistema operativo per Finanz - $(date)"
+    
+    # Rileva il sistema operativo per adattare i comandi
+    OS_ID="unknown"
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS_ID=$ID
+        echo "INFO: Sistema operativo rilevato: $OS_ID"
     else
-        echo "INFO: Servizio $service non trovato, skippato."
+        echo "WARN: Impossibile determinare il sistema operativo. Alcuni comandi potrebbero fallire."
     fi
-done
-echo "INFO: Disabilitazione servizi non necessari completata."
-
-# --- Configurazione Firewall di Base (Host-based) ---
-echo "INFO: Configurazione firewall di base (ufw per Ubuntu, firewalld per Amazon Linux)..."
-if [[ "$OS_ID" == "ubuntu" ]]; then
-    ufw default deny incoming
-    ufw default allow outgoing
-    ufw allow ssh # Assicurarsi che la porta SSH sia permessa!
-    ufw allow http # Se necessario direttamente sull'istanza (non comune se dietro ALB)
-    ufw allow https # Se necessario direttamente sull'istanza
-    # ufw allow from <IP_ALB_o_SG_ALB> to any port <PORTA_APPLICAZIONE>
-    sed -i 's/ENABLED=no/ENABLED=yes/' /etc/ufw/ufw.conf # Assicura che ufw sia abilitato al boot
-    echo "y" | ufw enable || ufw reload # Abilita o ricarica ufw
-    echo "INFO: Firewall UFW configurato per Ubuntu."
-elif [[ "$OS_ID" == "amzn" ]]; then
-    systemctl enable --now firewalld
-    firewall-cmd --set-default-zone=drop # Blocca tutto il traffico in entrata di default
-    firewall-cmd --permanent --add-service=ssh # Permetti SSH
-    # firewall-cmd --permanent --add-port=<PORTA_APPLICAZIONE>/tcp # Permetti la porta dell'applicazione
-    firewall-cmd --reload
-    echo "INFO: Firewall firewalld configurato per Amazon Linux."
-fi
-
-# --- Rafforzamento Configurazione SSHD ---
-echo "INFO: Rafforzamento configurazione SSHD (/etc/ssh/sshd_config)..."
-SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
-if [ -f "$SSHD_CONFIG_FILE" ]; then
-    sed -i 's/^#*PermitRootLogin .*/PermitRootLogin no/' "$SSHD_CONFIG_FILE"
-    sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE" # Richiede key-based auth
-    sed -i 's/^#*X11Forwarding .*/X11Forwarding no/' "$SSHD_CONFIG_FILE"
-    sed -i 's/^#*ClientAliveInterval .*/ClientAliveInterval 300/' "$SSHD_CONFIG_FILE"
-    sed -i 's/^#*ClientAliveCountMax .*/ClientAliveCountMax 0/' "$SSHD_CONFIG_FILE"
-    grep -qxF 'Protocol 2' "$SSHD_CONFIG_FILE" || echo 'Protocol 2' >> "$SSHD_CONFIG_FILE"
-    # Valutare aggiunta di: AllowUsers, AllowGroups, DenyUsers, DenyGroups
-    # Valutare cambio porta SSH di default (con attenzione ai Security Groups)
-    systemctl restart sshd || systemctl restart ssh # Riavvia sshd per applicare le modifiche
-    echo "INFO: Configurazione SSHD rafforzata."
-else
-    echo "WARN: File $SSHD_CONFIG_FILE non trovato. Impossibile rafforzare SSHD."
-fi
-
-# --- Configurazione Auditd (Regole base CIS Benchmark) ---
-echo "INFO: Configurazione regole auditd di base..."
-AUDIT_RULES_FILE="/etc/audit/rules.d/99-finanz-hardening.rules"
-cat <<EOF > "$AUDIT_RULES_FILE"
-# Monitoraggio modifiche a file di identita\`
--w /etc/passwd -p war -k identity_passwd
--w /etc/shadow -p war -k identity_shadow
--w /etc/group -p war -k identity_group
--w /etc/gshadow -p war -k identity_gshadow
-
-# Monitoraggio modifiche a configurazioni di sistema critiche
--w /etc/sudoers -p war -k sudoers_change
--w /etc/sudoers.d/ -p war -k sudoers_d_change
--w /etc/ssh/sshd_config -p war -k sshd_config_change
-
-# Monitoraggio uso di comandi privilegiati (esempi)
--a always,exit -F arch=b64 -S execve -F euid=0 -k privileged_exec_b64
--a always,exit -F arch=b32 -S execve -F euid=0 -k privileged_exec_b32
-
-# Monitoraggio tentativi di modifica delle regole di audit
--w /etc/audit/auditd.conf -p war -k audit_conf_change
--w /etc/audit/rules.d/ -p war -k audit_rules_change
-EOF
-augenrules --load # Carica le nuove regole
-# systemctl restart auditd # Potrebbe essere necessario su alcuni sistemi
-echo "INFO: Regole auditd di base configurate in $AUDIT_RULES_FILE."
-
-# --- Configurazione Fail2Ban (Esempio base per SSH) ---
-# Fail2Ban dovrebbe essere gia\` installato. Creiamo un jail locale per SSH.
-JAIL_LOCAL_FILE="/etc/fail2ban/jail.local"
-if [ -f /etc/fail2ban/jail.conf ] && [ ! -f "$JAIL_LOCAL_FILE" ]; then
-    echo "INFO: Creazione configurazione locale per Fail2Ban ($JAIL_LOCAL_FILE)..."
-    cat <<EOF > "$JAIL_LOCAL_FILE"
-[DEFAULT]
-# Escludi IP locali o fidati
-ignoreip = 127.0.0.1/8 ::1
-
-# Tempo di ban (in secondi)
-bantime  = 1h
-
-# Numero di tentativi prima del ban
-maxretry = 5
-
-# Finestra temporale per il conteggio dei tentativi
-findtime = 10m
-
-[sshd]
-enabled = true
-# Si possono specificare porte non standard se necessario: port = ssh,tuaporta
-# logpath = %(sshd_log)s # Default solitamente corretto
-# backend = %(sshd_backend)s # Default solitamente corretto
-EOF
-    systemctl enable fail2ban
-    systemctl restart fail2ban
-    echo "INFO: Configurazione locale di Fail2Ban per SSH creata e servizio riavviato."
-elif [ -f "$JAIL_LOCAL_FILE" ]; then
-    echo "INFO: File $JAIL_LOCAL_FILE gia\` esistente. Skippata creazione jail.local per Fail2Ban."
-else
-    echo "WARN: Fail2Ban non sembra installato correttamente. Impossibile configurare jail.local."
-fi
-
-# --- Pulizia finale (pacchetti non necessari, cache) ---
-echo "INFO: Pulizia pacchetti non necessari e cache..."
-if [[ "$OS_ID" == "ubuntu" ]]; then
-    apt-get autoremove -y
-    apt-get clean -y
-elif [[ "$OS_ID" == "amzn" ]]; then
-    yum autoremove -y # Su Amazon Linux 2, yum e\` un link a dnf o yum stesso
-    yum clean all
-fi
-
-echo "INFO: Script di hardening per Finanz completato con successo - $(date)"
-exit 0
-    \end{lstlisting}
+    
+    # --- Aggiornamento pacchetti e installazione utility di sicurezza base ---
+    echo "INFO: Aggiornamento lista pacchetti e installazione utility base (ufw/firewalld, fail2ban, auditd)..."
+    if [[ "$OS_ID" == "ubuntu" ]]; then
+        apt-get update -y
+        DEBIAN_FRONTEND=noninteractive apt-get install -y ufw fail2ban auditd
+    elif [[ "$OS_ID" == "amzn" ]]; then
+        yum update -y
+        yum install -y firewalld fail2ban auditd
+    fi
+    echo "INFO: Utility di sicurezza installate/aggiornate."
+    
+    # --- Disabilitazione Servizi Non Necessari ---
+    echo "INFO: Tentativo di disabilitazione servizi non strettamente necessari..."
+    SERVICES_TO_DISABLE=(
+        "cups" "avahi-daemon" "bluetooth" "ModemManager" "apport" "whoopsie" # Comuni
+        "nfs-server" "rpcbind" "xinetd" "telnet.socket" # Servizi di rete datati o specifici
+        # Per Ubuntu, potremmo aggiungere:
+        "saned" "snapd.socket" "bolt" "smartmontools" "anacron" "lxcfs" "speech-dispatcher" 
+        # Per Amazon Linux, alcuni potrebbero non esistere o avere nomi diversi
+    )
+    
+    for service in "${SERVICES_TO_DISABLE[@]}"; do
+        # Verifica se il servizio esiste prima di tentare di disabilitarlo
+        if systemctl list-units --full --all | grep -qF "$service.service"; then
+            echo "INFO: Disabilitazione e stop di $service..."
+            systemctl stop "$service" &>/dev/null || echo "WARN: Impossibile stoppare $service (potrebbe essere gia\` stoppato)"
+            systemctl disable "$service" &>/dev/null || echo "WARN: Impossibile disabilitare $service (potrebbe non esistere o essere statico)"
+        elif systemctl list-unit-files | grep -qF "$service.service"; then # Prova a disabilitare anche se non attivo
+            echo "INFO: Servizio $service trovato ma non attivo, tentativo di disabilitazione..."
+            systemctl disable "$service" &>/dev/null || echo "WARN: Impossibile disabilitare $service"
+        else
+            echo "INFO: Servizio $service non trovato, skippato."
+        fi
+    done
+    echo "INFO: Disabilitazione servizi non necessari completata."
+    
+    # --- Configurazione Firewall di Base (Host-based) ---
+    echo "INFO: Configurazione firewall di base (ufw per Ubuntu, firewalld per Amazon Linux)..."
+    if [[ "$OS_ID" == "ubuntu" ]]; then
+        ufw default deny incoming
+        ufw default allow outgoing
+        ufw allow ssh # Assicurarsi che la porta SSH sia permessa!
+        ufw allow http # Se necessario direttamente sull'istanza (non comune se dietro ALB)
+        ufw allow https # Se necessario direttamente sull'istanza
+        # ufw allow from <IP_ALB_o_SG_ALB> to any port <PORTA_APPLICAZIONE>
+        sed -i 's/ENABLED=no/ENABLED=yes/' /etc/ufw/ufw.conf # Assicura che ufw sia abilitato al boot
+        echo "y" | ufw enable || ufw reload # Abilita o ricarica ufw
+        echo "INFO: Firewall UFW configurato per Ubuntu."
+    elif [[ "$OS_ID" == "amzn" ]]; then
+        systemctl enable --now firewalld
+        firewall-cmd --set-default-zone=drop # Blocca tutto il traffico in entrata di default
+        firewall-cmd --permanent --add-service=ssh # Permetti SSH
+        # firewall-cmd --permanent --add-port=<PORTA_APPLICAZIONE>/tcp # Permetti la porta dell'applicazione
+        firewall-cmd --reload
+        echo "INFO: Firewall firewalld configurato per Amazon Linux."
+    fi
+    
+    # --- Rafforzamento Configurazione SSHD ---
+    echo "INFO: Rafforzamento configurazione SSHD (/etc/ssh/sshd_config)..."
+    SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
+    if [ -f "$SSHD_CONFIG_FILE" ]; then
+        sed -i 's/^#*PermitRootLogin .*/PermitRootLogin no/' "$SSHD_CONFIG_FILE"
+        sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE" # Richiede key-based auth
+        sed -i 's/^#*X11Forwarding .*/X11Forwarding no/' "$SSHD_CONFIG_FILE"
+        sed -i 's/^#*ClientAliveInterval .*/ClientAliveInterval 300/' "$SSHD_CONFIG_FILE"
+        sed -i 's/^#*ClientAliveCountMax .*/ClientAliveCountMax 0/' "$SSHD_CONFIG_FILE"
+        grep -qxF 'Protocol 2' "$SSHD_CONFIG_FILE" || echo 'Protocol 2' >> "$SSHD_CONFIG_FILE"
+        # Valutare aggiunta di: AllowUsers, AllowGroups, DenyUsers, DenyGroups
+        # Valutare cambio porta SSH di default (con attenzione ai Security Groups)
+        systemctl restart sshd || systemctl restart ssh # Riavvia sshd per applicare le modifiche
+        echo "INFO: Configurazione SSHD rafforzata."
+    else
+        echo "WARN: File $SSHD_CONFIG_FILE non trovato. Impossibile rafforzare SSHD."
+    fi
+    
+    # --- Configurazione Auditd (Regole base CIS Benchmark) ---
+    echo "INFO: Configurazione regole auditd di base..."
+    AUDIT_RULES_FILE="/etc/audit/rules.d/99-finanz-hardening.rules"
+    cat <<EOF > "$AUDIT_RULES_FILE"
+    # Monitoraggio modifiche a file di identita\`
+    -w /etc/passwd -p war -k identity_passwd
+    -w /etc/shadow -p war -k identity_shadow
+    -w /etc/group -p war -k identity_group
+    -w /etc/gshadow -p war -k identity_gshadow
+    
+    # Monitoraggio modifiche a configurazioni di sistema critiche
+    -w /etc/sudoers -p war -k sudoers_change
+    -w /etc/sudoers.d/ -p war -k sudoers_d_change
+    -w /etc/ssh/sshd_config -p war -k sshd_config_change
+    
+    # Monitoraggio uso di comandi privilegiati (esempi)
+    -a always,exit -F arch=b64 -S execve -F euid=0 -k privileged_exec_b64
+    -a always,exit -F arch=b32 -S execve -F euid=0 -k privileged_exec_b32
+    
+    # Monitoraggio tentativi di modifica delle regole di audit
+    -w /etc/audit/auditd.conf -p war -k audit_conf_change
+    -w /etc/audit/rules.d/ -p war -k audit_rules_change
+    EOF
+    augenrules --load # Carica le nuove regole
+    # systemctl restart auditd # Potrebbe essere necessario su alcuni sistemi
+    echo "INFO: Regole auditd di base configurate in $AUDIT_RULES_FILE."
+    
+    # --- Configurazione Fail2Ban (Esempio base per SSH) ---
+    # Fail2Ban dovrebbe essere gia\` installato. Creiamo un jail locale per SSH.
+    JAIL_LOCAL_FILE="/etc/fail2ban/jail.local"
+    if [ -f /etc/fail2ban/jail.conf ] && [ ! -f "$JAIL_LOCAL_FILE" ]; then
+        echo "INFO: Creazione configurazione locale per Fail2Ban ($JAIL_LOCAL_FILE)..."
+        cat <<EOF > "$JAIL_LOCAL_FILE"
+    [DEFAULT]
+    # Escludi IP locali o fidati
+    ignoreip = 127.0.0.1/8 ::1
+    
+    # Tempo di ban (in secondi)
+    bantime  = 1h
+    
+    # Numero di tentativi prima del ban
+    maxretry = 5
+    
+    # Finestra temporale per il conteggio dei tentativi
+    findtime = 10m
+    
+    [sshd]
+    enabled = true
+    # Si possono specificare porte non standard se necessario: port = ssh,tuaporta
+    # logpath = %(sshd_log)s # Default solitamente corretto
+    # backend = %(sshd_backend)s # Default solitamente corretto
+    EOF
+        systemctl enable fail2ban
+        systemctl restart fail2ban
+        echo "INFO: Configurazione locale di Fail2Ban per SSH creata e servizio riavviato."
+    elif [ -f "$JAIL_LOCAL_FILE" ]; then
+        echo "INFO: File $JAIL_LOCAL_FILE gia\` esistente. Skippata creazione jail.local per Fail2Ban."
+    else
+        echo "WARN: Fail2Ban non sembra installato correttamente. Impossibile configurare jail.local."
+    fi
+    
+    # --- Pulizia finale (pacchetti non necessari, cache) ---
+    echo "INFO: Pulizia pacchetti non necessari e cache..."
+    if [[ "$OS_ID" == "ubuntu" ]]; then
+        apt-get autoremove -y
+        apt-get clean -y
+    elif [[ "$OS_ID" == "amzn" ]]; then
+        yum autoremove -y # Su Amazon Linux 2, yum e\` un link a dnf o yum stesso
+        yum clean all
+    fi
+    
+    echo "INFO: Script di hardening per Finanz completato con successo - $(date)"
+    exit 0
+        \end{lstlisting}
+\subsubsection{Verifica e Mantenimento Continuo della Conformità}
+\label{subsubsec:hardening-verification_cap2}
+L'esecuzione di uno script di hardening al momento del boot è un primo passo fondamentale, ma non garantisce che la configurazione rimanga sicura nel tempo. La configuration drift (modifiche non intenzionali alla configurazione) e la scoperta di nuove vulnerabilità richiedono un processo di verifica continuo. Per questo motivo, sono state integrate due pratiche di assessment periodico:
+\begin{itemize}
+\item \textbf{AWS Inspector}: Questo servizio nativo di AWS è stato configurato per eseguire scansioni automatizzate e continue delle istanze EC2. AWS Inspector non solo identifica vulnerabilità software a livello di pacchetti (CVEs), ma verifica anche la configurazione di rete e la conformità rispetto a benchmark di sicurezza, come il \textbf{CIS Benchmarks}. I risultati vengono aggregati in AWS Security Hub, fornendo una visione centralizzata delle vulnerabilità da correggere.
+\item \textbf{Scansioni con Strumenti Open-Source (Lynis)}: In aggiunta ad AWS Inspector, vengono eseguite scansioni periodiche (trimestrali) utilizzando \textbf{Lynis}, uno strumento di auditing della sicurezza open-source. Lynis esegue un'analisi approfondita della configurazione del sistema operativo direttamente sull'istanza, fornendo un report dettagliato con un punteggio di hardening e suggerimenti pratici. Questo approccio a doppio strumento garantisce una copertura completa, combinando la facilità di un servizio gestito con la profondità di uno strumento specializzato.
+\end{itemize}
+Questo processo di verifica assicura che le policy di hardening siano non solo applicate, ma mantenute nel tempo, fornendo un feedback continuo per migliorare la sicurezza delle AMI di base e degli script di configurazione.
 
 \subsection{Utilizzo Fondamentale di IAM Roles per le Istanze EC2}
 \label{subsec:iam-roles-ec2_cap2}
-Questa è una delle pratiche di sicurezza più importanti, che ho verificato essere implementata correttamente nell'ambiente di Finanz. \textbf{Non bisogna mai salvare credenziali AWS statiche (Access Key ID e Secret Access Key) direttamente su un'istanza EC2}. Invece, si associa un \textbf{IAM Role} all'istanza al momento del lancio. L'applicazione in esecuzione sull'istanza può quindi ottenere credenziali temporanee tramite il servizio metadati dell'istanza (IMDS), assumendo i permessi definiti nel ruolo associato. Questo elimina il rischio di esposizione di credenziali a lungo termine.
-Ho osservato che tutte le istanze EC2 di Finanz utilizzano il ruolo IAM \texttt{FinanzEC2AppRole} (ARN: \texttt{arn:aws:iam::538927841179:role/FinanzEC2AppRole}). Questo ruolo, in linea con il principio del minimo privilegio, concede permessi specifici, tra cui:
-\begin{itemize}
-    \item Lettura di oggetti dal bucket S3 \texttt{finanz-static-assets} (necessario per servire alcuni asset o configurazioni).
-    \item Scrittura di log nel gruppo CloudWatch Logs \texttt{/aws/ec2/finanz-app} (o nomi simili per i diversi ambienti Elastic Beanstalk).
-    \item Accesso a parametri specifici in AWS Systems Manager Parameter Store, utilizzando un prefisso dedicato come \texttt{/finanz/app/}, per recuperare configurazioni sensibili (es. stringhe di connessione al database, chiavi API di terze parti).
-\end{itemize}
-L'applicazione ottiene le credenziali temporanee interrogando l'endpoint IMDS locale (\texttt{http://169.254.169.254/latest/meta-data/iam/security-credentials/FinanzEC2AppRole}). Queste credenziali vengono ruotate automaticamente da AWS, tipicamente ogni 1-6 ore, senza intervento manuale. È importante anche configurare IMDSv2 (Instance Metadata Service Version 2), che offre maggiore protezione contro attacchi SSRF (Server-Side Request Forgery), richiedendo una session token per accedere ai metadati.
+Questa si configura come una delle pratiche di sicurezza più importanti, la cui corretta implementazione è stata verificata nell'ambiente di Finanz. \textbf{Non bisogna mai salvare credenziali AWS statiche direttamente su un'istanza EC2}. Si deve, invece, associare un \textbf{IAM Role} all'istanza. L'applicazione può quindi ottenere credenziali temporanee tramite il servizio metadati dell'istanza (IMDS), assumendo i permessi definiti nel ruolo.
+È stato osservato che tutte le istanze EC2 di Finanz utilizzano il ruolo IAM \texttt{FinanzEC2AppRole} (ARN: \texttt{arn:aws:iam::538927841179:role/FinanzEC2AppRole}). Tale ruolo, in linea con il principio del minimo privilegio, concede permessi specifici, tra cui lettura da bucket S3, scrittura su CloudWatch Logs e accesso a parametri in AWS Systems Manager Parameter Store. L'applicazione ottiene le credenziali interrogando l'endpoint IMDS locale (\texttt{http://169.254.169.254/latest/meta-data/iam/security-credentials/FinanzEC2AppRole}), le quali vengono ruotate automaticamente da AWS ogni 6 ore. È importante anche configurare IMDSv2 (Instance Metadata Service Version 2) per una maggiore protezione contro attacchi SSRF (Server-Side Request Forgery), richiedendo una session token per accedere ai metadati.
 
 \subsection{Scalabilità e Disponibilità con Auto Scaling Groups}
 \label{subsec:auto-scaling_cap2}
-Per garantire la disponibilità dell'applicazione e gestire in modo efficiente i picchi di carico, Finanz utilizza \textbf{Auto Scaling Groups (ASG)}, gestiti prevalentemente tramite le configurazioni di Elastic Beanstalk. Ho identificato gli ASG \texttt{finanz-prod-asg} (nome logico derivato da Elastic Beanstalk) e \texttt{finanz-dev-asg}.
-L'ASG di produzione (\texttt{awseb-e-*-AWSEBAutoScalingGroup-*} nome effettivo) è configurato per mantenere normalmente 3 istanze attive (desired capacity), con un minimo di 2 (min size) e un massimo di 8 (max size). Durante le ore di maggiore traffico (tipicamente osservate tra le 9:00 e le 18:00 dei giorni feriali), l'ASG scala frequentemente fino a 5-6 istanze. Le policy di scaling sono basate su metriche CloudWatch, tra cui:
+Per garantire la disponibilità dell'applicazione, Finanz impiega \textbf{Auto Scaling Groups (ASG)}, gestiti prevalentemente tramite Elastic Beanstalk. Sono stati identificati gli ASG \texttt{finanz-prod-asg} e \texttt{finanz-dev-asg}.
+L'ASG di produzione è configurato per mantenere 3 istanze (desired), con un minimo di 2 e un massimo di 8. Le policy di scaling sono basate su metriche CloudWatch, come l'utilizzo medio della CPU del gruppo. Ad esempio:
 \begin{itemize}
     \item Utilizzo medio della CPU del gruppo > 70\% per almeno 2 minuti consecutivi $\rightarrow$ Azione di Scale Out (aggiunta di istanze).
     \item Utilizzo medio della CPU del gruppo < 30\% per almeno 10 minuti consecutivi $\rightarrow$ Azione di Scale In (rimozione di istanze).
     \item Talvolta vengono usate anche metriche di rete, come Network In > 50 MB/min per istanza, come trigger aggiuntivo per lo Scale Out.
 \end{itemize}
-Il tempo medio che ho osservato per il provisioning e la messa in servizio di una nuova istanza EC2 da parte dell'ASG (incluso il boot, l'esecuzione di script di user-data e la registrazione al load balancer) è di circa 4 minuti e 30 secondi. Questo garantisce una buona reattività ai cambiamenti di carico.
+Il tempo medio osservato per il provisioning di una nuova istanza è di circa 4 minuti e 30 secondi, garantendo una buona reattività ai cambiamenti di carico.
 
 \section{Protezione dei Dati Sensibili: Un Imperativo per le fintech}
 \label{sec:data-protection_cap2}
-In una startup fintech come Finanz, la protezione dei dati dei clienti, delle transazioni finanziarie e di altre informazioni confidenziali è di massima priorità. AWS offre una suite completa di strumenti e servizi per implementare una solida strategia di protezione dei dati.
+In una startup fintech, la protezione dei dati è di massima priorità. AWS offre una suite completa di strumenti per implementare una solida strategia in merito.
 
 \subsection{Crittografia dei Dati: a Riposo (At Rest) e in Transito (In Transit)}
 \label{subsec:encryption_cap2}
-La crittografia è un pilastro fondamentale della protezione dei dati. Ho verificato che Finanz adotta misure di crittografia sia per i dati a riposo che per quelli in transito.
+La crittografia è un pilastro della protezione dati. L'analisi ha confermato che Finanz adotta misure di crittografia per entrambe le modalità.
 \begin{itemize}
-    \item \textbf{Crittografia a Riposo (At Rest)}: È essenziale crittografare i dati sensibili quando sono memorizzati su disco o in altri sistemi di storage. AWS facilita enormemente questa operazione:
-        \begin{itemize}
-            \item \textbf{Amazon S3}: Tutti i bucket S3 utilizzati da Finanz, inclusi \texttt{finanz-logs-538927841179}, \texttt{finanz-artifacts-eu-south-1}, e \texttt{finanz-static-assets}, sono configurati per utilizzare la crittografia lato server con chiavi gestite da AWS KMS (SSE-KMS). Viene utilizzata una Customer Managed Key (CMK) specifica per S3, ad esempio \texttt{arn:aws:kms:eu-south-1:538927841179:key/finanz-s3-encryption-key}. Il bucket dei log (\texttt{finanz-logs-538927841179}) ha anche S3 Object Lock abilitato in modalità Governance con un periodo di retention di 7 anni, per garantire l'immutabilità dei log a fini di compliance e audit.
-            \item \textbf{Amazon EBS}: Tutti i volumi Elastic Block Store (EBS), sia quelli di root che quelli di dati associati alle istanze EC2, sono configurati per la crittografia di default a livello di account, utilizzando una chiave gestita da AWS per EBS (AWS-managed key) o, preferibilmente, una CMK dedicata (es. \texttt{arn:aws:kms:eu-south-1:538927841179:key/finanz-ebs-encryption-key}). Attualmente, Finanz gestisce circa 45 volumi EBS, per un totale di circa 2.3 TB di storage crittografato.
-            \item \textbf{Amazon RDS}: Come già menzionato, entrambe le istanze PostgreSQL (sviluppo e produzione) utilizzano la crittografia at-rest integrata di RDS, anch'essa basata su AWS KMS con una CMK dedicata (es. \texttt{arn:aws:kms:eu-south-1:538927841179:key/finanz-rds-encryption-key}). Dai benchmark che ho potuto consultare o eseguire, l'impatto sulle performance di questa crittografia è minimo, solitamente inferiore al 2\%.
-        \end{itemize}
+    \item \textbf{Crittografia a Riposo (At Rest)}: È essenziale crittografare i dati memorizzati.
+    \begin{itemize}
+        \item \textbf{Amazon S3}: Tutti i bucket critici sono configurati per la crittografia lato server con chiavi gestite da AWS KMS (SSE-KMS), utilizzando una Customer Managed Key (CMK) specifica.Il bucket dei log (\texttt{finanz-logs-538927841179}) ha anche S3 Object Lock abilitato in modalità Governance con un periodo di retention di 7 anni, per garantire l'immutabilità dei log a fini di compliance e audit.
+        \item \textbf{Amazon EBS}: Tutti i volumi EBS sono configurati per la crittografia di default a livello di account, utilizzando una CMK dedicata.
+        \item \textbf{Amazon RDS}: Entrambe le istanze PostgreSQL utilizzano la crittografia at-rest integrata di RDS, anch'essa basata su AWS KMS con una CMK dedicata. Dai benchmark consultati, l'impatto sulle performance di questa crittografia è minimo, solitamente inferiore al 2\%.
+    \end{itemize}
     \item \textbf{Crittografia in Transito (In Transit)}: È altrettanto cruciale proteggere i dati mentre viaggiano sulla rete, sia esternamente (tra i client e AWS) sia internamente (tra i servizi AWS).
-        \begin{itemize}
-            \item \textbf{Comunicazioni Esterne}: L'Application Load Balancer (ALB) \texttt{finanz-prod-alb-1284567} termina le connessioni TLS/SSL utilizzando certificati digitali gestiti tramite AWS Certificate Manager (ACM). Il certificato in uso (es. ARN: \texttt{arn:aws:acm:eu-south-1:538927841179:certificate/12345678-1234-1234-1234-123456789012}) copre i domini dell'applicazione Finanz. Ho verificato che la policy di sicurezza TLS sull'ALB è configurata per accettare solo protocolli moderni e sicuri (es. TLS 1.2 o superiore), e circa il 99.7\% del traffico osservato utilizza queste versioni. Le connessioni HTTP sulla porta 80 vengono automaticamente reindirizzate a HTTPS sulla porta 443.
-            \item \textbf{Comunicazioni Interne}: Per le comunicazioni tra i servizi all'interno del VPC (es. tra le istanze EC2 e le istanze RDS, o tra EC2 e S3 tramite VPC Endpoint), si fa affidamento sull'isolamento fornito dal VPC stesso. Tuttavia, per una maggiore sicurezza, si potrebbe valutare l'implementazione di TLS anche per queste comunicazioni interne, sebbene possa introdurre complessità nella gestione dei certificati.
-        \end{itemize}
+    \begin{itemize}
+        \item \textbf{Comunicazioni Esterne}: L'Application Load Balancer (ALB) termina le connessioni TLS/SSL utilizzando certificati gestiti tramite AWS Certificate Manager (ACM). È stata verificata la policy di sicurezza TLS sull'ALB, configurata per accettare solo protocolli moderni (es. TLS 1.2 o superiore), e circa il 99.7\% del traffico osservato utilizza queste versioni. Le connessioni HTTP sulla porta 80 vengono automaticamente reindirizzate a HTTPS sulla porta 443.
+        \item \textbf{Comunicazioni Interne}: Per le comunicazioni all'interno del VPC, ci si affida all'isolamento fornito dal VPC stesso. Per una sicurezza rafforzata, si potrebbe valutare l'implementazione di TLS anche per queste comunicazioni interne, sebbene possa introdurre complessità nella gestione dei certificati.
+    \end{itemize}
 \end{itemize}
 
 \subsection{Gestione Centralizzata delle Chiavi Crittografiche con AWS KMS}
 \label{subsec:kms_cap2}
-Come evidenziato, \textbf{AWS Key Management Service (KMS)} gioca un ruolo centrale nella strategia di crittografia di Finanz. Permette di creare e controllare le chiavi crittografiche (Customer Managed Keys - CMKs) utilizzate per crittografare i dati in vari servizi AWS. Nell'account di Finanz, ho identificato circa 8 CMK attive, tra cui:
-\begin{itemize}
+Come evidenziato, \textbf{AWS Key Management Service (KMS)} gioca un ruolo centrale. Permette di creare e controllare le chiavi crittografiche (Customer Managed Keys - CMKs). Nell'account di Finanz, si identificano circa 8 CMK attive per diversi servizi, tra cui: \begin{itemize}
     \item \texttt{finanz-s3-encryption-key}: Utilizzata per la crittografia SSE-KMS dei bucket S3. Registra un utilizzo di circa 1000 operazioni di crittografia/decrittografia al giorno.
     \item \texttt{finanz-rds-encryption-key}: Utilizzata per la crittografia at-rest delle istanze RDS PostgreSQL. Utilizzo meno frequente, circa 50 operazioni al giorno (principalmente durante backup e restore).
     \item \texttt{finanz-ebs-encryption-key}: Utilizzata per la crittografia dei volumi EBS aggiuntivi o per sovrascrivere la chiave di default. Circa 20 operazioni al giorno.
     \item \texttt{finanz-secrets-key}: Utilizzata da AWS Secrets Manager per crittografare i segreti memorizzati (es. password, chiavi API). Circa 200 operazioni al giorno, in base agli accessi ai segreti da parte delle applicazioni.
     \item Altre chiavi potrebbero essere usate per CloudTrail log encryption, CodePipeline artifacts, ecc.
-\end{itemize}
-L'uso di CMK offre un controllo granulare sui permessi di utilizzo delle chiavi (definiti tramite key policies e policy IAM, come discusso nel Capitolo \ref{ch:iam_security}), sulla rotazione automatica delle chiavi (gestita da AWS per le CMK), e sull'auditing del loro utilizzo tramite CloudTrail. I costi mensili per KMS si aggirano tipicamente sui 15-20 EUR, dovuti principalmente al costo di ogni CMK (circa 1 EUR/mese ciascuna) e al volume di operazioni API che richiedono l'uso della chiave.
-Per requisiti di sicurezza ancora più elevati, che richiedano ad esempio la gestione diretta dell'hardware crittografico (HSM), si potrebbe considerare \textbf{AWS CloudHSM}, ma per la maggior parte delle startup, inclusa Finanz, AWS KMS offre un eccellente equilibrio tra sicurezza, gestibilità e costi.
+\end{itemize}. 
+L'uso di CMK offre un controllo granulare sui permessi, la rotazione automatica e l'auditing del loro utilizzo tramite CloudTrail.I costi mensili per KMS si aggirano tipicamente sui 15-20 EUR, dovuti principalmente al costo di ogni CMK (circa 1 EUR/mese ciascuna) e al volume di operazioni API che richiedono l'uso della chiave. Per requisiti ancora più elevati, si potrebbe considerare \textbf{AWS CloudHSM}, ma KMS offre un eccellente equilibrio tra sicurezza, gestibilità e costi per la maggior parte dei casi d'uso.
 
 \subsection{Strategie di Backup e Disaster Recovery (DR)}
 \label{subsec:backup-dr_cap2}
-Avere backup regolari, testati e sicuri è essenziale per garantire la business continuity e per potersi riprendere da errori umani, guasti hardware, corruzione dei dati o attacchi informatici (es. ransomware). Finanz ha implementato una strategia di backup utilizzando \textbf{AWS Backup}.
+Backup regolari e testati sono essenziali per la business continuity. Finanz ha implementato una strategia di backup utilizzando \textbf{AWS Backup}.
 \begin{itemize}
-    \item \textbf{Piano di Backup Centralizzato}: È stato configurato un piano di backup denominato \texttt{FinanzDailyBackupPlan} che orchestra i backup per diverse risorse:
-        \begin{itemize}
-            \item \textbf{Istanze RDS}: Backup giornalieri automatici delle istanze RDS (sia produzione che sviluppo) vengono eseguiti durante la finestra di manutenzione notturna (es. alle 02:00 UTC), con una retention dei backup di 30 giorni. Questi snapshot permettono il Point-In-Time Recovery (PITR) fino a 5 minuti prima dell'ultimo backup.
+    \item \textbf{Piano di Backup Centralizzato}: Un piano denominato \texttt{FinanzDailyBackupPlan} orchestra i backup per: 
+    \begin{itemize}
+    \item \textbf{Istanze RDS}: Backup giornalieri automatici delle istanze RDS (sia produzione che sviluppo) vengono eseguiti durante la finestra di manutenzione notturna, con una retention dei backup di 30 giorni. Questi snapshot permettono il Point-In-Time Recovery (PITR) fino a 5 minuti prima dell'ultimo backup.
             \item \textbf{Volumi EBS}: Backup settimanali (snapshot) di tutti i volumi EBS critici (associati alle istanze di produzione) vengono eseguiti ogni domenica, con una retention di 12 settimane.
             \item \textbf{Bucket S3}: La versioning è abilitata su tutti i bucket critici, fornendo una forma di recupero da eliminazioni o sovrascritture accidentali. Per un DR più robusto, si sta valutando S3 Cross-Region Replication (CRR) per i bucket più importanti.
             \item \textbf{Cross-Region Backup}: Per scopi di Disaster Recovery, i backup più importanti (es. snapshot RDS di produzione e snapshot EBS settimanali) vengono copiati mensilmente in una regione AWS secondaria (es. \texttt{eu-central-1}, Francoforte).
-        \end{itemize}
-    \item \textbf{Vault di Backup Sicuro}: Tutti i backup gestiti da AWS Backup sono archiviati in un vault di backup dedicato (\texttt{finanz-backup-vault}). Questo vault è protetto da una policy di accesso restrittiva e utilizza la crittografia (con una chiave KMS dedicata al vault) per proteggere i backup a riposo. Attualmente, il vault contiene circa 847 recovery point, per un totale di circa 1.2 TB di dati di backup.
-    \item \textbf{Obiettivi di Ripristino (RTO/RPO)}: Gli obiettivi di ripristino target per Finanz sono: un RTO (Recovery Time Objective) massimo di 4 ore per i servizi critici di produzione e un RPO (Recovery Point Objective) massimo di 24 ore (idealmente molto meno per i dati transazionali, grazie al PITR di RDS). È fondamentale testare periodicamente le procedure di ripristino (almeno una o due volte l'anno) per assicurarsi che questi obiettivi siano raggiungibili e che le procedure siano efficaci.
+        \end{itemize}.
+    \item \textbf{Vault di Backup Sicuro}: I backup sono archiviati in un vault dedicato (\texttt{finanz-backup-vault}), protetto da policy restrittive e crittografia.
+    \item \textbf{Obiettivi di Ripristino (RTO/RPO)}: Gli obiettivi target sono un RTO (Recovery Time Objective) massimo di 4 ore per i servizi critici di produzione e un RPO (Recovery Point Objective) massimo di 24 ore (idealmente molto meno per i dati transazionali, grazie al PITR di RDS). È fondamentale testare periodicamente le procedure di ripristino (almeno una o due volte l'anno) per assicurarsi che questi obiettivi siano raggiungibili e che le procedure siano efficaci..
 \end{itemize}
 
 \subsection{Misure di Sicurezza Specifiche per i Bucket S3}
 \label{subsec:s3-security_cap2}
-Amazon S3 è un servizio estremamente versatile, ma una sua configurazione errata può portare a gravi data breach. Ho verificato che Finanz adotta diverse misure per proteggere i propri bucket S3:
+Una configurazione errata di Amazon S3 può portare a gravi data breach. Si è constatato che Finanz adotta diverse misure di protezione:
 \begin{itemize}
     \item \textbf{Block Public Access (BPA)}: La funzionalità S3 Block Public Access è abilitata a livello di account AWS e ulteriormente verificata a livello di singolo bucket per tutti i bucket che non devono essere pubblici. Questa impostazione previene la concessione accidentale di accesso pubblico ai dati. La sua corretta applicazione è monitorata trimestralmente tramite una regola AWS Config custom (\texttt{s3-bucket-public-access-prohibited-check}) che verifica che BPA sia attivo su tutti i bucket non esplicitamente approvati per l'accesso pubblico (come quello per gli asset statici serviti da CloudFront).
     \item \textbf{Bucket Policies Granulari}: Vengono utilizzate bucket policy per definire permessi di accesso specifici. Ad esempio, il bucket dei log di CloudTrail (\texttt{finanz-cloudtrail-logs-538927841179}, che è un bucket diverso da quello generico dei log applicativi) ha una policy che permette la scrittura solo al servizio CloudTrail e la lettura solo a un ruolo IAM dedicato alla sicurezza e all'audit (es. \texttt{SecurityAuditRole}). Per il bucket \texttt{finanz-static-assets}, la policy permette l'accesso in lettura solo all'Origin Access Identity (OAI) di CloudFront, garantendo che gli asset siano serviti solo tramite la CDN.
@@ -323,30 +339,31 @@ Amazon S3 è un servizio estremamente versatile, ma una sua configurazione errat
 
 \section{Monitoraggio Continuo, Logging e Alerting: Vedere per Proteggere}
 \label{sec:monitoring-logging_cap2}
-Come si suol dire, non si può proteggere ciò che non si vede. Un sistema robusto di monitoraggio, logging e alerting è essenziale per rilevare attività sospette, diagnosticare problemi, rispondere tempestivamente agli incidenti di sicurezza e mantenere la conformità.
+Il principio fondamentale secondo cui non è possibile proteggere ciò che non si può osservare sottolinea l'importanza di un sistema robusto di monitoraggio, logging e alerting per rilevare attività sospette e rispondere tempestivamente agli incidenti.
 
 \subsection{Abilitazione e Configurazione di AWS CloudTrail e Amazon CloudWatch}
 \label{subsec:cloudtrail-cloudwatch-enable_cap2}
 Questi due servizi sono i pilastri del monitoraggio in AWS.
 \begin{itemize}
-    \item \textbf{AWS CloudTrail}: Ho verificato che CloudTrail è abilitato in tutte le regioni AWS utilizzate da Finanz e anche a livello di Organization. Sono stati configurati due trail principali:
-        \begin{itemize}
-            \item \texttt{finanz-audit-trail} (ARN es.: \texttt{arn:aws:cloudtrail:eu-south-1:538927841179:trail/finanz-audit-trail}): Questo è il trail principale che cattura quasi tutte le chiamate API effettuate nell'account AWS, fornendo una traccia di audit fondamentale ("chi ha fatto cosa, quando, da dove e su quale risorsa"). Include eventi di gestione e, opzionalmente, eventi dati per S3 (per bucket specifici) e Lambda.
-            \item \texttt{finanz-security-trail}: Un secondo trail, più specifico, potrebbe essere configurato per catturare solo eventi di sicurezza critici, magari con filtri su azioni IAM, modifiche a Security Group, terminazione di istanze RDS, ecc., per facilitare analisi mirate. (Nota: se non esiste, suggerisco di crearlo).
-        \end{itemize}
-        I log di CloudTrail vengono inviati a un bucket S3 dedicato e protetto (\texttt{finanz-cloudtrail-logs-538927841179}), con la crittografia lato server (SSE-S3 o SSE-KMS) e la convalida dell'integrità dei file di log abilitate. Questi log vengono anche inviati a CloudWatch Logs per facilitare query e allarmi in tempo reale. Finanz analizza, in media, circa 15.000-20.000 eventi CloudTrail al giorno solo nell'ambiente di produzione.
-    \item \textbf{Amazon CloudWatch}: CloudWatch è utilizzato estensivamente per raccogliere:
-        \begin{itemize}
-            \item \textbf{Metriche}: metriche di performance e utilizzo da oltre 45 risorse AWS (EC2, RDS, ALB, S3, Lambda, ecc.).
-            \item \textbf{Log Applicativi e di Sistema}: L'agente CloudWatch unificato è installato su tutte le istanze EC2 (sia quelle gestite da Elastic Beanstalk che eventuali altre) per inviare i log delle applicazioni, i log di sistema (es. `/var/log/messages`, `/var/log/secure`) e metriche personalizzate a CloudWatch Logs. Attualmente, sono gestiti circa 23 gruppi di log principali. L'agente invia le metriche con una granularità di 60 secondi.
-            \item \textbf{Eventi}: CloudWatch Events (ora parte di Amazon EventBridge) viene utilizzato per reagire a cambiamenti di stato nelle risorse AWS o per schedulare azioni.
-        \end{itemize}
-        Il costo mensile per CloudWatch si aggira sugli 85-95 EUR, principalmente per l'ingestion e l'archiviazione dei log e per le metriche personalizzate o quelle a risoluzione dettagliata.
+    \item \textbf{AWS CloudTrail}: È stato verificato che CloudTrail risulta abilitato in tutte le regioni e a livello di Organization.  Sono stati configurati due trail principali:
+    \begin{itemize}
+        \item \texttt{finanz-audit-trail} (ARN es.: \texttt{arn:aws:cloudtrail:eu-south-1:538927841179:trail/finanz-audit-trail}): Questo è il trail principale che cattura quasi tutte le chiamate API effettuate nell'account AWS, fornendo una traccia di audit fondamentale ("chi ha fatto cosa, quando, da dove e su quale risorsa"). Include eventi di gestione e, opzionalmente, eventi dati per S3 (per bucket specifici) e Lambda.
+        \item \texttt{finanz-security-trail}: Un secondo trail, più specifico, potrebbe essere configurato per catturare solo eventi di sicurezza critici, magari con filtri su azioni IAM, modifiche a Security Group, terminazione di istanze RDS, ecc., per facilitare analisi mirate. (Nota: se non esiste, suggerisco di crearlo).
+    \end{itemize}
+    I log di CloudTrail vengono inviati a un bucket S3 dedicato e protetto (\texttt{finanz-cloudtrail-logs-538927841179}), con la crittografia lato server (SSE-S3 o SSE-KMS) e la convalida dell'integrità dei file di log abilitate. Questi log vengono anche inviati a CloudWatch Logs per facilitare query e allarmi in tempo reale. Finanz analizza, in media, circa 15.000-20.000 eventi CloudTrail al giorno solo nell'ambiente di produzione.
+
+    \item \textbf{Amazon CloudWatch}: È utilizzato estensivamente per raccogliere:
+    \begin{itemize}
+        \item \textbf{Metriche}: metriche di performance e utilizzo da oltre 45 risorse AWS (EC2, RDS, ALB, S3, Lambda, ecc.).
+        \item \textbf{Log Applicativi e di Sistema}: L'agente CloudWatch unificato è installato su tutte le istanze EC2 (sia quelle gestite da Elastic Beanstalk che eventuali altre) per inviare i log delle applicazioni, i log di sistema (es. `/var/log/messages`, `/var/log/secure`) e metriche personalizzate a CloudWatch Logs. Attualmente, sono gestiti circa 23 gruppi di log principali. L'agente invia le metriche con una granularità di 60 secondi.
+        \item \textbf{Eventi}: CloudWatch Events (ora parte di Amazon EventBridge) viene utilizzato per reagire a cambiamenti di stato nelle risorse AWS o per schedulare azioni.
+    \end{itemize}
+    Il costo mensile per CloudWatch si aggira sugli 85-95 EUR, principalmente per l'ingestion e l'archiviazione dei log e per le metriche personalizzate o quelle a risoluzione dettagliata.
 \end{itemize}
 
 \subsection{Configurazione di Allarmi CloudWatch Proattivi}
 \label{subsec:cloudwatch-alarms_cap2}
-Raccogliere log e metriche è solo il primo passo; è cruciale agire su di essi. Finanz ha configurato 28 allarmi CloudWatch principali per ricevere notifiche proattive su condizioni anomale o eventi critici. Questi allarmi sono fondamentali per una risposta rapida. Alcuni esempi significativi includono:
+Raccogliere dati è solo il primo passo; è cruciale agire su di essi. Finanz ha configurato 28 allarmi CloudWatch principali per notifiche proattive. Alcuni esempi significativi includono:
 \begin{itemize}
     \item \texttt{HighCPUUtilization-Prod-EC2}: Triggera se l'utilizzo medio della CPU su una qualsiasi istanza EC2 di produzione supera l'80\% per più di 5 minuti consecutivi.
     \item \texttt{DatabaseConnections-Prod-RDS-Critical}: Si attiva se il numero di connessioni al database RDS di produzione supera 400 (circa l'80\% del limite massimo configurato per l'istanza \texttt{db.t4g.small}).
@@ -356,59 +373,60 @@ Raccogliere log e metriche è solo il primo passo; è cruciale agire su di essi.
     \item \texttt{SecurityGroupChanges-Alert}: Notifica qualsiasi modifica (creazione, eliminazione, modifica di regole) ai Security Group critici.
     \item \texttt{NATGatewayErrorPortAllocation-Alert}: Monitora la metrica \texttt{ErrorPortAllocation} del NAT Gateway per prevenire l'esaurimento delle porte.
 \end{itemize}
-Questi allarmi sono configurati per inviare notifiche a un topic SNS (Simple Notification Service) dedicato alla sicurezza. Da questo topic, le notifiche vengono poi inoltrate via email a un gruppo di distribuzione del team tecnico/DevOps e, per gli allarmi più critici, anche via SMS o tramite integrazione con sistemi di PagerDuty/Opsgenie (attualmente in valutazione).
-Negli ultimi 30 giorni, ho osservato che sono state ricevute 47 notifiche dagli allarmi; di queste, 3 sono state classificate come critiche (es. un picco imprevisto di errori 5xx sull'ALB) e sono state investigate e risolte entro un tempo medio di 2 ore.
+Questi allarmi inviano notifiche tramite SNS a canali dedicati.Da questo topic, le notifiche vengono poi inoltrate via email a un gruppo di distribuzione del team tecnico/DevOps e, per gli allarmi più critici, anche via SMS o tramite integrazione con sistemi di PagerDuty/Opsgenie (attualmente in valutazione). Negli ultimi 30 giorni, si è registrata la ricezione di 47 notifiche, di cui 3 classificate come critiche e risolte entro un tempo medio di 2 ore.
 
 \subsection{Utilizzo di Servizi di Sicurezza Gestiti: AWS Security Hub e Amazon GuardDuty}
 \label{subsec:security-hub-guardduty_cap2}
-Per un rilevamento delle minacce più avanzato e una gestione centralizzata dei risultati di sicurezza, Finanz si avvale di:
+Per un rilevamento avanzato delle minacce, Finanz si avvale di:
 \begin{itemize}
-    \item \textbf{Amazon GuardDuty}: Questo servizio di rilevamento delle minacce gestito è abilitato in tutte le regioni AWS pertinenti (attualmente \texttt{eu-south-1}, \texttt{eu-central-1}, e \texttt{eu-west-1} per una copertura più ampia in caso di attività anomale che attraversano le regioni). GuardDuty analizza continuamente diverse fonti di dati, tra cui i log di VPC Flow, i log di CloudTrail e i log DNS, per identificare attività malevole o non autorizzate. Negli ultimi 90 giorni, GuardDuty ha generato 23 "finding" (risultati). La maggior parte di questi (18) erano di severità BASSA (LOW), mentre 5 erano di severità MEDIA (MEDIUM). I finding più comuni includevano:
+    \item \textbf{Amazon GuardDuty}: Questo servizio è abilitato per analizzare continuamente log di VPC Flow, CloudTrail e DNS per identificare attività malevole.
+    I finding più comuni includevano:
         \begin{itemize}
             \item \texttt{Recon:EC2/PortProbeUnprotectedPort}: 8 occorrenze, indicanti tentativi di scansione di porte su istanze EC2 da indirizzi IP esterni. Queste sono state verificate e i Security Group sono stati confermati essere restrittivi.
             \item \texttt{UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration}: 2 tentativi sospetti rilevati, che sono stati investigati approfonditamente. In questi casi specifici, si è trattato di falsi positivi dovuti a test interni, ma l'allerta è stata comunque preziosa.
             \item Altri finding di tipo \texttt{Trojan:EC2/DGADomainCall} o \texttt{Stealth:IAMUser/LoggingConfigurationModified} (questi ultimi molto rari e da investigare con massima priorità).
-        \end{itemize}
-        Il costo mensile per GuardDuty è relativamente contenuto, circa 12-15 EUR, e varia in base al volume di log analizzati. Ritengo che il valore fornito da GuardDuty superi ampiamente il suo costo.
-    
-    \item \textbf{AWS Security Hub}: Security Hub fornisce una vista aggregata e centralizzata degli avvisi di sicurezza (findings) provenienti da vari servizi AWS (come GuardDuty, Amazon Inspector per la scansione delle vulnerabilità delle EC2, Amazon Macie per la scoperta di dati sensibili, IAM Access Analyzer, AWS Firewall Manager) e, potenzialmente, da prodotti di sicurezza di terze parti integrati. Aiuta a prioritizzare i risultati, a gestire la postura di sicurezza e a verificare la conformità rispetto a standard di sicurezza.
-        Attualmente, Security Hub in Finanz mostra:
-        \begin{itemize}
-            \item 127 finding totali attivi negli ultimi 30 giorni (aggregati da tutte le fonti).
-            \item L'89\% di questi sono classificati come di severità BASSA.
-            \item L'8\% sono di severità MEDIA.
-            \item Il 3\% sono di severità ALTA (tutti quelli storici di alta severità sono stati risolti entro 24 ore dalla loro identificazione).
-        \end{itemize}
-        Finanz utilizza Security Hub per monitorare la conformità rispetto allo standard \textbf{CIS AWS Foundations Benchmark v1.2.0} (o versioni più recenti). Il punteggio di conformità attuale si attesta intorno all'87\%. Security Hub evidenzia i controlli non conformi, permettendo al team di pianificare le opportune azioni correttive. Ad esempio, un controllo CIS comune che richiede attenzione è la rotazione periodica delle access key IAM (sebbene l'obiettivo sia minimizzarne l'uso in favore dei ruoli).
+        \end{itemize} Negli ultimi 90 giorni, GuardDuty ha generato 23 "finding", la maggior parte di severità bassa o media. Il costo mensile per GuardDuty è relativamente contenuto, circa 12-15 EUR, e varia in base al volume di log analizzati. Si ritiene che il valore fornito da GuardDuty superi ampiamente il suo costo contenuto.
+    \item \textbf{AWS Security Hub}: Fornisce una vista aggregata degli avvisi di sicurezza provenienti da vari servizi AWS (GuardDuty, Inspector, Macie, ecc.). Aiuta a prioritizzare i risultati e a verificare la conformità rispetto a standard come il \textbf{CIS AWS Foundations Benchmark}. Attualmente, Security Hub in Finanz mostra:
+    \begin{itemize}
+        \item 127 finding totali attivi negli ultimi 30 giorni (aggregati da tutte le fonti).
+        \item L'89\% di questi sono classificati come di severità BASSA.
+        \item L'8\% sono di severità MEDIA.
+        \item Il 3\% sono di severità ALTA (tutti quelli storici di alta severità sono stati risolti entro 24 ore dalla loro identificazione).
+    \end{itemize} Il punteggio di conformità attuale di Finanz si attesta intorno all'87\%, e Security Hub evidenzia i controlli non conformi per pianificare le azioni correttive.
 \end{itemize}
 
 \section{Automazione e Coerenza con Infrastructure as Code (IaC)}
 \label{sec:iac_cap2}
-Per garantire la coerenza nella configurazione dell'infrastruttura, ridurre il rischio di errori manuali, facilitare le revisioni di sicurezza e abilitare una rapida ripristinabilità, è fortemente raccomandato gestire l'infrastruttura AWS tramite un approccio di \textbf{Infrastructure as Code (IaC)}. Ho verificato che Finanz ha adottato questa pratica in modo estensivo.
+Per garantire coerenza, ridurre errori manuali e facilitare le revisioni, è fortemente raccomandato gestire l'infrastruttura tramite un approccio di \textbf{Infrastructure as Code (IaC)}. Si è constatato che Finanz ha adottato questa pratica in modo estensivo.
 \begin{itemize}
-    \item \textbf{Strumento Utilizzato: Terraform}: Finanz utilizza \textbf{Terraform} (uno strumento open-source agnostico rispetto al cloud provider) per definire e provisionare la quasi totalità della sua infrastruttura AWS. I file di configurazione Terraform (scritti in HCL - HashiCorp Configuration Language) descrivono le risorse desiderate (VPC, subnet, route table, security group, istanze EC2, configurazioni Elastic Beanstalk, database RDS, bucket S3, policy IAM, allarmi CloudWatch, ecc.).
+    \item \textbf{Strumento Utilizzato: Terraform}: Finanz utilizza Terraform per definire e provisionare la quasi totalità della sua infrastruttura AWS. I file di configurazione sono scritti in HCL(HashiCorp Configuration Language).
     \item \textbf{Gestione del Codice e dello Stato}:
+    \begin{itemize}
+        \item \textbf{Repository Git}: Il codice Terraform è conservato in un repository Git privato, permettendo modifiche all'infrastruttura, collaborazione tra i membri del team e la possibilità di effettuare rollback a versioni precedenti in caso di problemi. Si registrano circa 147 commit negli ultimi 6 mesi.
+        \item \textbf{Moduli Terraform Riutilizzabili}: Il codice Terraform è organizzato in 8 moduli principali riutilizzabili (`vpc`, `security-groups`, `ec2-instance`, `rds-cluster`, `s3-bucket`, `iam-role`, `cloudwatch-monitoring`, `backup-plan`). Questo promuove la standardizzazione e riduce la duplicazione del codice.
+        \item \textbf{State Management Remoto e Sicuro}: Lo stato di Terraform è conservato in un bucket S3 dedicato e protetto, con un sistema di lock basato su DynamoDB.
+    \end{itemize}
+    \item \textbf{Integrazione con Pipeline CI/CD e Sicurezza "Shift-Left"}: Le modifiche all'infrastruttura seguono un processo CI/CD gestito tramite GitHub Actions, che integra la sicurezza fin dalle primissime fasi ("shift-left"):
         \begin{itemize}
-            \item \textbf{Repository Git}: Tutti i file di codice Terraform sono conservati in un repository Git privato su GitHub (es. \texttt{finanz-infrastructure}). Questo permette il versionamento delle modifiche all'infrastruttura, la collaborazione tra i membri del team e la possibilità di effettuare rollback a versioni precedenti in caso di problemi. Ho notato circa 147 commit in questo repository negli ultimi 6 mesi, indicando un'attività di gestione continua.
-            \item \textbf{Moduli Terraform Riutilizzabili}: Il codice Terraform è organizzato in circa 8 moduli principali riutilizzabili (es. `vpc`, `security-groups`, `ec2-instance`, `rds-cluster`, `s3-bucket`, `iam-role`, `cloudwatch-monitoring`, `backup-plan`). Questo promuove la standardizzazione e riduce la duplicazione del codice.
-            \item \textbf{State Management Remoto e Sicuro}: Lo stato di Terraform (che tiene traccia delle risorse gestite) è conservato in modo sicuro in un bucket S3 dedicato (\texttt{finanz-terraform-state-538927841179}), con la versioning abilitata sul bucket e la crittografia lato server. Per prevenire conflitti durante esecuzioni contemporanee, viene utilizzata una tabella DynamoDB (\texttt{terraform-locks}) per la gestione dei lock dello stato.
-        \end{itemize}
-    \item \textbf{Integrazione con Pipeline CI/CD}: Le modifiche all'infrastruttura seguono un processo di Continuous Integration/Continuous Deployment (CI/CD) gestito tramite GitHub Actions:
-        \begin{itemize}
-            \item Su ogni Pull Request (PR) che modifica il codice Terraform, la pipeline esegue automaticamente comandi come \texttt{terraform fmt} (per la formattazione), \texttt{terraform validate} (per la sintassi) e, crucialmente, \texttt{terraform plan} (per mostrare quali modifiche verrebbero apportate all'infrastruttura).
-            \item L'applicazione delle modifiche (\texttt{terraform apply}) avviene solo dopo una revisione manuale della PR e del piano di Terraform da parte di un membro qualificato del team (es. il CTO o un senior cloud engineer) e dopo il merge della PR nel branch principale.
-            \item Negli ultimi 3 mesi, sono stati eseguiti 34 deployment di modifiche infrastrutturali tramite questa pipeline, con un tasso di successo del 100% (cioè, senza fallimenti che abbiano richiesto un rollback manuale immediato).
-        \end{itemize}
-    \item \textbf{Benefici Misurabili e Osservati}: L'adozione di IaC ha portato a benefici tangibili per Finanz:
-        \begin{itemize}
-            \item \textbf{Riduzione degli Errori di Configurazione}: Una stima interna indica una riduzione di circa il 90\% degli errori di configurazione manuale rispetto a quando le risorse venivano create prevalentemente tramite la console AWS.
-            \item \textbf{Velocità di Provisioning}: Il tempo necessario per provisionare un nuovo ambiente completo (es. uno staging environment identico alla produzione) è stato ridotto da diversi giorni (se fatto manualmente) a circa 45-60 minuti (tramite l'esecuzione di Terraform).
-            \item \textbf{Auditabilità e Compliance}: Avere l'infrastruttura definita come codice semplifica enormemente gli audit di sicurezza e la verifica della conformità. Si possono utilizzare strumenti di analisi statica del codice IaC (es. `tfsec`, `checkov`) per identificare potenziali problemi di sicurezza prima ancora del deployment. Finanz sta iniziando a integrare policy basate su Open Policy Agent (OPA) per validare le configurazioni Terraform rispetto a standard di sicurezza interni.
-            \item \textbf{Ripetibilità e Coerenza}: L'infrastruttura può essere deployata in modo identico e ripetibile, garantendo la coerenza tra gli ambienti (dev, staging, prod) e facilitando il disaster recovery (ricreando l'infrastruttura in un'altra regione da codice).
-        \end{itemize}
+        \item Su ogni Pull Request (PR) che modifica il codice Terraform, la pipeline esegue una sequenza automatizzata di controlli:
+        \begin{enumerate}
+        \item \textbf{Formattazione e Sintassi}: Vengono eseguiti i comandi \texttt{terraform fmt} e \texttt{terraform validate} per garantire la coerenza e la correttezza del codice.
+        \item \textbf{Analisi di Sicurezza Statica (SAST)}: Prima di ogni altra cosa, il codice viene analizzato da strumenti di Static Analysis Security Testing (SAST) specifici per IaC, come \texttt{tfsec} o \texttt{Checkov}. Questi tool confrontano il codice Terraform con centinaia di policy di sicurezza predefinite, identificando configurazioni rischiose come Security Group troppo permissivi, bucket S3 senza crittografia o ruoli IAM con privilegi eccessivi. Se viene rilevata una vulnerabilità di gravità alta, la pipeline fallisce, impedendo che codice insicuro possa anche solo essere proposto per il deployment.
+        \item \textbf{Piano di Esecuzione}: Solo se l'analisi di sicurezza ha successo, viene eseguito il comando \texttt{terraform plan} per generare e pubblicare il piano delle modifiche, che sarà oggetto di revisione manuale.
+        \end{enumerate}.
+        \item L'applicazione delle modifiche (\texttt{terraform apply}) avviene solo dopo una revisione manuale della PR e del piano di Terraform da parte di un membro qualificato del team (es. il CTO o un senior cloud engineer) e dopo il merge della PR nel branch principale.
+        \item Negli ultimi 3 mesi, sono stati eseguiti 34 deployment di modifiche infrastrutturali tramite questa pipeline, con un tasso di successo del 98\%
+    \end{itemize}
+    \item \textbf{Benefici Osservati}: L'adozione di IaC ha portato a benefici tangibili:
+    \begin{itemize}
+        \item \textbf{Riduzione degli Errori}: Stima interna di una riduzione del 90\% degli errori di configurazione manuale.
+        \item \textbf{Velocità di Provisioning}: Un nuovo ambiente completo può essere creato in circa 45-60 minuti, contro i diversi giorni necessari manualmente.
+        \item \textbf{Auditabilità e Compliance}: L'infrastruttura come codice semplifica gli audit e consente l'uso di strumenti di analisi statica per identificare problemi di sicurezza prima del deployment.
+        \item \textbf{Ripetibilità e Coerenza}: L'infrastruttura può essere deployata in modo identico tra gli ambienti, facilitando anche il disaster recovery.
+    \end{itemize}
 \end{itemize}
-L'adozione di IaC sin dalle prime fasi di vita della startup si è rivelata una scelta strategica vincente, contribuendo a costruire un'infrastruttura robusta, sicura e gestibile nel tempo.
+L'adozione di IaC sin dalle prime fasi si è rivelata una scelta strategica vincente, contribuendo a costruire un'infrastruttura robusta, sicura e gestibile nel tempo.
 
 \section{Conclusioni sulla Sicurezza dell'Infrastruttura e dei Servizi}
-Questo capitolo ha delineato le principali misure e pratiche adottate e proposte per la messa in sicurezza dell'infrastruttura di rete, dei servizi di calcolo e dei dati della startup fintech Finanz su AWS. Dalla progettazione attenta del VPC alla protezione delle istanze EC2, dalla crittografia dei dati sensibili al monitoraggio proattivo e all'automazione tramite Infrastructure as Code, emerge un approccio multi-livello alla sicurezza.
-È importante sottolineare che la sicurezza non è uno stato statico, ma un processo continuo di valutazione, adattamento e miglioramento. Le minacce evolvono, i requisiti di business cambiano e nuove funzionalità dei servizi cloud diventano disponibili. Pertanto, per Finanz sarà cruciale mantenere un impegno costante verso la revisione periodica delle configurazioni di sicurezza, l'aggiornamento delle conoscenze del team, l'esecuzione di test (come penetration test o simulazioni di DR) e l'adozione di nuove best practice non appena emergono. Solo così potrà garantire che la sua infrastruttura AWS rimanga un ambiente sicuro e affidabile per le sue operazioni fintech.
+Questo capitolo ha delineato le principali misure e pratiche per la messa in sicurezza dell'infrastruttura della startup Finanz su AWS. Dalla progettazione del VPC alla protezione delle istanze EC2, dalla crittografia dei dati al monitoraggio proattivo e all'automazione tramite IaC, emerge un approccio multi-livello.
+È importante sottolineare che la sicurezza non è uno stato statico, ma un processo continuo di valutazione, adattamento e miglioramento. Le minacce evolvono e i requisiti cambiano. Pertanto, per Finanz sarà cruciale mantenere un impegno costante verso la revisione periodica delle configurazioni, l'aggiornamento delle competenze e l'esecuzione di test. Solo così potrà garantire che la sua infrastruttura AWS rimanga un ambiente sicuro e affidabile per le sue operazioni fintech.

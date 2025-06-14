@@ -1,50 +1,26 @@
 \section{Introduzione alla Gestione delle Identità e degli Accessi}
 La gestione delle identità e degli accessi (IAM) rappresenta un passo fondamentale per sviluppare qualsiasi strategia di sicurezza robusta in un ambiente cloud come Amazon Web Services (AWS). Per una startup fintech, dove la struttura gerarchica è ancora poco definita, stabilire chi può accedere alle risorse e con quali privilegi non è solo una best practice, ma una necessità imprescindibile per garantire una gestione sicura e affidabile dei dati. Questo capitolo esplora i principi cardine della sicurezza IAM, analizza la configurazione attuale della startup "Finanz" e propone una serie di miglioramenti concreti per rafforzare la postura di sicurezza, ispirandosi ai modelli Zero Trust e al Principio del Minimo Privilegio. L'obiettivo è creare un framework IAM che sia non solo sicuro, ma anche flessibile e gestibile, per supportare la crescita dinamica della startup.
 
-\subsection{Configurazione attuale dell’ambiente AWS di \textit{Finanz}}
-\label{subsec:aws_infrastruttura_attuale_cap4}
 
-Prima di entrare nel merito delle tematiche di sicurezza, riepiloghiamo la topologia infrastrutturale attualmente in uso.
 
-L’intera piattaforma opera nella regione \texttt{eu-south-1} (Milano) all’interno di un unico account AWS, ID \texttt{538927841179}. All’interno dell’account convivono i due ambienti logici di riferimento — \texttt{Finanz-Dev} e \texttt{Finanz-Prod} — che vengono isolati a livello di risorse e pipeline di rilascio.
+\subsection{Configurazione dell'infrastruttura AWS per la piattaforma \textit{Finanz}}
+\label{subsec:aws_infrastruttura_attuale_cap4_narrativo}
+
+\paragraph{Panoramica architetturale}
+L'infrastruttura tecnologica che supporta la piattaforma \textit{Finanz} è interamente provisionata all'interno della regione AWS `eu-south-1` (Milano) e consolidata in un singolo account. Per garantire una netta separazione degli ambienti, sono stati definiti due contesti logici distinti, `Finanz-Dev` per lo sviluppo e `Finanz-Prod` per la produzione. La segregazione tra questi non avviene a livello di account, bensì è implementata attraverso una strategia granulare di tagging delle risorse, l'impiego di ruoli IAM (Identity and Access Management) con permessi specifici e l'adozione di pipeline di rilascio completamente separate e indipendenti.
 
 \paragraph{Layer applicativo}
-L’applicazione “Finanz-Backend” è gestita da \textbf{AWS Elastic Beanstalk}. Gli ambienti sono:
-\begin{itemize}
-  \item \texttt{Finanz-Dev} (ID \texttt{e-q9sa4qsmjz});
-  \item \texttt{Finanz-Prod} (ID \texttt{e-gueuqgs9nc}).
-\end{itemize}
-Beanstalk effettua il provisioning di un \textbf{Auto Scaling Group} con istanze \texttt{t3a.small};
-l’ambiente di sviluppo mantiene generalmente 1–2 istanze, quello di produzione scala fra 3 e 5 nei picchi. 
-Il traffico verso produzione è distribuito da un \textbf{Application Load Balancer} creato automaticamente dallo stack CloudFormation di Beanstalk. 
+Il layer applicativo, che ospita il servizio core `Finanz-Backend`, è orchestrato tramite il servizio gestito \textbf{AWS Elastic Beanstalk}. Tale servizio astrae la gestione dell'infrastruttura sottostante, automatizzando il provisioning e la configurazione delle risorse. La configurazione prevede l'impiego di istanze EC2 di tipo *burstable* (`t3a.small`), definite tramite un Launch Template. La scalabilità orizzontale è gestita da un Auto Scaling Group, le cui politiche sono basate su metriche di carico della CPU e sul numero di richieste al secondo, con soglie differenziate tra l'ambiente di sviluppo (da 1 a 2 istanze) e quello di produzione (da 3 a 5 istanze). Un Application Load Balancer (ALB) funge da unico entry-point per il traffico HTTPS, instradandolo verso le istanze applicative. Queste ultime sono protette da un Security Group che ne permette l'accesso esclusivamente dall'ALB, isolandole da accessi diretti. Infine, i log applicativi e di sistema vengono inoltrati in tempo reale verso Amazon CloudWatch Logs per il monitoraggio e archiviati su Amazon S3 con rotazione oraria per l'analisi a lungo termine.
 
 \paragraph{Layer dati}
-I dati transazionali risiedono su \textbf{Amazon RDS for PostgreSQL}:
-\begin{description}
-  \item[\texttt{finanz-dev-db}] classe \texttt{db.t4g.micro}, Single-AZ, cifrata con KMS; backup disattivati; database logico \texttt{FinanzDevDB}.
-  \item[\texttt{finanz-prod-db}] classe \texttt{db.t4g.small}, Multi-AZ abilitato, cifrata con la stessa chiave; retention backup 7 giorni; database logico \texttt{FinanzProdDB}.
-\end{description}
-Entrambe le istanze utilizzano la chiave  
-\texttt{arn:aws:kms:eu-south-1:538927841179:key/3f720caa-19ca-4fa6-bc5c-654617ba5e46}  
-e dispongono di 20 GiB di storage \texttt{gp3}.
+Il layer di persistenza dei dati transazionali si affida al servizio gestito \textbf{Amazon RDS for PostgreSQL}. La sicurezza dei dati *at-rest* è garantita dalla cifratura, attuata tramite una chiave gestita dal cliente (Customer-Managed Key) in AWS Key Management Service (KMS). Per rispondere a diverse esigenze di disponibilità e costo, l'ambiente di produzione impiega un'istanza in configurazione Multi-AZ, che assicura alta disponibilità e failover automatico, con una retention dei backup di sette giorni e la protezione contro la cancellazione accidentale. Al contrario, l'ambiente di sviluppo utilizza un'istanza Single-AZ, con backup disabilitati. Per entrambe le configurazioni, l'accesso pubblico è negato e i log di database, insieme alle metriche di Performance Insights, vengono aggregati in Amazon CloudWatch per un monitoraggio centralizzato delle prestazioni.
 
-\paragraph{Networking}
-Tutte le risorse sono collocate nella \textbf{VPC} \texttt{Finanz-vpc} (10.0.0.0/16). La suddivisione in subnet prevede:  
-\begin{itemize}
-  \item \textbf{Pubbliche} 10.0.0.0/20 (AZ a) e 10.0.16.0/20 (AZ b);
-  \item \textbf{Private App} 10.0.128.0/20 (AZ a) e 10.0.144.0/20 (AZ b);
-  \item \textbf{Private DB} 10.0.32.0/25 (AZ a), 10.0.32.128/25 (AZ b) e 10.0.33.0/25 (AZ c).
-\end{itemize}
-La VPC è connessa a Internet mediante l’Internet Gateway \texttt{igw-02364236a62913136}. Un endpoint Gateway \texttt{vpce-033d76d7c2fc48ff6} consente traffico privato verso S3.
+\paragraph{Topologia di rete}
+La rete è incapsulata in un Virtual Private Cloud (VPC) con un ampio spazio di indirizzamento privato (`10.0.0.0/16`). La segmentazione è ottenuta attraverso una topologia multi-tier che prevede subnet pubbliche e private. Una subnet pubblica ospita le risorse che necessitano di esposizione diretta a Internet, ovvero l'Application Load Balancer e un NAT Gateway. Le risorse computazionali, cioè le istanze EC2, risiedono invece in subnet private dedicate, una per l'ambiente di produzione e una per quello di sviluppo. Questo disegno architetturale assicura che le istanze applicative non siano mai direttamente raggiungibili dall'esterno. Il traffico in ingresso (\textbf{ingress}) è sempre mediato dall'ALB, mentre il traffico in uscita (\textbf{egress}), necessario per le chiamate a servizi esterni, è canalizzato attraverso il NAT Gateway. Le tabelle di rotta sono configurate di conseguenza, impedendo alle subnet private qualsiasi rotta diretta verso l'Internet Gateway.
 
-\paragraph{Storage e CI/CD}
-\begin{itemize}
-  \item \textbf{Bucket Elastic Beanstalk} \texttt{elasticbeanstalk-eu-south-1-538927841179}: versioni applicative e log.
-  \item \textbf{Bucket CodePipeline} \texttt{codepipeline-eu-south-1-538927841179}: artefatti di build; la bucket policy \texttt{SSEAndSSLPolicy} forza cifratura KMS e HTTPS.
-\end{itemize}
+\paragraph{Storage e processi CI/CD}
+Per lo storage degli artefatti e dei log si utilizzano bucket Amazon S3, protetti da policy restrittive. Il bucket impiegato da Elastic Beanstalk per le versioni applicative è protetto contro la cancellazione accidentale, mentre quello associato ad \textbf{AWS CodePipeline}, che contiene gli artefatti di build, impone la cifratura lato server e la comunicazione tramite TLS. Il processo di Continuous Delivery è automatizzato da una pipeline in CodePipeline, articolata nelle fasi canoniche di Source, Build e Deploy. La fase di Source è innescata da commit su branch specifici per lo sviluppo e da tag semantici per la produzione. La fase di Build, eseguita da \textbf{AWS CodeBuild}, include passaggi di sicurezza aggiuntivi per l'ambiente produttivo, come l'analisi di vulnerabilità (SCA/CVE) e la firma digitale degli artefatti. Infine, la fase di Deploy avviene con una strategia di *rolling update* per minimizzare i disservizi, e richiede un'approvazione manuale per ogni rilascio in produzione. Gli eventi salienti della pipeline vengono notificati tramite Amazon SNS.
 
-\paragraph{Automazione e notifiche}
-Il ciclo di \textbf{CI/CD} è orchestrato da \textbf{AWS CodePipeline} e \textbf{AWS CodeBuild}; gli eventi di deployment vengono pubblicati su due topic \textbf{SNS} specifici per gli ambienti \texttt{Finanz-Dev} e \texttt{Finanz-Prod}, entrambi privati all’account e senza sottoscrizioni esterne.
 
 \begin{figure}[htbp]
   \centering
@@ -93,13 +69,7 @@ Una delle prime e più critiche aree di intervento riguarda l'\textbf{account ro
 \label{subsec:analisi_iam_finanz}
 
 \subsubsection*{Analisi degli accessi e delle policy}
-L'analisi condotta a marzo 2025 sull'infrastruttura di \emph{Finanz} ha permesso di identificare tre identità primarie con privilegi elevati:
-
-\begin{itemize}
-    \item \textbf{Andrea Pasini} – opera direttamente con l'account \emph{root} (ARN \texttt{arn:aws:iam::538927841179:root});
-    \item \textbf{Andrea Ferraboli} – utente IAM a cui è associata la policy \texttt{AdministratorAccess};
-    \item \textbf{Matteo Giuntoni} – utente IAM a cui è associata la policy \texttt{AdministratorAccess}.
-\end{itemize}
+L'analisi dell'infrastruttura di \emph{Finanz} (marzo 2025) ha evidenziato che il Chief Technology Officer (CTO) opera direttamente con l'account \emph{root} dell'ambiente AWS. Oltre a tale account, sono stati identificati due utenti IAM distinti che dispongono di privilegi amministrativi completi tramite l'assegnazione della policy \texttt{AdministratorAccess}.
 
 Si è riscontrato che, nei 90 giorni precedenti l'analisi, l'account \emph{root} è stato utilizzato 76 volte per eseguire attività che potevano essere delegate a ruoli con privilegi limitati, in palese violazione del principio del minimo privilegio.
 
@@ -126,7 +96,7 @@ Dall'analisi emergono diverse criticità significative che espongono l'organizza
 \section{Implementazione delle Migliorie Proposte alla Gestione IAM}
 \label{sec:implementazione_migliorie_iam}
 
-A partire dalle criticità evidenziate nell'analisi presentata nella Sezione~\ref{subsec:analisi_iam_finanz}, abbiamo progettato e implementato un piano strategico per il rafforzamento della gestione degli accessi e delle identità (IAM) all'interno dell'ambiente AWS di \emph{Finanz}. Gli obiettivi principali di questo intervento consistono nell'applicazione rigorosa del principio del least-privilege (minimo privilegio), nella riduzione del cosiddetto blast radius in caso di compromissione di un'identità e nel pieno soddisfacimento dei nuovi requisiti normativi. Tra questi figurano le direttive AWS previste per il 2025 sull'autenticazione a più fattori (Multi-Factor Authentication, MFA) e gli standard di settore come NIST SP 800-63 e PCI DSS.
+A partire dalle criticità evidenziate nell'analisi presentata nella Sezione \ref{subsec:analisi_iam_finanz}, abbiamo progettato e implementato un piano strategico per il rafforzamento della gestione degli accessi e delle identità (IAM) all'interno dell'ambiente AWS di \emph{Finanz}. Gli obiettivi principali di questo intervento consistono nell'applicazione rigorosa del principio del least-privilege (minimo privilegio), nella riduzione del cosiddetto blast radius in caso di compromissione di un'identità e nel pieno soddisfacimento dei nuovi requisiti normativi. Tra questi figurano le direttive AWS previste per il 2025 sull'autenticazione a più fattori (Multi-Factor Authentication, MFA) e gli standard di settore come NIST SP 800-63 e PCI DSS.
 
 \subsection{Ristrutturazione della Gerarchia degli Accessi}
 Il primo passo ha riguardato una profonda revisione della gerarchia degli accessi, con un'attenzione particolare all'account \texttt{root} e all'introduzione di meccanismi di controllo preventivo.
@@ -134,7 +104,7 @@ Il primo passo ha riguardato una profonda revisione della gerarchia degli access
 \subsubsection{Revisione dell'Account \texttt{root} e delle Policy di Sicurezza}
 La gestione dell'account \texttt{root} è stata interamente rivista secondo il principio di utilizzo per la sola emergenza (break-glass only). Per massimizzarne la sicurezza, sono state revocate tutte le access key programmatiche preesistenti e sono stati registrati due dispositivi Multi-Factor Authentication (MFA) hardware conformi allo standard FIDO2 (es. YubiKey 5 C NFC). Tali dispositivi sono custoditi in un luogo fisico sicuro, come una cassetta di sicurezza, e il loro accesso è limitato a figure apicali designate, come il CEO, secondo una procedura formale di emergenza \cite{saraswat:breakglass, clouddefense:mfa}.
 Per le attività amministrative ordinarie, è stato invece predisposto un utente IAM dedicato al CTO, \texttt{andrea.pasini.admin}, associato al ruolo \texttt{CTO-AdminRole}. Come descritto nella Sezione \ref{subsubsec:ruoli_specifici_iam}, questo ruolo non possiede privilegi elevati diretti ma delega le operazioni potenzialmente distruttive a ruoli temporanei con permessi specifici, in linea con il principio del privilegio minimo.
-A ulteriore protezione degli ambienti critici, è stata implementata una policy di negazione esplicita, \texttt{DenyProdResourceDeletion}, che funge da barriera di sicurezza aggiuntiva. Come mostrato nel Listato~\ref{lst:deny-prod-delete}, la policy impedisce categoricamente la cancellazione di risorse nell'ambiente di produzione (identificate tramite il tag \texttt{Environment=prod}) e la rimozione accidentale o malevola di utenti e ruoli IAM.
+A ulteriore protezione degli ambienti critici, è stata implementata una policy di negazione esplicita, \texttt{DenyProdResourceDeletion}, che funge da barriera di sicurezza aggiuntiva. Come mostrato nel Listato \ref{lst:deny-prod-delete}, la policy impedisce categoricamente la cancellazione di risorse nell'ambiente di produzione (identificate tramite il tag \texttt{Environment=prod}) e la rimozione accidentale o malevola di utenti e ruoli IAM.
 \begin{lstlisting}[style=json, caption={Policy IAM per negare eliminazioni in produzione}, label=lst:deny-prod-delete]
   {
     "Version": "2012-10-17",

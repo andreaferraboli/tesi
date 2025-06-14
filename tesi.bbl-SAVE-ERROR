@@ -19,6 +19,28 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{gartnerfintech}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=18bfab6309a4addeb7e1dae07d2a4b89}{%
+           family={Gartner},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{fullhash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{fullhashraw}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{bibnamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authorbibnamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authornamehash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authorfullhash}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \strng{authorfullhashraw}{18bfab6309a4addeb7e1dae07d2a4b89}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Investimenti globali in fintech: crescita e trend}
+      \field{title}{Rapporto sugli investimenti globali fintech}
+      \field{year}{2018}
+    \endentry
     \entry{tecnofinanza}{misc}{}{}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
@@ -217,12 +239,36 @@
       \strng{authornamehash}{e773efb248aef6d7f57ad11ec967183a}
       \strng{authorfullhash}{e773efb248aef6d7f57ad11ec967183a}
       \strng{authorfullhashraw}{e773efb248aef6d7f57ad11ec967183a}
+      \field{extraname}{1}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Rapporto sul rischio e le vulnerabilità in ambito fintech}
       \field{title}{Le sfide della cybersecurity nelle startup fintech}
+      \field{year}{2023}
+    \endentry
+    \entry{bankingVsfintech}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e773efb248aef6d7f57ad11ec967183a}{%
+           family={Anonimo},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{fullhash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{fullhashraw}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{bibnamehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authorbibnamehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authornamehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authorfullhash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authorfullhashraw}{e773efb248aef6d7f57ad11ec967183a}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Analisi comparativa degli approcci di sicurezza}
+      \field{title}{Differenze tra Cybersecurity Bancaria e fintech}
       \field{year}{2023}
     \endentry
     \entry{puschmann_fintech_2017}{article}{}{}
@@ -328,6 +374,29 @@
       \verb https://www.theseus.fi/bitstream/handle/10024/853540/Kauppinen_Teppo.pdf?sequence=2&isAllowed=y
       \endverb
     \endentry
+    \entry{cyberThreatsfintech}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e773efb248aef6d7f57ad11ec967183a}{%
+           family={Anonimo},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{fullhash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{fullhashraw}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{bibnamehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authorbibnamehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authornamehash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authorfullhash}{e773efb248aef6d7f57ad11ec967183a}
+      \strng{authorfullhashraw}{e773efb248aef6d7f57ad11ec967183a}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Analisi delle tipologie di attacchi e delle vulnerabilità in ambito fintech}
+      \field{title}{Minacce informatiche nel settore fintech}
+      \field{year}{2023}
+    \endentry
     \entry{NIST_SP_1800_26}{report}{}{}
       \name{author}{6}{}{%
         {{hash=5ba196f6d56810e94c6099738d99a2e6}{%
@@ -382,6 +451,9 @@
       \field{title}{Data Integrity: Detecting and Responding to Ransomware and Other Destructive Events}
       \field{type}{techreport}
       \field{year}{2020}
+      \verb{doi}
+      \verb https://doi.org/10.6028/NIST.SP.1800-26
+      \endverb
     \endentry
     \entry{NIST_SP_800_53}{manual}{}{}
       \name{author}{1}{}{%
@@ -544,6 +616,7 @@
       \strng{authornamehash}{ab8391fddb28dc8d96b77c21d6f45aad}
       \strng{authorfullhash}{3a8354cfccf1e096b680b06a4ca33cb9}
       \strng{authorfullhashraw}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \field{extraname}{1}
       \field{sortinit}{3}
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
@@ -561,20 +634,20 @@
            familyi={S\bibinitperiod},
            given={Jerome\bibnamedelima H.},
            giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
-        {{hash=83b584ef97b412d31b5b98583e54ef92}{%
+        {{hash=1b566efc9000396372edc91189b7a7a3}{%
            family={Schroeder},
            familyi={S\bibinitperiod},
-           given={Michael\bibnamedelima D.},
-           giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
       }
-      \strng{namehash}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{fullhash}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{fullhashraw}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{bibnamehash}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{authorbibnamehash}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{authornamehash}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{authorfullhash}{12a0d2bc83e0b5a594d1d1ed37207534}
-      \strng{authorfullhashraw}{12a0d2bc83e0b5a594d1d1ed37207534}
+      \strng{namehash}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{fullhash}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{fullhashraw}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{bibnamehash}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{authorbibnamehash}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{authornamehash}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{authorfullhash}{0e3f1352206118ba0a8a9a8eaeb61019}
+      \strng{authorfullhashraw}{0e3f1352206118ba0a8a9a8eaeb61019}
       \field{sortinit}{4}
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
@@ -598,20 +671,20 @@
     \endentry
     \entry{Smith_2012_SaltzerReview}{article}{}{}
       \name{author}{1}{}{%
-        {{hash=a4974ab59cdd05d4bad6541f8ad14755}{%
+        {{hash=938f4cafb8b83a6037df2f67fd614a20}{%
            family={Smith},
            familyi={S\bibinitperiod},
-           given={Richard\bibnamedelima E.},
-           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
       }
-      \strng{namehash}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{fullhash}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{fullhashraw}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{bibnamehash}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{authorbibnamehash}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{authornamehash}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{authorfullhash}{a4974ab59cdd05d4bad6541f8ad14755}
-      \strng{authorfullhashraw}{a4974ab59cdd05d4bad6541f8ad14755}
+      \strng{namehash}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{fullhash}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{fullhashraw}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{bibnamehash}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{authorbibnamehash}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{authornamehash}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{authorfullhash}{938f4cafb8b83a6037df2f67fd614a20}
+      \strng{authorfullhashraw}{938f4cafb8b83a6037df2f67fd614a20}
       \field{sortinit}{4}
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
@@ -742,25 +815,25 @@
            familyi={F\bibinitperiod},
            given={Joan},
            giveni={J\bibinitperiod}}}%
-        {{hash=75c0fdbadfc9d992d0c36b60e699dd2e}{%
+        {{hash=fdb9951066b19b2af4fdfb9f595ffdcf}{%
            family={Jaggard},
            familyi={J\bibinitperiod},
-           given={Aaron\bibnamedelima D.},
-           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
-        {{hash=6b760c3bc1c334fa05291958e62ca503}{%
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4e361e9451a78bae941767925ef68a08}{%
            family={Wright},
            familyi={W\bibinitperiod},
-           given={Rebecca\bibnamedelima N.},
-           giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+           given={Rebecca},
+           giveni={R\bibinitperiod}}}%
       }
       \strng{namehash}{6a0246ccdc2b0195a48c764571654b44}
-      \strng{fullhash}{c905f7bf14e4a54805c60c6d8a9f5ed0}
-      \strng{fullhashraw}{c905f7bf14e4a54805c60c6d8a9f5ed0}
-      \strng{bibnamehash}{c905f7bf14e4a54805c60c6d8a9f5ed0}
-      \strng{authorbibnamehash}{c905f7bf14e4a54805c60c6d8a9f5ed0}
+      \strng{fullhash}{ee0c0481d25d0be580f819ced133c485}
+      \strng{fullhashraw}{ee0c0481d25d0be580f819ced133c485}
+      \strng{bibnamehash}{ee0c0481d25d0be580f819ced133c485}
+      \strng{authorbibnamehash}{ee0c0481d25d0be580f819ced133c485}
       \strng{authornamehash}{6a0246ccdc2b0195a48c764571654b44}
-      \strng{authorfullhash}{c905f7bf14e4a54805c60c6d8a9f5ed0}
-      \strng{authorfullhashraw}{c905f7bf14e4a54805c60c6d8a9f5ed0}
+      \strng{authorfullhash}{ee0c0481d25d0be580f819ced133c485}
+      \strng{authorfullhashraw}{ee0c0481d25d0be580f819ced133c485}
       \field{sortinit}{4}
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
@@ -1463,59 +1536,14 @@
       \verb https://www.ponemon.org/research/
       \endverb
     \endentry
-    \entry{ref6}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html}}
-      \field{note}{Accesso effettuato il 2025-03-24}
-      \field{title}{Policy di Accesso IAM e Boundaries: Controllo degli Permessi in AWS}
-    \endentry
-    \entry{ref3}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.clouddefense.ai/compliance-rules/aws-fs-practices/iam/foundational-security-iam-6}}
-      \field{note}{Accesso effettuato il 2025-04-07}
-      \field{title}{Sicurezza IAM AWS: Pratiche Fondamentali, Regola IAM-6 CloudDefense.ai}
-    \endentry
-    \entry{ref2}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.semanticscholar.org/paper/a86c772c9f10dcb88b030600da0538af58dc8d3a}}
-      \field{note}{Accesso effettuato il 2025-05-12}
-      \field{title}{Managing Identity and Access Management (IAM) in Amazon Web Services (AWS)}
-    \endentry
-    \entry{ref4}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.linkedin.com/pulse/break-glass-when-all-else-fails-secure-emergency-access-alok-saraswat-tmesc}}
-      \field{note}{Accesso effettuato il 2025-05-11}
-      \field{title}{Break Glass: Accesso Sicuro di Emergenza Quando Tutto il Resto Fallisce}
-    \endentry
-    \entry{ref7}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://dev.to/aws-builders/what-are-aws-service-control-policies-scps-2022-guide-4f67}}
-      \field{note}{Accesso effettuato il 2025-04-30}
-      \field{title}{Guida 2022 alle AWS Service Control Policies (SCP): Cosa sono e come usarle.}
-    \endentry
-    \entry{ref5}{misc}{}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://medium.com/@shahedkazi/principle-of-least-privilege-13312cbb0aff}}
-      \field{note}{Accesso effettuato il 2025-05-31}
-      \field{title}{Principio del Minimo Privilegio: Sicurezza Informatica, Accesso e Implementazione.}
-    \endentry
-    \entry{aws:iam:bestpractices}{misc}{}{}
+    \entry{aws_security_foundational}{online}{}{}
       \name{author}{1}{}{%
         {{hash=3eb2c1a57a8160029f036e3dcbf84bf1}{%
            family={{Amazon Web Services}},
            familyi={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Amazon Web Services}%
       }
       \strng{namehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{fullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
@@ -1530,57 +1558,18 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html}}
-      \field{note}{[Online; accesso 15-10-2024]}
-      \field{title}{IAM best practices}
-      \field{year}{2024}
-    \endentry
-    \entry{aws:iam:boundaries}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=3eb2c1a57a8160029f036e3dcbf84bf1}{%
-           family={{Amazon Web Services}},
-           familyi={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{fullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{fullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{bibnamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authorbibnamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html}}
-      \field{note}{[Online; accesso 15-10-2024]}
-      \field{title}{Permissions boundaries for IAM entities}
-      \field{year}{2024}
-    \endentry
-    \entry{clouddefense:mfa}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=24bd56265cea62bb7cdc4ebd8364ac08}{%
-           family={{Cloud Defense}},
-           familyi={C\bibinitperiod}}}%
-      }
-      \strng{namehash}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{fullhash}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{fullhashraw}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{bibnamehash}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{authorbibnamehash}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{authornamehash}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{authorfullhash}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \strng{authorfullhashraw}{24bd56265cea62bb7cdc4ebd8364ac08}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.clouddefense.ai/compliance-rules/aws-fs-practices/iam/foundational-security-iam-6}}
-      \field{note}{[Online; accesso 15-10-2024]}
-      \field{title}{Ensure hardware MFA is enabled for the root user account [AWS Foundational Security Best Practices IAM.6]}
+      \field{title}{AWS Foundational Security Best Practices standard}
+      \field{urlday}{27}
+      \field{urlmonth}{10}
+      \field{urlyear}{2023}
       \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.aws.amazon.com/securityhub/latest/userguide/fsbp-standard.html
+      \endverb
+      \verb{url}
+      \verb https://docs.aws.amazon.com/securityhub/latest/userguide/fsbp-standard.html
+      \endverb
     \endentry
     \entry{saraswat:breakglass}{online}{}{}
       \name{author}{1}{}{%
@@ -1608,31 +1597,70 @@
       \field{title}{Break Glass - When All Else Fails: Secure Emergency Access in AWS}
       \field{year}{2024}
     \endentry
-    \entry{NIST_ZTA}{report}{}{}
+    \entry{clouddefense:mfa}{misc}{}{}
       \name{author}{1}{}{%
-        {{hash=cde12b00c42cd0c58d8206d59e921241}{%
+        {{hash=24bd56265cea62bb7cdc4ebd8364ac08}{%
+           family={{Cloud Defense}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{fullhash}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{fullhashraw}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{bibnamehash}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{authorbibnamehash}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{authornamehash}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{authorfullhash}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \strng{authorfullhashraw}{24bd56265cea62bb7cdc4ebd8364ac08}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.clouddefense.ai/compliance-rules/aws-fs-practices/iam/foundational-security-iam-6}}
+      \field{note}{[Online; accesso 15-10-2024]}
+      \field{title}{Ensure hardware MFA is enabled for the root user account [AWS Foundational Security Best Practices IAM.6]}
+      \field{year}{2023}
+    \endentry
+    \entry{NIST_ZTA}{report}{}{}
+      \name{author}{4}{}{%
+        {{hash=3c3d7dbac07ac32c82628b6a0e35decb}{%
            family={Rose},
            familyi={R\bibinitperiod},
-           given={S.\bibnamedelimi \&\bibnamedelima al.},
-           giveni={S\bibinitperiod\bibinitdelim \\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e787d1fa9ed1abc3c9e5b389996ddaac}{%
+           family={Borchert},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+        {{hash=bb759fb738bf98cd99171afc9de1f822}{%
+           family={Mitchell},
+           familyi={M\bibinitperiod},
+           given={Stu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=43153bbb8dcab159d4bc17eed5da08f3}{%
+           family={Connelly},
+           familyi={C\bibinitperiod},
+           given={Sean},
+           giveni={S\bibinitperiod}}}%
       }
       \list{institution}{2}{%
         {National Institute of Standards}%
         {Technology}%
       }
-      \strng{namehash}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{fullhash}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{fullhashraw}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{bibnamehash}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{authorbibnamehash}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{authornamehash}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{authorfullhash}{cde12b00c42cd0c58d8206d59e921241}
-      \strng{authorfullhashraw}{cde12b00c42cd0c58d8206d59e921241}
+      \strng{namehash}{ab8391fddb28dc8d96b77c21d6f45aad}
+      \strng{fullhash}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \strng{fullhashraw}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \strng{bibnamehash}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \strng{authorbibnamehash}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \strng{authornamehash}{ab8391fddb28dc8d96b77c21d6f45aad}
+      \strng{authorfullhash}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \strng{authorfullhashraw}{3a8354cfccf1e096b680b06a4ca33cb9}
+      \field{extraname}{2}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{number}{SP 800‑207}
+      \field{number}{SP 800-207}
       \field{title}{Zero Trust Architecture}
       \field{type}{techreport}
       \field{year}{2020}
@@ -1645,37 +1673,37 @@
     \endentry
     \entry{NIST_SP80063}{report}{}{}
       \name{author}{1}{}{%
-        {{hash=821a07913f7f622bcb51a5b2744be0b2}{%
+        {{hash=227cca00d0115cf46ffa4c52b14b8165}{%
            family={Grassi},
            familyi={G\bibinitperiod},
-           given={P.\bibnamedelimi \&\bibnamedelima al.},
-           giveni={P\bibinitperiod\bibinitdelim \\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
       }
       \list{institution}{2}{%
         {National Institute of Standards}%
         {Technology}%
       }
-      \strng{namehash}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{fullhash}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{fullhashraw}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{bibnamehash}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{authorbibnamehash}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{authornamehash}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{authorfullhash}{821a07913f7f622bcb51a5b2744be0b2}
-      \strng{authorfullhashraw}{821a07913f7f622bcb51a5b2744be0b2}
+      \strng{namehash}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{fullhash}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{fullhashraw}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{bibnamehash}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{authorbibnamehash}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{authornamehash}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{authorfullhash}{227cca00d0115cf46ffa4c52b14b8165}
+      \strng{authorfullhashraw}{227cca00d0115cf46ffa4c52b14b8165}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{number}{SP 800‑63‑3}
+      \field{number}{SP 800-63-3}
       \field{title}{Digital Identity Guidelines}
       \field{type}{techreport}
       \field{year}{2023}
       \verb{urlraw}
-      \verb https://pages.nist.gov/800-63-3/
+      \verb https://doi.org/10.6028/NIST.SP.800-63-3
       \endverb
       \verb{url}
-      \verb https://pages.nist.gov/800-63-3/
+      \verb https://doi.org/10.6028/NIST.SP.800-63-3
       \endverb
     \endentry
     \entry{PCI_DSS}{misc}{}{}
@@ -1698,7 +1726,7 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.pcisecuritystandards.org/pdfs/pci_ssc_quick_guide.pdf}}
       \field{note}{accessed~04‑May‑2025}
-      \field{title}{PCI DSS v3.2.1 Quick Reference Guide}
+      \field{title}{PCI DSS v3.2.1 Quick Reference Guide}
       \field{year}{2024}
     \endentry
     \entry{DatadogLeastPrivilege}{misc}{}{}
@@ -1740,7 +1768,7 @@
       \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{3}
+      \field{extraname}{2}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -1764,17 +1792,41 @@
       \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{4}
+      \field{extraname}{3}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts-roles-service.html}}
       \field{note}{accessed~04‑May‑2025}
-      \field{title}{Elastic Beanstalk service role}
+      \field{title}{Elastic Beanstalk service role}
       \field{year}{2024}
     \endentry
     \entry{AWSS3Security}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3eb2c1a57a8160029f036e3dcbf84bf1}{%
+           family={{Amazon Web Services}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{fullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{fullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{bibnamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{authorbibnamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
+      \field{extraname}{4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html}}
+      \field{note}{accessed~04‑May‑2025}
+      \field{title}{Security best practices for Amazon S3}
+      \field{year}{2024}
+    \endentry
+    \entry{AWSELBIAM}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=3eb2c1a57a8160029f036e3dcbf84bf1}{%
            family={{Amazon Web Services}},
@@ -1793,12 +1845,12 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html}}
+      \field{howpublished}{\url{https://docs.aws.amazon.com/service-authorization/latest/reference/list_awselasticloadbalancing.html}}
       \field{note}{accessed~04‑May‑2025}
-      \field{title}{Security best practices for Amazon S3}
-      \field{year}{2024}
+      \field{title}{Actions, resources and condition keys for AWS Elastic Load Balancing}
+      \field{year}{2025}
     \endentry
-    \entry{AWSELBIAM}{misc}{}{}
+    \entry{AWSRDSIAM}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=3eb2c1a57a8160029f036e3dcbf84bf1}{%
            family={{Amazon Web Services}},
@@ -1817,33 +1869,9 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.aws.amazon.com/service-authorization/latest/reference/list_awselasticloadbalancing.html}}
-      \field{note}{accessed~04‑May‑2025}
-      \field{title}{Actions, resources, and condition keys for AWS Elastic Load Balancing}
-      \field{year}{2025}
-    \endentry
-    \entry{AWSRDSIAM}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=3eb2c1a57a8160029f036e3dcbf84bf1}{%
-           family={{Amazon Web Services}},
-           familyi={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{fullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{fullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{bibnamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authorbibnamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{7}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAM.html}}
       \field{note}{accessed~04‑May‑2025}
-      \field{title}{Identity and access management for Amazon RDS}
+      \field{title}{Identity and access management for Amazon RDS}
       \field{year}{2024}
     \endentry
     \entry{AWSIAMBestPractices}{misc}{}{}
@@ -1860,7 +1888,7 @@
       \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{8}
+      \field{extraname}{7}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -1884,7 +1912,7 @@
       \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{9}
+      \field{extraname}{8}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -1908,7 +1936,7 @@
       \strng{authornamehash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhash}{3eb2c1a57a8160029f036e3dcbf84bf1}
       \strng{authorfullhashraw}{3eb2c1a57a8160029f036e3dcbf84bf1}
-      \field{extraname}{10}
+      \field{extraname}{9}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -1940,32 +1968,6 @@
       \field{note}{[Online; accesso 15-10-2024]}
       \field{title}{What are AWS Service Control Policies (SCPs)? [2022 Guide]}
       \field{year}{2022}
-    \endentry
-    \entry{kazi:leastprivilege}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=7976b5e38403a418b4a59f871704aba6}{%
-           family={Kazi},
-           familyi={K\bibinitperiod},
-           given={Shahed},
-           giveni={S\bibinitperiod}}}%
-      }
-      \strng{namehash}{7976b5e38403a418b4a59f871704aba6}
-      \strng{fullhash}{7976b5e38403a418b4a59f871704aba6}
-      \strng{fullhashraw}{7976b5e38403a418b4a59f871704aba6}
-      \strng{bibnamehash}{7976b5e38403a418b4a59f871704aba6}
-      \strng{authorbibnamehash}{7976b5e38403a418b4a59f871704aba6}
-      \strng{authornamehash}{7976b5e38403a418b4a59f871704aba6}
-      \strng{authorfullhash}{7976b5e38403a418b4a59f871704aba6}
-      \strng{authorfullhashraw}{7976b5e38403a418b4a59f871704aba6}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://medium.com/@shahedkazi/principle-of-least-privilege-13312cbb0aff}}
-      \field{month}{8}
-      \field{note}{[Online; accesso 15-10-2024]}
-      \field{title}{Principle of Least Privilege}
-      \field{year}{2023}
     \endentry
     \entry{proofpoint2024}{online}{}{}
       \name{author}{1}{}{%
@@ -2075,7 +2077,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{InSic}
       \field{month}{5}
-      \field{title}{Cos'è un honeypot...}
+      \field{title}{Cos'è un honeypot}
       \field{year}{2023}
       \verb{urlraw}
       \verb https://www.insic.it/senza-categoria/cose-un-honeypot-come-funziona-e-quali-sono-le-tipologie/
@@ -2408,12 +2410,12 @@
         {{hash=c0ce29809645469b40ec2d5c6e247aad}{%
            family={Brintha},
            familyi={B\bibinitperiod},
-           given={N.C.},
-           giveni={N\bibinitperiod}}}%
-        {{hash=3770794198ffb47ba2100e80a7bc3fdb}{%
+           given={N.\bibnamedelimi C.},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=0da004880453f85b4e492e38f731d2ae}{%
            family={Joliya},
            familyi={J\bibinitperiod},
-           given={Vikrant\bibnamedelima Vijaybhai},
+           given={V.\bibnamedelimi V.},
            giveni={V\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
         {{hash=3e0fd9069011139eadbfdb817d31dfeb}{%
            family={Bhuvnesh},
@@ -2427,13 +2429,13 @@
            giveni={S\bibinitperiod}}}%
       }
       \strng{namehash}{ec3550799f040d498d99daaa52963bd6}
-      \strng{fullhash}{1626f085d1064cb17c16e5a3ac83116a}
-      \strng{fullhashraw}{1626f085d1064cb17c16e5a3ac83116a}
-      \strng{bibnamehash}{1626f085d1064cb17c16e5a3ac83116a}
-      \strng{authorbibnamehash}{1626f085d1064cb17c16e5a3ac83116a}
+      \strng{fullhash}{2965f757fe793fde3ffbad5e3ff4a21c}
+      \strng{fullhashraw}{2965f757fe793fde3ffbad5e3ff4a21c}
+      \strng{bibnamehash}{2965f757fe793fde3ffbad5e3ff4a21c}
+      \strng{authorbibnamehash}{2965f757fe793fde3ffbad5e3ff4a21c}
       \strng{authornamehash}{ec3550799f040d498d99daaa52963bd6}
-      \strng{authorfullhash}{1626f085d1064cb17c16e5a3ac83116a}
-      \strng{authorfullhashraw}{1626f085d1064cb17c16e5a3ac83116a}
+      \strng{authorfullhash}{2965f757fe793fde3ffbad5e3ff4a21c}
+      \strng{authorfullhashraw}{2965f757fe793fde3ffbad5e3ff4a21c}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -2578,9 +2580,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{bankingVsFintech}
-  \missing{cyberThreatsFintech}
-  \missing{gartnerFintech}
 \endrefsection
 \endinput
 
