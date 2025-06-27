@@ -23,14 +23,71 @@
 \usepackage{url}            % Per inserire URL cliccabili (spesso gestito anche da hyperref)
 \usepackage{setspace}       % Per controllare l'interlinea
 \usepackage{comment}        % Per blocchi di commento multilinea
+\usepackage{microtype} 
+\setlength{\overfullrule}{2pt}
 % LISTINGS DI CODICE (XCOLOR È GIÀ CARICATO)
-\usepackage{listings}       % Per inserire blocchi di codice
+\usepackage{listings}
+\lstset{
+    literate=%
+        % Caratteri italiani con accenti acuti
+        {á}{{\'a}}1
+        {é}{{\'e}}1
+        {í}{{\'i}}1
+        {ó}{{\'o}}1
+        {ú}{{\'u}}1
+        {Á}{{\'A}}1
+        {É}{{\'E}}1
+        {Í}{{\'I}}1
+        {Ó}{{\'O}}1
+        {Ú}{{\'U}}1
+        % Caratteri italiani con accenti gravi
+        {à}{{\`a}}1
+        {è}{{\`e}}1
+        {ì}{{\`i}}1
+        {ò}{{\`o}}1
+        {ù}{{\`u}}1
+        {À}{{\`A}}1
+        {È}{{\`E}}1
+        {Ì}{{\`I}}1
+        {Ò}{{\`O}}1
+        {Ù}{{\`U}}1
+        % Altri caratteri italiani
+        {ç}{{\c{c}}}1
+        {Ç}{{\c{C}}}1
+        % Caratteri cechi (dal tuo codice originale)
+        {ý}{{\'y}}1
+        {ě}{{\v{e}}}1
+        {š}{{\v{s}}}1
+        {č}{{\v{c}}}1
+        {ř}{{\v{r}}}1
+        {ž}{{\v{z}}}1
+        {ď}{{\v{d}}}1
+        {ť}{{\v{t}}}1
+        {ň}{{\v{n}}}1
+        {ů}{{\r{u}}}1
+        {Ý}{{\'Y}}1
+        {Ě}{{\v{E}}}1
+        {Š}{{\v{S}}}1
+        {Č}{{\v{C}}}1
+        {Ř}{{\v{R}}}1
+        {Ž}{{\v{Z}}}1
+        {Ď}{{\v{D}}}1
+        {Ť}{{\v{T}}}1
+        {Ň}{{\v{N}}}1
+        {Ů}{{\r{U}}}1
+}    % Per inserire blocchi di codice
 % HYPERLINKS E BOOKMARKS (generalmente verso la fine)
 \usepackage{hyperref}
 \usepackage{bookmark}       % Migliora la gestione dei segnalibri PDF
 % PACCHETTO PERSONALIZZATO (DOPO TUTTI GLI ALTRI)
 \usepackage{tesiupdated}           % Pacchetto personalizzato per la tesi"
 % per le accentate
+\definecolor{vscKeyword}{HTML}{0000FF}    % blu VSCode
+\definecolor{vscString}{HTML}{A31515}     % rosso stringhe
+\definecolor{vscNumber}{HTML}{098658}     % verde numeri
+\definecolor{vscBool}{HTML}{0000FF}       % stesso dei keyword
+\definecolor{vscPunct}{HTML}{000000}      % simboli neri
+\definecolor{vscId}{HTML}{795E26}         % chiavi/identificatori
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -53,6 +110,40 @@ showspaces=false,
 showstringspaces=false,
 showtabs=false,
 tabsize=2
+}
+\lstdefinelanguage{jsonVS}{
+  keywords={true,false,null},
+  sensitive=false,
+  comment=[l]//,
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  literate=
+   *{:}{{{\color{vscPunct}:}}}{1}
+    {,}{{{\color{vscPunct},}}}{1}
+    {\{}{{{\color{vscPunct}\{}}}{1}
+    {\}}{{{\color{vscPunct}\}}}}{1}
+    {[}{{{\color{vscPunct}[}}}{1}
+    {]}{{{\color{vscPunct}]}}}{1}
+    % numeri
+    {0}{{{\color{vscNumber}0}}}{1} {1}{{{\color{vscNumber}1}}}{1}
+    {2}{{{\color{vscNumber}2}}}{1} {3}{{{\color{vscNumber}3}}}{1}
+    {4}{{{\color{vscNumber}4}}}{1} {5}{{{\color{vscNumber}5}}}{1}
+    {6}{{{\color{vscNumber}6}}}{1} {7}{{{\color{vscNumber}7}}}{1}
+    {8}{{{\color{vscNumber}8}}}{1} {9}{{{\color{vscNumber}9}}}{1}
+}
+\lstdefinestyle{jsonVS}{
+  language=jsonVS,
+  basicstyle=\small\ttfamily\color{vscId},
+  stringstyle=\color{vscString},
+  keywordstyle=\color{vscKeyword}\bfseries,
+  commentstyle=\color{gray},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1, numbersep=6pt,
+  frame=single, rulecolor=\color{black},
+  breaklines=true, breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=2
 }
 
 \lstset{style=mystyle}
