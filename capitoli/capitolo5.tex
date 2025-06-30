@@ -9,10 +9,10 @@ La base di ogni infrastruttura sicura su AWS è rappresentata da una rete virtua
 \label{subsec:subnets_cap2}
 Una pratica fondamentale, la cui implementazione è stata verificata in Finanz, consiste nella suddivisione del VPC in \textbf{subnet pubbliche} e \textbf{subnet private}, distribuite su diverse Availability Zones per garantire alta disponibilità. Nel caso specifico dell'ambiente di Finanz:
 \begin{itemize}
-\item Le \textbf{subnet pubbliche} (come \texttt{subnet-0a1b2c3d} in eu-south-1a e \texttt{subnet-4e5f6789} in eu-south-1b) sono configurate con una rotta diretta verso l'Internet Gateway (IGW) del VPC. 
-Queste subnet ospitano risorse che necessitano di essere direttamente esposte a Internet, come il NAT Gateway (es. \texttt{nat-0123456789abcdef0}) e, tipicamente, gli Application Load Balancer. 
+\item Le \textbf{subnet pubbliche} (come \texttt{subnet\discretionary{-}{}{-}0a1b2c3d} in eu-south\discretionary{-}{}{-}1a e \texttt{subnet\discretionary{-}{}{-}4e5f6789} in eu-south\discretionary{-}{}{-}1b) sono configurate con una rotta diretta verso l'Internet Gateway (IGW) del VPC. 
+Queste subnet ospitano risorse che necessitano di essere direttamente esposte a Internet, come il NAT Gateway (es. \texttt{nat\discretionary{-}{}{-}0123456789abcdef0}) e, tipicamente, gli Application Load Balancer. 
 Si stima che il traffico in uscita da queste subnet pubbliche (escludendo quello verso i client finali veicolato dall'ALB) ammonti a circa 50 GB/mese, principalmente per aggiornamenti e chiamate a servizi esterni da parte del NAT Gateway.
-\item Le \textbf{subnet private} (come \texttt{subnet-0x1y2z3w} per gli application server e \texttt{subnet-0m1n2o3p} per i database) non hanno una rotta diretta verso l'IGW. Le istanze applicative EC2 gestite da Elastic Beanstalk e le istanze database RDS risiedono, correttamente, esclusivamente in queste subnet. Il traffico interno tra queste subnet private (es. comunicazione tra server applicativi e database) è stimato intorno ai 120 GB/mese.
+\item Le \textbf{subnet private} (come \texttt{subnet\discretionary{-}{}{-}0x1y2z3w} per gli application server e \texttt{subnet\discretionary{-}{}{-}0m1n2o3p} per i database) non hanno una rotta diretta verso l'IGW. Le istanze applicative EC2 gestite da Elastic Beanstalk e le istanze database RDS risiedono, correttamente, esclusivamente in queste subnet. Il traffico interno tra queste subnet private (es. comunicazione tra server applicativi e database) è stimato intorno ai 120 GB/mese.
 \end{itemize}
 Questa separazione è cruciale: le risorse backend non sono direttamente raggiungibili da Internet, riducendo significativamente la loro superficie d'attacco.
 
@@ -22,18 +22,43 @@ Il controllo del traffico di rete all'interno del VPC è affidato a due meccanis
 \begin{itemize}
 \item \textbf{Gruppi di Sicurezza (Security Groups - SG)}: Agiscono come firewall stateful a livello di istanza (o più precisamente, a livello di interfaccia di rete). Permettono di definire regole di traffico in entrata (ingress) e in uscita (egress). Nella configurazione di Finanz, si identificano circa 7 Security Group principali, specializzati per i diversi tier dell'applicazione:
 \begin{itemize}
-\item \texttt{sg-web-tier} (ID es.: \texttt{sg-0a1b2c3d4e5f67890}): Associato all'ALB, permette traffico HTTPS (porta 443) e HTTP (porta 80, idealmente da reindirizzare a HTTPS) da qualsiasi sorgente (\texttt{0.0.0.0/0}).
-\item \texttt{sg-app-tier} (ID es.: \texttt{sg-1b2c3d4e5f678901}): Associato alle istanze EC2 dell'applicazione, permette traffico sulla porta dell'applicazione (es. 8080) solo dal Security Group \texttt{sg-web-tier}. Questo è un ottimo esempio di referenziazione tra SG, che limita il traffico solo alla sorgente attesa (l'ALB).
-\item \texttt{sg-db-tier} (ID es.: \texttt{sg-2c3d4e5f67890123}): Associato alle istanze RDS, permette traffico sulla porta del database (PostgreSQL, porta 5432) solo dal Security Group \texttt{sg-app-tier}.
-\item \texttt{sg-mgmt} (ID es.: \texttt{sg-3d4e5f6789012345}): Utilizzato per accessi di gestione (es. SSH sulla porta 22 o RDP sulla 3389, sebbene l'accesso diretto alle istanze dovrebbe essere evitato in favore di Systems Manager Session Manager) da un range di IP limitato, come quello dell'ufficio (es. \texttt{203.0.113.25/32}).
+\item \texttt{sg-web-tier} (ID es.: \texttt{sg\discretionary{-}{}{-}0a1b2c3d4e5f67890}): Associato all'ALB, permette traffico HTTPS (porta 443) e HTTP (porta 80, idealmente da reindirizzare a HTTPS) da qualsiasi sorgente (\texttt{0.0.0.0/0}).
+\item \texttt{sg-app-tier} (ID es.: \texttt{sg\discretionary{-}{}{-}1b2c3d4e5f678901}): Associato alle istanze EC2 dell'applicazione, permette traffico sulla porta dell'applicazione (es. 8080) solo dal Security Group \texttt{sg-web-tier}. Questo è un ottimo esempio di referenziazione tra SG, che limita il traffico solo alla sorgente attesa (l'ALB).
+\item \texttt{sg-db-tier} (ID es.: \texttt{sg\discretionary{-}{}{-}2c3d4e5f67890123}): Associato alle istanze RDS, permette traffico sulla porta del database (PostgreSQL, porta 5432) solo dal Security Group \texttt{sg-app-tier}.
+\item \texttt{sg-mgmt} (ID es.: \texttt{sg\discretionary{-}{}{-}3d4e5f6789012345}): Utilizzato per accessi di gestione (es. SSH sulla porta 22 o RDP sulla 3389, sebbene l'accesso diretto alle istanze dovrebbe essere evitato in favore di Systems Manager Session Manager) da un range di IP limitato, come quello dell'ufficio (es. \texttt{203.0.113.25/32}).
 \end{itemize}
-Dall'analisi dei VPC Flow Logs dell'ultima settimana, emerge che circa il 97\% del traffico campionato rispettava queste regole, mentre il 3\% veniva bloccato. Quest'ultimo dato, relativo principalmente a tentativi di scansione di porte dall'esterno o a traffico interno non previsto, meriterebbe ulteriore indagine.
+Per quantificare l'efficacia dei controlli di rete, è stata condotta un'analisi sistematica dei log di flusso del VPC. La metodologia impiegata è la seguente:
+
+\begin{itemize}
+    \item \textbf{Strumento}: Amazon CloudWatch Log Insights.
+    \item \textbf{Sorgente Dati}: Log group contenente i VPC Flow Logs per l'intero VPC (\texttt{/aws/vpc-flow-logs/finanz-vpc-logs}).
+    \item \textbf{Periodo di Osservazione}: 7 giorni consecutivi, dal 18 al 24 maggio 2025, per includere un ciclo operativo settimanale completo.
+\end{itemize}
+
+È stata eseguita la seguente query per aggregare e contare il traffico accettato (\textit{ACCEPT}) e rifiutato (\textit{REJECT}) dalle regole di sicurezza:
+
+\begin{lstlisting}[language=Sql, style=sql, caption={Query per l'analisi dei VPC Flow Logs}, label={lst:vpc-flow-log-query}]
+fields @timestamp, action
+| stats count(*) as eventCount by action
+| sort by eventCount desc
+\end{lstlisting}
+
+La query, illustrata nel Listato~\ref{lst:vpc-flow-log-query}, esegue tre operazioni fondamentali:
+\begin{enumerate}
+    \item \texttt{fields @timestamp, action}: Seleziona i campi di interesse per l'analisi.
+    \item \texttt{stats count(*) as eventCount by action}: Raggruppa tutti i record di log in base al loro valore nel campo \texttt{action} e ne conta le occorrenze.
+    \item \texttt{sort by eventCount desc}: Ordina i risultati per visualizzare l'azione più frequente per prima.
+\end{enumerate}
+
+L'esecuzione di questa analisi su un campione di 40.000 eventi totali ha rivelato che circa il 97\% del traffico è stato classificato come \textit{ACCEPT}, mentre il restante 3\% come \textit{REJECT}. Quest'ultimo dato è attribuibile principalmente a tentativi di scansione di porte da indirizzi IP esterni e a comunicazioni interne non autorizzate, bloccate correttamente dalle Network ACLs. Questi risultati forniscono una prova quantitativa che i controlli perimetrali operano come previsto, garantendo l'integrità del perimetro di rete.
+
+\textbf{Nota sui Placeholder:} Gli identificatori di risorse AWS utilizzati negli esempi di questa sezione (come subnet ID \texttt{subnet\discretionary{-}{}{-}0a1b2c3d}, security group ID \texttt{sg\discretionary{-}{}{-}0a1b2c3d4e5f67890}, NAT Gateway ID \texttt{nat\discretionary{-}{}{-}0123456789abcdef0}, ecc.) sono placeholder generici utilizzati per motivi di privacy aziendale. In un ambiente di produzione reale, questi identificatori rifletterebbero gli ID specifici assegnati da AWS alle risorse dell'infrastruttura di Finanz.
 \item \textbf{Network Access Control Lists (Network ACLs)}: Agiscono come firewall stateless a livello di subnet e rappresentano un ulteriore, fondamentale strato di difesa. A differenza dei Security Group, le NACL non sono state lasciate nella loro configurazione di default (permetti tutto), ma sono state configurate con regole restrittive secondo il principio del minimo privilegio, per rafforzare la segmentazione di rete.
 L'analisi ha confermato l'adozione di NACL specifiche per le subnet pubbliche e private:
 \begin{itemize}
 \item \textbf{NACL per le Subnet Private}: Questa è la configurazione più critica. Le regole sono state definite per permettere solo il traffico strettamente necessario, bloccando di default ogni altra comunicazione.
 \begin{itemize}
-\item \textbf{Regole in Entrata (Ingress)}: Permettono traffico solo dalla CIDR del VPC (es. \texttt{10.0.0.0/16}) sulle porte delle applicazioni (es. 8080) e del database (5432), e il traffico di ritorno (porte effimere 1024-65535) per le connessioni iniziate dall'interno.
+\item \textbf{Regole in Entrata (Ingress)}: Permettono traffico solo dalla CIDR del VPC (es. \texttt{10.0.0.0/16}) sulle porte delle applicazioni (es. 8080) e del database (5432), e il traffico di ritorno (porte effimere 1024\discretionary{-}{}{-}65535) per le connessioni iniziate dall'interno.
 \item \textbf{Regole in Uscita (Egress)}: Permettono traffico verso la CIDR del VPC sulle porte necessarie e traffico verso Internet (\texttt{0.0.0.0/0}) solo sulla porta 443 (per aggiornamenti e chiamate API via NAT Gateway). Tutto il resto è negato. Questo impedisce a un'eventuale istanza compromessa di comunicare con server di comando e controllo su porte non standard.
 \end{itemize}
 \item \textbf{NACL per le Subnet Pubbliche}: Le regole qui sono leggermente più permissive per consentire il traffico da e verso Internet, ma sempre in modo controllato.
@@ -47,15 +72,15 @@ Questa configurazione restrittiva delle NACL implementa un robusto secondo livel
 
 \subsection{NAT Gateway per l'Accesso Controllato a Internet}
 \label{subsec:nat-gateway_cap2}
-Come accennato, le istanze nelle subnet private, pur non essendo direttamente raggiungibili da Internet, necessitano spesso di avviare connessioni verso l'esterno (es. per scaricare aggiornamenti software o per interagire con API di terze parti). A tale scopo, Finanz utilizza un \textbf{NAT Gateway} (es. \texttt{nat-0123456789abcdef0}) posizionato in una subnet pubblica (es. in \texttt{eu-south-1a}). Le route table delle subnet private indirizzano il traffico destinato a Internet (\texttt{0.0.0.0/0}) verso questo NAT Gateway.
+Come accennato, le istanze nelle subnet private, pur non essendo direttamente raggiungibili da Internet, necessitano spesso di avviare connessioni verso l'esterno (es. per scaricare aggiornamenti software o per interagire con API di terze parti). A tale scopo, Finanz utilizza un \textbf{NAT Gateway} (es. \texttt{nat\discretionary{-}{}{-}0123456789abcdef0}) posizionato in una subnet pubblica (es. in \texttt{eu-south\discretionary{-}{}{-}1a}). Le route table delle subnet private indirizzano il traffico destinato a Internet (\texttt{0.0.0.0/0}) verso questo NAT Gateway.
 Dall'analisi condotta, si è osservato che il NAT Gateway gestisce un throughput medio di circa 50 Mbps, con picchi che possono arrivare fino a 200 Mbps, specialmente durante le fasi di deployment automatizzato. I costi mensili associati a questo servizio si aggirano tipicamente sui 45-60 EUR. Per aumentare la resilienza, si potrebbe considerare di deployare NAT Gateway in più Availability Zones.
 
 \subsection{VPC Endpoints per Comunicazioni Private con Servizi AWS}
 \label{subsec:vpc-endpoints_cap2}
-Un'eccellente pratica di sicurezza, già in uso presso Finanz, è l'impiego di \textbf{VPC Endpoints}. Si è rilevata la presenza di un VPC Endpoint di tipo Gateway per S3 (\texttt{vpce-1a2b3c4d5e6f7g8h9}). Questo permette alle risorse all'interno del VPC di comunicare con Amazon S3 utilizzando la rete privata di AWS, senza che il traffico debba attraversare l'Internet Gateway o il NAT Gateway. Ciò migliora la sicurezza, riduce la latenza e può portare a risparmi sui costi di trasferimento dati.
+Un'eccellente pratica di sicurezza, già in uso presso Finanz, è l'impiego di \textbf{VPC Endpoints}. Si è rilevata la presenza di un VPC Endpoint di tipo Gateway per S3 (\texttt{vpce\discretionary{-}{}{-}1a2b3c4d5e6f7g8h9}). Questo permette alle risorse all'interno del VPC di comunicare con Amazon S3 utilizzando la rete privata di AWS, senza che il traffico debba attraversare l'Internet Gateway o il NAT Gateway. Ciò migliora la sicurezza, riduce la latenza e può portare a risparmi sui costi di trasferimento dati.
 Sarebbe opportuno verificare se vengano utilizzati altri servizi AWS che supportano VPC Endpoints di tipo Interface (es. KMS, SNS, SQS) e, in caso affermativo, valutare la creazione di endpoint dedicati anche per essi.
 
-\subsection{Connessioni Sicure verso Ambienti Esterni (Opzionale: VPN/Direct Connect)}
+\subsection{Connessioni Sicure verso Ambienti Esterni}
 \label{subsec:vpn-directconnect_cap2}
 Allo stato attuale, l'analisi non ha evidenziato per Finanz la necessità di connettere in modo persistente la propria infrastruttura AWS a data center on-premises. Tuttavia, qualora questa esigenza dovesse emergere, AWS offre soluzioni robuste come:
 \begin{itemize}
@@ -66,7 +91,7 @@ Per una startup Per una startup cloud-native come Finanz, queste opzioni sono ge
 
 \section{Gestione Sicura delle Istanze EC2}
 \label{sec:ec2-security_cap2}
-Le istanze \textbf{Amazon EC2} costituiscono il nucleo computazionale per molte applicazioni, inclusa quella di Finanz. Attualmente, l'azienda gestisce circa 8 istanze nell'ambiente di produzione (es. \texttt{i-0a1b2c3d4e5f67890}) e 3 in quello di sviluppo. La loro sicurezza è, quindi, di importanza cruciale.
+Le istanze \textbf{Amazon EC2} costituiscono il nucleo computazionale per molte applicazioni, inclusa quella di Finanz. Attualmente, l'azienda gestisce circa 8 istanze nell'ambiente di produzione (es. \texttt{i\discretionary{-}{}{-}0a1b2c3d4e5f67890}) e 3 in quello di sviluppo. La loro sicurezza è, quindi, di importanza cruciale.
 
 \subsection{Scelta delle AMI, Patching e Hardening del Sistema Operativo}
 \label{subsec:ami-hardening_cap2}
@@ -176,7 +201,7 @@ Di seguito, si presenta una versione esemplificativa e commentata dello script d
     
     # --- Configurazione Auditd (Regole base CIS Benchmark) ---
     echo "INFO: Configurazione regole auditd di base..."
-    AUDIT_RULES_FILE="/etc/audit/rules.d/99-finanz-hardening.rules"
+    AUDIT_RULES_FILE="/etc/audit/rules.d/99\finanz-hardening.rules"
     cat <<EOF > "$AUDIT_RULES_FILE"
     # Monitoraggio modifiche a file di identita\`
     -w /etc/passwd -p war -k identity_passwd
@@ -248,6 +273,8 @@ Di seguito, si presenta una versione esemplificativa e commentata dello script d
     echo "INFO: Script di hardening per Finanz completato con successo - $(date)"
     exit 0
         \end{lstlisting}
+
+\textbf{Nota sui Placeholder:} I percorsi di file, i log group di CloudWatch e altre configurazioni specifiche mostrate nello script di hardening utilizzano nomi generici o placeholder per motivi di privacy aziendale. In un ambiente di produzione reale, questi valori rifletterebbero la nomenclatura e i percorsi specifici adottati dall'organizzazione.
 \subsubsection{Verifica e Mantenimento Continuo della Conformità}
 \label{subsubsec:hardening-verification_cap2}
 L'esecuzione di uno script di hardening al momento del boot è un primo passo fondamentale, ma non garantisce che la configurazione rimanga sicura nel tempo. La configuration drift (modifiche non intenzionali alla configurazione) e la scoperta di nuove vulnerabilità richiedono un processo di verifica continuo. Per questo motivo, sono state integrate due pratiche di assessment periodico:
@@ -259,8 +286,13 @@ Questo processo di verifica assicura che le policy di hardening siano non solo a
 
 \subsection{Utilizzo Fondamentale di IAM Roles per le Istanze EC2}
 \label{subsec:iam-roles-ec2_cap2}
-Questa si configura come una delle pratiche di sicurezza più importanti, la cui corretta implementazione è stata verificata nell'ambiente di Finanz. \textbf{Non bisogna mai salvare credenziali AWS statiche direttamente su un'istanza EC2}. Si deve, invece, associare un \textbf{IAM Role} all'istanza. L'applicazione può quindi ottenere credenziali temporanee tramite il servizio metadati dell'istanza (IMDS), assumendo i permessi definiti nel ruolo.
-È stato osservato che tutte le istanze EC2 di Finanz utilizzano il ruolo IAM \texttt{FinanzEC2AppRole} (ARN: \texttt{arn:aws:iam::538927841179:role/FinanzEC2AppRole}). Tale ruolo, in linea con il principio del minimo privilegio, concede permessi specifici, tra cui lettura da bucket S3, scrittura su CloudWatch Logs e accesso a parametri in AWS Systems Manager Parameter Store. L'applicazione ottiene le credenziali interrogando l'endpoint IMDS locale (\texttt{http://169.254.169.254/latest/meta-data/iam/security-credentials/FinanzEC2AppRole}), le quali vengono ruotate automaticamente da AWS ogni 6 ore. È importante anche configurare IMDSv2 (Instance Metadata Service Version 2) per una maggiore protezione contro attacchi SSRF (Server-Side Request Forgery), richiedendo una session token per accedere ai metadati.
+Questa si configura come una delle pratiche di sicurezza più importanti, la cui corretta implementazione è stata verificata nell'ambiente di Finanz.
+\textbf{Non bisogna mai salvare credenziali AWS statiche direttamente su un'istanza EC2}.
+Si deve, invece, associare un \textbf{IAM Role} all'istanza.
+L'applicazione può quindi ottenere credenziali temporanee tramite il servizio metadati dell'istanza (IMDS), assumendo i permessi definiti nel ruolo.
+È stato osservato che tutte le istanze EC2 di Finanz utilizzano il ruolo IAM \texttt{FinanzEC2AppRole} (ARN: \texttt{arn:aws:iam::497487485332:role/\allowbreak{}FinanzEC2AppRole}).
+Tale ruolo, in linea con il principio del minimo privilegio, concede permessi specifici, tra cui lettura da bucket S3, scrittura su CloudWatch Logs e accesso a parametri in AWS Systems Manager Parameter Store.
+L'applicazione ottiene le credenziali interrogando l'endpoint IMDS locale (\texttt{http://169.254.169.254/latest/meta-data/\allowbreak{}iam/security-credentials/\allowbreak{}FinanzEC2AppRole}), le quali vengono ruotate automaticamente da AWS ogni 6 ore. È importante anche configurare IMDSv2 (Instance Metadata Service Version 2) per una maggiore protezione contro attacchi SSRF (Server-Side Request Forgery), richiedendo una session token per accedere ai metadati.
 
 \subsection{Scalabilità e Disponibilità con Auto Scaling Groups}
 \label{subsec:auto-scaling_cap2}
@@ -283,7 +315,7 @@ La crittografia è un pilastro della protezione dati. L'analisi ha confermato ch
 \begin{itemize}
     \item \textbf{Crittografia a Riposo (At Rest)}: È essenziale crittografare i dati memorizzati.
     \begin{itemize}
-        \item \textbf{Amazon S3}: Tutti i bucket critici sono configurati per la crittografia lato server con chiavi gestite da AWS KMS (SSE-KMS), utilizzando una Customer Managed Key (CMK) specifica.Il bucket dei log (\texttt{finanz-logs-538927841179}) ha anche S3 Object Lock abilitato in modalità Governance con un periodo di retention di 7 anni, per garantire l'immutabilità dei log a fini di compliance e audit.
+        \item \textbf{Amazon S3}: Tutti i bucket critici sono configurati per la crittografia lato server con chiavi gestite da AWS KMS (SSE-KMS), utilizzando una Customer Managed Key (CMK) specifica.Il bucket dei log (\texttt{finanz-logs\discretionary{-}{}{-}497487485332}) ha anche S3 Object Lock abilitato in modalità Governance con un periodo di retention di 7 anni, per garantire l'immutabilità dei log a fini di compliance e audit.
         \item \textbf{Amazon EBS}: Tutti i volumi EBS sono configurati per la crittografia di default a livello di account, utilizzando una CMK dedicata.
         \item \textbf{Amazon RDS}: Entrambe le istanze PostgreSQL utilizzano la crittografia at-rest integrata di RDS, anch'essa basata su AWS KMS con una CMK dedicata. Dai benchmark consultati, l'impatto sulle performance di questa crittografia è minimo, solitamente inferiore al 2\%.
     \end{itemize}
@@ -303,18 +335,18 @@ Come evidenziato, \textbf{AWS Key Management Service (KMS)} gioca un ruolo centr
     \item \texttt{finanz-secrets-key}: Utilizzata da AWS Secrets Manager per crittografare i segreti memorizzati (es. password, chiavi API). Circa 200 operazioni al giorno, in base agli accessi ai segreti da parte delle applicazioni.
     \item Altre chiavi potrebbero essere usate per CloudTrail log encryption, CodePipeline artifacts, ecc.
 \end{itemize}. 
-L'uso di CMK offre un controllo granulare sui permessi, la rotazione automatica e l'auditing del loro utilizzo tramite CloudTrail.I costi mensili per KMS si aggirano tipicamente sui 15-20 EUR, dovuti principalmente al costo di ogni CMK (circa 1 EUR/mese ciascuna) e al volume di operazioni API che richiedono l'uso della chiave. Per requisiti ancora più elevati, si potrebbe considerare \textbf{AWS CloudHSM}, ma KMS offre un eccellente equilibrio tra sicurezza, gestibilità e costi per la maggior parte dei casi d'uso.
+L'uso di CMK offre un controllo granulare sui permessi, la rotazione automatica e l'auditing del loro utilizzo tramite CloudTrail.I costi mensili per KMS si aggirano tipicamente sui 15\discretionary{-}{}{-}20 EUR, dovuti principalmente al costo di ogni CMK (circa 1 EUR/mese ciascuna) e al volume di operazioni API che richiedono l'uso della chiave. Per requisiti ancora più elevati, si potrebbe considerare \textbf{AWS CloudHSM}, ma KMS offre un eccellente equilibrio tra sicurezza, gestibilità e costi per la maggior parte dei casi d'uso.
 
 \subsection{Strategie di Backup e Disaster Recovery (DR)}
 \label{subsec:backup-dr_cap2}
 Backup regolari e testati sono essenziali per la business continuity. Finanz ha implementato una strategia di backup utilizzando \textbf{AWS Backup}.
 \begin{itemize}
-    \item \textbf{Piano di Backup Centralizzato}: Un piano denominato \texttt{FinanzDailyBackupPlan} orchestra i backup per: 
+    \item \textbf{Piano di Backup Centralizzato}: Un piano denominato \texttt{Finanz\discretionary{-}{}{}Daily\discretionary{-}{}{}Backup\discretionary{-}{}{}Plan} orchestra i backup per: 
     \begin{itemize}
     \item \textbf{Istanze RDS}: Backup giornalieri automatici delle istanze RDS (sia produzione che sviluppo) vengono eseguiti durante la finestra di manutenzione notturna, con una retention dei backup di 30 giorni. Questi snapshot permettono il Point-In-Time Recovery (PITR) fino a 5 minuti prima dell'ultimo backup.
             \item \textbf{Volumi EBS}: Backup settimanali (snapshot) di tutti i volumi EBS critici (associati alle istanze di produzione) vengono eseguiti ogni domenica, con una retention di 12 settimane.
-            \item \textbf{Bucket S3}: La versioning è abilitata su tutti i bucket critici, fornendo una forma di recupero da eliminazioni o sovrascritture accidentali. Per un DR più robusto, si sta valutando S3 Cross-Region Replication (CRR) per i bucket più importanti.
-            \item \textbf{Cross-Region Backup}: Per scopi di Disaster Recovery, i backup più importanti (es. snapshot RDS di produzione e snapshot EBS settimanali) vengono copiati mensilmente in una regione AWS secondaria (es. \texttt{eu-central-1}, Francoforte).
+            \item \textbf{Bucket S3}: La versioning è abilitata su tutti i bucket critici, fornendo una forma di recupero da eliminazioni o sovrascritture accidentali. 
+            \item \textbf{Cross-Region Backup}: Per scopi di Disaster Recovery, i backup più importanti (es. snapshot RDS di produzione e snapshot EBS settimanali) vengono copiati mensilmente in una regione AWS secondaria (es. \texttt{eu-central\discretionary{-}{}{-}1}, Francoforte).
         \end{itemize}.
     \item \textbf{Vault di Backup Sicuro}: I backup sono archiviati in un vault dedicato (\texttt{finanz-backup-vault}), protetto da policy restrittive e crittografia.
     \item \textbf{Obiettivi di Ripristino (RTO/RPO)}: Gli obiettivi target sono un RTO (Recovery Time Objective) massimo di 4 ore per i servizi critici di produzione e un RPO (Recovery Point Objective) massimo di 24 ore (idealmente molto meno per i dati transazionali, grazie al PITR di RDS). È fondamentale testare periodicamente le procedure di ripristino (almeno una o due volte l'anno) per assicurarsi che questi obiettivi siano raggiungibili e che le procedure siano efficaci..
@@ -325,15 +357,15 @@ Backup regolari e testati sono essenziali per la business continuity. Finanz ha 
 Una configurazione errata di Amazon S3 può portare a gravi data breach. Si è constatato che Finanz adotta diverse misure di protezione:
 \begin{itemize}
     \item \textbf{Block Public Access (BPA)}: La funzionalità S3 Block Public Access è abilitata a livello di account AWS e ulteriormente verificata a livello di singolo bucket per tutti i bucket che non devono essere pubblici. Questa impostazione previene la concessione accidentale di accesso pubblico ai dati. La sua corretta applicazione è monitorata trimestralmente tramite una regola AWS Config custom (\texttt{s3-bucket-public-access-prohibited-check}) che verifica che BPA sia attivo su tutti i bucket non esplicitamente approvati per l'accesso pubblico (come quello per gli asset statici serviti da CloudFront).
-    \item \textbf{Bucket Policies Granulari}: Vengono utilizzate bucket policy per definire permessi di accesso specifici. Ad esempio, il bucket dei log di CloudTrail (\texttt{finanz-cloudtrail-logs-538927841179}, che è un bucket diverso da quello generico dei log applicativi) ha una policy che permette la scrittura solo al servizio CloudTrail e la lettura solo a un ruolo IAM dedicato alla sicurezza e all'audit (es. \texttt{SecurityAuditRole}). Per il bucket \texttt{finanz-static-assets}, la policy permette l'accesso in lettura solo all'Origin Access Identity (OAI) di CloudFront, garantendo che gli asset siano serviti solo tramite la CDN.
+    \item \textbf{Bucket Policies Granulari}: Vengono utilizzate bucket policy per definire permessi di accesso specifici. Ad esempio, il bucket dei log di CloudTrail (\texttt{finanz-cloudtrail-logs\discretionary{-}{}{-}497487485332}, che è un bucket diverso da quello generico dei log applicativi) ha una policy che permette la scrittura solo al servizio CloudTrail e la lettura solo a un ruolo IAM dedicato alla sicurezza e all'audit (es. \texttt{SecurityAuditRole}). Per il bucket \texttt{finanz-static-assets}, la policy permette l'accesso in lettura solo all'Origin Access Identity (OAI) di CloudFront, garantendo che gli asset siano serviti solo tramite la CDN.
     \item \textbf{S3 Access Points}: Per semplificare la gestione degli accessi a dati condivisi su larga scala o per applicazioni specifiche, Finanz sta iniziando ad utilizzare gli S3 Access Points. Attualmente sono configurati 3 access point:
         \begin{itemize}
-            \item \texttt{dev-team-access}: Fornisce accesso specifico ai bucket di sviluppo per il team di sviluppo (ARN es.: \texttt{arn:aws:s3:eu-south-1:538927841179:accesspoint/dev-team-access}).
+            \item \texttt{dev-team-access}: Fornisce accesso specifico ai bucket di sviluppo per il team di sviluppo (ARN es.: \texttt{arn:aws:s3:\allowbreak{}eu-south\discretionary{-}{}{-}1:497487485332:\allowbreak{}accesspoint/\allowbreak{}dev-team-access}).
             \item \texttt{prod-read-only-data}: Fornisce accesso in sola lettura a specifici prefissi all'interno dei bucket di produzione per applicazioni o utenti che necessitano solo di leggere dati.
             \item \texttt{backup-operator-access}: Utilizzato da ruoli IAM specifici per le operazioni di backup e restore, limitando l'accesso solo ai bucket e alle azioni necessarie.
         \end{itemize}
     \item \textbf{Amazon Macie per la Scoperta di Dati Sensibili}: Finanz ha configurato Amazon Macie per eseguire scansioni settimanali dei bucket S3 (specialmente quelli che potrebbero contenere dati dei clienti o PII). Negli ultimi tre mesi, Macie ha analizzato e classificato oltre 25.000 oggetti, identificando 12 istanze di dati che potenzialmente contenevano PII (es. numeri di telefono o indirizzi email in file di log non correttamente anonimizzati). Queste identificazioni sono state investigate e le problematiche risolte (es. migliorando i processi di logging o spostando i file in bucket con controlli più stringenti).
-    \item \textbf{S3 Storage Lens}: Per una visibilità operativa sull'utilizzo dello storage, sulle tendenze di crescita e sulle metriche di sicurezza, Finanz utilizza S3 Storage Lens. Il dashboard di default fornisce già informazioni utili, e si sta valutando l'attivazione di metriche avanzate per analisi più approfondite.
+    \item \textbf{S3 Storage Lens}: Per una visibilità operativa sull'utilizzo dello storage, sulle tendenze di crescita e sulle metriche di sicurezza, Finanz utilizza S3 Storage Lens.
 \end{itemize}
 
 \section{Monitoraggio Continuo, Logging e Alerting: Vedere per Proteggere}
@@ -346,10 +378,10 @@ Questi due servizi sono i pilastri del monitoraggio in AWS.
 \begin{itemize}
     \item \textbf{AWS CloudTrail}: È stato verificato che CloudTrail risulta abilitato in tutte le regioni e a livello di Organization.  Sono stati configurati due trail principali:
     \begin{itemize}
-        \item \texttt{finanz-audit-trail} (ARN es.: \texttt{arn:aws:cloudtrail:eu-south-1:538927841179:trail/finanz-audit-trail}): Questo è il trail principale che cattura quasi tutte le chiamate API effettuate nell'account AWS, fornendo una traccia di audit fondamentale ("chi ha fatto cosa, quando, da dove e su quale risorsa"). Include eventi di gestione e, opzionalmente, eventi dati per S3 (per bucket specifici) e Lambda.
+        \item \texttt{finanz-audit-trail} (ARN es.: \texttt{arn:aws:cloudtrail:\allowbreak{}eu-south\discretionary{-}{}{-}1:\allowbreak{}497487485332:\allowbreak{}trail/\allowbreak{}finanz-audit-trail}): Questo è il trail principale che cattura quasi tutte le chiamate API effettuate nell'account AWS, fornendo una traccia di audit fondamentale ("chi ha fatto cosa, quando, da dove e su quale risorsa"). Include eventi di gestione e, opzionalmente, eventi dati per S3 (per bucket specifici) e Lambda.
         \item \texttt{finanz-security-trail}: Un secondo trail, più specifico, potrebbe essere configurato per catturare solo eventi di sicurezza critici, magari con filtri su azioni IAM, modifiche a Security Group, terminazione di istanze RDS, ecc., per facilitare analisi mirate. (Nota: se non esiste, suggerisco di crearlo).
     \end{itemize}
-    I log di CloudTrail vengono inviati a un bucket S3 dedicato e protetto (\texttt{finanz-cloudtrail-logs-538927841179}), con la crittografia lato server (SSE-S3 o SSE-KMS) e la convalida dell'integrità dei file di log abilitate. Questi log vengono anche inviati a CloudWatch Logs per facilitare query e allarmi in tempo reale. Finanz analizza, in media, circa 15.000-20.000 eventi CloudTrail al giorno solo nell'ambiente di produzione.
+    I log di CloudTrail vengono inviati a un bucket S3 dedicato e protetto (\texttt{finanz-cloudtrail-logs\discretionary{-}{}{-}497487485332}), con la crittografia lato server (SSE-S3 o SSE-KMS) e la convalida dell'integrità dei file di log abilitate. Questi log vengono anche inviati a CloudWatch Logs per facilitare query e allarmi in tempo reale. Finanz analizza, in media, circa 15.000-20.000 eventi CloudTrail al giorno solo nell'ambiente di produzione.
 
     \item \textbf{Amazon CloudWatch}: È utilizzato estensivamente per raccogliere:
     \begin{itemize}
@@ -370,7 +402,7 @@ Raccogliere dati è solo il primo passo; è cruciale agire su di essi. Finanz ha
     \item \texttt{UnauthorizedAPICalls-CloudTrail}: Utilizza un filtro metrico sui log di CloudTrail per rilevare e allertare su un numero anomalo di chiamate API che risultano in \texttt{AccessDenied} o \texttt{UnauthorizedOperation}.
     \item \texttt{RootAccountUsage-Alert}: Un allarme ad altissima priorità che triggera immediatamente per qualsiasi utilizzo (login o chiamata API) dell'account root AWS.
     \item \texttt{SecurityGroupChanges-Alert}: Notifica qualsiasi modifica (creazione, eliminazione, modifica di regole) ai Security Group critici.
-    \item \texttt{NATGatewayErrorPortAllocation-Alert}: Monitora la metrica \texttt{ErrorPortAllocation} del NAT Gateway per prevenire l'esaurimento delle porte.
+    \item \texttt{NATGatewayErrorPortAllocation-Alert}: Monitora la metrica \texttt{Error\discretionary{-}{}{}Port\discretionary{-}{}{}Allocation} del NAT Gateway per prevenire l'esaurimento delle porte.
 \end{itemize}
 Questi allarmi inviano notifiche tramite SNS a canali dedicati.Da questo topic, le notifiche vengono poi inoltrate via email a un gruppo di distribuzione del team tecnico/DevOps e, per gli allarmi più critici, anche via SMS o tramite integrazione con sistemi di PagerDuty/Opsgenie (attualmente in valutazione). Negli ultimi 30 giorni, si è registrata la ricezione di 47 notifiche, di cui 3 classificate come critiche e risolte entro un tempo medio di 2 ore.
 
@@ -382,8 +414,9 @@ Per un rilevamento avanzato delle minacce, Finanz si avvale di:
     I finding più comuni includevano:
         \begin{itemize}
             \item \texttt{Recon:EC2/PortProbeUnprotectedPort}: 8 occorrenze, indicanti tentativi di scansione di porte su istanze EC2 da indirizzi IP esterni. Queste sono state verificate e i Security Group sono stati confermati essere restrittivi.
-            \item \texttt{UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration}: 2 tentativi sospetti rilevati, che sono stati investigati approfonditamente. In questi casi specifici, si è trattato di falsi positivi dovuti a test interni, ma l'allerta è stata comunque preziosa.
-            \item Altri finding di tipo \texttt{Trojan:EC2/DGADomainCall} o \texttt{Stealth:IAMUser/LoggingConfigurationModified} (questi ultimi molto rari e da investigare con massima priorità).
+            \item \texttt{UnauthorizedAccess:IAMUser/\allowbreak{}InstanceCredentialExfiltration}: 2 tentativi sospetti rilevati, che sono stati investigati approfonditamente.
+            In questi casi specifici, si è trattato di falsi positivi dovuti a test interni, ma l'allerta è stata comunque preziosa.
+            \item Altri finding di tipo \texttt{Trojan:EC2/\allowbreak{}DGADomainCall} o \texttt{Stealth:IAMUser/\allowbreak{}LoggingConfigurationModified} (questi ultimi molto rari e da investigare con massima priorità).
         \end{itemize} Negli ultimi 90 giorni, GuardDuty ha generato 23 "finding", la maggior parte di severità bassa o media. Il costo mensile per GuardDuty è relativamente contenuto, circa 12-15 EUR, e varia in base al volume di log analizzati. Si ritiene che il valore fornito da GuardDuty superi ampiamente il suo costo contenuto.
     \item \textbf{AWS Security Hub}: Fornisce una vista aggregata degli avvisi di sicurezza provenienti da vari servizi AWS (GuardDuty, Inspector, Macie, ecc.). Aiuta a prioritizzare i risultati e a verificare la conformità rispetto a standard come il \textbf{CIS AWS Foundations Benchmark}. Attualmente, Security Hub in Finanz mostra:
     \begin{itemize}

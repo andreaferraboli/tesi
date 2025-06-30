@@ -23,6 +23,7 @@
 \usepackage{url}            % Per inserire URL cliccabili (spesso gestito anche da hyperref)
 \usepackage{setspace}       % Per controllare l'interlinea
 \usepackage{comment}        % Per blocchi di commento multilinea
+\usepackage{enumitem}       % Per personalizzare elenchi e descrizioni
 % LISTINGS DI CODICE (XCOLOR È GIÀ CARICATO)
 \usepackage{listings}       % Per inserire blocchi di codice
 % HYPERLINKS E BOOKMARKS (generalmente verso la fine)
@@ -32,19 +33,20 @@
 \usepackage{tesiupdated}           % Pacchetto personalizzato per la tesi"
 \usepackage{fancyhdr}      % 1. carica fancyhdr
 
-% 2. tuo nuovo pagestyle (lo stesso codice mostrato prima)
-\setlength{\headheight}{14pt}
+\setlength{\headheight}{14pt}   % o il valore corretto che hai misurato
 \fancyhf{}
-\fancyhead[LE]{\small\slshape
-  \parbox[t]{\dimexpr\headwidth-1em\relax}{\raggedright\leftmark\strut}}
-\fancyhead[RO]{\small\slshape
-  \parbox[t]{\dimexpr\headwidth-1em\relax}{\raggedleft\leftmark\strut}}
+
+\fancyhead[L]{%
+  \small\slshape
+  \parbox[t]{\dimexpr\headwidth-1em\relax}{\raggedright\leftmark\strut}%
+}
 \fancyfoot[C]{\thepage}
 
 \makeatletter
 \renewcommand{\chaptermark}[1]{%
   \markboth{\ifnum\c@secnumdepth>\m@ne\thechapter\space\fi#1}{}}
 \makeatother
+\setlength{\headheight}{27.2pt}
 \pagestyle{fancy}          % 3. usa il nuovo stile
 
 \usepackage{etoolbox}
@@ -67,18 +69,25 @@ breakatwhitespace=false,
 breaklines=true,
 captionpos=b,
 keepspaces=true,
+columns=fullflexible,
 numbers=left,
 numbersep=5pt,
 showspaces=false,
 showstringspaces=false,
 showtabs=false,
-tabsize=2
+tabsize=2,
+literate=
+    {/}{{/}{\allowbreak}}1
+    {:}{{:}{\allowbreak}}1
+    {.}{{.}{\allowbreak}}1
+    {\_}{{\_}{\allowbreak}}1
 }
 
 \lstset{style=mystyle}
 % Definizione linguaggio JSON per listings
 \lstdefinelanguage{json}{
     keywords={true,false,null},
+    breaklines=true,
     sensitive=false,
     morestring=[b]",
     comment=[l]{//},
@@ -162,6 +171,27 @@ tabsize=2
     moredelim=[is][\color{red!70!black}\bfseries]{>>>}{\ }, 
 }
 
+\lstdefinestyle{sql}{
+  language=SQL,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{green!60!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=tb,
+  breaklines=true,
+  captionpos=b,
+  breakatwhitespace=false,
+  title=\lstname,
+  keywordstyle=\color{blue!80!black},
+  commentstyle=\color{green!50!black}\itshape,
+  stringstyle=\color{orange!80!black},
+  morekeywords={aws, sts, assume-role, --role-arn, --role-session-name},
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+}
+
     % Definizione stile per codice Bash migliorato
     \lstdefinestyle{bash}{
         language=bash,
@@ -205,8 +235,12 @@ tabsize=2
 \matricola{09985A}
 \relatore{Prof. Claudio Agostino Ardagna}
 \correlatore{Lorenzo Perotta, Andrea Pasini, Simone Cortese}
-
+\pagenumbering{gobble}
 \maketitlepage
+% 2. Front-matter in numeri romani
+\cleardoublepage
+\pagenumbering{Roman}   % o "roman" per i, ii, iii...
+\setcounter{page}{1}
 \prefacesection{Prefazione}
 La crescente adozione delle tecnologie cloud ha rivoluzionato il settore fintech, 
 portando benefici significativi in termini di scalabilità, flessibilità e riduzione 
@@ -232,45 +266,33 @@ attenzione è stata posta alla creazione di un ambiente che sia al contempo sicu
 scalabile e conforme ai principali framework di sicurezza internazionali.
 
 L'elaborato è organizzato come segue:
-\newline
-\newline
-\textbf{Capitolo 1 – Introduzione} In questo capitolo si presenta il contesto delle 
+\begin{description}[leftmargin=0pt,labelindent=\parindent,style=sameline]
+\item[Capitolo 1 – Introduzione] In questo capitolo si presenta il contesto delle 
 startup fintech, analizzando le specificità del settore e le principali sfide 
 di sicurezza che caratterizzano queste realtà innovative.
-\newline
-\newline
-\textbf{Capitolo 2 – Principi di cybersecurity olistici per un'infrastruttura fintech} 
-Il secondo capitolo fornisce le basi teoriche della sicurezza informatica, 
+\item[Capitolo 2 – Principi di cybersecurity olistici per un'infrastruttura \allowbreak{}fintech] 
+\allowbreak{}Il secondo capitolo fornisce le basi teoriche della sicurezza informatica, 
 dalla triade CIA ai principi di difesa in profondità, contestualizzandoli 
 nell'ambito fintech.
-\newline
-\newline
-\textbf{Capitolo 3 – Principi dell'Infrastruttura Cloud e Scelta di AWS} Il terzo 
-capitolo analizza i paradigmi del cloud computing e presenta AWS come 
+\item[Capitolo 3 – Principi dell'Infrastruttura \allowbreak{}Cloud e Scelta di AWS] \allowbreak{}Il terzo 
+\allowbreak{}capitolo analizza i paradigmi del cloud computing e presenta AWS come 
 piattaforma di riferimento, descrivendone architettura e caratteristiche 
 di sicurezza.
-\newline
-\newline
-\textbf{Capitolo 4 – Progettazione e Implementazione Avanzata della Sicurezza delle 
-Identità e degli Accessi (IAM) in AWS} Questo capitolo si concentra sull'implementazione 
+\item[Capitolo 4 – Progettazione e Implementazione \allowbreak{}Avanzata della \allowbreak{}Sicurezza \allowbreak{}delle 
+\allowbreak{}Identità e degli Accessi (IAM) in AWS] Questo capitolo si concentra sull'implementazione 
 pratica di IAM, analizzando strategie avanzate per la gestione delle identità 
 e l'applicazione del principio del minimo privilegio.
-\newline
-\newline
-\textbf{Capitolo 5 – Architettura di Rete Sicura e Protezione dei Servizi Applicativi 
-su AWS per fintech} Il quinto capitolo descrive la progettazione di un'architettura 
+\item[Capitolo 5 – Architettura di Rete Sicura e Protezione dei \allowbreak{}Servizi Applicativi 
+\allowbreak{}su AWS per fintech] Il quinto capitolo descrive la progettazione di un'architettura 
 di rete sicura mediante VPC, gruppi di sicurezza e controlli di accesso avanzati.
-\newline
-\newline
-\textbf{Capitolo 6 – Implementazione di un Honeypot in un'Infrastruttura AWS per 
-Startup fintech} L'ultimo capitolo tecnico presenta l'implementazione di un 
+\item[Capitolo 6 – Implementazione di un Honeypot in un'Infrastruttura AWS per 
+\allowbreak{}Startup fintech] L'ultimo capitolo tecnico presenta l'implementazione di un 
 sistema honeypot su AWS per il rilevamento proattivo delle minacce, includendo 
 analisi dei costi e test di efficacia.
-\newline
-\newline
-\textbf{Capitolo 7 – Conclusioni} Il capitolo finale riassume i risultati raggiunti 
-e presenta considerazioni sulle prospettive future per la sicurezza delle 
+\item[Capitolo 7 – Conclusioni] Il capitolo finale riassume i risultati raggiunti 
+\allowbreak{}e presenta considerazioni sulle prospettive future per la sicurezza delle 
 infrastrutture cloud in ambito fintech.
+\end{description}
 \prefacesection{Dedica}
 {\hfill \Large {\sl dedicato a chi mi vuole bene, a chi mi stima e ai miei compagni di viaggio, vi voglio bene}}
 \prefacesection{Ringraziamenti}
@@ -279,7 +301,8 @@ infrastrutture cloud in ambito fintech.
 \setcounter{tocdepth}{2} % Mostra solo chapter, section e subsection
 \tableofcontents
 \listoffigures % Comando per generare l'elenco delle figure
-
+\cleardoublepage
+\pagenumbering{arabic}
 \chapter{Introduzione}
 \pagenumbering{arabic}
 \label{chapter:introduzione}

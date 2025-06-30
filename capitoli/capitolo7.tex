@@ -4,7 +4,7 @@ La cybersecurity rappresenta una sfida strategica cruciale per le startup fintec
 
 \section{Sintesi dei Risultati Raggiunti}
 
-L'implementazione del framework di sicurezza proposto ha prodotto risultati concreti e misurabili nell'infrastruttura di Finanz. La ristrutturazione del sistema IAM (Identity and Access Management) ha eliminato l'uso improprio dell'account root AWS, sostituito da un'architettura granulare basata su ruoli temporanei e Permission Boundaries. Questa trasformazione ha ridotto il potenziale "blast radius" in caso di compromissione di un'identità del 75\%, limitando significativamente l'impatto di eventuali violazioni della sicurezza.
+L'implementazione del framework di sicurezza proposto ha prodotto risultati concreti e misurabili nell'infrastruttura di Finanz. La ristrutturazione del sistema IAM (Identity and Access Management) ha eliminato l'uso improprio dell'account root AWS, sostituito da un'architettura granulare basata su ruoli temporanei e Permission Boundaries. Questa trasformazione ha ridotto significativamente il potenziale "blast radius" in caso di compromissione di un'identità, limitando l'impatto di eventuali violazioni della sicurezza.
 
 La progettazione dell'architettura di rete tramite Amazon VPC ha implementato una segmentazione a più livelli, con subnet pubbliche e private distribuite su multiple Availability Zones. L'analisi dei VPC Flow Logs ha evidenziato che il 97\% del traffico rispetta le regole di sicurezza definite, mentre il 3\% viene correttamente bloccato dai controlli perimetrali. La configurazione di Security Groups e Network ACLs restrittive ha creato un solido secondo livello di difesa, rendendo estremamente difficile il movimento laterale all'interno dell'infrastruttura.
 
@@ -29,7 +29,7 @@ La transizione dall'attuale architettura basata su AWS Elastic Beanstalk verso u
 
 Questa evoluzione richiederà un investimento iniziale nella riprogettazione dell'architettura applicativa, ma porterà benefici significativi in termini di sicurezza, manutenibilità e capacità di risposta agli incidenti.
 
-\subsection{Implementazione di Sistemi SIEM e Correlazione Avanzata degli Eventi}
+\subsection{Implementazione di Sistemi SIEM e Correlazione \allowbreak{}Avanzata degli Eventi}
 
 L'integrazione dei dati raccolti dall'honeypot e dai vari sistemi di monitoraggio con una piattaforma SIEM (Security Information and Event Management) centralizzata rappresenta il passo successivo per elevare le capacità di threat detection dell'organizzazione. Questa implementazione comporterebbe:
 

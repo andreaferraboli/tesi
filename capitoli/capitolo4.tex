@@ -10,7 +10,13 @@ La gestione delle identità e degli accessi (IAM) rappresenta un passo fondament
 L'infrastruttura tecnologica che supporta la piattaforma \textit{Finanz} è interamente provisionata all'interno della regione AWS `eu-south-1` (Milano) e consolidata in un singolo account. Per garantire una netta separazione degli ambienti, sono stati definiti due contesti logici distinti, `Finanz-Dev` per lo sviluppo e `Finanz-Prod` per la produzione. La segregazione tra questi non avviene a livello di account, bensì è implementata attraverso una strategia granulare di tagging delle risorse, l'impiego di ruoli IAM (Identity and Access Management) con permessi specifici e l'adozione di pipeline di rilascio completamente separate e indipendenti.
 
 \paragraph{Layer applicativo}
-Il layer applicativo, che ospita il servizio core `Finanz-Backend`, è orchestrato tramite il servizio gestito \textbf{AWS Elastic Beanstalk}. Tale servizio astrae la gestione dell'infrastruttura sottostante, automatizzando il provisioning e la configurazione delle risorse. La configurazione prevede l'impiego di istanze EC2 di tipo *burstable* (`t3a.small`), definite tramite un Launch Template. La scalabilità orizzontale è gestita da un Auto Scaling Group, le cui politiche sono basate su metriche di carico della CPU e sul numero di richieste al secondo, con soglie differenziate tra l'ambiente di sviluppo (da 1 a 2 istanze) e quello di produzione (da 3 a 5 istanze). Un Application Load Balancer (ALB) funge da unico entry-point per il traffico HTTPS, instradandolo verso le istanze applicative. Queste ultime sono protette da un Security Group che ne permette l'accesso esclusivamente dall'ALB, isolandole da accessi diretti. Infine, i log applicativi e di sistema vengono inoltrati in tempo reale verso Amazon CloudWatch Logs per il monitoraggio e archiviati su Amazon S3 con rotazione oraria per l'analisi a lungo termine.
+Il layer applicativo, che ospita il servizio 'Finanz\discretionary{-}{}{-}Backend', è orchestrato tramite il servizio gestito \allowbreak{}\textbf{AWS \allowbreak{}Elastic \allowbreak{}Beanstalk}.
+Tale servizio astrae la gestione dell'infrastruttura sottostante, automatizzando il provisioning e la configurazione delle risorse.
+La configurazione prevede l'impiego di istanze EC2 di tipo \textbf{burstable} (`t3a.small`), definite tramite un Launch Template.
+La scalabilità orizzontale è gestita da un Auto Scaling Group, le cui politiche sono basate su metriche di carico della CPU e sul numero di richieste al secondo, con soglie differenziate tra l'ambiente di sviluppo (da 1 a 2 istanze) e quello di produzione (da 3 a 5 istanze).
+Un Application Load Balancer (ALB) funge da unico entry-point per il traffico HTTPS, instradandolo verso le istanze applicative.
+Queste ultime sono protette da un Security Group che ne permette l'accesso esclusivamente dall'ALB, isolandole da accessi diretti.
+Infine, i log applicativi e di sistema vengono inoltrati in tempo reale verso Amazon CloudWatch Logs per il monitoraggio e archiviati su Amazon S3 con rotazione oraria per l'analisi a lungo termine.
 
 \paragraph{Layer dati}
 Il layer di persistenza dei dati transazionali si affida al servizio gestito \textbf{Amazon RDS for PostgreSQL}. La sicurezza dei dati *at-rest* è garantita dalla cifratura, attuata tramite una chiave gestita dal cliente (Customer-Managed Key) in AWS Key Management Service (KMS). Per rispondere a diverse esigenze di disponibilità e costo, l'ambiente di produzione impiega un'istanza in configurazione Multi-AZ, che assicura alta disponibilità e failover automatico, con una retention dei backup di sette giorni e la protezione contro la cancellazione accidentale. Al contrario, l'ambiente di sviluppo utilizza un'istanza Single-AZ, con backup disabilitati. Per entrambe le configurazioni, l'accesso pubblico è negato e i log di database, insieme alle metriche di Performance Insights, vengono aggregati in Amazon CloudWatch per un monitoraggio centralizzato delle prestazioni.
@@ -21,6 +27,7 @@ La rete è incapsulata in un Virtual Private Cloud (VPC) con un ampio spazio di 
 \paragraph{Storage e processi CI/CD}
 Per lo storage degli artefatti e dei log si utilizzano bucket Amazon S3, protetti da policy restrittive. Il bucket impiegato da Elastic Beanstalk per le versioni applicative è protetto contro la cancellazione accidentale, mentre quello associato ad \textbf{AWS CodePipeline}, che contiene gli artefatti di build, impone la cifratura lato server e la comunicazione tramite TLS. Il processo di Continuous Delivery è automatizzato da una pipeline in CodePipeline, articolata nelle fasi canoniche di Source, Build e Deploy. La fase di Source è innescata da commit su branch specifici per lo sviluppo e da tag semantici per la produzione. La fase di Build, eseguita da \textbf{AWS CodeBuild}, include passaggi di sicurezza aggiuntivi per l'ambiente produttivo, come l'analisi di vulnerabilità (SCA/CVE) e la firma digitale degli artefatti. Infine, la fase di Deploy avviene con una strategia di *rolling update* per minimizzare i disservizi, e richiede un'approvazione manuale per ogni rilascio in produzione. Gli eventi salienti della pipeline vengono notificati tramite Amazon SNS.
 
+\textbf{Nota sui Placeholder:} Tutti gli identificatori di risorse AWS menzionati in questa sezione (subnet ID come \texttt{subnet\discretionary{-}{}{-}0a1b2c3d}, security group ID come \texttt{sg\discretionary{-}{}{-}0a1b2c3d4e5f67890}, instance ID come \texttt{i\discretionary{-}{}{-}0a1b2c3d4e5f67890}, NAT Gateway ID come \texttt{nat\discretionary{-}{}{-}0123456789abcdef0}, ecc.) sono placeholder utilizzati per motivi di privacy aziendale. In un ambiente reale, questi identificatori conterrebbero i valori specifici assegnati da AWS alle risorse dell'infrastruttura di produzione.
 
 \begin{figure}[htbp]
   \centering
@@ -60,7 +67,7 @@ L'infrastruttura ospitata su un Cloud Service Provider (CSP) come AWS è un asse
 Una delle prime e più critiche aree di intervento riguarda l'\textbf{account root di AWS}. Questo account possiede privilegi illimitati sull'intero ambiente AWS e rappresenta, di conseguenza, un obiettivo di altissimo valore per gli attaccanti e una fonte significativa di rischio operativo se usato impropriamente. Un'implementazione Zero Trust richiede misure stringenti per l'account root:
 \begin{itemize}
     \item \textbf{Limitazione Estrema dell'Uso:} L'accesso come utente root deve essere evitato per le operazioni quotidiane e riservato esclusivamente a quelle poche attività che lo richiedono obbligatoriamente (es. modifica delle informazioni di fatturazione, chiusura dell'account, modifica dei piani di supporto).
-    \item \textbf{Protezione Robusta delle Credenziali:} La password deve essere estremamente complessa e, soprattutto, l'\textbf{Auten\-ticazione a Più Fattori (MFA)} deve essere \textit{sempre} abilitata e richiesta per l'accesso root.
+    \item \textbf{Protezione Robusta delle Credenziali:} La password deve essere estremamente complessa e, soprattutto, l'\textbf{Auten\allowbreak{}ticazione a Più Fattori\allowbreak{}(MFA)} deve essere \textit{sempre} abilitata e richiesta per l'accesso root.
     \item \textbf{Monitoraggio Continuo:} Ogni azione eseguita tramite l'account root deve essere tracciata e monitorata tramite servizi come AWS CloudTrail, generando allarmi per qualsiasi utilizzo.
 \end{itemize}
 
@@ -71,7 +78,8 @@ Una delle prime e più critiche aree di intervento riguarda l'\textbf{account ro
 \subsubsection*{Analisi degli accessi e delle policy}
 L'analisi dell'infrastruttura di \emph{Finanz} (marzo 2025) ha evidenziato che il Chief Technology Officer (CTO) opera direttamente con l'account \emph{root} dell'ambiente AWS. Oltre a tale account, sono stati identificati due utenti IAM distinti che dispongono di privilegi amministrativi completi tramite l'assegnazione della policy \texttt{AdministratorAccess}.
 
-Si è riscontrato che, nei 90 giorni precedenti l'analisi, l'account \emph{root} è stato utilizzato 76 volte per eseguire attività che potevano essere delegate a ruoli con privilegi limitati, in palese violazione del principio del minimo privilegio.
+Si è riscontrato che, nei 90 giorni precedenti l'analisi, l'account \emph{root} è stato utilizzato 76 volte per eseguire attività che potevano essere delegate a ruoli con privilegi limitati.
+Tale pratica non è conforme al principio del minimo privilegio, che ne riserva l'uso a scenari di emergenza.
 
 Inoltre, tutte le policy di autorizzazione assegnate sono di tipo \emph{AWS managed}, ovvero predefinite dal provider. Si rileva la totale assenza di condizioni contestuali (\texttt{Condition}), di controlli basati su attributi (\emph{Attribute-Based Access Control}, ABAC) e di \emph{permission boundary} per circoscrivere i permessi. Ad esempio, l'utente di servizio \texttt{finanz-backend} dispone della policy \texttt{AmazonS3FullAccess}, sebbene le sue mansioni richiedano unicamente l'accesso in sola lettura (\emph{read-only}) a tre specifici bucket di produzione.
 
@@ -83,7 +91,7 @@ Dall'analisi emergono diverse criticità significative che espongono l'organizza
 
     \item \textbf{Privilegi eccessivi per gli utenti amministrativi}: L'assegnazione della policy \texttt{AdministratorAccess} a entrambi gli utenti IAM concede permessi equivalenti a quelli dell'account \emph{root}. Tale configurazione, che consente pieni poteri su tutte le risorse, costituisce una violazione diretta della best practice \textbf{IAM-1}.
 
-    \item \textbf{Autenticazione debole per gli utenti IAM}: Per gli account amministrativi \texttt{Ferraboli} e \texttt{Giuntoni} non è obbligatorio l'uso della MFA per accedere alla console. Questo espone gli account al rischio di compromissione tramite furto di credenziali e viola la raccomandazione \textbf{IAM-5}.
+    \item \textbf{Autenticazione debole per gli utenti IAM}: Per gli account amministrativi non è obbligatorio l'uso della MFA per accedere alla console. Questo espone gli account al rischio di compromissione tramite furto di credenziali e viola la raccomandazione \textbf{IAM-5}.
 
     \item \textbf{Mancanza di una policy per le password}: Non è stata definita una policy che imponga requisiti di complessità, rotazione e lunghezza minima per le password degli utenti. L'assenza di tale politica di sicurezza viola la direttiva \textbf{IAM-7}.
     
@@ -135,16 +143,18 @@ A ulteriore protezione degli ambienti critici, è stata implementata una policy 
                 "iam:DetachRolePolicy"
             ],
             "Resource": [
-                "arn:aws:iam::538927841179:role/CTO-AdminRole",
-                "arn:aws:iam::538927841179:role/incident-responder",
-                "arn:aws:iam::538927841179:user/andrea.pasini.admin",
-                "arn:aws:iam::538927841179:user/matteo.giuntoni",
-                "arn:aws:iam::538927841179:user/andrea.ferraboli"
+                "arn:aws:iam::123456789012:role/CTO-AdminRole",
+                "arn:aws:iam::123456789012:role/incident-responder",
+                "arn:aws:iam::123456789012:user/admin",
+                "arn:aws:iam::123456789012:user/user1",
+                "arn:aws:iam::123456789012:user/user2"
             ]
         }
     ]
 }
 \end{lstlisting}
+
+\textbf{Nota:} Gli identificatori delle risorse AWS (account ID, ARN di ruoli e utenti) mostrati in questo e nei successivi listati sono stati sostituiti con placeholder generici per motivi di privacy aziendale. In un ambiente di produzione reale, questi valori conterrebbero gli identificatori specifici dell'account e delle risorse AWS dell'organizzazione.
 
 \subsubsection{Segmentazione dei Ruoli tramite Permission Boundaries}
 Per garantire che i permessi non possano superare una soglia di sicurezza predefinita, abbiamo reso obbligatoria l'applicazione di Permission Boundaries a tutti i nuovi ruoli IAM. Un permission boundary definisce il perimetro massimo di autorizzazioni che un'entità può possedere, anche se la sua policy di identità ne concedesse di più. Il Listato \ref{lst:permission-boundary-dev} illustra un esempio di tale confine, \texttt{FinanzDeveloperBoundary}, che limita le azioni degli sviluppatori ai servizi necessari (EC2, S3, RDS), impedendo al contempo qualsiasi operazione su risorse di produzione e negando esplicitamente l'accesso ai servizi di gestione IAM e AWS Organizations. L'applicazione di questi confini è stata automatizzata tramite una funzione Lambda, \texttt{enforce-boundaries-lambda}, che viene attivata dagli eventi \texttt{CreateRole} e \texttt{PutRolePolicy} registrati da AWS CloudTrail.
@@ -208,13 +218,15 @@ Per garantire che i permessi non possano superare una soglia di sicurezza predef
         "Resource": "*",
         "Condition": {
            "StringNotLike": {
-              "iam:PermissionsBoundary": "arn:aws:iam::538927841179:policy/FinanzDeveloperBoundary" 
+              "iam:PermissionsBoundary": "arn:aws:iam::497487485332:policy/FinanzDeveloperBoundary" 
            }
         }
     }
   ]
 }
 \end{lstlisting}
+
+\textbf{Nota:} L'account ID `497487485332` utilizzato nell'ARN della Permission Boundary è un placeholder utilizzato per motivi di privacy aziendale.
 
 \subsection{Sviluppo di un Modello Ibrido Aggiornato per la Gestione degli Accessi}
 \label{subsec:modello_ibrido_aggiornato_iam}
@@ -269,11 +281,10 @@ Questi ruoli sono concepiti per un'assunzione temporanea e strettamente necessar
 \label{subsubsec:mappa_servizi_iam}
 Di seguito si presenta una sintesi esemplificativa di come i permessi vengono distribuiti tra i gruppi e i ruoli.
 \begin{description}
-  \item[EC2] \texttt{dev}: permesso di \texttt{Start/Stop/Terminate} per le istanze di sviluppo. \texttt{backend-dev}: stessi permessi del gruppo \texttt{dev}, con l'aggiunta di \texttt{DescribeImages}. \texttt{admin}: controllo completo, ad eccezione di azioni critiche come \texttt{DeleteVpc} in produzione (limitate tramite boundary o SCP).
-  \item[Elastic Beanstalk] \texttt{dev}: autorizzazione al deploy negli ambienti di sviluppo. \texttt{backend-dev}: deploy e salvataggio delle configurazioni (\texttt{eb config save}) negli ambienti di sviluppo. \texttt{admin}: gestione dei template e delle versioni delle applicazioni, anche in produzione, previa adozione di specifiche cautele \cite{AWSEBRole}.
-  \item[S3] \texttt{dev}: lettura/scrittura sui bucket con suffisso \texttt{-dev}. \texttt{backend-dev}: dispone inoltre dei permessi \texttt{PutObjectAcl} su bucket di log specifici. \texttt{admin}: facoltà di modificare policy di bucket (\texttt{PutBucketPolicy}) e configurazioni di replica (\texttt{PutReplicationConfiguration}) \cite{AWSS3Security}.
-  \item[Load Balancer] \texttt{dev}: sola descrizione (\texttt{Describe*}). \texttt{backend-dev}: registrazione di target nei target group di sviluppo (\texttt{RegisterTargets}). \texttt{admin}: creazione e modifica degli attributi dei load balancer su tutti gli ambienti, subordinando le modifiche in produzione a processi di approvazione formali \cite{AWSELBIAM}.
-  \item[RDS] \texttt{dev}: connessione in sola lettura (\texttt{rds-db:connect}) ai database di sviluppo. \texttt{backend-dev}: esecuzione di statement tramite Data API sugli ambienti di sviluppo. \texttt{admin}: creazione di snapshot (\texttt{CreateDBSnapshot}), avvio di task di esportazione (\texttt{StartExportTask}) e gestione del failover (\texttt{FailoverDBCluster}) \cite{AWSRDSIAM}.
+  \item[EC2] \texttt{dev}: permesso di \texttt{Start/Stop/Terminate} per le istanze di sviluppo.\newline \texttt{backend-dev}: stessi permessi del gruppo \texttt{dev}, con l'aggiunta di \texttt{Describe\discretionary{-}{}{}Images}.\newline \texttt{admin}: controllo completo, ad eccezione di azioni critiche come \texttt{DeleteVpc} in produzione (limitate tramite boundary o SCP).
+  \item[Elastic Beanstalk] \texttt{dev}: autorizzazione al deploy negli ambienti di sviluppo.\newline \texttt{backend-dev}: deploy e salvataggio delle configurazioni (\texttt{eb config save}) negli ambienti di sviluppo.\newline \texttt{admin}: gestione dei template e delle versioni delle applicazioni, anche in produzione, previa adozione di specifiche cautele \cite{AWSEBRole}.
+  \item[S3] \texttt{dev}: lettura/scrittura sui bucket con suffisso \texttt{-dev}.\newline \texttt{backend-dev}: dispone inoltre dei permessi \texttt{PutObjectAcl} su bucket di log specifici.\newline \texttt{admin}: facoltà di modificare policy di bucket (\texttt{PutBucketPolicy}) e configurazioni di replica.
+  \item[RDS] \texttt{dev}: connessione in sola lettura (\texttt{rds-db:connect}) ai database di sviluppo.\newline \texttt{backend-dev}: esecuzione di statement tramite Data API sugli ambienti di sviluppo.\newline \texttt{admin}: creazione di snapshot (\texttt{CreateDBSnapshot}), avvio di task di esportazione (\texttt{StartExportTask}) e gestione del failover (\texttt{FailoverDBCluster}) \cite{AWSRDSIAM}.
 \end{description}
 L'adozione di un approccio basato sul controllo degli accessi tramite tag, noto come \emph{Tag-Based Access Control} (ABAC), può ridurre significativamente la complessità delle policy puntuali. Questo metodo consente una gestione più scalabile degli accessi man mano che gli ambienti (sviluppo, staging, produzione) crescono o si moltiplicano \cite{AWSEC2IAM,AWSELBIAM}.
 
@@ -334,7 +345,7 @@ Le \emph{Service Control Policies} (SCP) stabiliscono i confini massimi dei perm
     
     La verifica di una policy analoga in un ambiente di sviluppo ha confermato la sua efficacia nel bloccare i tentativi di disabilitazione di tali servizi, anche quando eseguiti da utenti con privilegi amministrativi.
 
-    \item \textbf{Restrizione Geografica delle Regioni AWS}: Per ragioni di conformità normativa (ad esempio, il GDPR) e per ridurre la superficie d'attacco, si raccomanda di limitare l'operatività alle sole regioni AWS approvate (come \texttt{eu-central-1}, \texttt{eu-south-1} e \texttt{eu-west-1}). Una SCP può essere impiegata per impedire il provisioning di risorse in regioni non autorizzate \cite{awsbuilders:scps}.
+    \item \textbf{Restrizione Geografica delle Regioni AWS}: Per ragioni di conformità normativa (ad esempio, il GDPR) e per ridurre la superficie d'attacco, si raccomanda di limitare l'operatività alle sole regioni AWS approvate (come \texttt{eu-central\discretionary{-}{}{-}1}, \texttt{eu-south\discretionary{-}{}{-}1} e \texttt{eu-west\discretionary{-}{}{-}1}). Una SCP può essere impiegata per impedire il provisioning di risorse in regioni non autorizzate \cite{awsbuilders:scps}.
 
     \begin{lstlisting}[style=json, caption={SCP per limitare le regioni AWS utilizzabili}, label=lst:scp-region-restriction]
 {
@@ -363,7 +374,7 @@ Le \emph{Service Control Policies} (SCP) stabiliscono i confini massimi dei perm
 }
     \end{lstlisting}
     
-    L'utilizzo della clausola \texttt{NotAction} è cruciale per escludere i servizi globali (come IAM e Route 53) che non sono legati a una regione specifica. La regione \texttt{us-east-1} viene inclusa in via eccezionale, poiché ospita gli endpoint di alcuni di questi servizi.
+    L'utilizzo della clausola \texttt{NotAction} è cruciale per escludere i servizi globali (come IAM e Route 53) che non sono legati a una regione specifica. La regione \texttt{us-east\discretionary{-}{}{-}1} viene inclusa in via eccezionale, poiché ospita gli endpoint di alcuni di questi servizi.
 
     \item \textbf{Obbligo di Autenticazione a Più Fattori (MFA)}: In linea con le più recenti direttive di sicurezza, è stata introdotta una SCP che rende obbligatoria l'autenticazione a più fattori (MFA). Questa policy nega qualsiasi operazione se non eseguita all'interno di una sessione autenticata tramite un secondo fattore, anticipando i requisiti che AWS renderà mandatori.
 
@@ -392,10 +403,10 @@ Per scenari d’emergenza estrema, come un attacco ransomware che compromette l'
 
 \begin{enumerate}
 \item \textbf{Account AWS dedicato e isolato}:
-Viene creato un nuovo account AWS all'interno dell'Organization (\texttt{o-4g2j3d5e6l}), posizionato nella OU «Security». Questo account, con ID riservato \texttt{538927841179}, è mantenuto operativamente isolato, senza risorse operative e con un ciclo di fatturazione separato per garantirne l'integrità.
+Viene creato un nuovo account AWS all'interno dell'Organization (\texttt{o\discretionary{-}{}{-}4g2j3d5e6l}), posizionato nella OU «Security». Questo account, con ID riservato \texttt{497487485332}, è mantenuto operativamente isolato, senza risorse operative e con un ciclo di fatturazione separato per garantirne l'integrità.
 
 \item \textbf{Utente di emergenza \texttt{BreakGlassEmergencyUser}}:
-All'interno dell'account Break-Glass, viene configurato un singolo utente IAM, il cui ARN è \texttt{arn:aws:iam::538927841179:user/BreakGlassEmergencyUser}. La sua sicurezza è affidata a una password di 32 caratteri generata casualmente, custodita in una busta fisica sigillata, e a un dispositivo MFA hardware FIDO2 dedicato (es. YubiKey, Seriale: \texttt{YK-87654321}). Per ridurre la superficie d'attacco, l'utente non dispone di access key permanenti e la sua unica abilità è quella di poter assumere il ruolo \texttt{BreakGlassAdminRole}.
+All'interno dell'account Break-Glass, viene configurato un singolo utente IAM, il cui ARN è \texttt{arn:aws:iam::497487485332:user/BreakGlassEmergencyUser}. La sua sicurezza è affidata a una password di 32 caratteri generata casualmente, custodita in una busta fisica sigillata, e a un dispositivo MFA hardware FIDO2 dedicato (es. YubiKey, Seriale: \texttt{YK\discretionary{-}{}{-}87654321}). Per ridurre la superficie d'attacco, l'utente non dispone di access key permanenti e la sua unica abilità è quella di poter assumere il ruolo \texttt{BreakGlassAdminRole}.
 
 \item \textbf{Ruolo amministrativo \texttt{BreakGlassAdminRole}}:
 Questo ruolo, definito nell'account Break-Glass, è il fulcro operativo del meccanismo. È associato alla policy gestita \texttt{AdministratorAccess} e la sua \emph{trust-policy} è configurata per consentire l'assunzione del ruolo esclusivamente da parte di \texttt{BreakGlassEmergencyUser}. A sua volta, il ruolo è autorizzato, tramite \texttt{sts:AssumeRole}, ad assumere il ruolo \texttt{OrganizationAccountAccessRole} presente in tutti gli altri account operativi, garantendo così la capacità di intervento a livello di intera organizzazione.
@@ -403,8 +414,10 @@ Questo ruolo, definito nell'account Break-Glass, è il fulcro operativo del mecc
 \item \textbf{Procedura di attivazione rigorosa}:
 L'utilizzo del Break-Glass Account è un evento eccezionale, la cui attivazione richiede un'autorizzazione congiunta e tracciata del CEO e del CTO, con la registrazione formale dell'evento in ServiceNow. Ogni sessione attivata ha una durata massima di 8 ore e deve essere seguita da una revisione post-incidente obbligatoria per analizzare le cause e le azioni intraprese.
 
-\item \textbf{Monitoraggio e lockdown \-automatico}:
-È implementato un sistema di monitoraggio intensivo. Una regola EventBridge rileva ogni evento di login (\lstinline|aws.signin|) e invia una notifica immediata al topic SNS \texttt{security-alerts-breakglass}. Inoltre, una funzione Lambda (\texttt{breakglass-auto-restrict}) viene attivata per applicare automaticamente una \emph{permissions-boundary} restrittiva al ruolo qualora la sessione superi la durata di 8 ore, limitando così la finestra di esposizione al rischio.
+\item \textbf{Monitoraggio e lockdown \allowbreak{}automatico}:
+È implementato un sistema di monitoraggio intensivo.
+Una regola EventBridge rileva ogni evento di login (\lstinline|aws.signin|) e invia una notifica immediata al topic SNS \texttt{security\discretionary{-}{}{-}alerts\discretionary{-}{}{-}breakglass}.
+Inoltre, una funzione Lambda (\texttt{breakglass-auto-restrict}) viene attivata per applicare automaticamente una \emph{permissions-boundary} restrittiva al ruolo qualora la sessione superi la durata di 8 ore, limitando così la finestra di esposizione al rischio.
 
 \end{enumerate}
 
@@ -416,7 +429,7 @@ from datetime import datetime, timedelta, timezone
 
 iam = boto3.client("iam")
 sns = boto3.client("sns")
-ROLE_ARN = os.environ["ROLE_TO_ASSUME"] # arn:aws:iam::538927841179:role/BreakGlassAdminRole
+ROLE_ARN = os.environ["ROLE_TO_ASSUME"] # arn:aws:iam::497487485332:role/BreakGlassAdminRole
 BOUNDARY_ARN = os.environ["RESTRICTIVE_POLICY_ARN"]
 SNS_TOPIC_ARN = os.environ["SNS_TOPIC_ARN"]
 
@@ -452,7 +465,7 @@ Per mitigare il rischio associato a credenziali statiche a lunga durata, è cruc
 #Ottiene credenziali temporanee e le scrive in un file
 
 aws sts assume-role
---role-arn arn:aws:iam::538927841179:role/S3ReadOnlyForFinanzScript
+--role-arn arn:aws:iam::497487485332:role/S3ReadOnlyForFinanzScript
 --role-session-name $(date +FinanzScript_%Y%m%d_%H%M%S)
 --duration-seconds 3600
 --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
@@ -471,7 +484,7 @@ aws s3 ls s3://finanz-data-dev/
 unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 \end{lstlisting}
 
-\subsection{Implementazione di un Workflow di Approvazione a Due Fasi (Opzionale)}
+\subsection{Implementazione di un Workflow di Approvazione a Due Fasi}
 \label{subsubsec:approvazione_due_fasi}
 Per operazioni ad altissimo impatto (es. eliminazione di un bucket S3 in produzione, disattivazione del logging), si può introdurre un workflow di approvazione multi-persona, orchestrato tramite AWS Step Functions.
 

@@ -113,20 +113,20 @@ La scelta è quindi ricaduta su \textbf{T-Pot CE 22.04}, una suite di honeypot a
 L'implementazione è stata eseguita seguendo rigorosamente i principi di \textit{security by design} e \textit{least privilege}. L'obiettivo primario era creare un ambiente efficace nella raccolta di dati, ma al contempo ermeticamente isolato per prevenire qualsiasi rischio per l'infrastruttura di produzione di Finanz.
 
 \subsection{Architettura di Rete Isolata}
-È stato creato un Virtual Private Cloud (VPC) dedicato, denominato \texttt{Finanz\-Honeypot\--VPC}, completamente separato dal VPC di produzione.
+È stato creato un Virtual Private Cloud (VPC) dedicato, denominato \texttt{Finanz\discretionary{-}{}{-}Honeypot\discretionary{-}{}{-}-VPC}, completamente separato dal VPC di produzione.
 Lo schema concettuale dell'architettura è illustrato di seguito.
 
 \begin{verbatim}
-VPC Isolato (Finanz-Honeypot-VPC) in eu-south-1
+VPC Isolato (Finanz-Honeypot\discretionary{-}{}{-}VPC) in eu-south-1
 |
-|-- Public Subnet (Finanz-Honeypot-PublicSubnet)
+|-- Public Subnet (Finanz-Honeypot\discretionary{-}{}{-}PublicSubnet)
 |   |-- EC2 Instance (Finanz-Tpot-EC2) [t3a.medium, Ubuntu 22.04]
 |   |   |-- Elastic IP (IP Pubblico Statico)
 |   |   |-- IAM Role (Permessi minimi per CloudWatch/Secrets Manager)
 |   |   '-- Security Group (Finanz-Tpot-SG)
-|   '-- Network ACL (Finanz-Honeypot-NACL)
+|   '-- Network ACL (Finanz-Honeypot\discretionary{-}{}{-}NACL)
 |
-|-- Internet Gateway (Finanz-Honeypot-IGW)
+|-- Internet Gateway (Finanz-Honeypot\discretionary{-}{}{-}IGW)
 |
 '-- Integrazione con Servizi AWS di Monitoraggio e Logging
     |-- AWS CloudWatch (Logs, Alarms)
@@ -135,7 +135,7 @@ VPC Isolato (Finanz-Honeypot-VPC) in eu-south-1
 \end{verbatim}
 
 \subsection{Configurazione dei Controlli di Sicurezza di Rete}
-La sicurezza del perimetro è stata la priorità assoluta. Per il Security Group \texttt{Finanz-Tpot-SG}, le regole di ingresso sono state configurate per aprire le porte dei sensori honeypot (e.g., 21, 23, 80, 443, 3306) a qualsiasi indirizzo (\texttt{0.0.0.0/0}) al fine di massimizzare l'esposizione agli attacchi. È fondamentale sottolineare che la porta 22 esposta pubblicamente è gestita dal sensore Cowrie e non dal demone SSH reale dell'host. Le porte di gestione di T-Pot (64294-64297) e la porta SSH dell'host, configurata su una porta non standard (2222) per offuscamento, sono state rese accessibili esclusivamente dall'IP di un Bastion Host di gestione. Le regole di uscita sono state impostate per bloccare tutto il traffico di default, consentendo connessioni solo verso gli endpoint AWS necessari e per gli aggiornamenti di sistema.
+La sicurezza del perimetro è stata la priorità assoluta. Per il Security Group \texttt{Finanz-Tpot-SG}, le regole di ingresso sono state configurate per aprire le porte dei sensori honeypot (e.g., 21, 23, 80, 443, 3306) a qualsiasi indirizzo (\texttt{0.0.0.0/0}) al fine di massimizzare l'esposizione agli attacchi. È fondamentale sottolineare che la porta 22 esposta pubblicamente è gestita dal sensore Cowrie e non dal demone SSH reale dell'host. Le porte di gestione di T-Pot (64294\discretionary{-}{}{-}64297) e la porta SSH dell'host, configurata su una porta non standard (2222) per offuscamento, sono state rese accessibili esclusivamente dall'IP di un Bastion Host di gestione. Le regole di uscita sono state impostate per bloccare tutto il traffico di default, consentendo connessioni solo verso gli endpoint AWS necessari e per gli aggiornamenti di sistema.
 
 Come seconda linea di difesa, le Network ACLs (NACLs) associate alla subnet sono state configurate con regole di ingresso permissive, per non filtrare traffico potenzialmente interessante per i sensori, ma con regole di uscita estremamente restrittive, bloccando esplicitamente qualsiasi traffico non essenziale.
 
@@ -259,32 +259,51 @@ Un ulteriore elemento che altera radicalmente l'equazione economica è il progra
 Ne consegue che, per tutta la durata dei crediti, il TCO finanziario del progetto coincide quasi esclusivamente con il costo del personale, che come analizzato, non grava sul budget di cassa.
 
 \subsection{Valutazione del Ritorno sull'Investimento (ROI) Strategico}
-Alla luce di un TCO con un impatto minimo sulla cassa aziendale, il ROI del progetto diventa straordinariamente elevato. Secondo studi di settore (e.g., IBM Cost of a Data Breach Report), il costo medio di una violazione nel settore finanziario si attesta intorno ai \$6 milioni. Se l'intelligence fornita dall'honeypot contribuisce a ridurre la probabilità annuale di una violazione anche solo dello 0,5\%, il beneficio atteso (la perdita evitata) è:
+Alla luce di un TCO con un impatto minimo sulla cassa aziendale, il ROI del progetto diventa straordinariamente elevato. Secondo \cite{dataBreachCosts,arquelau_luiz_vergara_robson_amvame_2024}, il costo medio di una violazione nel settore finanziario si attesta intorno ai \$4 milioni. Per illustrare il potenziale ritorno sull'investimento, consideriamo l'ipotesi che l'intelligence fornita dall'honeypot contribuisca a ridurre la probabilità annuale di una violazione dello 0,5\%. 
+
+Il calcolo del beneficio atteso si basa sul concetto di \textbf{Delta ALE (Annual Loss Expectancy)}, che rappresenta la riduzione dell'esposizione al rischio annuale ottenuta attraverso l'implementazione di una contromisura di sicurezza. L'ALE è definito come il prodotto tra l'impatto finanziario di un incidente (\textit{Single Loss Expectancy}, SLE) e la sua frequenza annuale attesa (\textit{Annual Rate of Occurrence}, ARO). Il Delta ALE quantifica quindi il valore economico della riduzione del rischio:
+
 \[
-\Delta\text{ALE} = \$6.000.000 \times 0,005 = \textbf{\$30.000}
+\text{ALE} = \text{SLE} \times \text{ARO}
 \]
-Questo valore, che rappresenta una stima conservativa, surclassa di ordini di grandezza il TCO del sistema. Il rapporto costi/benefici è quindi eccezionalmente favorevole, rendendo l'adozione dell'honeypot non solo una scelta tecnicamente saggia, ma una decisione di business strategica e finanziariamente astuta.
+\[
+\Delta\text{ALE} = \text{ALE}_{\text{prima}} - \text{ALE}_{\text{dopo}} = \text{SLE} \times (\text{ARO}_{\text{prima}} - \text{ARO}_{\text{dopo}})
+\]
+
+Nel nostro scenario illustrativo, assumendo un SLE di \$4.000.000 (costo medio di una violazione) e una riduzione dell'ARO dello 0,5\% (da una probabilità base a una probabilità ridotta), il beneficio atteso sarebbe:
+\[
+\Delta\text{ALE} = \$4.000.000 \times 0,005 = \textbf{\$20.000}
+\]
+
+È importante sottolineare che questa percentuale rappresenta un'assunzione conservativa utilizzata a scopo dimostrativo. L'analisi di sensibilità rivela come il ROI vari significativamente al variare di questo parametro:
+\begin{itemize}
+    \item Con una riduzione del rischio dello 0,1\%, il beneficio atteso si riduce a \$4.000
+    \item Con una riduzione dell'1\%, il beneficio atteso raddoppia a \$40.000
+    \item Con una riduzione del 2\%, il beneficio atteso raggiunge \$80.000
+\end{itemize}
+
+Anche nello scenario più conservativo (0,1\% di riduzione del rischio), il valore del beneficio atteso supera comunque di ordini di grandezza il TCO del sistema. Questo dimostra la robustezza dell'investimento: il rapporto costi/benefici rimane eccezionalmente favorevole anche con ipotesi molto prudenti, rendendo l'adozione dell'honeypot non solo una scelta tecnicamente saggia, ma una decisione di business strategica e finanziariamente astuta indipendentemente dalla precisione della stima iniziale.
 \section{Validazione Empirica e Analisi dei Risultati}
 \label{sec:validazione_empirica_analisi}
 
 Per trascendere una semplice verifica funzionale e valutare l'efficacia dell'architettura in uno scenario realistico, è stata condotta una simulazione di attacco controllata, metodica e multi-fase, ispirata ai cicli di vita degli attacchi reali e alle tecniche di penetration testing in ambiente cloud.
 
-\subsection{Metodologia della Simulazione di Attacco Multi-Fase}
+\subsection{Metodologia dell'Attacco Controllato Multi-Fase}
 L'esperimento è stato condotto da un'istanza EC2 esterna ("attacking machine") e ha seguito un approccio a tre fasi, che emula la progressione di un attaccante da una ricognizione opportunistica a un tentativo di post-sfruttamento mirato.
 
 \subsubsection{Fase 1: Ricognizione Esterna e Attacco Opportunistico}
-Questa fase ha simulato le azioni di un attaccante a bassa sofisticazione o di una botnet, il cui scopo è mappare la superficie d'attacco e trovare vulnerabilità "low-hanging fruit".
+Questa fase ha riprodotto le azioni di un attaccante a bassa sofisticazione o di una botnet, il cui scopo è mappare la superficie d'attacco e trovare vulnerabilità "low-hanging fruit".
 \begin{itemize}
-    \item \textbf{Scansione di Rete e Servizi:} Utilizzo di \texttt{Nmap} con opzioni aggressive (\texttt{-A -sV}) per identificare porte aperte, servizi in esecuzione e loro versioni, e per tentare un fingerprinting del sistema operativo.
-    \item \textbf{Attacco a Forza Bruta:} Utilizzo di \texttt{Hydra} contro i servizi SSH, Telnet e MySQL emulati, impiegando dizionari di credenziali comuni (e.g., \textit{rockyou.txt}) per simulare tentativi di compromissione di password deboli.
-    \item \textbf{Enumerazione di Risorse Web:} Utilizzo di strumenti come \texttt{gobuster} per sondare l'esistenza di percorsi, file e directory comuni sul server web esposto.
+    \item \textbf{Scansione di Rete e Servizi:} Abbiamo utilizzato \texttt{Nmap} con opzioni aggressive (\texttt{-A -sV}) per identificare porte aperte, servizi in esecuzione e loro versioni, e per tentare un fingerprinting del sistema operativo.
+    \item \textbf{Attacco a Forza Bruta:} Abbiamo impiegato \texttt{Hydra} contro i servizi SSH, Telnet e MySQL emulati, utilizzando dizionari di credenziali comuni (e.g., \textit{rockyou.txt}) per riprodurre tentativi di compromissione di password deboli.
+    \item \textbf{Enumerazione di Risorse Web:} Abbiamo utilizzato strumenti come \texttt{gobuster} per sondare l'esistenza di percorsi, file e directory comuni sul server web esposto.
 \end{itemize}
 
-\subsubsection{Fase 2: Sfruttamento Simulata e Accesso Iniziale}
-Questa fase ha simulato il successo della Fase 1. Si è ipotizzato che l'attacco di forza bruta avesse avuto successo, identificando una credenziale debole (e.g., \texttt{root:123456}) per il servizio SSH emulato da Cowrie. L'azione conseguente è stata la connessione tramite SSH al servizio Cowrie utilizzando le credenziali "compromesse" per accedere alla shell interattiva fittizia.
+\subsubsection{Fase 2: Sfruttamento Eseguito e Accesso Iniziale}
+In questa fase abbiamo eseguito un attacco di compromissione controllato. Dopo aver identificato le credenziali deboli configurate nell'ambiente di test (e.g., \texttt{root:123456}), abbiamo effettuato la connessione tramite SSH al servizio Cowrie utilizzando tali credenziali per accedere alla shell interattiva fittizia.
 
 \subsubsection{Fase 3: Post-Sfruttamento, Escalation e Movimento Laterale}
-Questa è la fase più critica, che simula le azioni di un attaccante che, dopo aver ottenuto un punto d'appoggio (\textit{foothold}), tenta di comprendere l'ambiente, scalare i privilegi e accedere a dati sensibili. I comandi eseguiti all'interno della shell Cowrie sono stati ispirati dalle tecniche di post-exploitation descritte nella letteratura specifica per AWS.
+Questa è la fase più critica dell'esperimento, in cui abbiamo eseguito le azioni tipiche di un attaccante che, dopo aver ottenuto un punto d'appoggio (\textit{foothold}), tenta di comprendere l'ambiente, scalare i privilegi e accedere a dati sensibili. I comandi eseguiti all'interno della shell Cowrie sono stati ispirati dalle tecniche di post-exploitation descritte nella letteratura specifica per AWS e sono stati effettivamente lanciati durante il test.
 \begin{lstlisting}[caption={Comandi simulati nella fase di post-sfruttamento}, label=lst:post_exploit_aws]
 # 1. Enumerazione dell'ambiente e identita'
 whoami
@@ -320,7 +339,7 @@ L'esperimento ha prodotto un volume ricco e stratificato di dati, confermando l'
     \item \textbf{Rilevamenti del Sensore Custom:} Le interazioni mirate con l'endpoint \texttt{/api/v1/payments/authorize} sono state catturate dal sensore Flask. I log strutturati in JSON hanno permesso di analizzare non solo i payload (e.g., tentativi di SQLi), ma anche gli header HTTP (e.g., User-Agent), che possono essere utilizzati per creare firme specifiche per il WAF di produzione.
 \end{itemize}
 In sintesi, la validazione ha dimostrato che l'architettura non solo rileva le minacce, ma fornisce un contesto profondo sulle \textbf{intenzioni} e le \textbf{metodologie} degli attaccanti, un risultato che va ben oltre le capacità di un sistema di sicurezza tradizionale.
-\section{Conclusioni}
+\section{Conclusioni dell'implementazione dell'honeypot}
 \label{sec:conclusioni}
 
 L'implementazione dell'honeypot T-Pot su AWS si è dimostrata un successo strategico per Finanz. A fronte di un costo operativo contenuto e di un impegno gestionale definito, il sistema fornisce un flusso costante di threat intelligence ad alta fedeltà, direttamente pertinente al contesto operativo della startup. Questo progetto ha dimostrato che anche una startup con risorse limitate può e deve adottare misure di sicurezza proattive, trasformando gli attacchi da minacce a preziose opportunità di apprendimento.
