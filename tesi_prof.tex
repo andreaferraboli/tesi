@@ -32,7 +32,7 @@
 % PACCHETTO PERSONALIZZATO (DOPO TUTTI GLI ALTRI)
 \usepackage{tesiupdated}           % Pacchetto personalizzato per la tesi"
 \usepackage{fancyhdr}      % 1. carica fancyhdr
-
+\usepackage[a-3u]{pdfx}
 \setlength{\headheight}{14pt}   % o il valore corretto che hai misurato
 \fancyhf{}
 
@@ -278,26 +278,58 @@ nell'ambito fintech.
 \allowbreak{}capitolo analizza i paradigmi del cloud computing e presenta AWS come 
 piattaforma di riferimento, descrivendone architettura e caratteristiche 
 di sicurezza.
-\item[Capitolo 4 – Progettazione e Implementazione \allowbreak{}Avanzata della \allowbreak{}Sicurezza \allowbreak{}delle 
-\allowbreak{}Identità e degli Accessi (IAM) in AWS] Questo capitolo si concentra sull'implementazione 
+\item[Capitolo 4 – Sicurezza delle Identità e degli Accessi (IAM) in AWS] Questo capitolo si concentra sull'implementazione 
 pratica di IAM, analizzando strategie avanzate per la gestione delle identità 
 e l'applicazione del principio del minimo privilegio.
-\item[Capitolo 5 – Architettura di Rete Sicura e Protezione dei \allowbreak{}Servizi Applicativi 
-\allowbreak{}su AWS per fintech] Il quinto capitolo descrive la progettazione di un'architettura 
+\item[Capitolo 5 – Architettura di Rete Sicura su AWS] Il quinto capitolo descrive la progettazione di un'architettura 
 di rete sicura mediante VPC, gruppi di sicurezza e controlli di accesso avanzati.
-\item[Capitolo 6 – Implementazione di un Honeypot in un'Infrastruttura AWS per 
-\allowbreak{}Startup fintech] L'ultimo capitolo tecnico presenta l'implementazione di un 
+\item[Capitolo 6 – Implementazione di un Honeypot su AWS] L'ultimo capitolo tecnico presenta l'implementazione di un 
 sistema honeypot su AWS per il rilevamento proattivo delle minacce, includendo 
 analisi dei costi e test di efficacia.
-\item[Capitolo 7 – Conclusioni] Il capitolo finale riassume i risultati raggiunti 
-\allowbreak{}e presenta considerazioni sulle prospettive future per la sicurezza delle 
+\item[Capitolo 7 – Conclusioni e Prospettive Future] Il capitolo finale riassume i risultati raggiunti 
+e presenta considerazioni sulle prospettive future per la sicurezza delle 
 infrastrutture cloud in ambito fintech.
 \end{description}
 \prefacesection{Dedica}
 {\hfill \Large {\sl dedicato a chi mi vuole bene, a chi mi stima e ai miei compagni di viaggio, vi voglio bene}}
 \prefacesection{Ringraziamenti}
-        Vorrei ringraziare soprattutto \dots
+Desidero esprimere la mia più sentita gratitudine al Professor Claudio Agostino Ardagna, mio relatore, per la sua costante disponibilità, gentilezza e prontezza nell'aiutarmi durante tutto il percorso di stesura della tesi. I suoi feedback costruttivi e i suoi preziosi consigli sono stati fondamentali per la riuscita di questo lavoro.
 
+\bigskip
+Un ringraziamento speciale va ad Andrea Pasini, che mi ha accompagnato con pazienza e competenza durante tutto il periodo di tirocinio in azienda. La sua guida nell'implementazione tecnica e il suo supporto continuo sono stati determinanti per la mia crescita professionale e per la realizzazione pratica di questo progetto.
+
+\bigskip
+Vorrei inoltre ringraziare Simone Cortese per il suo contributo e supporto durante questo percorso: una figura di livello internazionale e di grande esperienza nel settore, sia accademica sia imprenditoriale, che ha dedicato a uno studente qualsiasi il suo prezioso tempo. Grazie.
+
+\bigskip
+A Lorenzo Perotta, che mi ha aperto le porte del mondo delle startup fintech, vedendo del valore in me quando forse io stesso non lo vedevo. La fiducia che mi hai sempre dimostrato e il tuo continuo sostegno hanno rappresentato una fonte di motivazione inesauribile. Grazie per essere la dimostrazione vivente di quello che voglio diventare: una persona piena di ambizione, passione ed ossessione per costruire qualcosa di valore per la società. Un semplice grazie non basterà mai a esprimere la mia gratitudine per averti conosciuto e per avermi fatto conoscere una startup piena di ragazzi con così tanto fuoco dentro e così tanto valore da essere uno stimolo intellettuale e morale senza paragoni. Se dovessi puntare su qualcuno che può avere successo ed un impatto sul mondo, non esiterei a dire il tuo nome. Continua a essere un esempio per tutti i ragazzi che hanno la fortuna di conoscerti.
+
+\bigskip
+Ai miei genitori, grazie per avermi accompagnato in questa prima tappa della mia vita con amore e sostegno incondizionato. Grazie per avermi lasciato libero di scegliere il mio percorso, per avermi aiutato a esprimere il mio potenziale senza mettermi paletti o ostacolare la mia strada. Grazie per tutti i sacrifici che avete fatto per me e che continuerete a fare, non è scontato avere dei genitori così e di questo vi sarò per sempre riconoscente. Grazie, mamma, per ricordarmi ogni volta che ti vedo cosa significa veramente amare qualcuno, e grazie, papà, per essere il mio fan numero uno in ogni cosa che faccio e per ricordarmi ogni volta la bellezza della cultura, sono infinitamente grato per questo. Parte del mio successo sarà sempre vostro. Grazie.
+
+\bigskip
+A mia sorella, la donna più importante della mia vita, grazie per essere stata un porto sicuro in cui attraccare quando la chiarezza e la determinazione che mi hanno sempre contraddistinto si annebbiavano. Grazie per considerarmi un punto di riferimento con cui confrontarti e crescere. Continua con la tua voglia di imparare e di migliorare le persone che ti sono accanto, continua a non accontentarti e a ricercare il meglio per te: lo meriti. Ti voglio un bene immenso. Grazie di esistere.
+
+\bigskip
+Ai miei nonni, grazie per avermi cresciuto e accompagnato mano nella mano durante la mia infanzia e la mia adolescenza, grazie per tutto il tempo passato insieme e per avermi voluto bene senza alcun motivo. Vi porterò sempre con me.
+
+\bigskip
+A te, Gine, grazie per essere entrata nella mia vita in punta di piedi e aver reso la mia quotidianità cupa e grigia un'esplosione di colori. Grazie per ricordarmi ogni volta che stiamo insieme il motivo per cui, a ogni persona che me lo chiede, dico sempre che è meglio amare che sentirsi amati, perché quel brivido che si prova quando guardi negli occhi la persona che ami è ciò che ti fa sentire veramente vivo e per cui vale la pena lottare, non ha prezzo. Grazie per aver visto tutte le mie debolezze e i miei lati peggiori ed essere rimasta lo stesso. Grazie per esserti innamorata dei miei lati migliori e per ricordarmeli ogni volta che non riesco a vederli. Sei e rimarrai sempre una parte di me.
+
+\bigskip
+A Matte, grazie per essere il fratello che non ho mai avuto. In te ho sempre visto e sentito la complicità che caratterizza le migliori amicizie. Grazie per volermi bene come pochi altri, grazie per aver scelto di costruire insieme un'amicizia che spero ci porteremo dietro per tanti anni. Ti voglio bene campione.
+
+\bigskip
+Ai miei compagni di viaggio, grazie per aver reso questo percorso unico e speciale. Grazie per tutto il sostegno che mi avete dato, per aver alleggerito ogni viaggio in treno per venire a lezione e per avermi dato una mano quando ne avevo bisogno. Spero di aver lasciato un bel ricordo in ognuno di voi.
+
+\bigskip
+Ai miei amici, da quelli che non vedo da anni fino a quelli che vedo ogni settimana, grazie per tutti i bei momenti passati insieme. Siete sempre stati una luce inaspettata che ha reso il tutto più bello. Se ogni volta che ci vediamo ti saluto con quel tono super entusiasta e voglio sapere come stai e cosa fai, è perché sei parte di quelli che sto ringraziando ora. Abbiamo condiviso tanto in un periodo della mia vita e ogni volta che ti vedo riaffiora quel ricordo con tutto l'affetto annesso. Grazie per essere o essere stato una parte della mia vita. Ti voglio e ti vorrò sempre bene.
+
+\bigskip
+Ci tengo a fare un ringraziamento speciale a Faffo, Damiano, Zambo, Milos e Vale. Siete delle persone speciali, ogni volta che stiamo insieme mi viene in mente come vorrei che fossero i miei figli. L'affetto e la stima che nutro nei vostri confronti penso che non riuscirò mai ad esprimerli a fondo. Grazie per essere d'ispirazione nel costruire la persona migliore che io possa diventare.
+
+\bigskip
+Infine, grazie a te che mi vuoi bene e che mi stimi, tutto ciò che faccio è per esserti di sprono ed esempio a dare il meglio di te in ogni cosa che fai. Sei in grado di fare cose che nemmeno immagini, credi in te stesso sempre, sei unico e speciale.
 \setcounter{tocdepth}{2} % Mostra solo chapter, section e subsection
 \tableofcontents
 \listoffigures % Comando per generare l'elenco delle figure
@@ -315,16 +347,16 @@ infrastrutture cloud in ambito fintech.
 \chapter{Principi dell'Infrastruttura Cloud e Scelta di AWS}
 \label{ch:cloud-aws}
 \input{capitoli/capitolo3}
-\chapter{Progettazione e Implementazione Avanzata della Sicurezza delle Identità e degli Accessi (IAM) in AWS}
+\chapter{Sicurezza delle Identità e degli Accessi (IAM) in AWS}
 \label{ch:iam_security}
 \input{capitoli/capitolo4}
-\chapter{Architettura di Rete Sicura e Protezione dei Servizi Applicativi su AWS per Finanz}
+\chapter{Architettura di Rete Sicura su AWS}
 \label{ch:vpc_infra_security}
 \input{capitoli/capitolo5}
-\chapter{Implementazione di un Honeypot in un'Infrastruttura AWS per Startup fintech}
+\chapter{Implementazione di un Honeypot su AWS}
 \label{ch:honeypot}
 \input{capitoli/capitolo6}
-\chapter{Conclusioni e Prospettive Future per la Cybersecurity nelle Startup fintech}
+\chapter{Conclusioni e Prospettive Future}
 \label{chap:conclusioni}
 \input{capitoli/capitolo7}
 %

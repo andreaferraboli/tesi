@@ -3,7 +3,7 @@ La gestione delle identità e degli accessi (IAM) rappresenta un passo fondament
 
 
 
-\subsection{Configurazione dell'infrastruttura AWS per la piattaforma \textit{Finanz}}
+\subsection{Infrastruttura AWS di \textit{Finanz}}
 \label{subsec:aws_infrastruttura_attuale_cap4_narrativo}
 
 \paragraph{Panoramica architetturale}
@@ -31,13 +31,13 @@ Per lo storage degli artefatti e dei log si utilizzano bucket Amazon S3, protett
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{aws_struttura}
+  \includegraphics[width=1\textwidth]{aws_struttura}
   \caption{Diagramma semplificato dell’architettura AWS di \textit{Finanz}.}
   \label{fig:aws_struttura_attuale_cap2}
 \end{figure}
 
 
-\subsection{Implementazione del Modello Zero Trust e del Principio del Minimo Privilegio}
+\subsection{Modello Zero Trust e Principio del Minimo Privilegio}
 \label{sec:zero-trust-implementation}
 
 Come già analizzato [\ref{ch:principi-cybersecurity}], il modello \textbf{Zero Trust} rappresenta un superamento del paradigma di sicurezza tradizionale basato sul perimetro. L'adozione di questo principio risulta cruciale nel contesto delle startup, i cui ambienti operativi sono per natura dinamici e flessibili. Le caratteristiche intrinseche delle startup non solo giustificano, ma impongono la necessità di un framework di sicurezza ispirato a tale modello. Approfondiamo ora gli aspetti chiave a sostegno di questa visione:
@@ -59,7 +59,7 @@ Il Principio del Minimo Privilegio non è solo una buona pratica di sicurezza a 
     \item \textbf{Applicazione della Verifica Esplicita:} Implementare PoLP costringe a definire policy di accesso granulari e intenzionali, basate sulle reali necessità operative. Questo si allinea perfettamente con la richiesta di Zero Trust di basare ogni decisione di accesso su policy esplicite e dinamiche, piuttosto che su autorizzazioni ampie o ereditate implicitamente.
     \item \textbf{Miglioramento del Controllo e dell'Auditabilità:} Policy di accesso minimali e specifiche sono più facili da comprendere, gestire e verificare. Ciò semplifica l'audit della postura di sicurezza e la dimostrazione della conformità, permettendo di attestare che gli accessi sono effettivamente limitati come richiesto dal modello Zero Trust.
 \end{itemize}
-\subsection{Gestione delle Identità e degli Accessi (IAM) come Pilastro di Zero Trust in AWS}
+\subsection{IAM come Pilastro di Zero Trust in AWS}
 \label{subsec:iam-zero-trust}
 
 L'infrastruttura ospitata su un Cloud Service Provider (CSP) come AWS è un asset critico per una startup fintech. Essa contiene dati sensibili degli utenti e ospita i servizi essenziali (endpoint API, istanze EC2 per server applicativi, networking VPC, ecc.) che ne garantiscono l'operatività. La protezione di queste risorse inizia dalla gestione rigorosa di chi può accedervi e cosa può fare. \textbf{AWS Identity and Access Management (IAM)} è il servizio centrale per implementare questi controlli e costituisce una base imprescindibile per un modello Zero Trust.
@@ -72,7 +72,7 @@ Una delle prime e più critiche aree di intervento riguarda l'\textbf{account ro
 \end{itemize}
 
 
-\subsection{Valutazione dell'implementazione IAM corrente di \emph{Finanz}}
+\subsection{Analisi IAM corrente di \emph{Finanz}}
 \label{subsec:analisi_iam_finanz}
 
 \subsubsection*{Analisi degli accessi e delle policy}
@@ -101,7 +101,7 @@ Dall'analisi emergono diverse criticità significative che espongono l'organizza
     
     \item \textbf{Mancanza di account di emergenza (\emph{break-glass})}: Non sono stati predisposti account dedicati e sicuri per garantire l'accesso in scenari critici di \emph{lock-out} amministrativo, lasciando l'organizzazione senza un piano di contingenza affidabile.
 \end{enumerate}
-\section{Implementazione delle Migliorie Proposte alla Gestione IAM}
+\section{Implementazione delle Migliorie IAM}
 \label{sec:implementazione_migliorie_iam}
 
 A partire dalle criticità evidenziate nell'analisi presentata nella Sezione \ref{subsec:analisi_iam_finanz}, abbiamo progettato e implementato un piano strategico per il rafforzamento della gestione degli accessi e delle identità (IAM) all'interno dell'ambiente AWS di \emph{Finanz}. Gli obiettivi principali di questo intervento consistono nell'applicazione rigorosa del principio del least-privilege (minimo privilegio), nella riduzione del cosiddetto blast radius in caso di compromissione di un'identità e nel pieno soddisfacimento dei nuovi requisiti normativi. Tra questi figurano le direttive AWS previste per il 2025 sull'autenticazione a più fattori (Multi-Factor Authentication, MFA) e gli standard di settore come NIST SP 800-63 e PCI DSS.
@@ -228,7 +228,7 @@ Per garantire che i permessi non possano superare una soglia di sicurezza predef
 
 \textbf{Nota:} L'account ID `497487485332` utilizzato nell'ARN della Permission Boundary è un placeholder utilizzato per motivi di privacy aziendale.
 
-\subsection{Sviluppo di un Modello Ibrido Aggiornato per la Gestione degli Accessi}
+\subsection{Modello Ibrido per la Gestione degli Accessi}
 \label{subsec:modello_ibrido_aggiornato_iam}
 Per rispondere alle esigenze di una startup fintech come Finanz, che richiede agilità e, al contempo, un elevato livello di sicurezza, in questa sezione si propone un modello ibrido di \emph{Identity and Access Management} (IAM). Questo approccio si articola su \emph{tre gruppi baseline}—\texttt{dev}, \texttt{backend-dev} e \texttt{admin}—ai quali vengono assegnati i permessi necessari per le attività ordinarie. A questi si affiancano \emph{quattro ruoli operativi circoscritti}, assumibili \emph{on-demand} tramite il servizio AWS STS (Security Token Service), che richiedono sistematicamente l'autenticazione a più fattori (MFA).
 
@@ -498,7 +498,7 @@ Per operazioni ad altissimo impatto (es. eliminazione di un bucket S3 in produzi
 
 Tale flusso, pur introducendo un leggero overhead, riduce drasticamente il rischio di azioni irreversibili accidentali o malevole, senza ostacolare in modo significativo la velocità operativa.
 
-\section{Conclusioni sulla Sicurezza IAM}
+\section{Conclusioni}
 L'intervento strategico sulla gestione delle identità e degli accessi, descritto in questo capitolo, ha trasformato la postura di sicurezza dell'infrastruttura AWS di Finanz, spostandola da un modello permissivo e ad alto rischio a un'architettura allineata ai principi di Zero Trust e del Minimo Privilegio (PoLP). L'implementazione delle misure proposte ha risolto in modo sistematico le criticità identificate nell'analisi iniziale (Sezione \ref{subsec:analisi_iam_finanz}), raggiungendo risultati concreti e misurabili. Tra questi, spiccano la messa in sicurezza dell'account root, l'eliminazione dei privilegi amministrativi permanenti per gli utenti IAM, l'imposizione dell'autenticazione a più fattori (MFA) e, soprattutto, l'introduzione di un modello granulare basato su gruppi e ruoli temporanei. L'applicazione di guardrail preventivi tramite Permission Boundaries e Service Control Policies (SCP) ha ridotto drasticamente la superficie d'attacco e il potenziale raggio d'esplosione (blast radius) in caso di compromissione di un'identità.
 
 Tuttavia, è fondamentale riconoscere che tale rafforzamento della sicurezza introduce nuove considerazioni operative e non è esente da limitazioni. La principale contropartita è un leggero aumento dell'overhead operativo, in particolare per il team di sviluppo, che deve ora operare tramite l'assunzione di ruoli specifici (sts:AssumeRole) anziché con permessi diretti e persistenti. Questo modello impone anche un onere di manutenzione continua: le policy IAM devono essere periodicamente revisionate e aggiornate per adattarsi all'introduzione di nuovi servizi AWS o all'evoluzione delle responsabilità dei team. Inoltre, il passaggio a un regime di controllo così rigoroso richiede una necessaria evoluzione culturale all'interno della startup, supportata da formazione continua per garantire che i nuovi processi di accesso vengano compresi e adottati correttamente, senza che diventino un ostacolo alla produttività.
