@@ -77,7 +77,7 @@ Tale decisione è stata suffragata da diverse motivazioni strategiche. In primo 
 
 
 
-\section{Valutazione Strategica degli Honeypot nel Contesto della Cybersecurity Contemporanea}
+\section{Valutazione Strategica degli Honeypot}
 
 \label{sec:vantaggi_svantaggi}
 
@@ -220,7 +220,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 \end{lstlisting}
 
-Questa applicazione è stata containerizzata tramite un semplice \texttt{Dockerfile}. L'immagine Docker risultante è stata quindi integrata nell'ecosistema T-Pot modificando il file \texttt{docker-compose.yml} per aggiungere un nuovo servizio, mappando la porta interna del container (5000) a una porta dell'host, che a sua volta è esposta pubblicamente. Questa personalizzazione permette di catturare tentativi di interazione specifici, come l'iniezione di SQL o NoSQL nel corpo della richiesta JSON, l'enumerazione di parametri o l'uso di token di autenticazione rubati, fornendo un'intelligence di valore inestimabile.
+Questa applicazione è stata containerizzata tramite un semplice \texttt{Dockerfile}. L'immagine Docker risultante è stata quindi integrata nell'ecosistema T-Pot modificando il file \texttt{docker-compose.yml} per aggiungere un nuovo servizio, mappando la porta interna del container (5000) a una porta dell'host, che a sua volta è esposta pubblicamente. Questa personalizzazione permette di catturare tentativi di interazione specifici, come l'iniezione di SQL o NoSQL nel corpo della richiesta JSON, l'enumerazione di parametri o l'use di token di autenticazione rubati, fornendo un'intelligence di valore inestimabile.
 
 \section{Analisi dei Costi e Valutazione del Valore Strategico}
 \label{sec:analisi_costi_valore}
@@ -339,7 +339,7 @@ L'esperimento ha prodotto un volume ricco e stratificato di dati, confermando l'
     \item \textbf{Rilevamenti del Sensore Custom:} Le interazioni mirate con l'endpoint \texttt{/api/v1/payments/authorize} sono state catturate dal sensore Flask. I log strutturati in JSON hanno permesso di analizzare non solo i payload (e.g., tentativi di SQLi), ma anche gli header HTTP (e.g., User-Agent), che possono essere utilizzati per creare firme specifiche per il WAF di produzione.
 \end{itemize}
 In sintesi, la validazione ha dimostrato che l'architettura non solo rileva le minacce, ma fornisce un contesto profondo sulle \textbf{intenzioni} e le \textbf{metodologie} degli attaccanti, un risultato che va ben oltre le capacità di un sistema di sicurezza tradizionale.
-\section{Conclusioni dell'implementazione dell'honeypot}
+\section{Conclusioni}
 \label{sec:conclusioni}
 
 L'implementazione dell'honeypot T-Pot su AWS si è dimostrata un successo strategico per Finanz. A fronte di un costo operativo contenuto e di un impegno gestionale definito, il sistema fornisce un flusso costante di threat intelligence ad alta fedeltà, direttamente pertinente al contesto operativo della startup. Questo progetto ha dimostrato che anche una startup con risorse limitate può e deve adottare misure di sicurezza proattive, trasformando gli attacchi da minacce a preziose opportunità di apprendimento.

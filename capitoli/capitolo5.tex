@@ -1,5 +1,5 @@
 \section{Introduzione alla Sicurezza dell'Infrastruttura}
-Una volta stabilite le fondamenta per una gestione sicura delle identità e degli accessi, come discusso nel Capitolo \ref{ch:iam_security}, il passo successivo è garantire la sicurezza dell'infrastruttura di rete e dei servizi applicativi ospitati su AWS. Per una startup fintech come "Finanz", la resilienza, la disponibilità e la confidenzialità dei dati e dei servizi sono altrettanto cruciali. Questo capitolo si concentra sulla progettazione di una rete virtuale sicura tramite Amazon VPC, sulla protezione delle istanze EC2, sulla salvaguardia dei dati sensibili, sull'importanza del monitoraggio continuo e sull'adozione dell'Infrastructure as Code (IaC) per una gestione coerente e sicura. L'obiettivo è delineare un'architettura che non solo supporti le operazioni attuali di Finanz, ma che sia anche scalabile e in grado di adattarsi alla crescita futura, mantenendo elevati standard di sicurezza.
+Una volta stabilite le fondamenta per una gestione sicura delle identità e degli accessi, come discusso nel Capitolo \ref{ch:iam_security}, il passo successivo è garantire la sicurezza dell'infrastruttura di rete e dei servizi applicativi ospitati su AWS. Per una startup fintech come "Finanz", la resilienza, la disponibilità e la confidenzialità dei dati e dei servizi sono altrettanto cruciali. Questo capitolo si concentra sulla progettazione di una rete virtuale sicura tramite Amazon VPC (Virtual Private Cloud), sulla protezione delle istanze EC2 (Elastic Compute Cloud), sulla salvaguardia dei dati sensibili, sull'importanza del monitoraggio continuo e sull'adozione dell'Infrastructure as Code (IaC) per una gestione coerente e sicura. L'obiettivo è delineare un'architettura che non solo supporti le operazioni attuali di Finanz, ma che sia anche scalabile e in grado di adattarsi alla crescita futura, mantenendo elevati standard di sicurezza.
 
 \section{Progettazione di una Rete Sicura con Amazon VPC}
 \label{sec:vpc-design_cap2}
@@ -7,16 +7,16 @@ La base di ogni infrastruttura sicura su AWS è rappresentata da una rete virtua
 
 \subsection{Subnet Pubbliche e Private: Segmentazione Essenziale}
 \label{subsec:subnets_cap2}
-Una pratica fondamentale, la cui implementazione è stata verificata in Finanz, consiste nella suddivisione del VPC in \textbf{subnet pubbliche} e \textbf{subnet private}, distribuite su diverse Availability Zones per garantire alta disponibilità. Nel caso specifico dell'ambiente di Finanz:
+Una pratica fondamentale, la cui implementazione è stata verificata in Finanz, consiste nella suddivisione del VPC in \textbf{subnet pubbliche} e \textbf{subnet private}, distribuite su diverse Zone di Disponibilità (Availability Zones) per garantire alta disponibilità. Nel caso specifico dell'ambiente di Finanz:
 \begin{itemize}
 \item Le \textbf{subnet pubbliche} (come \texttt{subnet\discretionary{-}{}{-}0a1b2c3d} in eu-south\discretionary{-}{}{-}1a e \texttt{subnet\discretionary{-}{}{-}4e5f6789} in eu-south\discretionary{-}{}{-}1b) sono configurate con una rotta diretta verso l'Internet Gateway (IGW) del VPC. 
-Queste subnet ospitano risorse che necessitano di essere direttamente esposte a Internet, come il NAT Gateway (es. \texttt{nat\discretionary{-}{}{-}0123456789abcdef0}) e, tipicamente, gli Application Load Balancer. 
+Queste subnet ospitano risorse che necessitano di essere direttamente esposte a Internet, come il NAT Gateway (es. \texttt{nat\discretionary{-}{}{-}0123456789abcdef0}) e, tipicamente, gli Application Load Balancer (ALB). 
 Si stima che il traffico in uscita da queste subnet pubbliche (escludendo quello verso i client finali veicolato dall'ALB) ammonti a circa 50 GB/mese, principalmente per aggiornamenti e chiamate a servizi esterni da parte del NAT Gateway.
-\item Le \textbf{subnet private} (come \texttt{subnet\discretionary{-}{}{-}0x1y2z3w} per gli application server e \texttt{subnet\discretionary{-}{}{-}0m1n2o3p} per i database) non hanno una rotta diretta verso l'IGW. Le istanze applicative EC2 gestite da Elastic Beanstalk e le istanze database RDS risiedono, correttamente, esclusivamente in queste subnet. Il traffico interno tra queste subnet private (es. comunicazione tra server applicativi e database) è stimato intorno ai 120 GB/mese.
+\item Le \textbf{subnet private} (come \texttt{subnet\discretionary{-}{}{-}0x1y2z3w} per gli application server e \texttt{subnet\discretionary{-}{}{-}0m1n2o3p} per i database) non hanno una rotta diretta verso l'IGW. Le istanze applicative EC2 gestite da Elastic Beanstalk e le istanze database RDS (Relational Database Service) risiedono, correttamente, esclusivamente in queste subnet. Il traffico interno tra queste subnet private (es. comunicazione tra server applicativi e database) è stimato intorno ai 120 GB/mese.
 \end{itemize}
 Questa separazione è cruciale: le risorse backend non sono direttamente raggiungibili da Internet, riducendo significativamente la loro superficie d'attacco.
 
-\subsection{Controllo Granulare del Traffico: Gruppi di Sicurezza e Network ACL}
+\subsection{Controllo del Traffico: Security Groups e Network ACL}
 \label{subsec:sg-nacl_cap2}
 Il controllo del traffico di rete all'interno del VPC è affidato a due meccanismi principali, entrambi impiegati da Finanz. La loro configurazione è stata analizzata per verificarne la correttezza:
 \begin{itemize}
@@ -77,7 +77,7 @@ Dall'analisi condotta, si è osservato che il NAT Gateway gestisce un throughput
 
 \subsection{VPC Endpoints per Comunicazioni Private con Servizi AWS}
 \label{subsec:vpc-endpoints_cap2}
-Un'eccellente pratica di sicurezza, già in uso presso Finanz, è l'impiego di \textbf{VPC Endpoints}. Si è rilevata la presenza di un VPC Endpoint di tipo Gateway per S3 (\texttt{vpce\discretionary{-}{}{-}1a2b3c4d5e6f7g8h9}). Questo permette alle risorse all'interno del VPC di comunicare con Amazon S3 utilizzando la rete privata di AWS, senza che il traffico debba attraversare l'Internet Gateway o il NAT Gateway. Ciò migliora la sicurezza, riduce la latenza e può portare a risparmi sui costi di trasferimento dati.
+Un'eccellente pratica di sicurezza, già in uso presso Finanz, è l'impiego di \textbf{VPC Endpoints}. Si è rilevata la presenza di un VPC Endpoint di tipo Gateway per S3 (\texttt{vpce\discretionary{-}{}{-}1a2b3c4d5e6f7g8h9}). Questo permette alle risorse all'interno del VPC di comunicare con Amazon S3 (Simple Storage Service) utilizzando la rete privata di AWS, senza che il traffico debba attraversare l'Internet Gateway o il NAT Gateway. Ciò migliora la sicurezza, riduce la latenza e può portare a risparmi sui costi di trasferimento dati.
 Sarebbe opportuno verificare se vengano utilizzati altri servizi AWS che supportano VPC Endpoints di tipo Interface (es. KMS, SNS, SQS) e, in caso affermativo, valutare la creazione di endpoint dedicati anche per essi.
 
 \subsection{Connessioni Sicure verso Ambienti Esterni}
@@ -87,13 +87,13 @@ Allo stato attuale, l'analisi non ha evidenziato per Finanz la necessità di con
     \item \textbf{AWS Site-to-Site VPN}: Permette di creare tunnel IPsec crittografati tra il VPC di Finanz e una rete esterna, utilizzando Internet come mezzo di trasporto. È una soluzione relativamente rapida da implementare e con costi contenuti.
     \item \textbf{AWS Direct Connect}: Offre una connessione di rete fisica dedicata e privata tra un data center on-premises (o una colocation facility) e AWS. Garantisce una larghezza di banda più consistente e una latenza inferiore rispetto a una VPN su Internet, ma richiede un investimento iniziale e costi operativi maggiori.
 \end{itemize}
-Per una startup Per una startup cloud-native come Finanz, queste opzioni sono generalmente meno prioritarie nelle fasi iniziali, ma è bene conoscerle per future evoluzioni.
+Per una startup cloud-native come Finanz, queste opzioni sono generalmente meno prioritarie nelle fasi iniziali, ma è bene conoscerle per future evoluzioni.
 
 \section{Gestione Sicura delle Istanze EC2}
 \label{sec:ec2-security_cap2}
 Le istanze \textbf{Amazon EC2} costituiscono il nucleo computazionale per molte applicazioni, inclusa quella di Finanz. Attualmente, l'azienda gestisce circa 8 istanze nell'ambiente di produzione (es. \texttt{i\discretionary{-}{}{-}0a1b2c3d4e5f67890}) e 3 in quello di sviluppo. La loro sicurezza è, quindi, di importanza cruciale.
 
-\subsection{Scelta delle AMI, Patching e Hardening del Sistema Operativo}
+\subsection{AMI, Patching e Hardening del Sistema Operativo}
 \label{subsec:ami-hardening_cap2}
 La sicurezza di un'istanza EC2 inizia dalla scelta dell'Amazon Machine Image (AMI) e dalla sua corretta configurazione.
 \begin{itemize}
@@ -316,7 +316,7 @@ La crittografia è un pilastro della protezione dati. L'analisi ha confermato ch
     \item \textbf{Crittografia a Riposo (At Rest)}: È essenziale crittografare i dati memorizzati.
     \begin{itemize}
         \item \textbf{Amazon S3}: Tutti i bucket critici sono configurati per la crittografia lato server con chiavi gestite da AWS KMS (SSE-KMS), utilizzando una Customer Managed Key (CMK) specifica.Il bucket dei log (\texttt{finanz-logs\discretionary{-}{}{-}497487485332}) ha anche S3 Object Lock abilitato in modalità Governance con un periodo di retention di 7 anni, per garantire l'immutabilità dei log a fini di compliance e audit.
-        \item \textbf{Amazon EBS}: Tutti i volumi EBS sono configurati per la crittografia di default a livello di account, utilizzando una CMK dedicata.
+        \item \textbf{Amazon EBS}: Tutti i volumi EBS (Elastic Block Store) sono configurati per la crittografia di default a livello di account, utilizzando una CMK dedicata.
         \item \textbf{Amazon RDS}: Entrambe le istanze PostgreSQL utilizzano la crittografia at-rest integrata di RDS, anch'essa basata su AWS KMS con una CMK dedicata. Dai benchmark consultati, l'impatto sulle performance di questa crittografia è minimo, solitamente inferiore al 2\%.
     \end{itemize}
     \item \textbf{Crittografia in Transito (In Transit)}: È altrettanto cruciale proteggere i dati mentre viaggiano sulla rete, sia esternamente (tra i client e AWS) sia internamente (tra i servizi AWS).
@@ -349,7 +349,7 @@ Backup regolari e testati sono essenziali per la business continuity. Finanz ha 
             \item \textbf{Cross-Region Backup}: Per scopi di Disaster Recovery, i backup più importanti (es. snapshot RDS di produzione e snapshot EBS settimanali) vengono copiati mensilmente in una regione AWS secondaria (es. \texttt{eu-central\discretionary{-}{}{-}1}, Francoforte).
         \end{itemize}.
     \item \textbf{Vault di Backup Sicuro}: I backup sono archiviati in un vault dedicato (\texttt{finanz-backup-vault}), protetto da policy restrittive e crittografia.
-    \item \textbf{Obiettivi di Ripristino (RTO/RPO)}: Gli obiettivi target sono un RTO (Recovery Time Objective) massimo di 4 ore per i servizi critici di produzione e un RPO (Recovery Point Objective) massimo di 24 ore (idealmente molto meno per i dati transazionali, grazie al PITR di RDS). È fondamentale testare periodicamente le procedure di ripristino (almeno una o due volte l'anno) per assicurarsi che questi obiettivi siano raggiungibili e che le procedure siano efficaci..
+    \item \textbf{Obiettivi di Ripristino (RTO/RPO)}: Gli obiettivi target sono un RTO (Recovery Time Objective) massimo di 4 ore per i servizi critici di produzione e un RPO (Recovery Point Objective) massimo di 24 ore (idealmente molto meno per i dati transazionali, grazie al PITR di RDS). È fondamentale testare periodicamente le procedure di ripristino (almeno una o due volte l'anno) per assicurarsi che questi obiettivi siano raggiungibili e che le procedure siano efficaci.
 \end{itemize}
 
 \subsection{Misure di Sicurezza Specifiche per i Bucket S3}
@@ -431,7 +431,7 @@ Per un rilevamento avanzato delle minacce, Finanz si avvale di:
 \label{sec:iac_cap2}
 Per garantire coerenza, ridurre errori manuali e facilitare le revisioni, è fortemente raccomandato gestire l'infrastruttura tramite un approccio di \textbf{Infrastructure as Code (IaC)}. Si è constatato che Finanz ha adottato questa pratica in modo estensivo.
 \begin{itemize}
-    \item \textbf{Strumento Utilizzato: Terraform}: Finanz utilizza Terraform per definire e provisionare la quasi totalità della sua infrastruttura AWS. I file di configurazione sono scritti in HCL(HashiCorp Configuration Language).
+    \item \textbf{Strumento Utilizzato: Terraform}: Finanz utilizza Terraform per definire e provisionare la quasi totalità della sua infrastruttura AWS. I file di configurazione sono scritti in HCL (HashiCorp Configuration Language).
     \item \textbf{Gestione del Codice e dello Stato}:
     \begin{itemize}
         \item \textbf{Repository Git}: Il codice Terraform è conservato in un repository Git privato, permettendo modifiche all'infrastruttura, collaborazione tra i membri del team e la possibilità di effettuare rollback a versioni precedenti in caso di problemi. Si registrano circa 147 commit negli ultimi 6 mesi.
@@ -459,6 +459,6 @@ Per garantire coerenza, ridurre errori manuali e facilitare le revisioni, è for
 \end{itemize}
 L'adozione di IaC sin dalle prime fasi si è rivelata una scelta strategica vincente, contribuendo a costruire un'infrastruttura robusta, sicura e gestibile nel tempo.
 
-\section{Conclusioni sulla Sicurezza dell'Infrastruttura e dei Servizi}
+\section{Conclusioni}
 Questo capitolo ha delineato le principali misure e pratiche per la messa in sicurezza dell'infrastruttura della startup Finanz su AWS. Dalla progettazione del VPC alla protezione delle istanze EC2, dalla crittografia dei dati al monitoraggio proattivo e all'automazione tramite IaC, emerge un approccio multi-livello.
 È importante sottolineare che la sicurezza non è uno stato statico, ma un processo continuo di valutazione, adattamento e miglioramento. Le minacce evolvono e i requisiti cambiano. Pertanto, per Finanz sarà cruciale mantenere un impegno costante verso la revisione periodica delle configurazioni, l'aggiornamento delle competenze e l'esecuzione di test. Solo così potrà garantire che la sua infrastruttura AWS rimanga un ambiente sicuro e affidabile per le sue operazioni fintech.

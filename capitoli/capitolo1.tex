@@ -1,5 +1,4 @@
-
-\section{La Cybersecurity nelle Startup fintech: Sfide, Vulnerabilità e Strategie di Protezione in un Ecosistema in Rapida Evoluzione}
+\section{La Cybersecurity nelle Startup fintech}
 
 Il settore fintech rappresenta oggi una delle aree più dinamiche e innovative dell'ecosistema startup, con investimenti globali che hanno raggiunto i 115 miliardi di dollari, in crescita esponenziale rispetto ai 53.2 miliardi del 2018 \cite{gartnerfintech}. Questo rapido sviluppo, caratterizzato dall'implementazione di tecnologie emergenti per i servizi finanziari, porta con sé non solo opportunità senza precedenti, ma anche significative sfide in termini di sicurezza informatica. Le startup fintech, che si trovano all'intersezione tra finanza tradizionale e innovazione tecnologica, gestiscono dati estremamente sensibili, diventando bersagli privilegiati per i cybercriminali. La presente tesi esplora le vulnerabilità specifiche di queste realtà, analizza le principali minacce che esse affrontano e propone strategie di sicurezza efficaci anche in contesti di risorse limitate. Si evidenzia come un approccio proattivo alla cybersecurity non rappresenti un costo, bensì un investimento strategico fondamentale per il successo a lungo termine di una piccola-media impresa nel campo del fintech.
 
@@ -13,7 +12,7 @@ Il panorama dei servizi finanziari sta subendo una profonda trasformazione, guid
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.9\textwidth]{fintech_services_categories}
+\includegraphics[width=1\textwidth]{fintech_services_categories}
 \caption{Categorie di Servizi fintech}
 \label{fig:fintech_services}
 \end{figure}
@@ -40,7 +39,7 @@ Le startup fintech operano in un ambiente caratterizzato da elevata incertezza, 
 
 Il contesto finanziario in cui operano le startup fintech impone pressioni significative sulle decisioni di spesa. Ogni investimento, compreso quello per l'infrastruttura IT e la sicurezza, deve essere attentamente valutato in termini di ritorno immediato e benefici a lungo termine \cite{fintechChallenges}. Questa ottimizzazione dei costi rappresenta una sfida continua, poiché la sicurezza informatica richiede investimenti costanti, spesso non producendo risultati immediatamente visibili; la sua assenza, tuttavia, può comportare conseguenze catastrofiche. In questo equilibrio delicato, le startup fintech devono trovare il giusto compromesso tra la necessità di scalare rapidamente e l'implementazione di solide misure di protezione.
 
-\subsection{Banche Tradizionali vs. Startup fintech: Divergenze Strategiche in Tecnologia, Regolamentazione e Cybersecurity}
+\subsection{Banche Tradizionali vs. Startup fintech}
 Il panorama dei servizi finanziari è caratterizzato da una marcata eterogeneità tra gli operatori tradizionali e le nuove realtà fintech. Queste differenze si manifestano in modo sostanziale negli approcci tecnologici adottati, nei quadri normativi di riferimento e, di conseguenza, nelle strategie implementate per la cybersecurity.
 
 Un aspetto cruciale di distinzione risiede proprio nell'approc\allowbreak{}cio alla cyber\allowbreak{}security.
@@ -51,9 +50,9 @@ Al contrario, le startup fintech hanno storicamente beneficiato di una maggiore 
 
 Queste divergenze in ambito cybersecurity sono profondamente radicate in più ampi e distinti approcci alla tecnologia e al contesto regolamentare, che riflettono modelli organizzativi e strategie di innovazione differenti.
 Le banche tradizionali operano tipicamente con infrastrutture IT complesse e stratificate nel tempo, risultando spesso meno agili e più costose da aggiornare rispetto alle soluzioni moderne. La loro evoluzione tecnologica è stata prevalentemente incrementale, focalizzata sull'automazione dei processi esistenti per migliorare l'efficienza, piuttosto che su innovazioni disruptive. Storicamente, esse hanno perseguito un approccio olistico, integrando internamente un'ampia gamma di servizi, sebbene si osservi una crescente tendenza all'outsourcing e alla specializzazione. I costi IT rappresentano una quota significativa dei loro costi totali (15-20\%), a causa della complessità delle infrastrutture legacy. Sul piano regolamentare, sono soggette a un quadro normativo estremamente rigido, intensificatosi dopo la crisi finanziaria del 2008, che comporta elevati costi di compliance e ha storicamente costituito una barriera all'entrata per nuovi competitor.
-Le startup fintech, d'altra parte, si contraddistinguono per l'adozione di tecnologie moderne quali big data, cloud computing e blockchain, utilizzate per creare prodotti, servizi e modelli di business innovativi, come piattaforme di crowdfunding o assicurazioni peer-to-peer. La loro innovazione non si limita a miglioramenti incrementali, ma spesso mira a ridefinire radicalmente la catena del valore esistente, come nel caso dei pagamenti peer-to-peer tramite blockchain. Molte fintech si specializzano in nicchie specifiche, bypassando attori tradizionali e promuovendo la disintermediazione; raramente offrono un ventaglio completo di servizi bancari. La tecnologia è anche un driver per modelli di business innovativi, come i robo-advisors, e per l'ingresso di nuovi player nel mercato, come le grandi aziende tecnologiche. Sul fronte regolamentare, esse possono beneficiare di iniziative volte a ridurre le barriere all'entrata, quali i cosiddetti "\textit{fintech sandbox}", che permettono di testare soluzioni in ambienti controllati. Il quadro normativo per le fintech è ancora in evoluzione, creando incertezze ma anche opportunità, con l'emergere di soluzioni "\textit{RegTech}" (Regulatory Technology) per semplificare la compliance. Questo contesto, tendenzialmente più flessibile, consente alle fintech di esercitare una significativa pressione competitiva sulle banche tradizionali \cite{puschmann_fintech_2017}.
+Le startup fintech, d'altra parte, si contraddistinguono per l'adozione di tecnologie moderne quali big data, cloud computing e blockchain, utilizzate per creare prodotti, servizi e modelli di business innovativi, come piattaforme di crowdfunding o assicurazioni peer-to-peer. La loro innovazione non si limita a miglioramenti incrementali, ma spesso mira a ridefinire radicalmente la catena del valore esistente, come nel caso dei pagamenti peer-to-peer tramite blockchain. Molte fintech si specializzano in nicchie specifiche, bypassando attori tradizionali e promuovendo la disintermediazione; raramente offrono un ventaglio completo di servizi bancari. La tecnologia è anche un driver per modelli di business innovativi, come i robo-advisors, e per l'ingresso di nuovi player nel mercato, come le grandi aziende tecnologiche. Sul fronte regolamentare, esse possono beneficiare di iniziative volte a ridurre le barriere all'entrata, quali i cosiddetti (\textit{fintech sandbox}), che permettono di testare soluzioni in ambienti controllati. Il quadro normativo per le fintech è ancora in evoluzione, creando incertezze ma anche opportunità, con l'emergere di soluzioni di Regulatory Technology (\textit{RegTech}) per semplificare la compliance. Questo contesto, tendenzialmente più flessibile, consente alle fintech di esercitare una significativa pressione competitiva sulle banche tradizionali \cite{puschmann_fintech_2017}.
 
-\subsection{Analisi delle Sfide di Cybersecurity per le Startup fintech}
+\subsection{Sfide di Cybersecurity per le Startup fintech}
 
 L'ecosistema fintech, pur essendo un catalizzatore di innovazione nel settore finanziario, presenta per le startup che ne fanno parte un panorama di sfide di cybersecurity intrinsecamente complesso. La natura agile, la focalizzazione sulla rapida immissione sul mercato (\textit{time-to-market}) e le risorse spesso limitate di queste nuove realtà imprenditoriali possono portare a una sottovalutazione della postura di sicurezza, rendendole bersagli appetibili per attori malevoli. A differenza delle istituzioni finanziarie consolidate, che dispongono di budget e team dedicati alla mitigazione dei rischi informatici, le startup fintech devono bilanciare l'innovazione con la necessità imprescindibile di proteggere dati sensibili e infrastrutture critiche.
 
@@ -84,7 +83,7 @@ Le principali vulnerabilità e sfide operative per le startup fintech in ambito 
     \item \textbf{Superficie di Attacco Derivante da Tecnologie Emergenti e Interconnessioni}:
     \begin{itemize}
         \item L'adozione spinta di tecnologie innovative
-        (cloud computing, API (\textit{Application Programming Interface}) aperte, intelligenza artificiale, blockchain)\allowbreak{} %
+        (cloud computing, Application Programming Interfaces (\textit{API}) aperte, intelligenza artificiale, blockchain)\allowbreak{} %
         è un tratto distintivo delle fintech.
 
         \item Sebbene queste tecnologie offrano vantaggi competitivi, esse introducono anche nuove superfici di attacco e vettori di minaccia \cite{fintechChallenges}.
@@ -107,27 +106,27 @@ Le principali vulnerabilità e sfide operative per le startup fintech in ambito 
 \end{itemize}
 Queste sfide strutturali e operative aumentano la vulnerabilità delle startup fintech a una varietà di attacchi informatici, rendendo essenziale l'adozione di misure di sicurezza proattive e mirate per mitigare tali rischi.
 
-\subsection{Principali Vettori di Attacco e Minacce Informatiche nel Contesto fintech}
+\subsection{Vettori di Attacco e Minacce nel fintech}
 
 Il settore fintech, data la sua natura digitale e la preziosità dei dati trattati, è un obiettivo primario per una vasta gamma di cyberattacchi \cite{cyberThreatsfintech}. Tra le minacce più rilevanti per le startup fintech si annoverano:
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{cyber_threats_fintech}
+    \includegraphics[width=1\textwidth]{cyber_threats_fintech}
     \caption{Principali vettori di attacco e minacce informatiche nel contesto fintech}
     \label{fig:cyber_threats}
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Attacchi di Social Engineering e Phishing}: Tecniche come il \textit{social engineering} (ingegneria sociale) e il \textit{phishing} mirano a manipolare gli utenti o i dipendenti per indurli a rivelare credenziali di accesso, dati sensibili o a eseguire azioni malevole. E-mail, messaggi e siti web fraudolenti, che replicano comunicazioni legittime, sono strumenti comuni per compromettere la sicurezza a livello umano \cite{cyberThreatsfintech}.
+    \item \textbf{Attacchi di Social Engineering e Phishing}: Tecniche come il \textit{ingegneria sociale} (in inglese \textit{social engineering}) e il \textit{phishing} mirano a manipolare gli utenti o i dipendenti per indurli a rivelare credenziali di accesso, dati sensibili o a eseguire azioni malevole. E-mail, messaggi e siti web fraudolenti, che replicano comunicazioni legittime, sono strumenti comuni per compromettere la sicurezza a livello umano \cite{cyberThreatsfintech}.
     
-    \item \textbf{Malware e Ransomware}: L'infiltrazione di software malevolo (\textit{malware}), inclusi i \textit{ransomware} che cifrano i dati rendendoli inaccessibili e richiedono un riscatto, rappresenta una minaccia critica. Per una startup, le cui risorse finanziarie sono limitate, l'impatto di un attacco ransomware – in termini di interruzione operativa, costi di ripristino e potenziale pagamento del riscatto – può essere particolarmente devastante \cite{cyberThreatsfintech}.
+    \item \textbf{Malware e Ransomware}: L'infiltrazione di software malevolo, comunemente noto come \textit{malware}, inclusi i \textit{ransomware} che cifrano i dati rendendoli inaccessibili e richiedono un riscatto, rappresenta una minaccia critica. Per una startup, le cui risorse finanziarie sono limitate, l'impatto di un attacco ransomware – in termini di interruzione operativa, costi di ripristino e potenziale pagamento del riscatto – può essere particolarmente devastante \cite{cyberThreatsfintech}.
     
-    \item \textbf{Vulnerabilità delle API e Configurazioni Cloud Errate}: Le \textit{Application Programming Interfaces (API)} sono fondamentali per l'ecosistema fintech, abilitando l'integrazione tra servizi diversi. Tuttavia, API insicure o mal configurate possono diventare gateway per accessi non autorizzati a dati e funzionalità critiche \cite{fintechChallenges}. Analogamente, errori nella configurazione dei servizi cloud (\textit{cloud misconfigurations}) possono esporre involontariamente dati sensibili o creare falle di sicurezza sfruttabili.
+    \item \textbf{Vulnerabilità delle API e Configurazioni Cloud Errate}: Le \textit{API} sono fondamentali per l'ecosistema fintech, abilitando l'integrazione tra servizi diversi. Tuttavia, API insicure o mal configurate possono diventare gateway per accessi non autorizzati a dati e funzionalità critiche \cite{fintechChallenges}. Analogamente, errori nella configurazione dei servizi cloud (\textit{cloud misconfigurations}) possono esporre involontariamente dati sensibili o creare falle di sicurezza sfruttabili.
     
     \item \textbf{Attacchi Distributed Denial-of-Service (DDoS)}: Questi attacchi, noti come \textit{Distributed Denial-of-Service (DDoS)}, mirano a rendere i servizi online inaccessibili sovraccaricando l'infrastruttura target con un volume elevato di traffico malevolo. Sebbene possano apparire meno sofisticati di altri, gli attacchi DDoS possono causare significative interruzioni di servizio, danni reputazionali e perdite economiche; talvolta fungono da diversivo per mascherare intrusioni più mirate \cite{fintechChallenges}.
     
-    \item \textbf{Sfruttamento di Vulnerabilità Software e Zero-Day}: Le startup, per la rapidità di sviluppo, potrebbero non avere processi di \textit{patch management} (gestione delle patch) e \textit{vulnerability assessment} (valutazione delle vulnerabilità) altrettanto maturi quanto aziende più strutturate. Questo le espone a rischi derivanti da vulnerabilità note o, nel peggiore dei casi, da quelle non ancora divulgate (definite \textit{zero-day}).
+    \item \textbf{Sfruttamento di Vulnerabilità Software e Zero-Day}: Le startup, per la rapidità di sviluppo, potrebbero non avere processi di gestione delle patch (\textit{patch management}) e di valutazione delle vulnerabilità (\textit{vulnerability assessment}) altrettanto maturi quanto aziende più strutturate. Questo le espone a rischi derivanti da vulnerabilità note o, nel peggiore dei casi, da quelle non ancora divulgate (definite \textit{zero-day}).
 \end{itemize}
 
 La comprensione approfondita di queste sfide e minacce è il primo passo fondamentale per le startup fintech, al fine di poter sviluppare strategie di cybersecurity proattive ed efficaci, integrando la sicurezza come componente essenziale del proprio modello di business sin dalla sua concezione. Le conseguenze di una violazione, che spaziano da perdite finanziarie dirette a danni reputazionali, impatti normativi e perdita di fiducia da parte degli stakeholder, possono compromettere la sopravvivenza stessa della startup.
